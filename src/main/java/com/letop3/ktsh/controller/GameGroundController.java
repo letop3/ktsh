@@ -15,19 +15,16 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 public class GameGroundController implements Initializable {
 
-    private final Image i1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/1.png")));
-    private final Image i2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/2.png")));
-    private final Image i3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/3.png")));
+    private final Image I1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/1.png")));
+    private final Image I2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/2.png")));
+    private final Image I3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/tiles/3.png")));
     private Ground ground;
-    private AnimationTimer gameLoop;
     private Set<KeyCode> activeKeys;
+
     @FXML
     private TilePane gameGround;
 
@@ -49,10 +46,10 @@ public class GameGroundController implements Initializable {
         for (int i : groundData) {
             ImageView imageView = new ImageView();
             switch (i) {
-                case 1 -> imageView.setImage(i1);
-                case 2 -> imageView.setImage(i2);
-                case 3 -> imageView.setImage(i3);
-                default -> imageView.setImage(i1);
+                case 1 -> imageView.setImage(I1);
+                case 2 -> imageView.setImage(I2);
+                case 3 -> imageView.setImage(I3);
+                default -> imageView.setImage(I1);
             }
             StackPane tileStack = new StackPane(imageView);
             gameGround.getChildren().add(tileStack);
