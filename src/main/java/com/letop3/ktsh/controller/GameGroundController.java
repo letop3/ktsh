@@ -24,17 +24,19 @@ public class GameGroundController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
-
-        GameLoop gameLoopController = new GameLoop(gameGround);
-        ControlsController controlsController = new ControlsController();
+        //on s'occupe des vues
         GroundView groundView = new GroundView(gameGround);
         PlayerView playerView = new PlayerView(env.getPlayer(), gamePlayer);
 
-        gameLoopController.initialize(location, resources);
-        controlsController.initialize(location, resources);
+        //on s'occupe des controllers
+        GameLoop gameLoopController = new GameLoop(gameGround, playerView);
+        ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         groundView.draw();
         playerView.draw();
+
+        gameLoopController.initialize(location, resources);
+        controlsController.initialize(location, resources);
 
     }
 }

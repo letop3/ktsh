@@ -7,10 +7,9 @@ import javafx.beans.property.SimpleIntegerProperty;
  * Classe Position représentant une position avec des coordonnées x et y.
  */
 public class Position {
-    private final IntegerProperty x = new SimpleIntegerProperty();
-    private final IntegerProperty y = new SimpleIntegerProperty();
-    private final IntegerProperty dx = new SimpleIntegerProperty();
-    private final IntegerProperty dy = new SimpleIntegerProperty();
+    private final IntegerProperty x;
+    private final IntegerProperty y;
+    private char direction; // N, S, E, W
 
     /**
      * Constructeur de la classe Position.
@@ -18,11 +17,10 @@ public class Position {
      * @param x la coordonnée x
      * @param y la coordonnée y
      */
-    public Position(int x, int y, int dx, int dy) {
-        this.x.set(x);
-        this.y.set(y);
-        this.dx.set(dx);
-        this.dy.set(dy);
+    public Position(int x, int y, char direction) {
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
+        this.direction = direction;
     }
 
     /**
@@ -80,58 +78,22 @@ public class Position {
     }
 
     /**
-     * Retourne la propriété dx.
+     * Retourne la direction.
      *
-     * @return la propriété dx
+     * @return la direction
      */
-    public IntegerProperty dxProperty() {
-        return dx;
+    public char getDirection() {
+        return direction;
     }
 
     /**
-     * Retourne la valeur de dx.
+     * Définit la direction.
      *
-     * @return la valeur de dx
+     * @param direction la nouvelle direction
      */
 
-    public int getDx() {
-        return dx.get();
-    }
-
-    /**
-     * Définit la valeur de dx.
-     *
-     * @param dx la nouvelle valeur de dx
-     */
-    public void setDx(int dx) {
-        this.dx.set(dx);
-    }
-
-    /**
-     * Retourne la propriété dy.
-     *
-     * @return la propriété dy
-     */
-    public IntegerProperty dyProperty() {
-        return dy;
-    }
-
-    /**
-     * Retourne la valeur de dy.
-     *
-     * @return la valeur de dy
-     */
-    public int getDy() {
-        return dy.get();
-    }
-
-    /**
-     * Définit la valeur de dy.
-     *
-     * @param dy la nouvelle valeur de dy
-     */
-    public void setDy(int dy) {
-        this.dy.set(dy);
+    public void setDirection(char direction) {
+        this.direction = direction;
     }
 
     /**

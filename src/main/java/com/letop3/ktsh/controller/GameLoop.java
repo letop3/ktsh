@@ -1,5 +1,6 @@
 package com.letop3.ktsh.controller;
 
+import com.letop3.ktsh.view.PlayerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
@@ -15,9 +16,11 @@ public class GameLoop implements Initializable {
     private Set<KeyCode> activeKeys;
 
     private final TilePane gameGround;
+    private final PlayerView playerView;
 
-    public GameLoop(TilePane gameGround) {
+    public GameLoop(TilePane gameGround, PlayerView playerView) {
         this.gameGround = gameGround;
+        this.playerView = playerView;
     }
 
     @Override
@@ -26,7 +29,7 @@ public class GameLoop implements Initializable {
     }
 
     private void startGameLoop() {
-        Duration duration = Duration.millis(1000.0 / 144); // 144 FPS
+        Duration duration = Duration.millis(1000.0 / 30); // 30 FPS
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
             updateGame();
             drawGame();
@@ -39,11 +42,11 @@ public class GameLoop implements Initializable {
 
 
     private void updateGame() {
-        // This method can be expanded to update the game state as needed.
+        ControlsController.processInput();
     }
 
     private void drawGame() {
-        // This method can be expanded to draw the game state as needed.
+        playerView.update();
     }
 }
 

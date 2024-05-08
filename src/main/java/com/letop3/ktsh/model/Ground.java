@@ -53,4 +53,8 @@ public class Ground {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
         };
     }
+
+    public static boolean canMoveTo(int x, int i) {
+        return true;
+    }
 }
