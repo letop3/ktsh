@@ -54,7 +54,14 @@ public class Ground {
         };
     }
 
-    public static boolean canMoveTo(int x, int i) {
+    /**
+     * Détermine si le personnage peut se déplacer à la position (x, y) donnée en pixels.
+     *
+     * @param x la coordonnée x en pixels
+     * @param y la coordonnée y en pixels
+     * @return true si le personnage peut se déplacer sur cette tuile, false sinon
+     */
+    public static boolean canMoveTo(int x, int y) {
         return true;
     }
 }

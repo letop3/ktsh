@@ -5,7 +5,7 @@ public class Env {
     private final Player player;
 
     public Env() {
-        this.player = new Player(new Position(10, 10, 'n'));
+        this.player = new Player(new Position(160, 160, 'n'));
     }
 
     public Player getPlayer() {
