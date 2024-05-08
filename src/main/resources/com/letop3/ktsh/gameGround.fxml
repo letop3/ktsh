@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
             fx:controller="com.letop3.ktsh.controller.GameGroundController">
-   <center>
-      <TilePane fx:id="gameGround" maxHeight="352.0" maxWidth="352.0" minHeight="352.0" minWidth="352.0"
-                prefHeight="352.0" prefWidth="352.0" BorderPane.alignment="CENTER"/>
-   </center>
    <top>
       <Label text="Kill To Save Her" BorderPane.alignment="CENTER">
          <font>
-            <Font size="28.0"/>
+             <Font size="28.0"/>
          </font>
       </Label>
    </top>
+    <center>
+        <StackPane maxHeight="354.0" maxWidth="354.0" minHeight="354.0" minWidth="354.0" prefHeight="354.0"
+                   prefWidth="354.0" BorderPane.alignment="CENTER">
+            <children>
+                <TilePane fx:id="gameGround" prefHeight="200.0" prefWidth="200.0"/>
+                <Pane fx:id="gamePlayer" prefHeight="200.0" prefWidth="200.0"/>
+            </children>
+        </StackPane>
+    </center>
 </BorderPane>

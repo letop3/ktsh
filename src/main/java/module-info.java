@@ -5,6 +5,8 @@ module com.letop3.ktsh {
     requires org.controlsfx.controls;
     requires java.prefs;
     requires java.desktop;
+    requires com.fasterxml.jackson.databind;
+    requires java.logging;
 
     opens com.letop3.ktsh to javafx.fxml;
     exports com.letop3.ktsh;

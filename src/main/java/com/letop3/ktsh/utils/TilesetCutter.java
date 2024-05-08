@@ -3,8 +3,8 @@ package com.letop3.ktsh.utils;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class TilesetCutter {
      * @param imagePath Chemin vers l'image source.
      * @param tileSize Taille des tuiles carrées à découper (en pixels).
      */
-    public TilesetCutter(String imagePath, int tileSize) {
+    public TilesetCutter(String imagePath, int tileSize) throws IllegalArgumentException {
         if (imagePath == null || imagePath.trim().isEmpty()) {
             throw new IllegalArgumentException("Le chemin de l'image ne peut pas être nul ou vide.");
         }
@@ -57,7 +57,7 @@ public class TilesetCutter {
      * @return Liste immuable des tuiles.
      */
     public List<Image> getTiles() {
-        return Collections.unmodifiableList(tiles);
+        return tiles;
     }
 
     /**
@@ -66,8 +66,8 @@ public class TilesetCutter {
      * @param index Indice de la tuile à récupérer.
      * @return L'image de la tuile à l'indice spécifié.
      */
-    public Image getTile(int index) {
-        return tiles.get(index);
+    public Image getTile(int n) {
+        return tiles.get(n);
     }
 
     /**

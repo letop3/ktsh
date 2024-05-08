@@ -9,6 +9,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Position {
     private final IntegerProperty x = new SimpleIntegerProperty();
     private final IntegerProperty y = new SimpleIntegerProperty();
+    private final IntegerProperty dx = new SimpleIntegerProperty();
+    private final IntegerProperty dy = new SimpleIntegerProperty();
 
     /**
      * Constructeur de la classe Position.
@@ -16,9 +18,11 @@ public class Position {
      * @param x la coordonnée x
      * @param y la coordonnée y
      */
-    public Position(int x, int y) {
+    public Position(int x, int y, int dx, int dy) {
         this.x.set(x);
         this.y.set(y);
+        this.dx.set(dx);
+        this.dy.set(dy);
     }
 
     /**
@@ -73,6 +77,61 @@ public class Position {
      */
     public void setY(int y) {
         this.y.set(y);
+    }
+
+    /**
+     * Retourne la propriété dx.
+     *
+     * @return la propriété dx
+     */
+    public IntegerProperty dxProperty() {
+        return dx;
+    }
+
+    /**
+     * Retourne la valeur de dx.
+     *
+     * @return la valeur de dx
+     */
+
+    public int getDx() {
+        return dx.get();
+    }
+
+    /**
+     * Définit la valeur de dx.
+     *
+     * @param dx la nouvelle valeur de dx
+     */
+    public void setDx(int dx) {
+        this.dx.set(dx);
+    }
+
+    /**
+     * Retourne la propriété dy.
+     *
+     * @return la propriété dy
+     */
+    public IntegerProperty dyProperty() {
+        return dy;
+    }
+
+    /**
+     * Retourne la valeur de dy.
+     *
+     * @return la valeur de dy
+     */
+    public int getDy() {
+        return dy.get();
+    }
+
+    /**
+     * Définit la valeur de dy.
+     *
+     * @param dy la nouvelle valeur de dy
+     */
+    public void setDy(int dy) {
+        this.dy.set(dy);
     }
 
     /**
