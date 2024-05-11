@@ -42,10 +42,12 @@ public class GameLoop implements Initializable {
 
 
     private void updateGame() {
+        // update le modele
         ControlsController.processInput();
     }
 
     private void drawGame() {
+        // update la vue
         playerView.update();
     }
 }
