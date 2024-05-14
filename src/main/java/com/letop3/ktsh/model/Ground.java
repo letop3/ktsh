@@ -1,6 +1,6 @@
 package com.letop3.ktsh.model;
 
-import com.letop3.ktsh.utils.JsonLoader;
+import com.letop3.ktsh.model.files.JsonLoader;
 
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class Ground {
      * @return Le terrain par défaut
      */
     private static int[] loadDefaultGround() {
-        return new int[]{
+        return new int[] {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
                 0, 2, 2, 1, 1, 1, 1, 1, 1, 2, 0,

@@ -1,14 +1,14 @@
 package com.letop3.ktsh.view;
 
-import com.letop3.ktsh.model.Player;
-import com.letop3.ktsh.utils.TilesetCutter;
+import com.letop3.ktsh.model.entity.Direction;
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.view.viewUtils.TilesetCutter;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class PlayerView {
-
     Player player;
     Pane gamePlayer;
     Image playerImage;
@@ -20,8 +20,8 @@ public class PlayerView {
     Image[] eImages = new Image[2];
     Image[] wImages = new Image[2];
     int currentImageIndex = 0;
-    char lastDirection = 's';
     Point2D lastPosition;
+    Direction lastDirection = Direction.SOUTH;
     int moveCounter = 0;  // Compteur de déplacements
     int updateThreshold = 5; // Seuil de mise à jour pour l'animation, ajustez ce nombre selon vos besoins
 
@@ -31,8 +31,18 @@ public class PlayerView {
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/player/player.png", 32);
         loadImages();
         this.playerImageView = new ImageView(sImages[0]);
-        this.lastPosition = new Point2D(player.getPosition().getX(), player.getPosition().getY());
+        lastPosition = new Point2D(player.getPosition().getX(), player.getPosition().getY());
         draw();
+
+
+
+        //gamePlayer.translateXProperty().bind(player.getPosition().xProperty());
+        //gamePlayer.translateYProperty().bind(player.getPosition().yProperty());
+
+        gamePlayer.getChildren().add(playerImageView);
+
+        playerImageView.layoutXProperty().bind(player.getPosition().xProperty());
+        playerImageView.layoutYProperty().bind(player.getPosition().yProperty());
     }
 
     private void loadImages() {
@@ -49,22 +59,17 @@ public class PlayerView {
     }
 
     public void draw() {
-        playerImageView.setLayoutX(player.getPosition().getX());
-        playerImageView.setLayoutY(player.getPosition().getY());
-        if (!gamePlayer.getChildren().contains(playerImageView)) {
-            gamePlayer.getChildren().add(playerImageView);
-        }
+        //animatePlayer();
     }
 
     public void update() {
+        player.update();
+
         double newX = player.getPosition().getX();
         double newY = player.getPosition().getY();
 
-        playerImageView.setLayoutX(newX);
-        playerImageView.setLayoutY(newY);
-
         // Vérifier si le joueur s'est déplacé
-        if (lastPosition.getX() != newX || lastPosition.getY() != newY) {
+        if (lastPosition == null || lastPosition.getX() != newX || lastPosition.getY() != newY) {
             moveCounter++; // Incrémenter le compteur de déplacements
             if (moveCounter >= updateThreshold) {
                 animatePlayer();
@@ -75,12 +80,13 @@ public class PlayerView {
     }
 
     private void animatePlayer() {
-        char direction = player.getDirection();
-        Image[] images = switch (direction) {
-            case 'n' -> nImages;
-            case 's' -> sImages;
-            case 'e' -> eImages;
-            case 'w' -> wImages;
+        Direction direction = player.getDirection();
+
+        Image[] images = direction == null ? nImages : switch (direction) {
+            case NORTH -> nImages;
+            case SOUTH -> sImages;
+            case EAST -> eImages;
+            case WEST -> wImages;
             default -> nImages;
         }; // Définir par défaut vers le sud
 

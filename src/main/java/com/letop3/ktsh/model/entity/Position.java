@@ -1,7 +1,11 @@
-package com.letop3.ktsh.model;
+package com.letop3.ktsh.model.entity;
 
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 /**
  * Classe Position représentant une position avec des coordonnées x et y.
@@ -9,7 +13,6 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class Position {
     private final IntegerProperty x;
     private final IntegerProperty y;
-    private char direction; // N, S, E, W
 
     /**
      * Constructeur de la classe Position.
@@ -17,10 +20,9 @@ public class Position {
      * @param x la coordonnée x
      * @param y la coordonnée y
      */
-    public Position(int x, int y, char direction) {
+    public Position(int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
-        this.direction = direction;
     }
 
     /**
@@ -75,25 +77,6 @@ public class Position {
      */
     public void setY(int y) {
         this.y.set(y);
-    }
-
-    /**
-     * Retourne la direction.
-     *
-     * @return la direction
-     */
-    public char getDirection() {
-        return direction;
-    }
-
-    /**
-     * Définit la direction.
-     *
-     * @param direction la nouvelle direction
-     */
-
-    public void setDirection(char direction) {
-        this.direction = direction;
     }
 
     /**

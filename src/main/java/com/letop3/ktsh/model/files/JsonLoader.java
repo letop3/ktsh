@@ -1,4 +1,4 @@
-package com.letop3.ktsh.utils;
+package com.letop3.ktsh.model.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

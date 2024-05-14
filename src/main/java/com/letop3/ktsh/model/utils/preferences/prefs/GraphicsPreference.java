@@ -4,7 +4,7 @@
  */
 
 
-package com.letop3.ktsh.utils.preferences.prefs;
+package com.letop3.ktsh.model.utils.preferences.prefs;
 
 /**
  * Enum pour les contrôles des paramètres graphiques.

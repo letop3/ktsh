@@ -43,7 +43,7 @@ public class GameLoop implements Initializable {
 
     private void updateGame() {
         // update le modele
-        ControlsController.processInput();
+        //ControlsController.processInput();
     }
 
     private void drawGame() {

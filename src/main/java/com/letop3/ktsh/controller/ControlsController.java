@@ -1,6 +1,8 @@
 package com.letop3.ktsh.controller;
 
-import com.letop3.ktsh.model.Player;
+import com.letop3.ktsh.model.entity.Direction;
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
@@ -10,36 +12,16 @@ import javafx.scene.layout.TilePane;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class ControlsController implements Initializable {
+    public static ArrayList<Direction> keyDirections = new ArrayList<>();
     private final TilePane gameGround;
-    public static Set<KeyCode> pressedKeys = new HashSet<>();
     private static Player player;
 
     public ControlsController(TilePane gameGround, Player player) {
         this.gameGround = gameGround;
         ControlsController.player = player;
-    }
-
-    public static void processInput() {
-        if (pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.LEFT)) {
-            player.moveTopLeft();
-        } else if (pressedKeys.contains(KeyCode.UP) && pressedKeys.contains(KeyCode.RIGHT)) {
-            player.moveTopRight();
-        } else if (pressedKeys.contains(KeyCode.DOWN) && pressedKeys.contains(KeyCode.LEFT)) {
-            player.moveBottomLeft();
-        } else if (pressedKeys.contains(KeyCode.DOWN) && pressedKeys.contains(KeyCode.RIGHT)) {
-            player.moveBottomRight();
-        } else if (pressedKeys.contains(KeyCode.LEFT)) {
-            player.moveLeft();
-        } else if (pressedKeys.contains(KeyCode.RIGHT)) {
-            player.moveRight();
-        } else if (pressedKeys.contains(KeyCode.UP)) {
-            player.moveUp();
-        } else if (pressedKeys.contains(KeyCode.DOWN)) {
-            player.moveDown();
-        }
     }
 
     @Override
@@ -50,12 +32,30 @@ public class ControlsController implements Initializable {
         });
     }
 
+    private Direction keyToDirection(KeyCode key) {
+        if (key == KeyPreference.MOVE_UP)
+            return Direction.NORTH;
+        else if (key == KeyPreference.MOVE_DOWN)
+            return Direction.SOUTH;
+        else if (key == KeyPreference.MOVE_RIGHT)
+            return Direction.EAST;
+        else if (key == KeyPreference.MOVE_LEFT)
+            return Direction.WEST;
+
+        return null;
+    }
+
     private void keyPressed(KeyEvent event) {
-        pressedKeys.add(event.getCode());
+        Direction dir = keyToDirection(event.getCode());
+        if (dir != null && !keyDirections.contains(dir)) {
+            keyDirections.add(dir);
+        }
+        player.move(keyDirections);
     }
 
     private void keyReleased(KeyEvent event) {
-        pressedKeys.remove(event.getCode());
+        keyDirections.remove(keyToDirection(event.getCode()));
+        player.move(keyDirections);
     }
 
 }

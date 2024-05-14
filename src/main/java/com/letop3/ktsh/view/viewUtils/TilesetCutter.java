@@ -1,4 +1,4 @@
-package com.letop3.ktsh.utils;
+package com.letop3.ktsh.view.viewUtils;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;

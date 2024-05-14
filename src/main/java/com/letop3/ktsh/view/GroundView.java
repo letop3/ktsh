@@ -1,7 +1,7 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Ground;
-import com.letop3.ktsh.utils.TilesetCutter;
+import com.letop3.ktsh.view.viewUtils.TilesetCutter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
