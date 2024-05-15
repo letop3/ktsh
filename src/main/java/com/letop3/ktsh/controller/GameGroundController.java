@@ -33,7 +33,6 @@ public class GameGroundController implements Initializable {
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         groundView.draw();
-        playerView.draw();
 
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);

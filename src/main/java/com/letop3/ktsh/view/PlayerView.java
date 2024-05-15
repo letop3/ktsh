@@ -31,7 +31,8 @@ public class PlayerView {
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/player/player.png", 32);
         loadImages();
         this.playerImageView = new ImageView(sImages[0]);
-        draw();
+
+        gamePlayer.getChildren().add(playerImageView);
 
         ChangeListener animUpdate = (obs, old, nouv) -> {
             moveCounter++; // Incrémenter le compteur de déplacements
@@ -43,8 +44,6 @@ public class PlayerView {
 
         player.getPosition().xProperty().addListener(animUpdate);
         player.getPosition().yProperty().addListener(animUpdate);
-
-        gamePlayer.getChildren().add(playerImageView);
 
         playerImageView.layoutXProperty().bind(player.getPosition().xProperty());
         playerImageView.layoutYProperty().bind(player.getPosition().yProperty());
