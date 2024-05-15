@@ -50,16 +50,16 @@ public class PlayerView {
     }
 
     private void loadImages() {
-        nImages[0] = cutter.getTile(0);
-        nImages[1] = cutter.getTile(1);
-        nImages[2] = cutter.getTile(2);
-        eImages[0] = cutter.getTile(3);
-        eImages[1] = cutter.getTile(4);
-        wImages[0] = cutter.getTile(5);
-        wImages[1] = cutter.getTile(6);
-        sImages[0] = cutter.getTile(7);
-        sImages[1] = cutter.getTile(8);
-        sImages[2] = cutter.getTile(9);
+        sImages[0] = cutter.getTile(0);
+        sImages[1] = cutter.getTile(1);
+        sImages[2] = cutter.getTile(2);
+        wImages[0] = cutter.getTile(3);
+        wImages[1] = cutter.getTile(4);
+        eImages[0] = cutter.getTile(5);
+        eImages[1] = cutter.getTile(6);
+        nImages[0] = cutter.getTile(7);
+        nImages[1] = cutter.getTile(8);
+        nImages[2] = cutter.getTile(9);
     }
 
     public void update() {
@@ -74,7 +74,7 @@ public class PlayerView {
             case SOUTH -> sImages;
             case EAST -> eImages;
             case WEST -> wImages;
-            default -> nImages;
+            default -> sImages;
         }; // Définir par défaut vers le sud
 
         if (lastDirection != direction) {
