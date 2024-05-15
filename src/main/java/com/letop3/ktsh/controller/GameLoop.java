@@ -32,7 +32,6 @@ public class GameLoop implements Initializable {
         Duration duration = Duration.millis(1000.0 / 30); // 30 FPS
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
             updateGame();
-            drawGame();
         });
 
         Timeline timeline = new Timeline(keyFrame);
@@ -42,12 +41,6 @@ public class GameLoop implements Initializable {
 
 
     private void updateGame() {
-        // update le modele
-        //ControlsController.processInput();
-    }
-
-    private void drawGame() {
-        // update la vue
         playerView.update();
     }
 }

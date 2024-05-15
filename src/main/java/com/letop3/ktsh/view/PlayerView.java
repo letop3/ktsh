@@ -3,6 +3,7 @@ package com.letop3.ktsh.view;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.viewUtils.TilesetCutter;
+import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +21,6 @@ public class PlayerView {
     Image[] eImages = new Image[2];
     Image[] wImages = new Image[2];
     int currentImageIndex = 0;
-    Point2D lastPosition;
     Direction lastDirection = Direction.SOUTH;
     int moveCounter = 0;  // Compteur de déplacements
     int updateThreshold = 5; // Seuil de mise à jour pour l'animation, ajustez ce nombre selon vos besoins
@@ -31,13 +31,18 @@ public class PlayerView {
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/player/player.png", 32);
         loadImages();
         this.playerImageView = new ImageView(sImages[0]);
-        lastPosition = new Point2D(player.getPosition().getX(), player.getPosition().getY());
         draw();
 
+        ChangeListener animUpdate = (obs, old, nouv) -> {
+            moveCounter++; // Incrémenter le compteur de déplacements
+            if (moveCounter >= updateThreshold) {
+                animatePlayer();
+                moveCounter = 0; // Réinitialiser le compteur après l'animation
+            }
+        };
 
-
-        //gamePlayer.translateXProperty().bind(player.getPosition().xProperty());
-        //gamePlayer.translateYProperty().bind(player.getPosition().yProperty());
+        player.getPosition().xProperty().addListener(animUpdate);
+        player.getPosition().yProperty().addListener(animUpdate);
 
         gamePlayer.getChildren().add(playerImageView);
 
@@ -58,25 +63,8 @@ public class PlayerView {
         sImages[2] = cutter.getTile(9);
     }
 
-    public void draw() {
-        //animatePlayer();
-    }
-
     public void update() {
         player.update();
-
-        double newX = player.getPosition().getX();
-        double newY = player.getPosition().getY();
-
-        // Vérifier si le joueur s'est déplacé
-        if (lastPosition == null || lastPosition.getX() != newX || lastPosition.getY() != newY) {
-            moveCounter++; // Incrémenter le compteur de déplacements
-            if (moveCounter >= updateThreshold) {
-                animatePlayer();
-                moveCounter = 0; // Réinitialiser le compteur après l'animation
-            }
-            lastPosition = new Point2D(newX, newY); // Mettre à jour la dernière position connue
-        }
     }
 
     private void animatePlayer() {
