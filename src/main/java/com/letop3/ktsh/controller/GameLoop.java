@@ -1,6 +1,6 @@
 package com.letop3.ktsh.controller;
 
-import com.letop3.ktsh.view.PlayerView;
+import com.letop3.ktsh.view.player.PlayerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;

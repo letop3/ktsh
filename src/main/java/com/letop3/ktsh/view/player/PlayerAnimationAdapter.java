@@ -1,0 +1,61 @@
+package com.letop3.ktsh.view.player;
+
+import com.letop3.ktsh.model.entity.Direction;
+import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.view.animation.Animation;
+import com.letop3.ktsh.view.animation.AnimationAdapter;
+import com.letop3.ktsh.view.viewUtils.TilesetCutter;
+import javafx.scene.image.Image;
+
+public class PlayerAnimationAdapter implements AnimationAdapter {
+    private Player player;
+
+    Animation idle;
+    Animation nAnim, sAnim, eAnim, wAnim;
+
+
+
+    public PlayerAnimationAdapter(Player player) {
+        this.player = player;
+
+        loadAnim();
+    }
+
+    private void loadAnim() {
+        TilesetCutter cutter = new TilesetCutter("/com/letop3/ktsh/images/player/player.png", 32);
+
+        Image[] sImages = {cutter.getTile(0), cutter.getTile(1), cutter.getTile(2)};
+        Image[] wImages = {cutter.getTile(3), cutter.getTile(4)};
+        Image[] eImages = {cutter.getTile(5), cutter.getTile(6)};
+        Image[] nImages = {cutter.getTile(7), cutter.getTile(8), cutter.getTile(9)};
+
+        idle = new Animation(new Image[] {cutter.getTile(0)});
+
+        nAnim = new Animation(nImages);
+        sAnim = new Animation(sImages);
+        eAnim = new Animation(eImages);
+        wAnim = new Animation(wImages);
+    }
+
+    @java.lang.Override
+    public Animation getIdleAnim(Direction direction) {
+        return idle;
+    }
+
+    @java.lang.Override
+    public Animation getMovingAnim(Direction direction) {
+        return switch (direction) {
+            case NORTH -> nAnim;
+            case SOUTH -> sAnim;
+            case EAST -> eAnim;
+            case WEST -> wAnim;
+            default -> sAnim;
+        };
+    }
+
+    @java.lang.Override
+    public Entity getEntity() {
+        return player;
+    }
+}

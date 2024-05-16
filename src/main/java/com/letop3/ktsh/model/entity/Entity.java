@@ -11,9 +11,12 @@ public abstract class Entity implements Updatable {
     private final Position position;
     private Direction direction;
 
+    private Direction lastDirection;
+
     public Entity(Position position) {
         this.position = position;
         this.direction = null;
+        this.lastDirection = null;
     }
 
     public Position getPosition() {
@@ -21,7 +24,7 @@ public abstract class Entity implements Updatable {
     }
 
     public Direction getDirection() {
-        return direction;
+        return lastDirection;
     }
 
     public void update() {
@@ -59,6 +62,8 @@ public abstract class Entity implements Updatable {
         } else if (displacements.contains(Direction.SOUTH)) {
             direction = Direction.SOUTH;
         }
+
+        lastDirection = direction;
     }
 
     private void moveTopLeft() {

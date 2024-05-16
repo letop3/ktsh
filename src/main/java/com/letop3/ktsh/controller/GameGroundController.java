@@ -2,7 +2,7 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.view.GroundView;
-import com.letop3.ktsh.view.PlayerView;
+import com.letop3.ktsh.view.player.PlayerView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
