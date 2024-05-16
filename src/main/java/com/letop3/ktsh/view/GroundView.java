@@ -9,14 +9,15 @@ import javafx.scene.layout.TilePane;
 public class GroundView {
     private final TilesetCutter cutter;
     private final TilePane gameGround;
+    private Ground ground;
 
-    public GroundView(TilePane gameGround) {
+    public GroundView(Ground ground, TilePane gameGround) {
         this.gameGround = gameGround;
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/tiles/ground.png", 32);
     }
 
     public void draw() {
-        int[] tileArray = Ground.GROUND;
+        int[] tileArray = ground.GROUND;
         for (int j : tileArray) {
             Image tile = cutter.getTile(j);
             ImageView imageView = new ImageView(tile);
