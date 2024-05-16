@@ -1,11 +1,7 @@
 package com.letop3.ktsh.model.entity;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 /**
  * Classe Position représentant une position avec des coordonnées x et y.

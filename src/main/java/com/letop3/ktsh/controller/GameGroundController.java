@@ -25,7 +25,7 @@ public class GameGroundController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
         //on s'occupe des vues
-        GroundView groundView = new GroundView(gameGround);
+        GroundView groundView = new GroundView(env.getGround(), gameGround);
         PlayerView playerView = new PlayerView(env.getPlayer(), gamePlayer);
 
         //on s'occupe des controllers
