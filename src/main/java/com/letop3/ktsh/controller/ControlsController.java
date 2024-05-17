@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 import java.util.ArrayList;
 
 public class ControlsController implements Initializable {
-    public static ArrayList<Direction> keyDirections = new ArrayList<>();
     private final TilePane gameGround;
     private static Player player;
 
@@ -46,16 +45,10 @@ public class ControlsController implements Initializable {
     }
 
     private void keyPressed(KeyEvent event) {
-        Direction dir = keyToDirection(event.getCode());
-        if (dir != null && !keyDirections.contains(dir)) {
-            keyDirections.add(dir);
-        }
-        player.move(keyDirections);
+        player.addDirection(keyToDirection(event.getCode()));
     }
 
     private void keyReleased(KeyEvent event) {
-        keyDirections.remove(keyToDirection(event.getCode()));
-        player.move(keyDirections);
+        player.remDirection(keyToDirection(event.getCode()));
     }
-
 }
