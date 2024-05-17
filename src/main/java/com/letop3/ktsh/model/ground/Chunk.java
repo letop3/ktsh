@@ -32,4 +32,11 @@ public class Chunk {
     public void addNeighbor(Chunk neighbor) {
         this.neighbors.add(neighbor);
     }
+
+    @Override
+    public String toString() {
+        return "Chunk{" +
+                "id=" + id +
+                '}';
+    }
 }

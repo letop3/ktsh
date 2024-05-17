@@ -23,7 +23,6 @@ public class MapLoader implements Closeable {
         for (ChunkData chunkData : chunkDataList) {
             Chunk chunk = new Chunk(chunkData.id, chunkData.tiles);
             chunkMap.put(chunk.getId(), chunk);
-
         }
 
         // Ajouter les voisins après que tous les chunks aient été créés

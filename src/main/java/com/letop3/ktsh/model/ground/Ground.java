@@ -1,29 +1,41 @@
 package com.letop3.ktsh.model.ground;
 
-import com.letop3.ktsh.model.files.JsonLoader;
 import com.letop3.ktsh.model.files.MapLoader;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 
 public class Ground {
-    private MapLoader mapLoader;
-    public final Chunk[] chunks;
+    private final Chunk[] chunks;
+    private IntegerProperty currentChunkId;
+
 
     public Ground() {
-        Chunk[] chunks1 = null;
-        try (MapLoader mapLoader = new MapLoader("src/main/resources/com/letop3/ktsh/ground.json")) {
-            chunks1 = mapLoader.getChunks();
-        } catch (IOException e) {
+        Chunk[] chunksTmp = null;
 
-            System.out.println(e.getMessage());
-        }
-        this.chunks = chunks1;
+        try (MapLoader mapLoader = new MapLoader("src/main/resources/com/letop3/ktsh/ground.json")) {
+            chunksTmp = mapLoader.getChunks();
+        } catch (IOException ignored) {}
+
+        this.chunks = chunksTmp;
+        currentChunkId = new SimpleIntegerProperty();
     }
 
-    public Chunk getChunk(int x, int y) {
-        return chunks[x];
+    public Chunk getChunk(int chunkNumber) {
+        return chunks[chunkNumber];
+    }
+
+    public int getCurrentChunkId() {
+        return currentChunkId.get();
+    }
+
+    public IntegerProperty currentChunkIdProperty() {
+        return currentChunkId;
+    }
+
+    public void setCurrentChunkId(int currentChunkId) {
+        this.currentChunkId.set(currentChunkId);
     }
 
     public boolean canMoveTo(int x, int y) {
