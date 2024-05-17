@@ -1,5 +1,6 @@
 package com.letop3.ktsh.view.player;
 
+import com.letop3.ktsh.model.Ground;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.animation.AnimationAdapter;
@@ -12,12 +13,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 public class PlayerView {
+    private final Ground ground;
     private final Player player;
     private final Pane gamePlayer;
     private final ImageView playerImageView;
     private final AnimationHandler animHandler;
 
-    public PlayerView(Player player, Pane gamePlayer) {
+    public PlayerView(Player player, Pane gamePlayer, Ground ground) {
+        this.ground = ground;
         this.player = player;
         this.gamePlayer = gamePlayer;
 
@@ -32,7 +35,7 @@ public class PlayerView {
     }
 
     public void update() {
-        player.update();
+        player.update(ground);
         playerImageView.setImage(animHandler.getFrame());
     }
 }
