@@ -12,6 +12,7 @@ public class GroundView {
     private Ground ground;
 
     public GroundView(Ground ground, TilePane gameGround) {
+        this.ground = ground;
         this.gameGround = gameGround;
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/tiles/ground.png", 32);
     }

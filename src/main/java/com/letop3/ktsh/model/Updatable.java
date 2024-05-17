@@ -1,5 +1,5 @@
 package com.letop3.ktsh.model;
 
 public interface Updatable {
-    public void update();
+    public void update(Ground ground);
 }
