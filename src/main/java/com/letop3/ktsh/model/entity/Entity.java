@@ -2,10 +2,6 @@ package com.letop3.ktsh.model.entity;
 
 import com.letop3.ktsh.model.Ground;
 import com.letop3.ktsh.model.Updatable;
-import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
-import javafx.scene.input.KeyCode;
-
-import java.util.ArrayList;
 
 public abstract class Entity implements Updatable {
     private final Position position;

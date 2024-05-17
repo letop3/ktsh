@@ -7,7 +7,6 @@ package com.letop3.ktsh.model.utils.preferences;
 
 import com.letop3.ktsh.model.utils.preferences.prefs.AudioPreference;
 import com.letop3.ktsh.model.utils.preferences.prefs.GraphicsPreference;
-import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 
 import java.util.prefs.Preferences;
 

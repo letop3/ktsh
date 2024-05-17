@@ -10,9 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.ArrayList;
 
 public class ControlsController implements Initializable {
     private final TilePane gameGround;

@@ -1,14 +1,8 @@
 package com.letop3.ktsh.view.player;
 
 import com.letop3.ktsh.model.Ground;
-import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
-import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
-import com.letop3.ktsh.view.viewUtils.TilesetCutter;
-import javafx.beans.value.ChangeListener;
-import javafx.geometry.Point2D;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
