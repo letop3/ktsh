@@ -7,7 +7,6 @@ public abstract class Entity implements Updatable {
     private final Position position;
     private Direction direction;
 
-
     public Entity(Position position) {
         this.position = position;
         this.direction = null;

@@ -1,6 +1,6 @@
 package com.letop3.ktsh.view.player;
 
-import com.letop3.ktsh.model.Ground;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 import javafx.scene.image.ImageView;
