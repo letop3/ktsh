@@ -1,6 +1,5 @@
 package com.letop3.ktsh.view.animation;
 
-import com.letop3.ktsh.view.viewUtils.TilesetCutter;
 import javafx.scene.image.Image;
 
 public class Animation {

@@ -1,6 +1,5 @@
 package com.letop3.ktsh.model.entity.player;
 
-import com.letop3.ktsh.model.Ground;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 
