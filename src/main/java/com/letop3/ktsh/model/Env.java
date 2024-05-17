@@ -3,6 +3,7 @@ package com.letop3.ktsh.model;
 
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.ground.Ground;
 
 public class Env {
     private final Ground ground;

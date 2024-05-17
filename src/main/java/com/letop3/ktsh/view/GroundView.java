@@ -1,6 +1,6 @@
 package com.letop3.ktsh.view;
 
-import com.letop3.ktsh.model.Ground;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.viewUtils.TilesetCutter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +18,7 @@ public class GroundView {
     }
 
     public void draw() {
-        int[] tileArray = ground.GROUND;
+        int[] tileArray = ground.getChunk(0, 0).getTiles();
         for (int j : tileArray) {
             Image tile = cutter.getTile(j);
             ImageView imageView = new ImageView(tile);

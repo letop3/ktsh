@@ -13,4 +13,6 @@ module com.letop3.ktsh {
 
     exports com.letop3.ktsh.controller to javafx.fxml;
     opens com.letop3.ktsh.controller to javafx.fxml;
+
+    opens com.letop3.ktsh.model.files to com.fasterxml.jackson.databind;
 }

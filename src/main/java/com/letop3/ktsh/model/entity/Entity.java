@@ -1,18 +1,15 @@
 package com.letop3.ktsh.model.entity;
 
-import com.letop3.ktsh.model.Ground;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
 
 public abstract class Entity implements Updatable {
     private final Position position;
     private Direction direction;
 
-    private Direction lastDirection;
-
     public Entity(Position position) {
         this.position = position;
         this.direction = null;
-        this.lastDirection = null;
     }
 
     public Position getPosition() {
