@@ -9,7 +9,7 @@ import javafx.scene.layout.TilePane;
 public class GroundView {
     private final TilesetCutter cutter;
     private final TilePane gameGround;
-    private Ground ground;
+    private final Ground ground;
 
     public GroundView(Ground ground, TilePane gameGround) {
         this.ground = ground;
