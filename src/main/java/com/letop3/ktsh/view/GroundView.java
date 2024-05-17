@@ -15,15 +15,23 @@ public class GroundView {
         this.ground = ground;
         this.gameGround = gameGround;
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/tiles/ground.png", 32);
+
+        ground.currentChunkIdProperty().addListener((obs, old, nouv) -> {
+
+        });
+
+        loadChunkInto(gameGround, 0);
     }
 
-    public void draw() {
-        int[] tileArray = ground.getChunk(0, 0).getTiles();
-        for (int j : tileArray) {
+    private void loadChunkInto(TilePane dest, int chunkNumber) {
+        for (int j : ground.getChunk(chunkNumber).getTiles()) {
             Image tile = cutter.getTile(j);
             ImageView imageView = new ImageView(tile);
-            gameGround.getChildren().add(imageView);
+            dest.getChildren().add(imageView);
         }
     }
 
+    public void update() {
+
+    }
 }
