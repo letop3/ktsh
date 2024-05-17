@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 public class PlayerView {
     private Player player;
     private Pane gamePlayer;
-    private Image playerImage;
     private ImageView playerImageView;
     private AnimationHandler animHandler;
 
