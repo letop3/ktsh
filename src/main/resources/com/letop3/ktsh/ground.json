@@ -1,6 +1,6 @@
 {
-  "chunk_width": 11,
-  "chunk_height": 11,
+  "chunk_width": 32,
+  "chunk_height": 32,
   "chunks": [
     {
       "id": 1,

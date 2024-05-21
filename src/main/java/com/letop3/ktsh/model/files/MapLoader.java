@@ -46,26 +46,6 @@ public class MapLoader implements Closeable {
         return chunkMap.get(chunkId);
     }
 
-    public Chunk[] getChunks() {
-        return chunkMap.values().toArray(new Chunk[0]);
-    }
-
-    public int getChunkWidth() {
-        return chunkWidth;
-    }
-
-    public void setChunkWidth(int chunkWidth) {
-        this.chunkWidth = chunkWidth;
-    }
-
-    public int getChunkHeight() {
-        return chunkHeight;
-    }
-
-    public void setChunkHeight(int chunkHeight) {
-        this.chunkHeight = chunkHeight;
-    }
-
     @Override
     public void close() {
         // Implémentation de la méthode de fermeture si nécessaire
