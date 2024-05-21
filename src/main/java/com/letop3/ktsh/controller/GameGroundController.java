@@ -29,7 +29,7 @@ public class GameGroundController implements Initializable {
         PlayerView playerView = new PlayerView(env.getPlayer(), gamePlayer, env.getGround());
 
         //on s'occupe des controllers
-        GameLoop gameLoopController = new GameLoop(gameGround, playerView, groundView);
+        GameLoop gameLoopController = new GameLoop(playerView, groundView);
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         gameLoopController.initialize(location, resources);
