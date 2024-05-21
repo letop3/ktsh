@@ -3,6 +3,7 @@ package com.letop3.ktsh.model.ground;
 import com.letop3.ktsh.model.utils.EntityBlock;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Chunk {
@@ -10,17 +11,18 @@ public class Chunk {
     private final int[] tiles;
     private final int width;
     private final int height;
-    private final List<EntityBlock> entities;
+    //private final List<EntityBlock> entities;
     private final List<Chunk> neighbors;
 
+    private int[] notaccesible = {1, 2};
     public Chunk(int id, int[] tiles, int width, int height) {
         this.id = id;
         this.tiles = tiles;
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
+        //this.entities = new ArrayList<>();
         this.neighbors = new ArrayList<>();
-        this.calculateEntities();
+        //this.calculateEntities();
     }
 
     public int getId() {
@@ -39,19 +41,31 @@ public class Chunk {
         this.neighbors.add(neighbor);
     }
 
+    /*
     private void calculateEntities() {
-        for (int i = 0; i < tiles.length; i++) {
-            if (tiles[i] != 0) {
-                int x = i % width;
-                int y = i / width;
+        int index = 0;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int finalIndex = index;
+                if (Arrays.stream(notaccesible).anyMatch(x -> x == tiles[finalIndex])) {
+                    index ++;
+                    continue;
+                }
+                System.out.println("i: " + i + " j: " + j + " index: " + index + " tile: " + tiles[index]);
+                int x = j * 32;
+                int y = i * 32;
+                System.out.println("xchk: x: " + x + " y: " + y);
                 entities.add(new EntityBlock(x, y));
+                index ++;
             }
         }
     }
 
+
     public List<EntityBlock> getEntities() {
         return entities;
     }
+    */
 
     @Override
     public String toString() {

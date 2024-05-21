@@ -40,13 +40,13 @@ public class Ground {
     }
 
     public boolean canMoveTo(int x, int y) {
-        System.out.println("x: " + x + " y: " + y);
-        EntityBlock newBounds = new EntityBlock(x, y);
-        for (EntityBlock tileBounds : chunks[currentChunkId.get()].getEntities()) {
-            if (newBounds.intersects(tileBounds)) {
-                return false;
-            }
-        }
+        // System.out.println("x: " + x + " y: " + y);
+        // EntityBlock newBounds = new EntityBlock(x, y);
+        // for (EntityBlock tileBounds : chunks[currentChunkId.get()].getEntities()) {
+        //     if (newBounds.intersects(tileBounds)) {
+        //         return false;
+        //     }
+        // }
         return true;
     }
 }

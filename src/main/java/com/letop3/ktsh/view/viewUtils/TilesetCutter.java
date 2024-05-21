@@ -63,7 +63,7 @@ public class TilesetCutter {
     /**
      * Récupère une tuile par son indice.
      *
-     * @param index Indice de la tuile à récupérer.
+     * @param n Indice de la tuile à récupérer.
      * @return L'image de la tuile à l'indice spécifié.
      */
     public Image getTile(int n) {
