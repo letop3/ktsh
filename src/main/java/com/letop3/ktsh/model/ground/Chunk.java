@@ -1,15 +1,12 @@
 package com.letop3.ktsh.model.ground;
 
-import com.letop3.ktsh.model.files.JsonLoader;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk {
-    private int id;
-    private int[] tiles;
-    private List<Chunk> neighbors;
+    private final int id;
+    private final int[] tiles;
+    private final List<Chunk> neighbors;
 
     public Chunk(int id, int[] tiles) {
         this.id = id;

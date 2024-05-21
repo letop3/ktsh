@@ -12,12 +12,17 @@ import java.util.Map;
 
 public class MapLoader implements Closeable {
     private final Map<Integer, Chunk> chunkMap = new HashMap<>();
+    private int chunkWidth;
+    private int chunkHeight;
 
     public MapLoader(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File(filePath);
-        Map<String, ChunkData[]> jsonData = mapper.readValue(file, new TypeReference<Map<String, ChunkData[]>>() {});
-        ChunkData[] chunkDataList = jsonData.get("chunks");
+        Map<String, Object> jsonData = mapper.readValue(file, new TypeReference<Map<String, Object>>() {
+        });
+        ChunkData[] chunkDataList = mapper.convertValue(jsonData.get("chunks"), ChunkData[].class);
+        chunkWidth = (Integer) jsonData.get("width");
+        chunkHeight = (Integer) jsonData.get("height");
 
         // Créer les chunks sans voisins
         for (ChunkData chunkData : chunkDataList) {
@@ -43,6 +48,22 @@ public class MapLoader implements Closeable {
 
     public Chunk[] getChunks() {
         return chunkMap.values().toArray(new Chunk[0]);
+    }
+
+    public int getChunkWidth() {
+        return chunkWidth;
+    }
+
+    public void setChunkWidth(int chunkWidth) {
+        this.chunkWidth = chunkWidth;
+    }
+
+    public int getChunkHeight() {
+        return chunkHeight;
+    }
+
+    public void setChunkHeight(int chunkHeight) {
+        this.chunkHeight = chunkHeight;
     }
 
     @Override

@@ -32,7 +32,7 @@ public abstract class Entity implements Updatable, Collidable {
             int newX = position.getX() + direction.getX();
             int newY = position.getY() - direction.getY();
 
-            if (ground.canMoveTo(newX, newY)) {
+            if (ground.canMoveTo(this, newX, newY)) {
                 position.setX(newX);
                 position.setY(newY);
             }

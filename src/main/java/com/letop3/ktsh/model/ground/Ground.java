@@ -1,5 +1,6 @@
 package com.letop3.ktsh.model.ground;
 
+import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,7 +9,7 @@ import java.io.IOException;
 
 public class Ground {
     private final Chunk[] chunks;
-    private IntegerProperty currentChunkId;
+    private final IntegerProperty currentChunkId;
 
 
     public Ground() {
@@ -38,7 +39,7 @@ public class Ground {
         this.currentChunkId.set(currentChunkId);
     }
 
-    public boolean canMoveTo(int x, int y) {
+    public boolean canMoveTo(Entity entity, int x, int y) {
         return true;
     }
 }
