@@ -2,7 +2,6 @@ package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.utils.EntityBlock;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

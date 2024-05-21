@@ -1,6 +1,7 @@
 package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.files.MapLoader;
 import com.letop3.ktsh.model.utils.EntityBlock;
 import javafx.beans.property.IntegerProperty;
@@ -57,12 +58,12 @@ public class Ground {
         return currentChunkIdY;
     }
 
-    public void setCurrentChunkIdY(int currentChunkIdX) {
-        this.currentChunkIdX.set(currentChunkIdX);
-    }
-
     public void setCurrentChunkIdX(int currentChunkIdY) {
         this.currentChunkIdY.set(currentChunkIdY);
+    }
+
+    public void setCurrentChunkIdY(int currentChunkIdX) {
+        this.currentChunkIdX.set(currentChunkIdX);
     }
 
     public boolean canMoveTo(int x, int y) {
