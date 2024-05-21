@@ -21,8 +21,8 @@ public class MapLoader implements Closeable {
         Map<String, Object> jsonData = mapper.readValue(file, new TypeReference<Map<String, Object>>() {
         });
         ChunkData[] chunkDataList = mapper.convertValue(jsonData.get("chunks"), ChunkData[].class);
-        chunkWidth = (Integer) jsonData.get("width");
-        chunkHeight = (Integer) jsonData.get("height");
+        chunkWidth = (Integer) jsonData.get("chunk_width");
+        chunkHeight = (Integer) jsonData.get("chunk_height");
 
         // Créer les chunks sans voisins
         for (ChunkData chunkData : chunkDataList) {
