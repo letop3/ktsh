@@ -2,6 +2,7 @@ package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.files.MapLoader;
+import com.letop3.ktsh.model.utils.EntityBlock;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -40,6 +41,12 @@ public class Ground {
     }
 
     public boolean canMoveTo(Entity entity, int x, int y) {
+        EntityBlock newBounds = new EntityBlock(x, y);
+        for (EntityBlock tileBounds : chunks[currentChunkId.get()].getEntities()) {
+            if (newBounds.intersects(tileBounds)) {
+                return false;
+            }
+        }
         return true;
     }
 }

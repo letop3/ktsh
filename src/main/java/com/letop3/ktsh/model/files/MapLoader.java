@@ -26,7 +26,7 @@ public class MapLoader implements Closeable {
 
         // Créer les chunks sans voisins
         for (ChunkData chunkData : chunkDataList) {
-            Chunk chunk = new Chunk(chunkData.id, chunkData.tiles);
+            Chunk chunk = new Chunk(chunkData.id, chunkData.tiles, chunkWidth, chunkHeight);
             chunkMap.put(chunk.getId(), chunk);
         }
 

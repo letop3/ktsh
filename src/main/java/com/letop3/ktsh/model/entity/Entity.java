@@ -9,14 +9,16 @@ import com.letop3.ktsh.model.utils.EntityBlock;
 public abstract class Entity implements Updatable, Collidable {
     private final Position position;
     private Direction direction;
+    private final EntityBlock bounds;
 
     public Entity(Position position) {
         this.position = position;
+        this.bounds = new EntityBlock(position.getX(), position.getY());
         this.direction = null;
     }
 
     public EntityBlock getBounds() {
-        return new EntityBlock(position.getX(), position.getY());
+        return bounds;
     }
 
     public Position getPosition() {
