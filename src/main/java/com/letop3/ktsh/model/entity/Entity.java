@@ -1,15 +1,22 @@
 package com.letop3.ktsh.model.entity;
 
-import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.Collidable;
 import com.letop3.ktsh.model.Updatable;
+import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.utils.EntityBlock;
 
-public abstract class Entity implements Updatable {
+
+public abstract class Entity implements Updatable, Collidable {
     private final Position position;
     private Direction direction;
 
     public Entity(Position position) {
         this.position = position;
         this.direction = null;
+    }
+
+    public EntityBlock getBounds() {
+        return new EntityBlock(position.getX(), position.getY());
     }
 
     public Position getPosition() {
