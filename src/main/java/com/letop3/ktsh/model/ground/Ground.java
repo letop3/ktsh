@@ -87,4 +87,18 @@ public class Ground {
                     return false;
         return true;
     }
+
+    public boolean canMoveTo(EntityBlock hitboxEntity) {
+        int iMin = ((int) hitboxEntity.getMinX()) / 32;
+        int iMax = ((int) hitboxEntity.getMaxX()) / 32;
+        int jMin = ((int) hitboxEntity.getMinY() / 32);
+        int jMax = ((int) hitboxEntity.getMaxY() / 32);
+        for (int i = iMin; i <= iMax; i++)
+            for (int j = jMin; j <= jMax; j++)
+                if (hitboxEntity.intersects(i * 32, j * 32, 32, 32))
+                    return false;
+        return true;
+    }
+
+
 }
