@@ -11,7 +11,7 @@ public class EntityBlock extends Rectangle2D {
     }
 
     public boolean intersects(EntityBlock other) {
-        return this.intersects(other.getMinX(), other.getMinY(), other.getWidth(), other.getHeight());
+        return this.intersects(other);
     }
 
 }

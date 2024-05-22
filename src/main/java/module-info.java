@@ -7,6 +7,7 @@ module com.letop3.ktsh {
     requires java.desktop;
     requires com.fasterxml.jackson.databind;
     requires java.logging;
+    requires org.junit.jupiter.api;
 
     opens com.letop3.ktsh to javafx.fxml;
     exports com.letop3.ktsh;
