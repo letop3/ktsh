@@ -9,6 +9,7 @@ public class Stuff {
     private Item mainG;
     private Item mainD;
     private Item quickSlot;
+    private static final int TAILLE_INVENTAIRE = 12;
 
     public Stuff() {
         this.inventaire = new ArrayList<>();
@@ -17,17 +18,37 @@ public class Stuff {
         this.quickSlot = null;
     }
 
-    public boolean setMainG(int) {
-        this.mainG = mainG;
+    /**
+     * @param itm l'item ramassé par le joueur
+     * @return boolean, true si l'inventaire a la place nécessaire, false si non.
+     */
+    public boolean addItem(Item itm) {
+        if (this.inventaire.size() < TAILLE_INVENTAIRE) {
+            this.inventaire.add(itm);
+            return true;
+        }
+        return false;
     }
 
-    public boolean setMainD(Item mainD) {
-        this.mainD = mainD;
+    /**
+     * @param i indice de l'item se trouvant dans l'inventaire
+     */
+    public void setMainG(int i) {
+        this.mainG = this.inventaire.get(i);
     }
 
-    public boolean setQuickSlot(Item quickSlot) {
-        this.quickSlot = quickSlot;
+    /**
+     * @param i indice de l'item se trouvant dans l'inventaire
+     */
+    public void setMainD(int i) {
+        this.mainD = this.inventaire.get(i);
     }
 
-    public boolean
+    /**
+     * @param i indice de l'item se trouvant dans l'inventaire
+     */
+    public void setQuickSlot(int i) {
+        this.quickSlot = this.inventaire.get(i);
+    }
+
 }
