@@ -24,6 +24,7 @@ public class GameGroundController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
+
         //on s'occupe des vues
         GroundView groundView = new GroundView(env.getGround(), gameGround);
         PlayerView playerView = new PlayerView(env.getPlayer(), gamePlayer, env.getGround());
@@ -34,6 +35,5 @@ public class GameGroundController implements Initializable {
 
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);
-
     }
 }
