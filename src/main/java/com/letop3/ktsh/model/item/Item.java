@@ -1,4 +1,4 @@
-package com.letop3.ktsh.model.inventaire.item;
+package com.letop3.ktsh.model.item;
 
 public abstract class Item {
     private int id;
