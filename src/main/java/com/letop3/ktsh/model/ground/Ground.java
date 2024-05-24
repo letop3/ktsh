@@ -23,6 +23,10 @@ public class Ground {
         currentChunkId = new SimpleIntegerProperty();
     }
 
+    public int getChunkNumber() {
+        return chunks.length;
+    }
+
     public Chunk getChunk(int chunkNumber) {
         return chunks[chunkNumber];
     }
