@@ -9,19 +9,24 @@
         <Label text="Inventaire"/>
         <ListView fx:id="inventaireListView" onMouseClicked="#handleInventaireClick"/>
 
-        <HBox spacing="10" padding="10">
-            <VBox>
-                <Label text="Main Gauche"/>
-                <Label fx:id="mainGLabel"/>
-            </VBox>
-            <VBox>
-                <Label text="Main Droite"/>
-                <Label fx:id="mainDLabel"/>
-            </VBox>
-            <VBox>
-                <Label text="Quick Slot"/>
-                <Label fx:id="quickSlotLabel"/>
-            </VBox>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <children>
+                <VBox>
+                    <Label text="Main Gauche"/>
+                    <Label fx:id="mainGLabel"/>
+                </VBox>
+                <VBox>
+                    <Label text="Main Droite"/>
+                    <Label fx:id="mainDLabel"/>
+                </VBox>
+                <VBox>
+                    <Label text="Quick Slot"/>
+                    <Label fx:id="quickSlotLabel"/>
+                </VBox>
+            </children>
         </HBox>
     </children>
 </VBox>
