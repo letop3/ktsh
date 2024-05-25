@@ -51,4 +51,20 @@ public class Stuff {
         this.quickSlot = this.inventaire.get(i);
     }
 
+    public ArrayList<Item> getInventaire() {
+        return inventaire;
+    }
+
+    public Item getMainG() {
+        return mainG;
+    }
+
+    public Item getMainD() {
+        return mainD;
+    }
+
+    public Item getQuickSlot() {
+        return quickSlot;
+    }
+
 }

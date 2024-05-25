@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.letop3.ktsh.controller.StuffController">
+    <children>
+        <Label text="Inventaire"/>
+        <ListView fx:id="inventaireListView" onMouseClicked="#handleInventaireClick"/>
+
+        <HBox spacing="10" padding="10">
+            <VBox>
+                <Label text="Main Gauche"/>
+                <Label fx:id="mainGLabel"/>
+            </VBox>
+            <VBox>
+                <Label text="Main Droite"/>
+                <Label fx:id="mainDLabel"/>
+            </VBox>
+            <VBox>
+                <Label text="Quick Slot"/>
+                <Label fx:id="quickSlotLabel"/>
+            </VBox>
+        </HBox>
+    </children>
+</VBox>
