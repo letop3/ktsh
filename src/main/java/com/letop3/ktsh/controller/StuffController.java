@@ -32,18 +32,30 @@ public class StuffController {
     public void initialize() {
         Item sword = new Sword(1, "Sword Test", "Un test pour arme", 100);
         stuff.addItem(sword);
+        Item sword2 = new Sword(2, "Sword Test2", "Un test pour arme", 100);
+        stuff.addItem(sword2);
         inventaireListView.getItems().addAll(stuff.getInventaire());
     }
 
+
     @FXML
     public void handleInventaireClick(MouseEvent event) {
+        // TODO modifier pour automatiser où l'item va en fonction du type (sword -> mainG, shield -> mainD, conso etc -> quickSlot)
         Item selectedItem = inventaireListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            // Ajout à la main gauche pour l'instant
-            // TODO modifier pour automatiser où l'item va en fonction du type (sword -> mainG, shield -> mainD, conso etc -> quickSlot)
-            stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
+            if (stuff.getMainG() != null) {
+                Item currentMainG = stuff.getMainG();
+                stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
+                stuff.removeItem(selectedItem);
+                inventaireListView.getItems().remove(selectedItem);
+
+                stuff.addItem(currentMainG);
+                inventaireListView.getItems().add(currentMainG);
+            } else {
+                stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
+                stuff.removeItem(selectedItem);
+                inventaireListView.getItems().remove(selectedItem);
+            }
             updateLabels();
         }
     }
