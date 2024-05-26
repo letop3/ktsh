@@ -2,6 +2,7 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.item.Item;
+import com.letop3.ktsh.model.item.arme.Sword;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,6 +30,8 @@ public class StuffController {
 
     @FXML
     public void initialize() {
+        Item sword = new Sword(1, "Sword Test", "Un test pour arme", 100);
+        stuff.addItem(sword);
         inventaireListView.getItems().addAll(stuff.getInventaire());
     }
 
@@ -39,6 +42,8 @@ public class StuffController {
             // Ajout à la main gauche pour l'instant
             // TODO modifier pour automatiser où l'item va en fonction du type (sword -> mainG, shield -> mainD, conso etc -> quickSlot)
             stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
+            stuff.removeItem(selectedItem);
+            inventaireListView.getItems().remove(selectedItem);
             updateLabels();
         }
     }
@@ -47,5 +52,15 @@ public class StuffController {
         mainGLabel.setText(stuff.getMainG() != null ? stuff.getMainG().getNom() : "None");
         mainDLabel.setText(stuff.getMainD() != null ? stuff.getMainD().getNom() : "None");
         quickSlotLabel.setText(stuff.getQuickSlot() != null ? stuff.getQuickSlot().getNom() : "None");
+    }
+
+    @FXML
+    public void handleMainGLabelClick(MouseEvent event) {
+        if (stuff.getMainG() != null && stuff.getInventaire().size() < Stuff.TAILLE_INVENTAIRE) {
+            stuff.addItem(stuff.getMainG());
+            inventaireListView.getItems().add(stuff.getMainG());
+            stuff.setMainG();
+            updateLabels();
+        }
     }
 }

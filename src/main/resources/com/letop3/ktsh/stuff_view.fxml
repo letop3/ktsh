@@ -16,7 +16,7 @@
             <children>
                 <VBox>
                     <Label text="Main Gauche"/>
-                    <Label fx:id="mainGLabel"/>
+                    <Label fx:id="mainGLabel" onMouseClicked="#handleMainGLabelClick"/>
                 </VBox>
                 <VBox>
                     <Label text="Main Droite"/>

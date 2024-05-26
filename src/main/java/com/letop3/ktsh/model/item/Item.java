@@ -28,4 +28,9 @@ public abstract class Item {
     public int getPrix() {
         return prix;
     }
+
+    @Override
+    public String toString() {
+        return this.nom;
+    }
 }

@@ -9,7 +9,7 @@ public class Stuff {
     private Item mainG;
     private Item mainD;
     private Item quickSlot;
-    private static final int TAILLE_INVENTAIRE = 12;
+    public static final int TAILLE_INVENTAIRE = 12;
 
     public Stuff() {
         this.inventaire = new ArrayList<>();
@@ -31,10 +31,22 @@ public class Stuff {
     }
 
     /**
+     * @param itm l'item à retirer
+     * @return boolean, true si l'item a été retiré, false si non.
+     */
+    public boolean removeItem(Item itm) {
+        return this.inventaire.remove(itm);
+    }
+
+    /**
      * @param i indice de l'item se trouvant dans l'inventaire
      */
     public void setMainG(int i) {
         this.mainG = this.inventaire.get(i);
+    }
+
+    public void setMainG() {
+        this.mainG = null;
     }
 
     /**
@@ -66,5 +78,4 @@ public class Stuff {
     public Item getQuickSlot() {
         return quickSlot;
     }
-
 }
