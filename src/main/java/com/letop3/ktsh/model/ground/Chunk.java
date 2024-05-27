@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk {
+    public static final int CHUNK_SIZE = 352;
+
     private int id;
     private int[] tiles;
     private List<Chunk> neighbors;
