@@ -48,7 +48,7 @@ public class StuffController {
 
     @FXML
     public void handleInventaireClick(MouseEvent event) {
-        // TODO modifier pour automatiser où l'item va en fonction du type (sword -> mainG, shield -> mainD, conso etc -> quickSlot)
+        // TODO généraliser fonction handleInventaire**** et handle*****LabelClick
         Item selectedItem = inventaireListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             if (selectedItem instanceof Sword) {
