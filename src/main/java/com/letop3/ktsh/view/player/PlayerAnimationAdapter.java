@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public class PlayerAnimationAdapter implements AnimationAdapter {
     private Player player;
 
-    Animation idle;
+    Animation nIdle, sIdle, eIdle, wIdle;
     Animation nAnim, sAnim, eAnim, wAnim;
 
 
@@ -30,7 +30,10 @@ public class PlayerAnimationAdapter implements AnimationAdapter {
         Image[] eImages = {cutter.getTile(5), cutter.getTile(6)};
         Image[] nImages = {cutter.getTile(7), cutter.getTile(8), cutter.getTile(9)};
 
-        idle = new Animation(new Image[] {cutter.getTile(0)});
+        nIdle = new Animation(new Image[] {cutter.getTile(8)});
+        sIdle = new Animation(new Image[] {cutter.getTile(0)});
+        eIdle = new Animation(new Image[] {cutter.getTile(6)});
+        wIdle = new Animation(new Image[] {cutter.getTile(3)});
 
         nAnim = new Animation(nImages);
         sAnim = new Animation(sImages);
@@ -40,14 +43,20 @@ public class PlayerAnimationAdapter implements AnimationAdapter {
 
     @java.lang.Override
     public Animation getIdleAnim(Direction direction) {
-        return idle;
+        return switch (direction) {
+            case NORTH -> nIdle;
+            case SOUTH -> sIdle;
+            case EAST -> eIdle;
+            case WEST -> wIdle;
+            default -> nIdle;
+        };
     }
 
     @java.lang.Override
     public Animation getMovingAnim(Direction direction) {
         return switch (direction) {
-            case NORTH -> nAnim;
-            case SOUTH -> sAnim;
+            case NORTH, NORTH_EAST, NORTH_WEST -> nAnim;
+            case SOUTH, SOUTH_EAST, SOUTH_WEST -> sAnim;
             case EAST -> eAnim;
             case WEST -> wAnim;
             default -> sAnim;
