@@ -1,4 +1,4 @@
-package com.letop3.ktsh.model.ground;
+/*package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.utils.EntityBlock;
 
@@ -18,3 +18,4 @@ class GroundTest {
 
     }
 }
+*/

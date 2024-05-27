@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.letop3.ktsh.controller.StuffController">
     <children>
         <Label text="Inventaire"/>
@@ -20,11 +19,11 @@
                 </VBox>
                 <VBox>
                     <Label text="Main Droite"/>
-                    <Label fx:id="mainDLabel"/>
+                    <Label fx:id="mainDLabel" onMouseClicked="#handleMainDLabelClick"/>
                 </VBox>
                 <VBox>
                     <Label text="Quick Slot"/>
-                    <Label fx:id="quickSlotLabel"/>
+                    <Label fx:id="quickSlotLabel" onMouseClicked="#handleQuickSlotLabelClick"/>
                 </VBox>
             </children>
         </HBox>
