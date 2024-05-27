@@ -3,6 +3,7 @@ package com.letop3.ktsh.model;
 
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 
 public class Env {
@@ -10,8 +11,8 @@ public class Env {
     private final Player player;
 
     public Env() {
-        this.ground = new Ground();
-        this.player = new Player(new Position(106, 106));
+        this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.5), (int)(Chunk.CHUNK_SIZE * 1.5)));
+        this.ground = new Ground(player);
     }
 
     public Player getPlayer() {
