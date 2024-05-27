@@ -62,11 +62,10 @@ public class StuffController {
         }
     }
 
-
     private void handleInventaireClickMainG(Item selectedItem) {
         if (stuff.getMainG() != null) {
             Item currentMainG = stuff.getMainG();
-            stuff.setQuickSlot(stuff.getInventaire().indexOf(selectedItem));
+            stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
             stuff.removeItem(selectedItem);
             inventaireListView.getItems().remove(selectedItem);
 
