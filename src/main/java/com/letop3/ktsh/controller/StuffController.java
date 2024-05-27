@@ -45,68 +45,44 @@ public class StuffController {
         inventaireListView.getItems().addAll(stuff.getInventaire());
     }
 
-
     @FXML
     public void handleInventaireClick(MouseEvent event) {
-        // TODO généraliser fonction handleInventaire**** et handle*****LabelClick
         Item selectedItem = inventaireListView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             if (selectedItem instanceof Sword) {
-                handleInventaireClickMainG(selectedItem);
+                handleInventaireClickGeneric(selectedItem, "MainG");
             } else if (selectedItem instanceof Shield) {
-                handleInventaireClickMainD(selectedItem);
+                handleInventaireClickGeneric(selectedItem, "MainD");
             } else if (selectedItem instanceof Consomable || selectedItem instanceof Artefact) {
-                handleInventaireClickQuickSlot(selectedItem);
+                handleInventaireClickGeneric(selectedItem, "QuickSlot");
             }
             updateLabels();
         }
     }
 
-    private void handleInventaireClickMainG(Item selectedItem) {
-        if (stuff.getMainG() != null) {
-            Item currentMainG = stuff.getMainG();
-            stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
-
-            stuff.addItem(currentMainG);
-            inventaireListView.getItems().add(currentMainG);
-        } else {
-            stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
+    private void handleInventaireClickGeneric(Item selectedItem, String slotType) {
+        Item currentItem = null;
+        switch (slotType) {
+            case "MainG":
+                currentItem = stuff.getMainG();
+                stuff.setMainG(stuff.getInventaire().indexOf(selectedItem));
+                break;
+            case "MainD":
+                currentItem = stuff.getMainD();
+                stuff.setMainD(stuff.getInventaire().indexOf(selectedItem));
+                break;
+            case "QuickSlot":
+                currentItem = stuff.getQuickSlot();
+                stuff.setQuickSlot(stuff.getInventaire().indexOf(selectedItem));
+                break;
         }
-    }
 
-    private void handleInventaireClickMainD(Item selectedItem) {
-        if (stuff.getMainD() != null) {
-            Item currentMainD = stuff.getMainD();
-            stuff.setMainD(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
+        stuff.removeItem(selectedItem);
+        inventaireListView.getItems().remove(selectedItem);
 
-            stuff.addItem(currentMainD);
-            inventaireListView.getItems().add(currentMainD);
-        } else {
-            stuff.setMainD(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
-        }
-    }
-
-    private void handleInventaireClickQuickSlot(Item selectedItem) {
-        if (stuff.getQuickSlot() != null) {
-            Item currentQuickSlot = stuff.getQuickSlot();
-            stuff.setQuickSlot(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
-
-            stuff.addItem(currentQuickSlot);
-            inventaireListView.getItems().add(currentQuickSlot);
-        } else {
-            stuff.setQuickSlot(stuff.getInventaire().indexOf(selectedItem));
-            stuff.removeItem(selectedItem);
-            inventaireListView.getItems().remove(selectedItem);
+        if (currentItem != null) {
+            stuff.addItem(currentItem);
+            inventaireListView.getItems().add(currentItem);
         }
     }
 
@@ -118,30 +94,47 @@ public class StuffController {
 
     @FXML
     public void handleMainGLabelClick(MouseEvent event) {
-        if (stuff.getMainG() != null && stuff.getInventaire().size() < Stuff.TAILLE_INVENTAIRE) {
-            stuff.addItem(stuff.getMainG());
-            inventaireListView.getItems().add(stuff.getMainG());
-            stuff.setMainG();
-            updateLabels();
-        }
+        handleLabelClickGeneric("MainG");
     }
 
     @FXML
     public void handleMainDLabelClick(MouseEvent event) {
-        if (stuff.getMainD() != null && stuff.getInventaire().size() < Stuff.TAILLE_INVENTAIRE) {
-            stuff.addItem(stuff.getMainD());
-            inventaireListView.getItems().add(stuff.getMainD());
-            stuff.setMainD();
-            updateLabels();
-        }
+        handleLabelClickGeneric("MainD");
     }
 
     @FXML
     public void handleQuickSlotLabelClick(MouseEvent event) {
-        if (stuff.getQuickSlot() != null && stuff.getInventaire().size() < Stuff.TAILLE_INVENTAIRE) {
-            stuff.addItem(stuff.getQuickSlot());
-            inventaireListView.getItems().add(stuff.getQuickSlot());
-            stuff.setQuickSlot();
+        handleLabelClickGeneric("QuickSlot");
+    }
+
+    private void handleLabelClickGeneric(String slotType) {
+        Item currentItem = null;
+        switch (slotType) {
+            case "MainG":
+                currentItem = stuff.getMainG();
+                break;
+            case "MainD":
+                currentItem = stuff.getMainD();
+                break;
+            case "QuickSlot":
+                currentItem = stuff.getQuickSlot();
+                break;
+        }
+
+        if (currentItem != null && stuff.getInventaire().size() < Stuff.TAILLE_INVENTAIRE) {
+            stuff.addItem(currentItem);
+            inventaireListView.getItems().add(currentItem);
+            switch (slotType) {
+                case "MainG":
+                    stuff.setMainG();
+                    break;
+                case "MainD":
+                    stuff.setMainD();
+                    break;
+                case "QuickSlot":
+                    stuff.setQuickSlot();
+                    break;
+            }
             updateLabels();
         }
     }
