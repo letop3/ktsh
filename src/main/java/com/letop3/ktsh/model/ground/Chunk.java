@@ -2,8 +2,8 @@ package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.utils.EntityBlock;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Chunk {
@@ -14,7 +14,6 @@ public class Chunk {
     //private final List<EntityBlock> entities;
     private final List<Chunk> neighbors;
 
-    private int[] notaccesible = {1, 2};
     public Chunk(int id, int[] tiles, int width, int height) {
         this.id = id;
         this.tiles = tiles;
