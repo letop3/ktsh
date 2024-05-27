@@ -56,11 +56,19 @@ public class Stuff {
         this.mainD = this.inventaire.get(i);
     }
 
+    public void setMainD() {
+        this.mainD = null;
+    }
+
     /**
      * @param i indice de l'item se trouvant dans l'inventaire
      */
     public void setQuickSlot(int i) {
         this.quickSlot = this.inventaire.get(i);
+    }
+
+    public void setQuickSlot() {
+        this.quickSlot = null;
     }
 
     public ArrayList<Item> getInventaire() {
