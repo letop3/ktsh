@@ -7,19 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Chunk {
+    public static final int CHUNK_SIZE = 352;
     private final int id;
     private final int[] tiles;
-    private final int width;
-    private final int height;
     //private final List<EntityBlock> entities;
     private final List<Chunk> neighbors;
 
     private int[] notaccesible = {1, 2};
-    public Chunk(int id, int[] tiles, int width, int height) {
+    public Chunk(int id, int[] tiles) {
         this.id = id;
         this.tiles = tiles;
-        this.width = width;
-        this.height = height;
         //this.entities = new ArrayList<>();
         this.neighbors = new ArrayList<>();
         //this.calculateEntities();

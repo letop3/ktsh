@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class MapLoader implements Closeable {
     private final Map<Integer, Chunk> chunkMap = new HashMap<>();
-    private int chunkWidth;
-    private int chunkHeight;
+    private static int chunkWidth;
+    private static int chunkHeight;
 
     public MapLoader(String filePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -26,7 +26,7 @@ public class MapLoader implements Closeable {
 
         // Créer les chunks sans voisins
         for (ChunkData chunkData : chunkDataList) {
-            Chunk chunk = new Chunk(chunkData.id, chunkData.tiles, chunkWidth, chunkHeight);
+            Chunk chunk = new Chunk(chunkData.id, chunkData.tiles);
             chunkMap.put(chunk.getId(), chunk);
         }
 

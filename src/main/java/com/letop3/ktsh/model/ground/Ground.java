@@ -1,6 +1,6 @@
 package com.letop3.ktsh.model.ground;
 
-import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import com.letop3.ktsh.model.utils.EntityBlock;
 import javafx.beans.property.IntegerProperty;
@@ -75,30 +75,4 @@ public class Ground {
         // }
         return true;
     }
-
-    public boolean canMoveTo(EntityBlock hitboxEntity) {
-        int iMin = ((int) hitboxEntity.getMinX()) / 32;
-        int iMax = ((int) hitboxEntity.getMaxX()) / 32;
-        int jMin = ((int) hitboxEntity.getMinY() / 32);
-        int jMax = ((int) hitboxEntity.getMaxY() / 32);
-        for (int i = iMin; i <= iMax; i++)
-            for (int j = jMin; j <= jMax; j++)
-                if (hitboxEntity.intersects(i * 32, j * 32, 32, 32))
-                    return false;
-        return true;
-    }
-
-    public boolean canMoveTo(EntityBlock hitboxEntity) {
-        int iMin = ((int) hitboxEntity.getMinX()) / 32;
-        int iMax = ((int) hitboxEntity.getMaxX()) / 32;
-        int jMin = ((int) hitboxEntity.getMinY() / 32);
-        int jMax = ((int) hitboxEntity.getMaxY() / 32);
-        for (int i = iMin; i <= iMax; i++)
-            for (int j = jMin; j <= jMax; j++)
-                if (hitboxEntity.intersects(i * 32, j * 32, 32, 32))
-                    return false;
-        return true;
-    }
-
-
 }
