@@ -1,6 +1,6 @@
 package com.letop3.ktsh.model.entity;
 
-import com.letop3.ktsh.model.Ground;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
 
 public abstract class Entity implements Updatable {
