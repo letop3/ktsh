@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -22,4 +23,32 @@
             </children>
         </StackPane>
     </center>
+    <right>
+        <VBox>
+            <children>
+                <Label text="Inventaire"/>
+                <ListView fx:id="inventaireListView" onMouseClicked="#handleInventaireClick"/>
+
+                <HBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <children>
+                        <VBox>
+                            <Label text="Main Gauche"/>
+                            <Label fx:id="mainGLabel" onMouseClicked="#handleMainGLabelClick"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Main Droite"/>
+                            <Label fx:id="mainDLabel" onMouseClicked="#handleMainDLabelClick"/>
+                        </VBox>
+                        <VBox>
+                            <Label text="Quick Slot"/>
+                            <Label fx:id="quickSlotLabel" onMouseClicked="#handleQuickSlotLabelClick"/>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </right>
 </BorderPane>
