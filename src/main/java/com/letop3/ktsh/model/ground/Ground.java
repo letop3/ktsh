@@ -65,6 +65,51 @@ public class Ground {
     }
 
     public boolean canMoveTo(int x, int y) {
-        return true;
+        // taille tuile
+        int tileSize = Chunk.CHUNK_SIZE / 11; // divisé par 11 pcq chunk de 11*11
+
+        // coordoné cunk
+        int chunkX = x / Chunk.CHUNK_SIZE;
+        int chunkY = y / Chunk.CHUNK_SIZE;
+
+        // pos relative des tuiles dans le chunk
+        int relativeX = x % Chunk.CHUNK_SIZE;
+        int relativeY = y % Chunk.CHUNK_SIZE;
+        int tileX = relativeX / tileSize;
+        int tileY = relativeY / tileSize;
+
+        // jai pas compris mais ca marche
+        // ca régle un pb de décalage entre vue terrain / collisions
+        if (relativeX == 0 && tileX > 0) tileX--;
+        if (relativeY == 0 && tileY > 0) tileY--;
+
+        // en dehors de map
+        if (chunkX < 0 || chunkX >= MAP_WIDTH || chunkY < 0 || chunkY >= MAP_HEIGHT) {
+            return false;
+        }
+
+        Chunk chunk = getChunk(chunkX, chunkY);
+        if (chunk == null) {
+            return false;
+        }
+
+        if (tileX < 0 || tileX >= 11 || tileY < 0 || tileY >= 11) { // 11x11 tiles in each chunk
+            return false;
+        }
+
+        int tileIndex = tileY * 11 + tileX;
+
+        if (tileIndex < 0 || tileIndex >= chunk.getTiles().length) {
+            return false;
+        }
+
+        int tileValue = chunk.getTiles()[tileIndex];
+
+        boolean canMove = tileValue != 1 && tileValue != 2;
+        return canMove;
     }
+
+
+
+
 }

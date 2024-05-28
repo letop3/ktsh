@@ -11,7 +11,7 @@ public class Env {
     private final Player player;
 
     public Env() {
-        this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.5), (int)(Chunk.CHUNK_SIZE * 1.5)));
+        this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.45), (int)(Chunk.CHUNK_SIZE * 1.45)));
         this.ground = new Ground(player);
     }
 
