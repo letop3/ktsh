@@ -93,20 +93,19 @@ public class Ground {
             return false;
         }
 
-        if (tileX < 0 || tileX >= 11 || tileY < 0 || tileY >= 11) { // 11x11 tiles in each chunk
+        if (tileX < 0 || tileY < 0) { // 11x11 tiles in each chunk
             return false;
         }
 
         int tileIndex = tileY * 11 + tileX;
 
-        if (tileIndex < 0 || tileIndex >= chunk.getTiles().length) {
+        if (tileIndex >= chunk.getTiles().length) {
             return false;
         }
 
         int tileValue = chunk.getTiles()[tileIndex];
 
-        boolean canMove = tileValue != 1 && tileValue != 2;
-        return canMove;
+        return tileValue != 1 && tileValue != 2;
     }
 
 
