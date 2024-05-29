@@ -18,7 +18,7 @@
                    BorderPane.alignment="CENTER">
             <children>
                 <TilePane fx:id="gameGround" prefHeight="1056.0" prefWidth="1056.0"/>
-                <Pane fx:id="gamePlayer" prefHeight="1056.0" prefWidth="1056.0"/>
+                <Pane fx:id="playerGround" prefHeight="1056.0" prefWidth="1056.0"/>
             </children>
         </StackPane>
     </center>
