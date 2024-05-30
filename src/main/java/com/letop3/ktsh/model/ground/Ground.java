@@ -84,7 +84,7 @@ public class Ground {
         if (relativeY == 0 && tileY > 0) tileY--;
 
         // en dehors de map
-        if (chunkX < 0 || chunkX >= MAP_WIDTH || chunkY < 0 || chunkY >= MAP_HEIGHT) {
+        if (x < 0 || x >= MAP_WIDTH*Chunk.CHUNK_SIZE || y < 0 || y >= MAP_HEIGHT*Chunk.CHUNK_SIZE) {
             return false;
         }
 
