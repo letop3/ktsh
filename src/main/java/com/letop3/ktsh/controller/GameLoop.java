@@ -1,7 +1,6 @@
 package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.view.GroundView;
-import com.letop3.ktsh.view.enemy.EnemiesViewsManager;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,14 +19,11 @@ public class GameLoop implements Initializable {
     private final TilePane gameGround;
     private final PlayerView playerView;
     private final GroundView groundView;
-    private final EnemiesViewsManager enneViewManager;
-    
 
-    public GameLoop(TilePane gameGround, PlayerView playerView, GroundView groundView, EnemiesViewsManager enneViewManager) {
+    public GameLoop(TilePane gameGround, PlayerView playerView, GroundView groundView) {
         this.gameGround = gameGround;
         this.playerView = playerView;
         this.groundView = groundView;
-        this.enneViewManager = enneViewManager;
     }
 
     @Override
@@ -49,7 +45,6 @@ public class GameLoop implements Initializable {
     private void updateGame() {
         playerView.update();
         groundView.update();
-        enneViewManager.update();
     }
 }
 

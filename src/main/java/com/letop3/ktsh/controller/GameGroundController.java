@@ -2,6 +2,8 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.view.GameView;
+import com.letop3.ktsh.view.GroundView;
+import com.letop3.ktsh.view.player.PlayerView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
@@ -13,19 +15,21 @@ import java.util.ResourceBundle;
 public class GameGroundController implements Initializable {
 
     private Env env;
+
     @FXML
     private TilePane gameGround;
+
     @FXML
-    private Pane playerGround;
+    private Pane gamePlayer;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), env.getEnemies(), gameGround, playerGround);
+        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer);
 
         //on s'occupe des controllers
-        GameLoop gameLoopController = new GameLoop(gameGround, gameView.getPlayerView(), gameView.getGroundView(), gameView.getEnemiesViewsManager());
+        GameLoop gameLoopController = new GameLoop(gameGround, gameView.getPlayerView(), gameView.getGroundView());
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         gameLoopController.initialize(location, resources);
