@@ -40,21 +40,21 @@ public class GameController implements Initializable {
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);
 
-        view.updateHpDisplay(env.getPlayer());
+        view.updateHpBar(env.getPlayer());
 
         // Test perte hp pour update bar hp
         Timer timer = new Timer();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i <= 10; i++) {
             int finalI = i;
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println(finalI *10 + "secondes");
+                    System.out.println(finalI *5 + "secondes");
 
                     env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                    view.updateHpDisplay(env.getPlayer());
+                    view.updateHpBar(env.getPlayer());
                 }
-            }, i * 10000);
+            }, i * 5000);
         }
     }
 }

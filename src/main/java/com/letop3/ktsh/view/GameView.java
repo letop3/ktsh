@@ -5,7 +5,6 @@ import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -48,7 +47,7 @@ public class GameView {
         return playerView;
     }
 
-    public void updateHpDisplay(Player player) {
+    public void updateHpBar(Player player) {
         int fullHearts = player.getHearts()[0];
         int halfHearts = player.getHearts()[1];
         int totalHearts = player.getHearts()[2];

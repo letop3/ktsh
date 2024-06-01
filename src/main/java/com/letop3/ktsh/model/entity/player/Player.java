@@ -9,8 +9,8 @@ public class Player extends Entity {
 
     public Player(Position position) {
         super(position);
-        this.maxHp = 6; // Vous pouvez définir la valeur initiale de maxHp ici
-        this.hp = 6; // Vous pouvez définir la valeur initiale de hp ici
+        this.maxHp = 12;
+        this.hp = this.maxHp;
     }
 
     public int getHp() {
