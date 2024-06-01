@@ -2,8 +2,6 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.view.GameView;
-import com.letop3.ktsh.view.GroundView;
-import com.letop3.ktsh.view.player.PlayerView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
@@ -12,7 +10,7 @@ import javafx.scene.layout.TilePane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameGroundController implements Initializable {
+public class GameController implements Initializable {
 
     private Env env;
 
