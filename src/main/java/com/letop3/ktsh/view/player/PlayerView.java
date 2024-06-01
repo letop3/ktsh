@@ -1,20 +1,20 @@
 package com.letop3.ktsh.view.player;
 
-import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.entity.player.Player;
-import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import java.lang.Math;
+
+import java.net.URL;
 
 public class PlayerView {
     private final Ground ground;
     private final Player player;
     private final ImageView playerImageView;
     private final AnimationHandler animHandler;
+    private ImageView heart;
 
     public PlayerView(Player player, Pane gamePlayer, Ground ground) {
         this.ground = ground;
