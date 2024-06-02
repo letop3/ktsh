@@ -2,6 +2,10 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.item.Item;
+import com.letop3.ktsh.model.item.arme.Shield;
+import com.letop3.ktsh.model.item.arme.Sword;
+import com.letop3.ktsh.model.item.artefact.Artefact;
+import com.letop3.ktsh.model.item.consomable.Consomable;
 import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
@@ -71,7 +75,7 @@ public class GameController implements Initializable, StuffClickListener {
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
             @Override
-            public void onChanged(ListChangeListener.Change<? extends Item> change) {
+            public void onChanged(Change<? extends Item> change) {
                 Platform.runLater(() -> view.updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
             }
         });
@@ -91,6 +95,7 @@ public class GameController implements Initializable, StuffClickListener {
 //            }, i * 5000);
 //        }
 
+        //TODO ajouter listener sur les Item : créer une class ItemProperty
     }
 
     @Override
@@ -124,7 +129,25 @@ public class GameController implements Initializable, StuffClickListener {
     }
 
     @Override
-    public void onStuffClick() {
-        System.out.println("Stuff cliqué dans GameController");
+    public void onStuffClick(int i) {
+        System.out.println("Stuff cliqué dans GameController, id : " + i);
+        Item itemSelected = env.getPlayer().getStuff().getInventaire().get(i);
+        if (itemSelected != null) {
+            Item currentItem = null;
+            if (itemSelected instanceof Sword) {
+                currentItem = env.getPlayer().getStuff().getMainG();
+                env.getPlayer().getStuff().setMainG(itemSelected);
+            } else if (itemSelected instanceof Shield) {
+                currentItem = env.getPlayer().getStuff().getMainD();
+                env.getPlayer().getStuff().setMainD(itemSelected);
+            } else if (itemSelected instanceof Consomable || itemSelected instanceof Artefact) {
+                currentItem = env.getPlayer().getStuff().getQuickSlot();
+                env.getPlayer().getStuff().setQuickSlot(itemSelected);
+            }
+            if (currentItem != null) {
+                env.getPlayer().getStuff().addItem(currentItem);
+            }
+            env.getPlayer().getStuff().removeItem(itemSelected);
+        }
     }
 }

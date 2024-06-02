@@ -17,10 +17,10 @@ public class Player extends Entity {
         this.maxHp = 12;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();
-        stuff.addItem(new Sword(1,"sword","test",100));
-        stuff.addItem(new Sword(2,"sword","test",100));
-        stuff.addItem(new Sword(3,"sword","test",100));
-        stuff.addItem(new Sword(4,"sword","test",100));
+        stuff.addItem(new Sword(1,"sword1","test",100));
+        stuff.addItem(new Sword(2,"sword2","test",100));
+        stuff.addItem(new Sword(3,"sword3","test",100));
+        stuff.addItem(new Sword(4,"sword4","test",100));
 //        stuff.addItem(new Sword(5,"sword","test",100));
 //        stuff.addItem(new Sword(6,"sword","test",100));
 //        stuff.addItem(new Sword(7,"sword","test",100));
@@ -29,9 +29,9 @@ public class Player extends Entity {
 //        stuff.addItem(new Sword(10,"sword","test",100));
 //        stuff.addItem(new Sword(11,"sword","test",100));
 //        stuff.addItem(new Sword(12,"sword","test",100));
-        stuff.setMainG(new Sword(13,"sword","test",100));
-        stuff.setMainD(new Sword(14,"sword","test",100));
-        stuff.setQuickSlot(new Sword(15,"sword","test",100));
+        stuff.setMainG(new Sword(13,"swordG","test",100));
+        stuff.setMainD(new Sword(14,"swordD","test",100));
+        stuff.setQuickSlot(new Sword(15,"swordQ","test",100));
     }
 
     public int getHp() {

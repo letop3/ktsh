@@ -4,5 +4,5 @@ public interface StuffClickListener {
     void onMainGClick();
     void onMainDClick();
     void onQuickSlotClick();
-    void onStuffClick();
+    void onStuffClick(int i);
 }
