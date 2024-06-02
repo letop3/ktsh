@@ -29,7 +29,9 @@ public class Player extends Entity {
         stuff.addItem(new Sword(10,"sword","test",100));
         stuff.addItem(new Sword(11,"sword","test",100));
         stuff.addItem(new Sword(12,"sword","test",100));
-
+        stuff.setMainG(new Sword(13,"sword","test",100));
+        stuff.setMainD(new Sword(14,"sword","test",100));
+        stuff.setQuickSlot(new Sword(15,"sword","test",100));
     }
 
     public int getHp() {
