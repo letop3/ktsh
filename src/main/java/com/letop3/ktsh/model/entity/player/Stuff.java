@@ -48,6 +48,10 @@ public class Stuff {
         this.mainG = this.inventaire.get(i);
     }
 
+    public void setMainG(Item item) {
+        this.mainG = item;
+    }
+
     public void setMainG() {
         this.mainG = null;
     }
@@ -57,6 +61,10 @@ public class Stuff {
      */
     public void setMainD(int i) {
         this.mainD = this.inventaire.get(i);
+    }
+
+    public void setMainD(Item item) {
+        this.mainG = item;
     }
 
     public void setMainD() {
@@ -69,6 +77,11 @@ public class Stuff {
     public void setQuickSlot(int i) {
         this.quickSlot = this.inventaire.get(i);
     }
+
+    public void setQuickSlot(Item item) {
+        this.mainG = item;
+    }
+
 
     public void setQuickSlot() {
         this.quickSlot = null;

@@ -17,7 +17,6 @@ public class GameView {
     private GroundView groundView;
     private PlayerView playerView;
     private Canvas heartCanvas;
-    private Canvas stuffCanvas;
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
@@ -44,7 +43,6 @@ public class GameView {
 
         // Initialize stuffPane
         this.stuffPane = stuffPane;
-
         drawStuff(player.getStuff());
     }
 
@@ -76,6 +74,24 @@ public class GameView {
 
     private void drawStuff(Stuff stuff) {
         stuffPane.getChildren().clear();
+
+        Image mainGIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getMainG().getIconPath())));
+        ImageView mainGView = new ImageView(mainGIcon);
+        mainGView.setLayoutX(playerView.getScreenPlayerX().get());
+        mainGView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
+        stuffPane.getChildren().add(mainGView);
+
+        Image mainDIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getMainG().getIconPath())));
+        ImageView mainDView = new ImageView(mainDIcon);
+        mainDView.setLayoutX(playerView.getScreenPlayerX().get() + 40);
+        mainDView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
+        stuffPane.getChildren().add(mainDView);
+
+        Image quickSlotIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getMainG().getIconPath())));
+        ImageView quickSlotView = new ImageView(quickSlotIcon);
+        quickSlotView.setLayoutX(playerView.getScreenPlayerX().get() + 80);
+        quickSlotView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
+        stuffPane.getChildren().add(quickSlotView);
 
         for (int i = 0; i < stuff.getInventaire().size(); i++) {
             Image itemIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getInventaire().get(i).getIconPath())));
