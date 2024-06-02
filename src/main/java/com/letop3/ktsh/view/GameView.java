@@ -21,9 +21,9 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
-    private Pane stuffPane;  // Pane to hold ImageView for stuff
+    private Pane stuffPane;
 
-    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas) {
+    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer, ground);
 
@@ -42,11 +42,8 @@ public class GameView {
         this.halfHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/halfHeart.png")));
         this.emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/emptyHeart.png")));
 
-        this.stuffCanvas = stuffCanvas;
-
         // Initialize stuffPane
-        this.stuffPane = new Pane();
-        gamePlayer.getChildren().add(stuffPane);
+        this.stuffPane = stuffPane;
 
         drawStuff(player.getStuff());
     }
@@ -78,15 +75,14 @@ public class GameView {
     }
 
     private void drawStuff(Stuff stuff) {
-        stuffPane.getChildren().clear();  // Clear previous stuff
+        stuffPane.getChildren().clear();
 
         for (int i = 0; i < stuff.getInventaire().size(); i++) {
             Image itemIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getInventaire().get(i).getIconPath())));
             ImageView imageView = new ImageView(itemIcon);
-            imageView.setFitWidth(32); // Set width if needed
-            imageView.setFitHeight(32); // Set height if needed
+            imageView.setFitWidth(32);
+            imageView.setFitHeight(32);
 
-            // Position the ImageView
             if (i < 3){
                 imageView.setLayoutX(playerView.getScreenPlayerX().get() + 200 + i*32);
                 imageView.setLayoutY(playerView.getScreenPlayerY().get() - 80);
@@ -101,8 +97,9 @@ public class GameView {
                 imageView.setLayoutY(playerView.getScreenPlayerY().get() + 40);
             }
 
+            int finalI = i;
             imageView.setOnMouseClicked(event -> {
-                System.out.println("Item clicked");
+                System.out.println("Item cliqué :" + stuff.getInventaire().get(finalI).getId());
             });
 
             stuffPane.getChildren().add(imageView);
