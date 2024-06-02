@@ -1,7 +1,10 @@
 package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.item.Item;
 import com.letop3.ktsh.view.GameView;
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -50,15 +53,37 @@ public class GameController implements Initializable {
         // Test perte hp pour update bar hp
         Timer timer = new Timer();
         for (int i = 1; i <= 10; i++) {
-            int finalI = i;
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println(finalI *5 + "secondes");
-
+                    System.out.println("-1 hp");
                     env.getPlayer().setHp(env.getPlayer().getHp() - 1);
                 }
             }, i * 5000);
         }
+
+        // ajouter listener sur changement stuff
+        env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Item> change) {
+                Platform.runLater(() -> view.updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
+            }
+        });
+
+        view.updateStuff(env.getPlayer().getStuff());
+
+        // Test changement dans le stuff
+        Timer timerStuff = new Timer();
+        for (int i = 1; i <= 3; i++) {
+            int finalI = i;
+            timerStuff.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println("-1 item");
+                    env.getPlayer().getStuff().getInventaire().remove(finalI);
+                }
+            }, i * 5000);
+        }
+
     }
 }
