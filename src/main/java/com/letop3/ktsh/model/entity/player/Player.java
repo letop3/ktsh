@@ -2,23 +2,26 @@ package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player extends Entity {
-    private int hp;
+    private IntegerProperty hp;
     private int maxHp;
 
     public Player(Position position) {
         super(position);
         this.maxHp = 12;
-        this.hp = this.maxHp;
+        this.hp = new SimpleIntegerProperty(this.maxHp);
     }
 
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.setValue(hp);
     }
 
     public int getMaxHp() {
@@ -26,8 +29,8 @@ public class Player extends Entity {
     }
 
     public int[] getHearts() {
-        int fullHearts = hp / 2;
-        int halfHearts = hp % 2;
+        int fullHearts = hp.get() / 2;
+        int halfHearts = hp.get() % 2;
         int totalHearts = maxHp / 2;
         return new int[]{fullHearts, halfHearts, totalHearts};
     }
@@ -35,6 +38,10 @@ public class Player extends Entity {
     @Override
     public String toString() {
         return "Player";
+    }
+
+    public IntegerProperty hpProperty() {
+        return hp;
     }
 }
 

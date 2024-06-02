@@ -40,6 +40,11 @@ public class GameController implements Initializable {
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);
 
+        // ajout listener pour update hb bar
+        env.getPlayer().hpProperty().addListener((observable, oldValue, newValue) -> {
+            view.updateHpBar(env.getPlayer());
+        });
+
         view.updateHpBar(env.getPlayer());
 
         // Test perte hp pour update bar hp
@@ -52,7 +57,6 @@ public class GameController implements Initializable {
                     System.out.println(finalI *5 + "secondes");
 
                     env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                    view.updateHpBar(env.getPlayer());
                 }
             }, i * 5000);
         }
