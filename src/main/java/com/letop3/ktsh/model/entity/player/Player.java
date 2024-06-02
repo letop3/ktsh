@@ -2,7 +2,9 @@ package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
+import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,21 +19,10 @@ public class Player extends Entity {
         this.maxHp = 12;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();
-        stuff.addItem(new Sword(1,"sword1","test",100));
-        stuff.addItem(new Sword(2,"sword2","test",100));
-        stuff.addItem(new Sword(3,"sword3","test",100));
-        stuff.addItem(new Sword(4,"sword4","test",100));
-//        stuff.addItem(new Sword(5,"sword","test",100));
-//        stuff.addItem(new Sword(6,"sword","test",100));
-//        stuff.addItem(new Sword(7,"sword","test",100));
-//        stuff.addItem(new Sword(8,"sword","test",100));
-//        stuff.addItem(new Sword(9,"sword","test",100));
-//        stuff.addItem(new Sword(10,"sword","test",100));
-//        stuff.addItem(new Sword(11,"sword","test",100));
-//        stuff.addItem(new Sword(12,"sword","test",100));
-        stuff.setMainG(new Sword(13,"swordG","test",100));
-        stuff.setMainD(new Sword(14,"swordD","test",100));
-        stuff.setQuickSlot(new Sword(15,"swordQ","test",100));
+        stuff.addItem(new Sword(1, "Sword Test", "Un test pour arme", 100));
+        stuff.addItem(new Sword(2, "Excalibur", "Un test pour arme", 100));
+        stuff.addItem(new Shield(1, "Shield Test", "Un test pour bouclier", 100));
+        stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
     }
 
     public int getHp() {
