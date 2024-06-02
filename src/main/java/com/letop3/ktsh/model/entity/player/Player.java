@@ -17,10 +17,10 @@ public class Player extends Entity {
         this.maxHp = 12;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();
-//        stuff.addItem(new Sword(1,"sword","test",100));
-//        stuff.addItem(new Sword(2,"sword","test",100));
-//        stuff.addItem(new Sword(3,"sword","test",100));
-//        stuff.addItem(new Sword(4,"sword","test",100));
+        stuff.addItem(new Sword(1,"sword","test",100));
+        stuff.addItem(new Sword(2,"sword","test",100));
+        stuff.addItem(new Sword(3,"sword","test",100));
+        stuff.addItem(new Sword(4,"sword","test",100));
 //        stuff.addItem(new Sword(5,"sword","test",100));
 //        stuff.addItem(new Sword(6,"sword","test",100));
 //        stuff.addItem(new Sword(7,"sword","test",100));
