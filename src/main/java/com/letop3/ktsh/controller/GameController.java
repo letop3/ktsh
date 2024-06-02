@@ -18,9 +18,12 @@ import java.util.TimerTask;
 
 public class GameController implements Initializable {
 
+
     private Env env;
     private GameView view;
 
+    @FXML
+    public Pane stuffPane;
     @FXML
     private Canvas heartCanvas;
     @FXML
@@ -33,7 +36,7 @@ public class GameController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas);
+        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane);
         this.view = gameView;
 
         //on s'occupe des controllers
