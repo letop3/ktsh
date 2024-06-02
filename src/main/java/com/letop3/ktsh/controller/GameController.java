@@ -3,6 +3,7 @@ package com.letop3.ktsh.controller;
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.item.Item;
 import com.letop3.ktsh.view.GameView;
+import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
@@ -16,8 +17,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameController implements Initializable {
-
+public class GameController implements Initializable, StuffClickListener {
 
     private Env env;
     private GameView view;
@@ -39,6 +39,9 @@ public class GameController implements Initializable {
         GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane);
         this.view = gameView;
 
+        // Passer le listener à la vue
+        gameView.setStuffClickListener(this);
+
         //on s'occupe des controllers
         GameLoop gameLoopController = new GameLoop(gameGround, gameView.getPlayerView(), gameView.getGroundView());
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
@@ -54,16 +57,16 @@ public class GameController implements Initializable {
         view.updateHpBar(env.getPlayer());
 
         // Test perte hp pour update bar hp
-        Timer timer = new Timer();
-        for (int i = 1; i <= 10; i++) {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("-1 hp");
-                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                }
-            }, i * 5000);
-        }
+//        Timer timer = new Timer();
+//        for (int i = 1; i <= 10; i++) {
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    System.out.println("-1 hp");
+//                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
+//                }
+//            }, i * 5000);
+//        }
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
@@ -75,18 +78,48 @@ public class GameController implements Initializable {
 
         view.updateStuff(env.getPlayer().getStuff());
 
-        // Test changement dans le stuff
-        Timer timerStuff = new Timer();
-        for (int i = 1; i <= 3; i++) {
-            int finalI = i;
-            timerStuff.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("-1 item");
-                    env.getPlayer().getStuff().getInventaire().remove(finalI);
-                }
-            }, i * 5000);
-        }
+//        // Test changement dans le stuff
+//        Timer timerStuff = new Timer();
+//        for (int i = 1; i <= 3; i++) {
+//            int finalI = i;
+//            timerStuff.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    System.out.println("-1 item");
+//                    env.getPlayer().getStuff().getInventaire().remove(finalI);
+//                }
+//            }, i * 5000);
+//        }
 
+    }
+
+    @Override
+    public void onMainGClick() {
+        System.out.println("Main Gauche cliqué dans GameController");
+        Item itemSelected = env.getPlayer().getStuff().getMainG();
+        if (itemSelected != null) {
+            env.getPlayer().getStuff().addItem(itemSelected);
+            env.getPlayer().getStuff().setMainG();
+        }
+    }
+
+    @Override
+    public void onMainDClick() {
+        System.out.println("Main Droite cliqué dans GameController");
+        Item itemSelected = env.getPlayer().getStuff().getMainD();
+        if (itemSelected != null) {
+            env.getPlayer().getStuff().addItem(itemSelected);
+            env.getPlayer().getStuff().setMainD();
+        }
+    }
+
+    @Override
+    public void onQuickSlotClick() {
+        System.out.println("QuickSlot cliqué dans GameController");
+        Item itemSelected = env.getPlayer().getStuff().getQuickSlot();
+        if (itemSelected != null) {
+            env.getPlayer().getStuff().addItem(itemSelected);
+            env.getPlayer().getStuff().setQuickSlot();
+        }
     }
 }

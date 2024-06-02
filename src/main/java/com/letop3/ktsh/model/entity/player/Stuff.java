@@ -64,7 +64,7 @@ public class Stuff {
     }
 
     public void setMainD(Item item) {
-        this.mainG = item;
+        this.mainD = item;
     }
 
     public void setMainD() {
@@ -79,7 +79,7 @@ public class Stuff {
     }
 
     public void setQuickSlot(Item item) {
-        this.mainG = item;
+        this.quickSlot = item;
     }
 
 
