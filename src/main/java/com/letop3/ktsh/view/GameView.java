@@ -153,7 +153,10 @@ public class GameView {
 
             int finalI = i;
             imageView.setOnMouseClicked(_ -> {
-                System.out.println("Stuff cliqué");
+                System.out.println("Stuff cliqué, nom : " + stuff.getInventaire().get(finalI).getNom());
+                if (stuffClickListener != null) {
+                    stuffClickListener.onStuffClick(finalI);
+                }
             });
 
             stuffPane.getChildren().add(imageView);
