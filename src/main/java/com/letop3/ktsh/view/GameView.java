@@ -1,11 +1,13 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -15,9 +17,11 @@ public class GameView {
     private GroundView groundView;
     private PlayerView playerView;
     private Canvas heartCanvas;
+    private Canvas stuffCanvas;
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
+    private Pane stuffPane;  // Pane to hold ImageView for stuff
 
     public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas) {
         groundView = new GroundView(ground, gameGround, player);
@@ -37,6 +41,14 @@ public class GameView {
         this.fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/fullHeart.png")));
         this.halfHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/halfHeart.png")));
         this.emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/emptyHeart.png")));
+
+        this.stuffCanvas = stuffCanvas;
+
+        // Initialize stuffPane
+        this.stuffPane = new Pane();
+        gamePlayer.getChildren().add(stuffPane);
+
+        drawStuff(player.getStuff());
     }
 
     public GroundView getGroundView() {
@@ -63,5 +75,41 @@ public class GameView {
                 heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i*20, playerView.getScreenPlayerY().get() - 200);
             }
         }
+    }
+
+    private void drawStuff(Stuff stuff) {
+        stuffPane.getChildren().clear();  // Clear previous stuff
+
+        for (int i = 0; i < stuff.getInventaire().size(); i++) {
+            Image itemIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(stuff.getInventaire().get(i).getIconPath())));
+            ImageView imageView = new ImageView(itemIcon);
+            imageView.setFitWidth(32); // Set width if needed
+            imageView.setFitHeight(32); // Set height if needed
+
+            // Position the ImageView
+            if (i < 3){
+                imageView.setLayoutX(playerView.getScreenPlayerX().get() + 200 + i*32);
+                imageView.setLayoutY(playerView.getScreenPlayerY().get() - 80);
+            } else if (i < 6){
+                imageView.setLayoutX(playerView.getScreenPlayerX().get() + 200 + (i-3)*32);
+                imageView.setLayoutY(playerView.getScreenPlayerY().get() - 40);
+            } else if (i < 9){
+                imageView.setLayoutX(playerView.getScreenPlayerX().get() + 200 + (i-6)*32);
+                imageView.setLayoutY(playerView.getScreenPlayerY().get());
+            } else {
+                imageView.setLayoutX(playerView.getScreenPlayerX().get() + 200 + (i-9)*32);
+                imageView.setLayoutY(playerView.getScreenPlayerY().get() + 40);
+            }
+
+            imageView.setOnMouseClicked(event -> {
+                System.out.println("Item clicked");
+            });
+
+            stuffPane.getChildren().add(imageView);
+        }
+    }
+
+    public void updateStuff(Stuff stuff) {
+        drawStuff(stuff);
     }
 }
