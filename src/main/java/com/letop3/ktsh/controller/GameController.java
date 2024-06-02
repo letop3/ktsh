@@ -122,4 +122,9 @@ public class GameController implements Initializable, StuffClickListener {
             env.getPlayer().getStuff().setQuickSlot();
         }
     }
+
+    @Override
+    public void onStuffClick() {
+        System.out.println("Stuff cliqué dans GameController");
+    }
 }

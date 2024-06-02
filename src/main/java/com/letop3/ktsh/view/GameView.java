@@ -152,7 +152,9 @@ public class GameView {
             }
 
             int finalI = i;
-            imageView.setOnMouseClicked(_ -> System.out.println("Item cliqué :" + stuff.getInventaire().get(finalI).getId()));
+            imageView.setOnMouseClicked(_ -> {
+                System.out.println("Stuff cliqué");
+            });
 
             stuffPane.getChildren().add(imageView);
         }
