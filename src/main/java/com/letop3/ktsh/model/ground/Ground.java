@@ -25,14 +25,14 @@ public class Ground {
             }
         } catch (IOException ignored) {}
 
-        currentChunkIdX = new SimpleIntegerProperty(player.getPosition().getX() / Chunk.CHUNK_SIZE);
-        currentChunkIdY = new SimpleIntegerProperty(player.getPosition().getY() / Chunk.CHUNK_SIZE);
+        currentChunkIdX = new SimpleIntegerProperty((int)player.getPosition().getX() / Chunk.CHUNK_SIZE);
+        currentChunkIdY = new SimpleIntegerProperty((int)player.getPosition().getY() / Chunk.CHUNK_SIZE);
 
         player.getPosition().xProperty().addListener((obs, old, nouv) -> {
-            currentChunkIdX.set((int)nouv / Chunk.CHUNK_SIZE);
+            currentChunkIdX.set((int)((double)nouv / Chunk.CHUNK_SIZE));
         });
         player.getPosition().yProperty().addListener((obs, old, nouv) -> {
-            currentChunkIdY.set((int)nouv / Chunk.CHUNK_SIZE);
+            currentChunkIdY.set((int)((double)nouv / Chunk.CHUNK_SIZE));
         });
     }
 
@@ -64,19 +64,19 @@ public class Ground {
         this.currentChunkIdY.set(currentChunkIdY);
     }
 
-    public boolean canMoveTo(int x, int y) {
+    public boolean canMoveTo(double x, double y) {
         // taille tuile
         int tileSize = Chunk.CHUNK_SIZE / 11; // divisé par 11 pcq chunk de 11*11
 
-        // coordoné cunk
-        int chunkX = x / Chunk.CHUNK_SIZE;
-        int chunkY = y / Chunk.CHUNK_SIZE;
+        // coordoné chunk
+        int chunkX = (int)(x / Chunk.CHUNK_SIZE);
+        int chunkY = (int)(y / Chunk.CHUNK_SIZE);
 
         // pos relative des tuiles dans le chunk
-        int relativeX = x % Chunk.CHUNK_SIZE;
-        int relativeY = y % Chunk.CHUNK_SIZE;
-        int tileX = relativeX / tileSize;
-        int tileY = relativeY / tileSize;
+        double relativeX = x % Chunk.CHUNK_SIZE;
+        double relativeY = y % Chunk.CHUNK_SIZE;
+        int tileX = (int)(relativeX / tileSize);
+        int tileY = (int)(relativeY / tileSize);
 
         // jai pas compris mais ca marche
         // ca régle un pb de décalage entre vue terrain / collisions

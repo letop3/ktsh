@@ -1,14 +1,14 @@
 package com.letop3.ktsh.model.entity;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 /**
  * Classe Position représentant une position avec des coordonnées x et y.
  */
 public class Position {
-    private final IntegerProperty x;
-    private final IntegerProperty y;
+    private final DoubleProperty x;
+    private final DoubleProperty y;
 
     /**
      * Constructeur de la classe Position.
@@ -17,8 +17,8 @@ public class Position {
      * @param y la coordonnée y
      */
     public Position(int x, int y) {
-        this.x = new SimpleIntegerProperty(x);
-        this.y = new SimpleIntegerProperty(y);
+        this.x = new SimpleDoubleProperty(x);
+        this.y = new SimpleDoubleProperty(y);
     }
 
     /**
@@ -26,7 +26,7 @@ public class Position {
      *
      * @return la propriété x
      */
-    public IntegerProperty xProperty() {
+    public DoubleProperty xProperty() {
         return x;
     }
 
@@ -35,7 +35,7 @@ public class Position {
      *
      * @return la valeur de x
      */
-    public int getX() {
+    public double getX() {
         return x.get();
     }
 
@@ -44,7 +44,7 @@ public class Position {
      *
      * @param x la nouvelle valeur de x
      */
-    public void setX(int x) {
+    public void setX(double x) {
         this.x.set(x);
     }
 
@@ -53,7 +53,7 @@ public class Position {
      *
      * @return la propriété y
      */
-    public IntegerProperty yProperty() {
+    public DoubleProperty yProperty() {
         return y;
     }
 
@@ -62,7 +62,7 @@ public class Position {
      *
      * @return la valeur de y
      */
-    public int getY() {
+    public double getY() {
         return y.get();
     }
 
@@ -71,7 +71,7 @@ public class Position {
      *
      * @param y la nouvelle valeur de y
      */
-    public void setY(int y) {
+    public void setY(double y) {
         this.y.set(y);
     }
 

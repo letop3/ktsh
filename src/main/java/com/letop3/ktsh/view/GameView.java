@@ -23,14 +23,14 @@ public class GameView {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer, ground);
 
-        gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5- player.getPosition().getX() % Chunk.CHUNK_SIZE);
+        gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
         gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getY() % Chunk.CHUNK_SIZE);
 
         player.getPosition().xProperty().addListener((obs, old, nouv) -> {
-            gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - (int)nouv % Chunk.CHUNK_SIZE);
+            gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
         });
         player.getPosition().yProperty().addListener((obs, old, nouv) -> {
-            gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - (int)nouv % Chunk.CHUNK_SIZE);
+            gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
         });
 
         this.heartCanvas = heartCanvas;
