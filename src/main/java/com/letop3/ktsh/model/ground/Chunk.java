@@ -1,5 +1,6 @@
 package com.letop3.ktsh.model.ground;
 
+import com.letop3.ktsh.model.Updatable;
 import com.letop3.ktsh.model.files.JsonLoader;
 
 import java.io.IOException;
@@ -17,6 +18,10 @@ public class Chunk {
         this.id = id;
         this.tiles = tiles;
         this.neighbors = new ArrayList<>();
+    }
+
+    public void update() {
+
     }
 
     public int getId() {

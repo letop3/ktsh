@@ -5,7 +5,6 @@ import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
-import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

@@ -15,6 +15,13 @@ public class Env {
         this.ground = new Ground(player);
     }
 
+    public void update() {
+        player.update(ground);
+        for (Chunk chunks : ground.getCurrentChunk().getNeighbors()) {
+            chunks.update();
+        }
+    }
+
     public Player getPlayer() {
         return player;
     }

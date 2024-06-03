@@ -40,6 +40,10 @@ public class Ground {
         return chunks[y][x];
     }
 
+    public Chunk getCurrentChunk() {
+        return chunks[currentChunkIdY.get()][currentChunkIdX.get()];
+    }
+
     public int getCurrentChunkIdX() {
         return currentChunkIdX.get();
     }

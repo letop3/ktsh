@@ -31,7 +31,6 @@ public class PlayerView {
     }
 
     public void update() {
-        player.update(ground);
         playerImageView.setImage(animHandler.getFrame());
     }
 

@@ -55,8 +55,4 @@ public class GroundView {
             }
         }
     }
-
-    public void update() {
-
-    }
 }
