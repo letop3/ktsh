@@ -50,7 +50,7 @@ public abstract class Entity implements Updatable {
     }
 
     public void remDirection(Direction direction) {
-        if (this.direction != null && this.direction.getX() - direction.getX() == 0 && this.direction.getY() - direction.getY() == 0) {
+        if (direction != null && this.direction != null && (this.direction.getX() - direction.getX() == 0 || this.direction.getY() - direction.getY() == 0)) {
             this.direction = this.direction.sub(direction);
         }
     }
