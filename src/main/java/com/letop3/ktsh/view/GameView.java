@@ -89,7 +89,7 @@ public class GameView {
         ImageView mainGView = new ImageView(mainGIcon);
         mainGView.setLayoutX(playerView.getScreenPlayerX().get());
         mainGView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
-        mainGView.setOnMouseClicked(_ -> {
+        mainGView.setOnMouseClicked(event -> {
             System.out.println("Main Gauche cliqué");
             if (stuffClickListener != null) {
                 stuffClickListener.onMainGClick();
@@ -106,7 +106,7 @@ public class GameView {
         ImageView mainDView = new ImageView(mainDIcon);
         mainDView.setLayoutX(playerView.getScreenPlayerX().get() + 40);
         mainDView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
-        mainDView.setOnMouseClicked(_ -> {
+        mainDView.setOnMouseClicked(event -> {
             System.out.println("Main Droite cliqué");
             if (stuffClickListener != null) {
                 stuffClickListener.onMainDClick();
@@ -123,7 +123,7 @@ public class GameView {
         ImageView quickSlotView = new ImageView(quickSlotIcon);
         quickSlotView.setLayoutX(playerView.getScreenPlayerX().get() + 80);
         quickSlotView.setLayoutY(playerView.getScreenPlayerY().get() - 200);
-        quickSlotView.setOnMouseClicked(_ -> {
+        quickSlotView.setOnMouseClicked(event -> {
             System.out.println("QuickSlot cliqué");
             if (stuffClickListener != null) {
                 stuffClickListener.onQuickSlotClick();
@@ -152,7 +152,7 @@ public class GameView {
             }
 
             int finalI = i;
-            imageView.setOnMouseClicked(_ -> {
+            imageView.setOnMouseClicked(event -> {
                 System.out.println("Stuff cliqué, nom : " + stuff.getInventaire().get(finalI).getNom());
                 if (stuffClickListener != null) {
                     stuffClickListener.onStuffClick(finalI);
