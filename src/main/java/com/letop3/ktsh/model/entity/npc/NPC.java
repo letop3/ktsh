@@ -1,14 +1,12 @@
 package com.letop3.ktsh.model.entity.npc;
 
-import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.dialogue.Dialogue;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Ground;
 
-public class NPC extends Entity implements Interractible {
-    private final static double RANGE = 5;
+public class NPC extends Interractible {
     private final Dialogue dialogue;
 
     public NPC(Position position, Ground ground, Dialogue dialogue) {
@@ -22,7 +20,7 @@ public class NPC extends Entity implements Interractible {
 
     @Override
     public boolean isInterractible(Player player) {
-        return this.getPosition().distance(player.getPosition()) > RANGE;
+		return super.isInterractible(player) && dialogue != null;
     }
 
     @Override

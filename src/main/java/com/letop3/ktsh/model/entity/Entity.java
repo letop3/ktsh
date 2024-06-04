@@ -24,6 +24,10 @@ public abstract class Entity implements Updatable {
         return direction;
     }
 
+	public Ground getGround() {
+		return ground;
+	}
+
     public void update() {
         if (direction != null) {
             double newX = position.getX();

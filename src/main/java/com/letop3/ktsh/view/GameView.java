@@ -2,12 +2,14 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
 import com.letop3.ktsh.view.entity.EntityView;
+import com.letop3.ktsh.view.entity.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
 
 import javafx.scene.canvas.Canvas;
@@ -54,9 +56,11 @@ public class GameView {
 
         this.entities = new ArrayList<>();
         for (Entity entity : ground.getCurrentChunk().getEntities()) {
-            ImageView entityImageView = new ImageView();
+            Pane entityImageView = new Pane();
             entityPane.getChildren().add(entityImageView);
-            entities.add(new EntityView(new EntityAnimationAdapter(entity), entityImageView, screenPosition));
+			if (entity instanceof NPC) {
+            	entities.add(new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player));
+			}
         }
 
         this.heartCanvas = heartCanvas;

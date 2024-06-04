@@ -81,7 +81,7 @@ public class Position {
      * @param position la deuxième position avec laquel le calcul est effectué
      */
     public double distance(Position position) {
-        return Math.sqrt(Math.pow(position.x.get(), 2) + Math.pow(position.y.get(), 2));
+        return Math.sqrt(Math.pow(position.x.get() - x.get(), 2) + Math.pow(position.y.get() - y.get(), 2));
     }
 
     /**

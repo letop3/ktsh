@@ -6,15 +6,17 @@ import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
-public class EntityView {
+public abstract class EntityView {
     private final Entity entity;
     private final AnimationHandler animHandler;
-    private final ImageView spriteTarget;
+    private final ImageView sprite;
 
-    public EntityView(AnimationAdapter animationAdapter, ImageView spriteTarget, Position screenPosition) {
+    public EntityView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition) {
         this.animHandler = new AnimationHandler(animationAdapter);
-        this.spriteTarget = spriteTarget;
+        this.sprite = new ImageView();
+		spriteTarget.getChildren().add(sprite);
 
         entity = animationAdapter.getEntity();
 
@@ -30,6 +32,6 @@ public class EntityView {
     }
 
     public void update() {
-        spriteTarget.setImage(animHandler.getFrame());
+        sprite.setImage(animHandler.getFrame());
     }
 }
