@@ -48,7 +48,7 @@ public class GameController implements Initializable, StuffClickListener {
 
         //on s'occupe des controllers
         GameLoop gameLoopController = new GameLoop(env, gameGround, gameView.getPlayerView());
-        ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
+        ControlsController controlsController = new ControlsController(gameGround, env.getPlayer(), gameView.getStuffView());
 
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);

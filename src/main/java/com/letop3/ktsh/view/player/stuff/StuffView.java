@@ -13,6 +13,7 @@ public class StuffView {
     private Pane stuffPane;
     private PlayerView playerView;
     private StuffClickListener stuffClickListener;
+    private boolean isVisible = false;
 
     public StuffView(Pane stuffPane, PlayerView playerView) {
         this.stuffPane = stuffPane;
@@ -108,8 +109,11 @@ public class StuffView {
             stuffPane.getChildren().add(imageView);
         }
     }
-
     public void updateStuff(Stuff stuff) {
         drawStuff(stuff);
+    }
+    public void toogleVisibility(){
+        stuffPane.setVisible(!isVisible);
+        isVisible = !isVisible;
     }
 }

@@ -21,7 +21,7 @@
                 <TilePane fx:id="gameGround" prefHeight="1056.0" prefWidth="1056.0"/>
                 <Pane fx:id="gamePlayer" prefHeight="1056.0" prefWidth="1056.0"/>
                 <Canvas fx:id="heartCanvas" width="1056.0" height="1056.0" />
-                <Pane fx:id="stuffPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" />
+                <Pane fx:id="stuffPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" visible="false"/>
             </children>
         </StackPane>
     </center>

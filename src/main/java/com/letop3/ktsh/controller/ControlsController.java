@@ -2,11 +2,14 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
+import com.letop3.ktsh.view.player.stuff.StuffView;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.net.URL;
@@ -15,10 +18,12 @@ import java.util.ResourceBundle;
 public class ControlsController implements Initializable {
     private final TilePane gameGround;
     private static Player player;
+    private StuffView stuffView;
 
-    public ControlsController(TilePane gameGround, Player player) {
+    public ControlsController(TilePane gameGround, Player player, StuffView stuffView) {
         this.gameGround = gameGround;
         ControlsController.player = player;
+        this.stuffView = stuffView;
     }
 
     @Override
@@ -43,7 +48,11 @@ public class ControlsController implements Initializable {
     }
 
     private void keyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.getKeyCode("I")) {
+            stuffView.toogleVisibility();
+        }
         player.addDirection(keyToDirection(event.getCode()));
+
     }
 
     private void keyReleased(KeyEvent event) {
