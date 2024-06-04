@@ -16,7 +16,7 @@ public class Position {
      * @param x la coordonnée x
      * @param y la coordonnée y
      */
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         this.x = new SimpleDoubleProperty(x);
         this.y = new SimpleDoubleProperty(y);
     }
@@ -73,6 +73,15 @@ public class Position {
      */
     public void setY(double y) {
         this.y.set(y);
+    }
+
+    /**
+     * Retourne la distance entre la position actuel et la position passé en paramètre.
+     *
+     * @param position la deuxième position avec laquel le calcul est effectué
+     */
+    public double distance(Position position) {
+        return Math.sqrt(Math.pow(position.x.get(), 2) + Math.pow(position.y.get(), 2));
     }
 
     /**

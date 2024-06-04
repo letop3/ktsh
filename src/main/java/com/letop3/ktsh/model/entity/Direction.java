@@ -49,7 +49,7 @@ public enum Direction {
         return y;
     }
 
-	public boolean isDiagonal() {
-		return x != 0 && y != 0;
-	}
+    public boolean isDiagonal() {
+        return x != 0 && y != 0;
+    }
 }

@@ -6,12 +6,14 @@ import com.letop3.ktsh.model.Updatable;
 public abstract class Entity implements Updatable {
     private final static double speed = 2;
 
+    private final Ground ground;
     private final Position position;
     private Direction direction;
 
-    public Entity(Position position) {
+    public Entity(Position position, Ground ground) {
         this.position = position;
         this.direction = null;
+        this.ground = ground;
     }
 
     public Position getPosition() {
@@ -22,7 +24,7 @@ public abstract class Entity implements Updatable {
         return direction;
     }
 
-    public void update(Ground ground) {
+    public void update() {
         if (direction != null) {
             double newX = position.getX();
             double newY = position.getY();

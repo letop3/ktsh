@@ -2,6 +2,7 @@ package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
@@ -13,8 +14,8 @@ public class Player extends Entity {
     private int maxHp;
     private Stuff stuff;
 
-    public Player(Position position) {
-        super(position);
+    public Player(Position position, Ground ground) {
+        super(position, ground);
         this.maxHp = 12;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();

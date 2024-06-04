@@ -14,8 +14,7 @@ public class Ground {
     private final IntegerProperty currentChunkIdX;
     private final IntegerProperty currentChunkIdY;
 
-
-    public Ground(Player player) {
+    public Ground() {
         this.chunks = new Chunk[MAP_HEIGHT][MAP_WIDTH];
         try (MapLoader mapLoader = new MapLoader("src/main/resources/com/letop3/ktsh/ground.json")) {
             for (int y = 0; y < MAP_HEIGHT; y++) {
@@ -25,8 +24,13 @@ public class Ground {
             }
         } catch (IOException ignored) {}
 
-        currentChunkIdX = new SimpleIntegerProperty((int)player.getPosition().getX() / Chunk.CHUNK_SIZE);
-        currentChunkIdY = new SimpleIntegerProperty((int)player.getPosition().getY() / Chunk.CHUNK_SIZE);
+        currentChunkIdX = new SimpleIntegerProperty();
+        currentChunkIdY = new SimpleIntegerProperty();
+    }
+
+    public void setPlayer(Player player) {
+        currentChunkIdX.set((int)player.getPosition().getX() / Chunk.CHUNK_SIZE);
+        currentChunkIdY.set((int)player.getPosition().getY() / Chunk.CHUNK_SIZE);
 
         player.getPosition().xProperty().addListener((obs, old, nouv) -> {
             currentChunkIdX.set((int)((double)nouv / Chunk.CHUNK_SIZE));
@@ -111,8 +115,4 @@ public class Ground {
 
         return tileValue != 1 && tileValue != 2;
     }
-
-
-
-
 }

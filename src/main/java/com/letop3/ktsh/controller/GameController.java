@@ -18,14 +18,16 @@ import javafx.scene.layout.TilePane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
+//import java.util.Timer;
+//import java.util.TimerTask;
 
 public class GameController implements Initializable, StuffClickListener {
 
     private Env env;
     private GameView view;
 
+    @FXML
+    public Pane entityPane;
     @FXML
     public Pane stuffPane;
     @FXML
@@ -40,14 +42,14 @@ public class GameController implements Initializable, StuffClickListener {
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane);
+        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane, entityPane);
         this.view = gameView;
 
         // Passer le listener à la vue
         gameView.setStuffClickListener(this);
 
         //on s'occupe des controllers
-        GameLoop gameLoopController = new GameLoop(env, gameGround, gameView.getPlayerView());
+        GameLoop gameLoopController = new GameLoop(env, gameGround, gameView);
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         gameLoopController.initialize(location, resources);
@@ -61,7 +63,7 @@ public class GameController implements Initializable, StuffClickListener {
         view.updateHpBar(env.getPlayer());
 
         // Test perte hp pour update bar hp
-        Timer timer = new Timer();
+        /*Timer timer = new Timer();
         for (int i = 1; i <= 10; i++) {
             timer.schedule(new TimerTask() {
                 @Override
@@ -70,7 +72,7 @@ public class GameController implements Initializable, StuffClickListener {
                     env.getPlayer().setHp(env.getPlayer().getHp() - 1);
                 }
             }, i * 5000);
-        }
+        }*/
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
