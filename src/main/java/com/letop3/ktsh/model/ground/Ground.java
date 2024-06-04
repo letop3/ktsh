@@ -1,5 +1,6 @@
 package com.letop3.ktsh.model.ground;
 
+import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;
@@ -44,6 +45,10 @@ public class Ground {
         return chunks[y][x];
     }
 
+	public Chunk[][] getChunks() {
+		return chunks;
+	}
+
     public Chunk getCurrentChunk() {
         return chunks[currentChunkIdY.get()][currentChunkIdX.get()];
     }
@@ -71,6 +76,12 @@ public class Ground {
     public void setCurrentChunkIdX(int currentChunkIdY) {
         this.currentChunkIdY.set(currentChunkIdY);
     }
+
+	public Chunk getChunkFromPos(double x, double y) {
+		int chunkX = (int)(x / Chunk.CHUNK_SIZE);
+		int chunkY = (int)(y / Chunk.CHUNK_SIZE);
+		return getChunk(chunkX, chunkY);
+	}
 
     public boolean canMoveTo(double x, double y) {
         // taille tuile

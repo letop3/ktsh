@@ -18,8 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class GameView {
@@ -34,7 +34,7 @@ public class GameView {
 
     private Position screenPosition;
 
-    private List<EntityView> entities;
+    private Map<Entity, EntityView> entities;
 
     public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane entityPane) {
         groundView = new GroundView(ground, gameGround, player);
@@ -54,13 +54,21 @@ public class GameView {
             screenPosition.setY(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
 
-        this.entities = new ArrayList<>();
-        for (Entity entity : ground.getCurrentChunk().getEntities()) {
-            Pane entityImageView = new Pane();
-            entityPane.getChildren().add(entityImageView);
-			if (entity instanceof NPC) {
-            	entities.add(new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player));
-			}
+        this.entities = new HashMap<>();
+        for (Chunk chunks[] : ground.getChunks()) {
+            for (Chunk chunk : chunks) {
+                for (Entity entity : chunk.getEntities()) {
+                    Pane entityImageView = new Pane();
+                    entityPane.getChildren().add(entityImageView);
+
+                    EntityView entityView = null;
+                    if (entity instanceof NPC) {
+                        entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player);
+                    }
+
+                    if (entityView != null) entities.putIfAbsent(entity, entityView);
+                }
+            }
         }
 
         this.heartCanvas = heartCanvas;
@@ -171,8 +179,14 @@ public class GameView {
 
     public void update() {
         playerView.update();
-        for (EntityView entityView : entities) {
-            entityView.update();
+
+        for (Entity entity : groundView.getGround().getCurrentChunk().getEntities()) {
+            entities.get(entity).update();
+        }
+        for (Chunk chunks : groundView.getGround().getCurrentChunk().getNeighbors()) {
+            for (Entity entity : chunks.getEntities()) {
+                entities.get(entity).update();
+            }
         }
     }
 }
