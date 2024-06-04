@@ -36,7 +36,6 @@ public class StuffController implements Initializable, StuffClickListener {
         env.getPlayer().hpProperty().addListener((observable, oldValue, newValue) -> {
             view.updateHpBar(env.getPlayer());
         });
-
         view.updateHpBar(env.getPlayer());
 
         // Test perte hp pour update bar hp
@@ -58,7 +57,6 @@ public class StuffController implements Initializable, StuffClickListener {
                 Platform.runLater(() -> view.getStuffView().updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
             }
         });
-
         view.getStuffView().updateStuff(env.getPlayer().getStuff());
 
         //bind entre lock de Player et isVisible de StuffView

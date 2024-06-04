@@ -48,11 +48,10 @@ public class ControlsController implements Initializable {
     }
 
     private void keyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.getKeyCode("I")) {
-            stuffView.toogleVisibility();
+        switch (event.getCode()){
+            case KeyCode.I -> stuffView.toogleVisibility();
+            default -> player.addDirection(keyToDirection(event.getCode()));
         }
-        player.addDirection(keyToDirection(event.getCode()));
-
     }
 
     private void keyReleased(KeyEvent event) {

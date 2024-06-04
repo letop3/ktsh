@@ -27,12 +27,13 @@ public class GameController implements Initializable {
     private GameView view;
 
     @FXML
+    public Pane slotPane;
+    @FXML
     public Pane stuffPane;
     @FXML
     private Canvas heartCanvas;
     @FXML
     private TilePane gameGround;
-
     @FXML
     private Pane gamePlayer;
 
@@ -40,7 +41,7 @@ public class GameController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane);
+        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane, slotPane);
         this.view = gameView;
 
         //on s'occupe des controllers

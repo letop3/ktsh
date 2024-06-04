@@ -1,14 +1,12 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.entity.player.Player;
-import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.player.PlayerView;
 import com.letop3.ktsh.view.player.stuff.StuffView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -22,11 +20,12 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
+    private Pane slotPane;
 
-    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane) {
+    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
-        stuffView = new StuffView(stuffPane, playerView);
+        stuffView = new StuffView(stuffPane, slotPane, playerView);
 
         gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
         gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getY() % Chunk.CHUNK_SIZE);
