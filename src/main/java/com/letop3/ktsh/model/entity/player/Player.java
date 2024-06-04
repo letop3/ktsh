@@ -36,7 +36,7 @@ public class Player extends Entity {
     }
 
     public void interract() {
-        if (interractionTarget != null) {
+        if (interractionTarget != null && interractionTarget.isInterractible(this)) {
             interractionTarget.interract();
         }
     }
