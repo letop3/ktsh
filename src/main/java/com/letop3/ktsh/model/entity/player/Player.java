@@ -2,16 +2,20 @@ package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Player extends Entity {
     private IntegerProperty hp;
     private int maxHp;
     private Stuff stuff;
+    private BooleanProperty lock;
 
     public Player(Position position) {
         super(position);
@@ -22,6 +26,7 @@ public class Player extends Entity {
         stuff.addItem(new Sword(2, "Excalibur", "Un test pour arme", 100));
         stuff.addItem(new Shield(1, "Shield Test", "Un test pour bouclier", 100));
         stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
+        this.lock = new SimpleBooleanProperty(false);
     }
 
     public int getHp() {
@@ -54,6 +59,25 @@ public class Player extends Entity {
 
     public Stuff getStuff() {
         return stuff;
+    }
+
+    public boolean isLock() {
+        return lock.get();
+    }
+
+    public BooleanProperty lockProperty() {
+        return lock;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock.set(lock);
+    }
+
+    @Override
+    public void update(Ground ground) {
+        if (!lock.get()){
+            super.update(ground);
+        }
     }
 }
 

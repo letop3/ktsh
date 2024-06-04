@@ -3,6 +3,8 @@ package com.letop3.ktsh.view.player.stuff;
 import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.view.StuffClickListener;
 import com.letop3.ktsh.view.player.PlayerView;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -13,7 +15,7 @@ public class StuffView {
     private Pane stuffPane;
     private PlayerView playerView;
     private StuffClickListener stuffClickListener;
-    private boolean isVisible = false;
+    private BooleanProperty isVisible = new SimpleBooleanProperty(false);
 
     public StuffView(Pane stuffPane, PlayerView playerView) {
         this.stuffPane = stuffPane;
@@ -113,7 +115,19 @@ public class StuffView {
         drawStuff(stuff);
     }
     public void toogleVisibility(){
-        stuffPane.setVisible(!isVisible);
-        isVisible = !isVisible;
+        stuffPane.setVisible(!isVisible.get());
+        isVisible.setValue(!isVisible.get());
+    }
+
+    public boolean isIsVisible() {
+        return isVisible.get();
+    }
+
+    public BooleanProperty isVisibleProperty() {
+        return isVisible;
+    }
+
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible.set(isVisible);
     }
 }

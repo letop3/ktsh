@@ -9,6 +9,7 @@ import com.letop3.ktsh.model.item.consomable.Consomable;
 import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.Initializable;
 
@@ -59,6 +60,9 @@ public class StuffController implements Initializable, StuffClickListener {
         });
 
         view.getStuffView().updateStuff(env.getPlayer().getStuff());
+
+        //bind entre lock de Player et isVisible de StuffView
+        env.getPlayer().lockProperty().bind(view.getStuffView().isVisibleProperty());
     }
 
     @Override
