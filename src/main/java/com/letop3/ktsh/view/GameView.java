@@ -25,7 +25,7 @@ public class GameView {
 
     public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane) {
         groundView = new GroundView(ground, gameGround, player);
-        playerView = new PlayerView(player, gamePlayer, ground);
+        playerView = new PlayerView(player, gamePlayer);
 
         gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
         gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getY() % Chunk.CHUNK_SIZE);

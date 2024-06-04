@@ -22,12 +22,6 @@ public class Main extends Application {
 
         primaryStage.setTitle("Kill To Save Her");
         primaryStage.setScene(scene);
-//        primaryStage.setWidth(800);
-//        primaryStage.setHeight(600);
-//        primaryStage.setMinWidth(800);
-//        primaryStage.setMinHeight(600);
-//        primaryStage.setMaxWidth(800);
-//        primaryStage.setMaxHeight(600);
         primaryStage.show();
     }
 }

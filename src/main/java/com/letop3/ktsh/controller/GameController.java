@@ -47,7 +47,7 @@ public class GameController implements Initializable, StuffClickListener {
         gameView.setStuffClickListener(this);
 
         //on s'occupe des controllers
-        GameLoop gameLoopController = new GameLoop(env, gameGround, gameView.getPlayerView(), gameView.getGroundView());
+        GameLoop gameLoopController = new GameLoop(env, gameGround, gameView.getPlayerView());
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer());
 
         gameLoopController.initialize(location, resources);
@@ -81,19 +81,6 @@ public class GameController implements Initializable, StuffClickListener {
         });
 
         view.updateStuff(env.getPlayer().getStuff());
-
-//        // Test changement dans le stuff
-//        Timer timerStuff = new Timer();
-//        for (int i = 1; i <= 3; i++) {
-//            int finalI = i;
-//            timerStuff.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    System.out.println("-1 item");
-//                    env.getPlayer().getStuff().getInventaire().remove(finalI);
-//                }
-//            }, i * 5000);
-//        }
 
         //TODO ajouter listener sur les Item : créer une class ItemProperty
     }

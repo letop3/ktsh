@@ -1,7 +1,6 @@
 package com.letop3.ktsh.model.files;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.letop3.ktsh.model.ground.Chunk;
 
 import java.io.Closeable;
 import java.io.File;

@@ -1,5 +1,4 @@
 package com.letop3.ktsh.model.item;
-import javafx.scene.image.Image;
 
 public abstract class Item {
     private int id;

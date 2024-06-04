@@ -4,9 +4,6 @@ import com.letop3.ktsh.model.item.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Stuff {
     private ObservableList<Item> inventaire;
     private Item mainG;
