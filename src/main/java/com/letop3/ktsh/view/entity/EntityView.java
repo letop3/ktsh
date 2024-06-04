@@ -18,6 +18,9 @@ public class EntityView {
 
         entity = animationAdapter.getEntity();
 
+		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
+		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY());
+
         screenPosition.xProperty().addListener((obs, old, nouv) -> {
             spriteTarget.setTranslateX(entity.getPosition().getX() + (double)nouv);
         });
