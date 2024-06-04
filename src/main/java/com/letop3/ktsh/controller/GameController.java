@@ -44,7 +44,7 @@ public class GameController implements Initializable, StuffClickListener {
         this.view = gameView;
 
         // Passer le listener à la vue
-        gameView.setStuffClickListener(this);
+        gameView.getStuffView().setStuffClickListener(this);
 
         //on s'occupe des controllers
         GameLoop gameLoopController = new GameLoop(env, gameGround, gameView.getPlayerView());
@@ -76,13 +76,11 @@ public class GameController implements Initializable, StuffClickListener {
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
             @Override
             public void onChanged(Change<? extends Item> change) {
-                Platform.runLater(() -> view.updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
+                Platform.runLater(() -> view.getStuffView().updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
             }
         });
 
-        view.updateStuff(env.getPlayer().getStuff());
-
-        //TODO ajouter listener sur les Item : créer une class ItemProperty
+        view.getStuffView().updateStuff(env.getPlayer().getStuff());
     }
 
     @Override
