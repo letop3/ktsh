@@ -29,13 +29,13 @@ public class Env {
 
 	public void addEntity(Entity entity) {
 		entity.getPosition().xProperty().addListener((obs, old, nouv) -> {
-			if ((int)((int)old / Chunk.CHUNK_SIZE) != (int)((int)nouv / Chunk.CHUNK_SIZE)) {
+			if ((int)((double)old / Chunk.CHUNK_SIZE) != (int)((double)nouv / Chunk.CHUNK_SIZE)) {
 				ground.getChunkFromPos((double)old, entity.getPosition().getY()).removeEntity(entity);
 				ground.getChunkFromPos((double)nouv, entity.getPosition().getY()).addEntity(entity);
 			}
 		});
 		entity.getPosition().yProperty().addListener((obs, old, nouv) -> {
-			if ((int)((int)old / Chunk.CHUNK_SIZE) != (int)((int)nouv / Chunk.CHUNK_SIZE)) {
+			if ((int)((double)old / Chunk.CHUNK_SIZE) != (int)((double)nouv / Chunk.CHUNK_SIZE)) {
 				ground.getChunkFromPos(entity.getPosition().getX(), (double)old).removeEntity(entity);
 				ground.getChunkFromPos(entity.getPosition().getX(), (double)nouv).addEntity(entity);
 			}

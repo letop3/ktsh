@@ -29,7 +29,7 @@ public class NPCView extends EntityView {
 	@Override
 	public void update() {
 		super.update();
-		if (npc.isInterractible(player)) {
+		if (player.getInterractionTarget() == npc && npc.isInterractible(player)) {
 			interactLabel.setVisible(true);
 		}
 		else {

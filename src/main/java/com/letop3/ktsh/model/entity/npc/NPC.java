@@ -1,5 +1,6 @@
 package com.letop3.ktsh.model.entity.npc;
 
+import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.dialogue.Dialogue;
@@ -20,7 +21,7 @@ public class NPC extends Interractible {
 
     @Override
     public boolean isInterractible(Player player) {
-		return super.isInterractible(player) && dialogue != null;
+        return super.isInterractible(player) && dialogue != null;
     }
 
     @Override

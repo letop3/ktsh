@@ -29,15 +29,11 @@ public class GameLoop implements Initializable {
         Duration duration = Duration.millis(1000.0 / 30); // 30 FPS
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
             env.update();
-            updateGame();
+			gameView.update();
         });
 
         Timeline timeline = new Timeline(keyFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
-    }
-
-    private void updateGame() {
-        gameView.update();
     }
 }

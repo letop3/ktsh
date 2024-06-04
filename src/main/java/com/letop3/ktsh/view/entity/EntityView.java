@@ -5,6 +5,7 @@ import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 
+import javafx.beans.value.ChangeListener;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -23,12 +24,17 @@ public abstract class EntityView {
 		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
 		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY());
 
-        screenPosition.xProperty().addListener((obs, old, nouv) -> {
-            spriteTarget.setTranslateX(entity.getPosition().getX() + (double)nouv);
-        });
-        screenPosition.yProperty().addListener((obs, old, nouv) -> {
-            spriteTarget.setTranslateY(entity.getPosition().getY() + (double)nouv);
-        });
+		ChangeListener<Number> xListener = (obs, old, nouv) -> {
+			spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
+		};
+		ChangeListener<Number> yListener = (obs, old, nouv) -> {
+			spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY());
+		};
+
+        screenPosition.xProperty().addListener(xListener);
+		entity.getPosition().xProperty().addListener(xListener);
+        screenPosition.yProperty().addListener(yListener);
+		entity.getPosition().yProperty().addListener(yListener);
     }
 
     public void update() {

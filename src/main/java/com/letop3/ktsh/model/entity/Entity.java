@@ -6,7 +6,7 @@ import com.letop3.ktsh.model.Updatable;
 public abstract class Entity implements Updatable {
     private final static double speed = 2;
 
-    private final Ground ground;
+    protected final Ground ground;
     private final Position position;
     private Direction direction;
 
