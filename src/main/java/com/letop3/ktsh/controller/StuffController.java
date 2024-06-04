@@ -38,6 +38,18 @@ public class StuffController implements Initializable, StuffClickListener {
             view.update();
         });
 
+        // Test perte hp pour update bar hp
+        Timer timer = new Timer();
+        for (int i = 1; i <= 10; i++) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println("-1 hp");
+                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
+                }
+            }, i * 5000);
+        }
+
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
             @Override
@@ -45,6 +57,7 @@ public class StuffController implements Initializable, StuffClickListener {
                 Platform.runLater(() -> view.getStuffView().updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
             }
         });
+
         view.getStuffView().updateStuff(env.getPlayer().getStuff());
 
         //bind entre lock de Player et isVisible de StuffView

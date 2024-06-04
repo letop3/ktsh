@@ -16,6 +16,7 @@ import com.letop3.ktsh.view.player.stuff.StuffView;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -32,8 +33,6 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
-    private Pane stuffPane;
-    private StuffClickListener stuffClickListener;
 
     private Position screenPosition;
 
