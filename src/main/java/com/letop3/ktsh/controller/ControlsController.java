@@ -50,6 +50,7 @@ public class ControlsController implements Initializable {
     private void keyPressed(KeyEvent event) {
         switch (event.getCode()){
             case KeyCode.I -> stuffView.toogleVisibility();
+            case KeyCode.E -> player.useQuickSlot();
             default -> player.addDirection(keyToDirection(event.getCode()));
         }
     }
