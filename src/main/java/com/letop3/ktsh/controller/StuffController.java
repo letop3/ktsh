@@ -38,17 +38,17 @@ public class StuffController implements Initializable, StuffClickListener {
         });
         view.updateHpBar(env.getPlayer());
 
-        // Test perte hp pour update bar hp
-        Timer timer = new Timer();
-        for (int i = 1; i <= 10; i++) {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("-1 hp");
-                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                }
-            }, i * 5000);
-        }
+//        // Test perte hp pour update bar hp
+//        Timer timer = new Timer();
+//        for (int i = 1; i <= 10; i++) {
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    System.out.println("-1 hp");
+//                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
+//                }
+//            }, i * 5000);
+//        }
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
@@ -65,7 +65,6 @@ public class StuffController implements Initializable, StuffClickListener {
 
     @Override
     public void onMainGClick() {
-        System.out.println("Main Gauche cliqué dans GameController");
         Item itemSelected = env.getPlayer().getStuff().getMainG();
         if (itemSelected != null) {
             env.getPlayer().getStuff().addItem(itemSelected);
@@ -75,7 +74,6 @@ public class StuffController implements Initializable, StuffClickListener {
 
     @Override
     public void onMainDClick() {
-        System.out.println("Main Droite cliqué dans GameController");
         Item itemSelected = env.getPlayer().getStuff().getMainD();
         if (itemSelected != null) {
             env.getPlayer().getStuff().addItem(itemSelected);
@@ -85,7 +83,6 @@ public class StuffController implements Initializable, StuffClickListener {
 
     @Override
     public void onQuickSlotClick() {
-        System.out.println("QuickSlot cliqué dans GameController");
         Item itemSelected = env.getPlayer().getStuff().getQuickSlot();
         if (itemSelected != null) {
             env.getPlayer().getStuff().addItem(itemSelected);
@@ -95,7 +92,6 @@ public class StuffController implements Initializable, StuffClickListener {
 
     @Override
     public void onStuffClick(int i) {
-        System.out.println("Stuff cliqué dans GameController, id : " + i);
         Item itemSelected = env.getPlayer().getStuff().getInventaire().get(i);
         if (itemSelected != null) {
             Item currentItem = null;

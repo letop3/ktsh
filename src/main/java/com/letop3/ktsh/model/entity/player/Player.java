@@ -5,6 +5,7 @@ import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
+import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
@@ -16,17 +17,28 @@ public class Player extends Entity {
     private int maxHp;
     private Stuff stuff;
     private BooleanProperty lock;
+    private int atk;
 
     public Player(Position position) {
         super(position);
         this.maxHp = 12;
+        this.atk = 1;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();
         stuff.addItem(new Sword(1, "Sword Test", "Un test pour arme", 100));
         stuff.addItem(new Sword(2, "Excalibur", "Un test pour arme", 100));
         stuff.addItem(new Shield(1, "Shield Test", "Un test pour bouclier", 100));
         stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
+        stuff.addItem(new PotionAtk(1, "Potion atk","test",100));
         this.lock = new SimpleBooleanProperty(false);
+    }
+
+    public int getAtk() {
+        return atk;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = atk;
     }
 
     public int getHp() {
@@ -81,11 +93,9 @@ public class Player extends Entity {
     }
 
     public void useQuickSlot() {
-        if (!lock.get()) {
+        if (!lock.get() && this.stuff.getQuickSlot() != null) {
             this.stuff.getQuickSlot().action(this);
-            System.out.println("e appuyé dans condition lock");
         }
-        System.out.println("E appuyé");
     }
 }
 
