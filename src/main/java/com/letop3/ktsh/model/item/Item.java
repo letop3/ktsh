@@ -1,5 +1,7 @@
 package com.letop3.ktsh.model.item;
 
+import com.letop3.ktsh.model.entity.player.Player;
+
 public abstract class Item {
     private int id;
     private String nom;
@@ -43,4 +45,6 @@ public abstract class Item {
     public String getIconPath() {
         return iconPath;
     }
+
+    public abstract void action(Player player);
 }

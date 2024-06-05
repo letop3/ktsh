@@ -108,5 +108,13 @@ public class Player extends Entity {
             }
         }
     }
+
+    public void useQuickSlot() {
+        if (!lock.get()) {
+            this.stuff.getQuickSlot().action(this);
+            System.out.println("e appuyé dans condition lock");
+        }
+        System.out.println("E appuyé");
+    }
 }
 
