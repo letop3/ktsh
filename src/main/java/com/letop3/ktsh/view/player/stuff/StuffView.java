@@ -31,17 +31,14 @@ public class StuffView {
 
     private void drawStuff(Stuff stuff) {
         addStuffImage(stuff.getMainG(), "/com/letop3/ktsh/images/item/mainGView.png", 0, -200, () -> {
-            System.out.println("Main Gauche cliqué");
             if (stuffClickListener != null) stuffClickListener.onMainGClick();
         });
 
         addStuffImage(stuff.getMainD(), "/com/letop3/ktsh/images/item/mainDView.png", 40, -200, () -> {
-            System.out.println("Main Droite cliqué");
             if (stuffClickListener != null) stuffClickListener.onMainDClick();
         });
 
         addStuffImage(stuff.getQuickSlot(), "/com/letop3/ktsh/images/item/quickSlot.png", 80, -200, () -> {
-            System.out.println("QuickSlot cliqué");
             if (stuffClickListener != null) stuffClickListener.onQuickSlotClick();
         });
 
@@ -51,7 +48,6 @@ public class StuffView {
                 imageView = createImageView(stuff.getInventaire().get(i).getIconPath(), 32, 32);
                 int finalI = i;
                 imageView.setOnMouseClicked(event -> {
-                    System.out.println("Stuff cliqué, nom : " + stuff.getInventaire().get(finalI).getNom());
                     if (stuffClickListener != null) stuffClickListener.onStuffClick(finalI);
                 });
             } else {
