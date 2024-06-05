@@ -2,7 +2,7 @@ package com.letop3.ktsh.model.entity.npc.action.textAction;
 
 import java.util.List;
 
-import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 
 public class AskAction extends TextAction {
@@ -32,7 +32,7 @@ public class AskAction extends TextAction {
 	}
 
 	@Override
-	public void execute(Entity target) {
+	public void execute(NPC target) {
 		
 	}
 }

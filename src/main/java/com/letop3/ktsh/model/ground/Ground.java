@@ -82,6 +82,22 @@ public class Ground {
 		return getChunk(chunkX, chunkY);
 	}
 
+	public int tileFromPosX(double x) {
+		return (int)(x / (Chunk.CHUNK_SIZE / 11));
+	}
+
+	public int tileFromPosY(double y) {
+		return (int)(y / (Chunk.CHUNK_SIZE / 11));
+	}
+
+	public double posXFromTile(int x) {
+		return x * (Chunk.CHUNK_SIZE / 11);
+	}
+
+	public double posYFromTile(int y) {
+		return y * (Chunk.CHUNK_SIZE / 11);
+	}
+
     public boolean canMoveTo(double x, double y) {
         // taille tuile
         int tileSize = Chunk.CHUNK_SIZE / 11; // divisé par 11 pcq chunk de 11*11

@@ -6,6 +6,7 @@ import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
+import com.letop3.ktsh.model.entity.npc.action.MoveAction;
 import com.letop3.ktsh.model.entity.npc.action.textAction.AskAction;
 import com.letop3.ktsh.model.entity.npc.action.textAction.SpeakAction;
 import com.letop3.ktsh.model.entity.player.Player;
@@ -22,9 +23,11 @@ public class Env {
         ground.setPlayer(player);
 
 		// Debug NPC with dialogue
+		Action endAction = new MoveAction(new Position(128, 480), null);
+
 		ArrayList<Action> responses = new ArrayList<>();
-		responses.add(new SpeakAction("Good to hear !", null));
-		responses.add(new SpeakAction("I'm sorry to hear that", null));
+		responses.add(new SpeakAction("Good to hear !", endAction));
+		responses.add(new SpeakAction("I'm sorry to hear that", endAction));
 		Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
 
         addEntity(new NPC(new Position(252, 512), ground, dialogue));

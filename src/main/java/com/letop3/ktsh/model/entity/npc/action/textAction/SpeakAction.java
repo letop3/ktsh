@@ -1,6 +1,6 @@
 package com.letop3.ktsh.model.entity.npc.action.textAction;
 
-import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 
 public class SpeakAction extends TextAction {
@@ -17,7 +17,7 @@ public class SpeakAction extends TextAction {
 	}
 
 	@Override
-	public void execute(Entity target) {
+	public void execute(NPC target) {
 		
 	}
 }
