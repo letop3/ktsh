@@ -1,6 +1,5 @@
 package com.letop3.ktsh.model.ground;
 
-import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;

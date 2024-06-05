@@ -8,16 +8,16 @@ import com.letop3.ktsh.model.ground.Ground;
 
 public class NPC extends Interractible {
     private NPCInterractListener interractListener;
-    private final Action action;
+    private final Action dialogue;
 
-    public NPC(Position position, Ground ground, Action action) {
+    public NPC(Position position, Ground ground, Action dialogue) {
         super(position, ground);
-        this.action = action;
+        this.dialogue = dialogue;
         interractListener = null;
     }
 
-    public Action getAction() {
-        return action;
+    public Action getDialogue() {
+        return dialogue;
     }
 
     public void setInterractListener(NPCInterractListener interractListener) {
@@ -26,7 +26,7 @@ public class NPC extends Interractible {
 
     @Override
     public boolean isInterractible(Player player) {
-        return super.isInterractible(player) && action != null;
+        return super.isInterractible(player) && dialogue != null;
     }
 
     @Override

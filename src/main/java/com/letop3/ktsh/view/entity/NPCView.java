@@ -32,7 +32,7 @@ public class NPCView extends EntityView {
 		this.interactLabel.setVisible(false);
 		spriteTarget.getChildren().add(interactLabel);
 
-		action = npc.getAction();
+		action = npc.getDialogue();
 		npc.setInterractListener(new NPCInterractListener() {
 			private final Scanner scanner = new Scanner(System.in);
 
@@ -54,7 +54,7 @@ public class NPCView extends EntityView {
 
 				action = action.getNextAction();
 				if (action == null) {
-					action = npc.getAction();
+					action = npc.getDialogue();
 				}
 			}
 		});

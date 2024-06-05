@@ -22,7 +22,8 @@ public class AskAction extends TextAction {
 	}
 
 	public void setSelection(int selection) {
-		this.selection = selection;
+		if (selection < 0 || selection >= options.length) this.selection = 0;
+		else this.selection = selection;
 	}
 
 	@Override
