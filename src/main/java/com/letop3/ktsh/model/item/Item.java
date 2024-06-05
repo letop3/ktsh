@@ -8,6 +8,8 @@ public abstract class Item {
     private String description;
     private int prix;
     private String iconPath;
+    private boolean isOnCD;
+    private long cooldown;
 
     public Item(int id, String nom, String description, int prix) {
         this.id = id;
@@ -47,4 +49,20 @@ public abstract class Item {
     }
 
     public abstract void action(Player player);
+
+    public boolean isOnCD() {
+        return isOnCD;
+    }
+
+    public void setOnCD(boolean onCD) {
+        isOnCD = onCD;
+    }
+
+    public long getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
 }
