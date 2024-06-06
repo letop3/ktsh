@@ -1,6 +1,5 @@
 package com.letop3.ktsh.model.item.consomable;
 
-import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.item.Item;
 
 public abstract class Consomable extends Item {

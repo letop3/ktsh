@@ -4,12 +4,11 @@ import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.item.Item;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
-import com.letop3.ktsh.model.item.artefact.Artefact;
 import com.letop3.ktsh.model.item.consomable.Consomable;
+import com.letop3.ktsh.model.item.artefact.Artefact;
 import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.Initializable;
 
@@ -39,16 +38,16 @@ public class StuffController implements Initializable, StuffClickListener {
         });
 
 //        // Test perte hp pour update bar hp
-//        Timer timer = new Timer();
-//        for (int i = 1; i <= 10; i++) {
-//            timer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    System.out.println("-1 hp");
-//                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-//                }
-//            }, i * 5000);
-//        }
+        Timer timer = new Timer();
+        for (int i = 1; i <= 10; i++) {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.out.println("-1 hp");
+                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
+                }
+            }, i * 5000);
+        }
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {
