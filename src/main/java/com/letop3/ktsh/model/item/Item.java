@@ -1,5 +1,6 @@
 package com.letop3.ktsh.model.item;
 
+import com.letop3.ktsh.controller.ActionListener;
 import com.letop3.ktsh.model.entity.player.Player;
 
 public abstract class Item {
@@ -10,6 +11,7 @@ public abstract class Item {
     private String iconPath;
     private boolean isOnCD;
     private long cooldown;
+    private ActionListener actionListener;
 
     public Item(int id, String nom, String description, int prix) {
         this.id = id;
@@ -64,5 +66,14 @@ public abstract class Item {
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public void setActionListener(ActionListener listener) {
+        this.actionListener = listener;
+    }
+
+    protected void notifyActionListener(){
+        System.out.println("notify");
+        actionListener.onActionCalled();
     }
 }

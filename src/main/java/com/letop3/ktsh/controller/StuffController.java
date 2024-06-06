@@ -20,10 +20,12 @@ import java.util.TimerTask;
 public class StuffController implements Initializable, StuffClickListener {
     private GameView view;
     private Env env;
+    private ItemController itemController;
 
-    public StuffController(GameView view, Env env) {
+    public StuffController(GameView view, Env env, ItemController itemController) {
         this.view = view;
         this.env = env;
+        this.itemController = itemController;
     }
 
     @Override
@@ -54,6 +56,7 @@ public class StuffController implements Initializable, StuffClickListener {
             @Override
             public void onChanged(Change<? extends Item> change) {
                 Platform.runLater(() -> view.getStuffView().updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
+                env.getPlayer().getStuff().getQuickSlot().setActionListener(itemController);
             }
         });
 

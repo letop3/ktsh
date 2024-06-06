@@ -16,6 +16,8 @@ public class BotteErmS extends Artefact{
     @Override
     public void action(Player player) {
         if (player.getDirection() != null && !isOnCD()) {
+            System.out.println("appel action ErmS");
+            notifyActionListener();
             player.getPosition().setX(player.getPosition().getX() + player.getDirection().getX() * 64);
             player.getPosition().setY(player.getPosition().getY() - player.getDirection().getY() * 64);
 

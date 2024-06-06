@@ -16,7 +16,6 @@ import com.letop3.ktsh.view.player.stuff.StuffView;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -33,15 +32,17 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
+    private ItemView itemView;
 
     private Position screenPosition;
 
     private Map<Entity, EntityView> entities;
 
-    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane, Pane entityPane) {
+    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane, Pane entityPane, Pane itemEffectPane) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
+        itemView = new ItemView(playerView, itemEffectPane);
 
         this.player = player;
 
@@ -97,6 +98,10 @@ public class GameView {
 
     public StuffView getStuffView() {
         return stuffView;
+    }
+
+    public ItemView getItemView(){
+        return itemView;
     }
 
     public void update() {

@@ -7,6 +7,7 @@ import com.letop3.ktsh.model.item.arme.Sword;
 import com.letop3.ktsh.model.item.artefact.Artefact;
 import com.letop3.ktsh.model.item.consomable.Consomable;
 import com.letop3.ktsh.view.GameView;
+import com.letop3.ktsh.view.ItemView;
 import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
@@ -23,9 +24,12 @@ import java.util.TimerTask;
 
 public class GameController implements Initializable {
 
+
     private Env env;
     private GameView view;
 
+    @FXML
+    public Pane itemEffectPane;
     @FXML
     public Pane slotPane;
     @FXML
@@ -43,16 +47,18 @@ public class GameController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane, slotPane, entityPane);
+        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane, slotPane, entityPane, itemEffectPane);
         this.view = gameView;
 
         //on s'occupe des controllers
         GameLoop gameLoopController = new GameLoop(env, gameGround, gameView);
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer(), gameView.getStuffView());
-        StuffController stuffController = new StuffController(view, env);
+        ItemController itemController = new ItemController(view, env);
+        StuffController stuffController = new StuffController(view, env, itemController);
 
         gameLoopController.initialize(location, resources);
         controlsController.initialize(location, resources);
         stuffController.initialize(location, resources);
+        itemController.initialize(location, resources);
     }
 }
