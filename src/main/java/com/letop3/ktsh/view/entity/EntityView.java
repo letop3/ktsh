@@ -22,11 +22,11 @@ public abstract class EntityView {
 
         entity = animationAdapter.getEntity();
 
-		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
+		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX() - (Chunk.CHUNK_SIZE / 22));
 		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY() - (Chunk.CHUNK_SIZE / 22));
 
 		ChangeListener<Number> xListener = (obs, old, nouv) -> {
-			spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
+			spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX() - (Chunk.CHUNK_SIZE / 22));
 		};
 		ChangeListener<Number> yListener = (obs, old, nouv) -> {
 			spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY() - (Chunk.CHUNK_SIZE / 22));
@@ -37,6 +37,10 @@ public abstract class EntityView {
         screenPosition.yProperty().addListener(yListener);
 		entity.getPosition().yProperty().addListener(yListener);
     }
+
+	public Entity getEntity() {
+		return entity;
+	}
 
     public void update() {
         sprite.setImage(animHandler.getFrame());

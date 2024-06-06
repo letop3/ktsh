@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.npc.action.MoveAction;
@@ -31,6 +32,9 @@ public class Env {
 		Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
 
         addEntity(new NPC(new Position(252, 512), ground, dialogue));
+
+		//Debug Mob
+		addEntity(new Mob(new Position(800, 480), player));
     }
 
     public void update() {

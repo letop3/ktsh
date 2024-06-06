@@ -38,6 +38,7 @@ public class Pathfinder {
 
     public void setTarget(Position target) {
         this.target = target;
+        currentDistance = Double.MAX_VALUE;
         targetX = ground.tileFromPosX(target.getX());
         targetY = ground.tileFromPosY(target.getY());
         calculateDistance();
@@ -48,6 +49,7 @@ public class Pathfinder {
     }
 
     private void calculateDistance() {
+        distancesMap.clear();
         distancesMap.put(targetX + "," + targetY, 0);
 
         PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
@@ -98,8 +100,6 @@ public class Pathfinder {
                 if (direction == null) direction = dirY;
                 else direction = direction.add(dirY);
             }
-
-            currentDistance = start.distance(target);
         }
         else {
             int minDistance = Integer.MAX_VALUE;
@@ -112,10 +112,11 @@ public class Pathfinder {
                 if (inRadius(newX, newY) && distance <= minDistance) {
                     minDistance = distance;
                     direction = dir;
-                    currentDistance = start.distance(target);
                 }
             }
         }
+        
+        currentDistance = start.distance(target);
 
         return direction;
     }
