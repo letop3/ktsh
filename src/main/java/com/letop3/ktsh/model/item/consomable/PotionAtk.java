@@ -19,7 +19,7 @@ public class PotionAtk extends Consomable {
         if (isOnCD()) {
             return;
         }
-
+        notifyActionListener();
         int baseAtk = player.getAtk();
         player.setAtk(baseAtk + 2);
 
@@ -31,6 +31,7 @@ public class PotionAtk extends Consomable {
             public void run() {
                 player.setAtk(baseAtk);
                 setOnCD(false);
+                System.out.println("fin buff atk");
             }
         }, getCooldown() * 1000);
     }

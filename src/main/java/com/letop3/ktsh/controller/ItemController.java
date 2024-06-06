@@ -2,6 +2,7 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
+import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.view.GameView;
 import javafx.fxml.Initializable;
 
@@ -25,7 +26,8 @@ public class ItemController implements Initializable, ActionListener {
     public void onActionCalled() {
         if (env.getPlayer().getStuff().getQuickSlot() instanceof BotteErmS) {
             view.getItemView().drawErmS();
-
+        } else if (env.getPlayer().getStuff().getQuickSlot() instanceof PotionAtk) {
+            view.getItemView().drawPotionAtk();
         }
     }
 }

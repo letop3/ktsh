@@ -13,6 +13,7 @@ import java.util.TimerTask;
 
 public class ItemView {
 
+    private Image potionAtkEffectImg;
     private Image ermsEffectImg;
     private PlayerView playerView;
     private Pane itemEffectPane;
@@ -21,6 +22,7 @@ public class ItemView {
         this.itemEffectPane = itemEffectPane;
         this.playerView = playerView;
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
+        this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
     }
 
     public void drawErmS(){
@@ -34,9 +36,27 @@ public class ItemView {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> itemEffectPane.getChildren().clear());
+                Platform.runLater(() -> itemEffectPane.getChildren().remove(ermsEffect));
             }
         }, 500);
     }
+
+    public void drawPotionAtk(){
+        System.out.println("draw effet");
+        double x = playerView.getScreenPlayerX().get();
+        double y = playerView.getScreenPlayerY().get();
+        ImageView potionAtkEffect = new ImageView(this.potionAtkEffectImg);
+        potionAtkEffect.setLayoutX(x - 16);
+        potionAtkEffect.setLayoutY(y - 16);
+        itemEffectPane.getChildren().add(potionAtkEffect);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> itemEffectPane.getChildren().remove(potionAtkEffect));
+            }
+        }, 15000);
+    }
+
 
 }
