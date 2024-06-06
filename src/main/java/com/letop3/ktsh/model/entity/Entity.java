@@ -24,34 +24,25 @@ public abstract class Entity implements Updatable {
         return direction;
     }
 
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
 
-	public Ground getGround() {
-		return ground;
-	}
+    public Ground getGround() {
+        return ground;
+    }
+
+    public double[] predictPosition(Direction direction) {
+        if (direction != null) {
+            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed);
+        }
+        return new double[] {position.getX(), position.getY()};
+    }
 
     public void update() {
-        if (direction != null) {
-            double newX = position.getX();
-            double newY = position.getY();
-
-            if (direction.isDiagonal()) {
-                double diagonalMove = Math.sqrt(0.5);
-                newX += direction.getX() * diagonalMove * speed;
-                newY -= direction.getY() * diagonalMove * speed;
-            }
-            else {
-                newX += direction.getX() * speed;
-                newY -= direction.getY() * speed;
-            }
-
-            if (ground.canMoveTo(newX, newY)) {
-                position.setX(newX);
-                position.setY(newY);
-            }
-        }
+        double[] newPos = predictPosition(direction);
+        position.setX(newPos[0]);
+        position.setY(newPos[1]);
     }
 
     public void addDirection(Direction direction) {

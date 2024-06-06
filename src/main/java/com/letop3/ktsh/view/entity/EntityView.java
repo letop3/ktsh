@@ -2,6 +2,7 @@ package com.letop3.ktsh.view.entity;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 
@@ -22,13 +23,13 @@ public abstract class EntityView {
         entity = animationAdapter.getEntity();
 
 		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
-		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY());
+		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY() - (Chunk.CHUNK_SIZE / 22));
 
 		ChangeListener<Number> xListener = (obs, old, nouv) -> {
 			spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX());
 		};
 		ChangeListener<Number> yListener = (obs, old, nouv) -> {
-			spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY());
+			spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY() - (Chunk.CHUNK_SIZE / 22));
 		};
 
         screenPosition.xProperty().addListener(xListener);

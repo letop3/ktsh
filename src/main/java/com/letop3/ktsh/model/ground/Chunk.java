@@ -1,6 +1,7 @@
 package com.letop3.ktsh.model.ground;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.letop3.ktsh.model.entity.Entity;
@@ -34,8 +35,15 @@ public class Chunk {
     }
 
     public void update() {
-        for (Entity entity : entities) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
             entity.update();
+            Chunk currentChunk = entity.getGround().getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY());
+            if (currentChunk != this) {
+                iterator.remove();
+                currentChunk.addEntity(entity);
+            }
         }
     }
 

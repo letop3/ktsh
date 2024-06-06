@@ -23,7 +23,7 @@ public class Env {
         ground.setPlayer(player);
 
 		// Debug NPC with dialogue
-		Action endAction = new MoveAction(new Position(128, 480), null);
+		Action endAction = new MoveAction(new Position(528, 480), null);
 
 		ArrayList<Action> responses = new ArrayList<>();
 		responses.add(new SpeakAction("Good to hear !", endAction));
@@ -42,19 +42,6 @@ public class Env {
     }
 
 	public void addEntity(Entity entity) {
-		entity.getPosition().xProperty().addListener((obs, old, nouv) -> {
-			if ((int)((double)old / Chunk.CHUNK_SIZE) != (int)((double)nouv / Chunk.CHUNK_SIZE)) {
-				ground.getChunkFromPos((double)old, entity.getPosition().getY()).removeEntity(entity);
-				ground.getChunkFromPos((double)nouv, entity.getPosition().getY()).addEntity(entity);
-			}
-		});
-		entity.getPosition().yProperty().addListener((obs, old, nouv) -> {
-			if ((int)((double)old / Chunk.CHUNK_SIZE) != (int)((double)nouv / Chunk.CHUNK_SIZE)) {
-				ground.getChunkFromPos(entity.getPosition().getX(), (double)old).removeEntity(entity);
-				ground.getChunkFromPos(entity.getPosition().getX(), (double)nouv).addEntity(entity);
-			}
-		});
-
 		ground.getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY()).addEntity(entity);
 	}
 

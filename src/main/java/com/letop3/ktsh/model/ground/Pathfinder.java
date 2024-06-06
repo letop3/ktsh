@@ -63,7 +63,7 @@ public class Pathfinder {
                 int newX = curX + direction.getX();
                 int newY = curY + direction.getY();
 
-                if (inRadius(newX, newY) && ground.canMoveTo(ground.posXFromTile(newX), ground.posYFromTile(newY))) {
+                if (inRadius(newX, newY) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY))) {
                     int newDistance = currentDistance + 1;
                     String newKey = newX + "," + newY;
 
@@ -109,8 +109,7 @@ public class Pathfinder {
                 int newY = startY - dir.getY();
 
                 int distance = distancesMap.getOrDefault(newX + "," + newY, Integer.MAX_VALUE);
-
-                if (inRadius(newX, newY) && distance < minDistance) {
+                if (inRadius(newX, newY) && distance <= minDistance) {
                     minDistance = distance;
                     direction = dir;
                     currentDistance = start.distance(target);
