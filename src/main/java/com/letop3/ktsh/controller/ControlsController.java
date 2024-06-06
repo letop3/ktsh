@@ -48,11 +48,12 @@ public class ControlsController implements Initializable {
     }
 
     private void keyPressed(KeyEvent event) {
-        switch (event.getCode()){
-            case KeyCode.A -> stuffView.toogleVisibility();
-            case KeyCode.SPACE -> player.useQuickSlot();
-            default -> player.addDirection(keyToDirection(event.getCode()));
-        }
+        if (event.getCode() == KeyPreference.INVENTORY)
+            stuffView.toogleVisibility();
+        else if (event.getCode() == KeyPreference.QUICK_SLOT)
+            player.useQuickSlot();
+        else
+            player.addDirection(keyToDirection(event.getCode()));
     }
 
     private void keyReleased(KeyEvent event) {

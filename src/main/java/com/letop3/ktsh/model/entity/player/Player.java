@@ -3,8 +3,8 @@ package com.letop3.ktsh.model.entity.player;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.ground.Ground;
-import com.letop3.ktsh.model.item.arme.Shield;
-import com.letop3.ktsh.model.item.arme.Sword;
+import com.letop3.ktsh.model.item.arme.*;
+import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.beans.property.BooleanProperty;
@@ -25,11 +25,12 @@ public class Player extends Entity {
         this.atk = 1;
         this.hp = new SimpleIntegerProperty(this.maxHp);
         this.stuff = new Stuff();
-        stuff.addItem(new Sword(1, "Sword Test", "Un test pour arme", 100));
-        stuff.addItem(new Sword(2, "Excalibur", "Un test pour arme", 100));
-        stuff.addItem(new Shield(1, "Shield Test", "Un test pour bouclier", 100));
+        stuff.addItem(new DulledSword(1, "Sword Test", "Un test pour arme", 100));
+        stuff.addItem(new Excaliba(2, "Excalibur", "Un test pour arme", 100));
+        stuff.addItem(new WornShield(1, "Shield Test", "Un test pour bouclier", 100));
         stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
         stuff.addItem(new PotionAtk(1, "Potion atk","test",100));
+        stuff.addItem(new BotteErmS(1,"Bottes Dash", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
     }
 
