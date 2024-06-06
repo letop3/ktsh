@@ -68,7 +68,7 @@ public class Pathfinder {
                     String newKey = newX + "," + newY;
 
                     if (newDistance < distancesMap.getOrDefault(newKey, Integer.MAX_VALUE)) {
-                        int heuristic = Math.abs(newX - newY) + Math.abs(targetX - targetY); // Manhattan distance
+                        int heuristic = Math.abs(newX - targetX) + Math.abs(newY - targetY); // Manhattan distance
                         distancesMap.put(newKey, newDistance);
                         queue.add(new int[] {newX, newY, newDistance + heuristic});
                     }
