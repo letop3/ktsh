@@ -21,6 +21,9 @@ public class MoveAction extends Action {
 
     @Override
     public void execute(NPC target) {
-        target.setPathfinder(new Pathfinder(position, target.getGround(), (int)(Chunk.CHUNK_SIZE / target.getPosition().distance(position))));
+		System.out.println(target.getGround().tileFromPosX(target.getPosition().getX()) + ", " + target.getGround().tileFromPosX(position.getX()));
+		System.out.println(target.getGround().tileFromPosY(target.getPosition().getY()) + ", " + target.getGround().tileFromPosY(position.getY()));
+
+        target.setPathfinder(new Pathfinder(position, target.getGround(), (int)(position.distance(target.getPosition()) / (Chunk.CHUNK_SIZE / 11))));
     }
 }

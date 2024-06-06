@@ -54,10 +54,7 @@ public class NPC extends Interractible {
         if (pathfinder != null) {
             Direction direction = pathfinder.directionToTarget(getPosition());
             setDirection(direction);
-            if (direction == null) {
-                pathfinder = null;
-                System.out.println(getPosition());
-            }
+            if (direction == null) pathfinder = null;
         }
     }
 }

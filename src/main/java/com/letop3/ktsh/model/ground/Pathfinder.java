@@ -13,15 +13,21 @@ public class Pathfinder {
     private Position target;
     private int radius;
 
+    private int targetX;
+    private int targetY;
+
     private Map<String, Integer> distancesMap;
     private double currentDistance;
 
     public Pathfinder(Position target, Ground ground, int radius) {
         this.target = target;
         this.ground = ground;
-        this.radius = radius + 100;
+        this.radius = radius;
         distancesMap = new HashMap<>();
         currentDistance = Double.MAX_VALUE;
+
+        targetX = ground.tileFromPosX(target.getX());
+        targetY = ground.tileFromPosY(target.getY());
 
         calculateDistance();
     }
@@ -32,39 +38,19 @@ public class Pathfinder {
 
     public void setTarget(Position target) {
         this.target = target;
+        targetX = ground.tileFromPosX(target.getX());
+        targetY = ground.tileFromPosY(target.getY());
         calculateDistance();
     }
 
-    private void initializeDistances() {
-        for (int y = -radius; y < radius; y++) {
-            for (int x = -radius; x < radius; x++) {
-                int tileX = ground.tileFromPosX(target.getX()) - x;
-                int tileY = ground.tileFromPosY(target.getY()) - y;
-
-                if (x != 0 || y != 0) {
-                    distancesMap.put(tileX + "," + tileY, Integer.MAX_VALUE);
-                }
-                else {
-                    distancesMap.put(tileX + "," + tileY, 0);
-                }
-            }
-        }
-    }
-
     private boolean inRadius(int x, int y) {
-        return Math.abs(ground.tileFromPosX(target.getX() - x)) <= radius && Math.abs(ground.tileFromPosY(target.getY() - y)) <= radius;
-    }
-
-    private int manhattanDistance(int x1, int y1, int x2, int y2) {
-        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
+        return Math.abs(targetX - x) <= radius && Math.abs(targetY - y) <= radius;
     }
 
     private void calculateDistance() {
-        initializeDistances();
+        distancesMap.put(targetX + "," + targetY, 0);
 
         PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
-        int targetX = ground.tileFromPosX(target.getX());
-        int targetY = ground.tileFromPosY(target.getY());
         queue.add(new int[] {targetX, targetY, 0});
 
         while (!queue.isEmpty()) {
@@ -82,7 +68,7 @@ public class Pathfinder {
                     String newKey = newX + "," + newY;
 
                     if (newDistance < distancesMap.getOrDefault(newKey, Integer.MAX_VALUE)) {
-                        int heuristic = manhattanDistance(newX, newY, targetX, targetY);
+                        int heuristic = Math.abs(newX - newY) + Math.abs(targetX - targetY); // Manhattan distance
                         distancesMap.put(newKey, newDistance);
                         queue.add(new int[] {newX, newY, newDistance + heuristic});
                     }
@@ -96,8 +82,6 @@ public class Pathfinder {
 
         int startX = ground.tileFromPosX(start.getX());
         int startY = ground.tileFromPosY(start.getY());
-        int targetX = ground.tileFromPosX(target.getX());
-        int targetY = ground.tileFromPosY(target.getY());
 
         Direction direction = null;
 
