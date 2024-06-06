@@ -73,7 +73,6 @@ public abstract class Item {
     }
 
     protected void notifyActionListener(){
-        System.out.println("notify");
         actionListener.onActionCalled();
     }
 }

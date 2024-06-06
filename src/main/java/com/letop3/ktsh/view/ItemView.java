@@ -42,7 +42,6 @@ public class ItemView {
     }
 
     public void drawPotionAtk(){
-        System.out.println("draw effet");
         double x = playerView.getScreenPlayerX().get();
         double y = playerView.getScreenPlayerY().get();
         ImageView potionAtkEffect = new ImageView(this.potionAtkEffectImg);
