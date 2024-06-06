@@ -1,22 +1,12 @@
 package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.entity.Entity;
-import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.ground.Ground;
-import com.letop3.ktsh.model.item.arme.*;
-import com.letop3.ktsh.model.item.artefact.BotteErmS;
-import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
-import com.letop3.ktsh.model.item.consomable.PotionAtk;
-import com.letop3.ktsh.model.item.arme.*;
-import com.letop3.ktsh.model.item.artefact.BotteErmS;
-import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.beans.property.BooleanProperty;
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
