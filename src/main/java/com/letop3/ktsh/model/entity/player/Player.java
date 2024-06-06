@@ -11,6 +11,9 @@ import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.Shield;
 import com.letop3.ktsh.model.item.arme.Sword;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
+import com.letop3.ktsh.model.item.arme.*;
+import com.letop3.ktsh.model.item.artefact.BotteErmS;
+import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.beans.property.BooleanProperty;
 
