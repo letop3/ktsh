@@ -1,6 +1,9 @@
 package com.letop3.ktsh.model.ground;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Position;
@@ -49,7 +52,7 @@ public class Pathfinder {
     }
 
     private boolean inRadius(int x, int y) {
-        return Math.abs(ground.tileFromPosX(target.getX()) - x) <= radius && Math.abs(ground.tileFromPosY(target.getY()) - y) <= radius;
+        return Math.abs(ground.tileFromPosX(target.getX() - x)) <= radius && Math.abs(ground.tileFromPosY(target.getY() - y)) <= radius;
     }
 
     private int manhattanDistance(int x1, int y1, int x2, int y2) {
