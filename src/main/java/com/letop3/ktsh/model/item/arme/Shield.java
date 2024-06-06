@@ -12,4 +12,3 @@ public abstract class Shield extends Item {
     public void action(Player player) {
 
     }
-}
