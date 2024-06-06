@@ -9,14 +9,11 @@ import com.letop3.ktsh.model.item.consomable.Consomable;
 import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.StuffClickListener;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class StuffController implements Initializable, StuffClickListener {
     private GameView view;

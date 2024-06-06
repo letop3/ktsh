@@ -32,8 +32,6 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
-    private Pane stuffPane;
-    private StuffClickListener stuffClickListener;
 
     private Position screenPosition;
 
