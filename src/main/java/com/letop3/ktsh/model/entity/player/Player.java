@@ -91,23 +91,18 @@ public class Player extends Entity {
     }
 
     @Override
-    public void update(Ground ground) {
-        if (!lock.get()){
-            super.update(ground);
-        }
-    }
-
-    @Override
     public void update() {
-        super.update();
+        if (!lock.get()){
+            super.update();
 
-        double minDistance = Double.MAX_VALUE;
-        for (Chunk chunks[] : ground.getChunks()) {
-            for (Chunk chunk : chunks) {
-                for (Entity entity : chunk.getEntities()) {
-                    if (entity instanceof Interractible && ((Interractible)entity).isInterractible(this) && entity.getPosition().distance(super.getPosition()) < minDistance) {
-                        minDistance = entity.getPosition().distance(super.getPosition());
-                        interractionTarget = (Interractible)entity;
+            double minDistance = Double.MAX_VALUE;
+            for (Chunk chunks[] : ground.getChunks()) {
+                for (Chunk chunk : chunks) {
+                    for (Entity entity : chunk.getEntities()) {
+                        if (entity instanceof Interractible && ((Interractible)entity).isInterractible(this) && entity.getPosition().distance(super.getPosition()) < minDistance) {
+                            minDistance = entity.getPosition().distance(super.getPosition());
+                            interractionTarget = (Interractible)entity;
+                        }
                     }
                 }
             }

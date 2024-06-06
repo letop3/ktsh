@@ -33,22 +33,10 @@ public class StuffController implements Initializable, StuffClickListener {
         view.getStuffView().setStuffClickListener(this);
 
         // ajout listener pour update hb bar
+        view.update();
         env.getPlayer().hpProperty().addListener((observable, oldValue, newValue) -> {
-            view.updateHpBar(env.getPlayer());
+            view.update();
         });
-        view.updateHpBar(env.getPlayer());
-
-        // Test perte hp pour update bar hp
-        Timer timer = new Timer();
-        for (int i = 1; i <= 10; i++) {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("-1 hp");
-                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                }
-            }, i * 5000);
-        }
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {

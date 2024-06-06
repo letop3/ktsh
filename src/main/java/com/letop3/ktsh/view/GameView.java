@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class GameView {
+    private Player player;
     private GroundView groundView;
     private PlayerView playerView;
     private StuffView stuffView;
@@ -42,6 +43,8 @@ public class GameView {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
+
+        this.player = player;
 
         screenPosition = new Position(Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getX(), Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getY());
 
@@ -97,7 +100,7 @@ public class GameView {
         return stuffView;
     }
 
-    public void updateHpBar(Player player) {
+    public void update() {
         int fullHearts = player.getHearts()[0];
         int halfHearts = player.getHearts()[1];
         int totalHearts = player.getHearts()[2];
@@ -111,6 +114,17 @@ public class GameView {
                 heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
             } else {
                 heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+            }
+        }
+
+        playerView.update();
+
+        for (Entity entity : groundView.getGround().getCurrentChunk().getEntities()) {
+            entities.get(entity).update();
+        }
+        for (Chunk chunk : groundView.getGround().getCurrentChunk().getNeighbors()) {
+            for (Entity entity : chunk.getEntities()) {
+                entities.get(entity).update();
             }
         }
     }
