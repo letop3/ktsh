@@ -53,6 +53,8 @@ public class ControlsController implements Initializable {
 			player.interract();
         else if (key == KeyPreference.INVENTORY)
             stuffView.toogleVisibility();
+        else if (key == KeyPreference.QUICK_SLOT)
+            player.useQuickSlot();
         else player.addDirection(keyToDirection(event.getCode()));
     }
 
