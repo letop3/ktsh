@@ -1,15 +1,26 @@
 package com.letop3.ktsh.view;
 
+import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Mob;
+import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
+import com.letop3.ktsh.view.entity.EntityView;
+import com.letop3.ktsh.view.entity.MobView;
+import com.letop3.ktsh.view.entity.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
 import com.letop3.ktsh.view.player.stuff.StuffView;
+
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class GameView {
@@ -20,22 +31,51 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
-    private Pane slotPane;
+    private Pane stuffPane;
+    private StuffClickListener stuffClickListener;
 
-    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane) {
+    private Position screenPosition;
+
+    private Map<Entity, EntityView> entities;
+
+    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane, Pane entityPane) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
+
+        screenPosition = new Position(Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getX(), Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getY());
 
         gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
         gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getY() % Chunk.CHUNK_SIZE);
 
         player.getPosition().xProperty().addListener((obs, old, nouv) -> {
             gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
+            screenPosition.setX(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
         player.getPosition().yProperty().addListener((obs, old, nouv) -> {
             gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
+            screenPosition.setY(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
+
+        this.entities = new HashMap<>();
+        for (Chunk chunks[] : ground.getChunks()) {
+            for (Chunk chunk : chunks) {
+                for (Entity entity : chunk.getEntities()) {
+                    Pane entityImageView = new Pane();
+                    entityPane.getChildren().add(entityImageView);
+
+                    EntityView entityView = null;
+                    if (entity instanceof NPC) {
+                        entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player);
+                    }
+					else if (entity instanceof Mob) {
+						entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
+					}
+
+                    if (entityView != null) entities.putIfAbsent(entity, entityView);
+                }
+            }
+        }
 
         this.heartCanvas = heartCanvas;
         this.fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/fullHeart.png")));

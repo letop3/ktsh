@@ -1,7 +1,7 @@
 package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
-import com.letop3.ktsh.view.player.PlayerView;
+import com.letop3.ktsh.view.GameView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.Initializable;
@@ -13,11 +13,11 @@ import java.util.ResourceBundle;
 
 public class GameLoop implements Initializable {
     private final Env env;
-    private final PlayerView playerView;
+    private final GameView gameView;
 
-    public GameLoop(Env env, TilePane gameGround, PlayerView playerView) {
+    public GameLoop(Env env, TilePane gameGround, GameView gameView) {
         this.env = env;
-        this.playerView = playerView;
+        this.gameView = gameView;
     }
 
     @Override
@@ -29,17 +29,11 @@ public class GameLoop implements Initializable {
         Duration duration = Duration.millis(1000.0 / 30); // 30 FPS
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
             env.update();
-            updateGame();
+			gameView.update();
         });
 
         Timeline timeline = new Timeline(keyFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
-    private void updateGame() {
-        playerView.update();
-    }
 }
-
-

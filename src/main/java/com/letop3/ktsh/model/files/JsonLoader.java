@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonLoader implements Closeable {
-    private final Map JSONDATA;
+    private final Map<?, ?> JSONDATA;
     private final File FILE;
 
     public JsonLoader(String filePath) throws IOException {

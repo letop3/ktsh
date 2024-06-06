@@ -16,7 +16,7 @@ public class Position {
      * @param x la coordonnée x
      * @param y la coordonnée y
      */
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         this.x = new SimpleDoubleProperty(x);
         this.y = new SimpleDoubleProperty(y);
     }
@@ -76,6 +76,15 @@ public class Position {
     }
 
     /**
+     * Retourne la distance entre la position actuel et la position passé en paramètre.
+     *
+     * @param position la deuxième position avec laquel le calcul est effectué
+     */
+    public double distance(Position position) {
+        return Math.sqrt(Math.pow(position.x.get() - x.get(), 2) + Math.pow(position.y.get() - y.get(), 2));
+    }
+
+    /**
      * Retourne une représentation stringn de la Position
      *
      * @return une représentation stringn de la Position
@@ -83,8 +92,8 @@ public class Position {
     @Override
     public String toString() {
         return "Position{" +
-                "x=" + x +
-                ", y=" + y +
+                "x=" + x.get() +
+                ", y=" + y.get() +
                 '}';
     }
 }

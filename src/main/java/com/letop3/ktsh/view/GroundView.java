@@ -55,4 +55,8 @@ public class GroundView {
             }
         }
     }
+
+    public Ground getGround() {
+        return ground;
+    }
 }

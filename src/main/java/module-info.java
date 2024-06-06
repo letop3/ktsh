@@ -1,5 +1,6 @@
 module com.letop3.ktsh {
     requires javafx.controls;
+	requires transitive javafx.graphics;
     requires javafx.fxml;
 
     requires org.controlsfx.controls;

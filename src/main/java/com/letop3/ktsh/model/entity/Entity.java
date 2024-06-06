@@ -6,12 +6,14 @@ import com.letop3.ktsh.model.Updatable;
 public abstract class Entity implements Updatable {
     private final static double speed = 2;
 
+    protected final Ground ground;
     private final Position position;
     private Direction direction;
 
-    public Entity(Position position) {
+    public Entity(Position position, Ground ground) {
         this.position = position;
         this.direction = null;
+        this.ground = ground;
     }
 
     public Position getPosition() {
@@ -22,26 +24,25 @@ public abstract class Entity implements Updatable {
         return direction;
     }
 
-    public void update(Ground ground) {
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public Ground getGround() {
+        return ground;
+    }
+
+    public double[] predictPosition(Direction direction) {
         if (direction != null) {
-            double newX = position.getX();
-            double newY = position.getY();
-
-            if (direction.isDiagonal()) {
-                double diagonalMove = Math.sqrt(0.5);
-                newX += direction.getX() * diagonalMove * speed;
-                newY -= direction.getY() * diagonalMove * speed;
-            }
-            else {
-                newX += direction.getX() * speed;
-                newY -= direction.getY() * speed;
-            }
-
-            if (ground.canMoveTo(newX, newY)) {
-                position.setX(newX);
-                position.setY(newY);
-            }
+            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed);
         }
+        return new double[] {position.getX(), position.getY()};
+    }
+
+    public void update() {
+        double[] newPos = predictPosition(direction);
+        position.setX(newPos[0]);
+        position.setY(newPos[1]);
     }
 
     public void addDirection(Direction direction) {
