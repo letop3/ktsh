@@ -10,12 +10,16 @@ import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
 import com.letop3.ktsh.view.entity.EntityView;
 import com.letop3.ktsh.view.entity.MobView;
-import com.letop3.ktsh.view.entity.NPCView;
+import com.letop3.ktsh.view.entity.NPC.DialogueView;
+import com.letop3.ktsh.view.entity.NPC.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
 import com.letop3.ktsh.view.player.stuff.StuffView;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -37,10 +41,21 @@ public class GameView {
 
     private Map<Entity, EntityView> entities;
 
-    public GameView(Player player, Ground ground, TilePane gameGround, Pane gamePlayer, Canvas heartCanvas, Pane stuffPane, Pane slotPane, Pane entityPane) {
+    public GameView(Player player,
+                    Ground ground,
+                    TilePane gameGround,
+                    Pane gamePlayer,
+                    Canvas heartCanvas,
+                    Pane stuffPane,
+                    Pane slotPane,
+                    Pane entityPane,
+                    HBox dialogueBox,
+                    Label dialogueText,
+                    ListView dialogueResponses) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
+        DialogueView dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
 
         this.player = player;
 
@@ -67,7 +82,7 @@ public class GameView {
 
                     EntityView entityView = null;
                     if (entity instanceof NPC) {
-                        entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player);
+                        entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player, dialogueView);
                     }
 					else if (entity instanceof Mob) {
 						entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);

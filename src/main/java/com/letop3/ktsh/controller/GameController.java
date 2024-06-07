@@ -5,6 +5,9 @@ import com.letop3.ktsh.view.GameView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -28,12 +31,29 @@ public class GameController implements Initializable {
     private TilePane gameGround;
     @FXML
     private Pane gamePlayer;
+    @FXML
+    private HBox dialogueBox;
+    @FXML
+    private Label dialogueText;
+    @FXML
+    private ListView dialogueResponses;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         env = new Env();
 
-        GameView gameView = new GameView(env.getPlayer(), env.getGround(), gameGround, gamePlayer, heartCanvas, stuffPane, slotPane, entityPane);
+        GameView gameView = new GameView(
+                env.getPlayer(),
+                env.getGround(),
+                gameGround,
+                gamePlayer,
+                heartCanvas,
+                stuffPane,
+                slotPane,
+                entityPane,
+                dialogueBox,
+                dialogueText,
+                dialogueResponses);
         this.view = gameView;
 
         //on s'occupe des controllers

@@ -1,4 +1,4 @@
-package com.letop3.ktsh.view.entity;
+package com.letop3.ktsh.view.entity.NPC;
 
 import java.util.Scanner;
 
@@ -11,6 +11,7 @@ import com.letop3.ktsh.model.entity.npc.action.textAction.TextAction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.animation.AnimationAdapter;
 
+import com.letop3.ktsh.view.entity.EntityView;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -21,7 +22,7 @@ public class NPCView extends EntityView {
 
 	private Action action;
 
-	public NPCView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition, NPC npc, Player player) {
+	public NPCView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition, NPC npc, Player player, DialogueView dialogueView) {
 		super(animationAdapter, spriteTarget, screenPosition);
 		this.npc = npc;
 		this.player = player;
@@ -34,19 +35,10 @@ public class NPCView extends EntityView {
 
 		action = npc.getDialogue();
 		npc.setInterractListener(new NPCInterractListener() {
-			private final Scanner scanner = new Scanner(System.in);
-
 			@Override
 			public void interract() {
 				if (action instanceof TextAction) {
-					System.out.println(((TextAction)action).getText());
-					if (action instanceof AskAction) {
-						String[] options = ((AskAction)action).getOptions();
-						for (int i = 0; i < options.length; i++) {
-							System.out.println((i + 1) + ": " + options[i]);
-						}
-						((AskAction)action).setSelection(scanner.nextInt() - 1);
-					}
+					dialogueView.show((TextAction)action);
 				}
 				else {
 					action.execute(npc);
@@ -54,6 +46,7 @@ public class NPCView extends EntityView {
 
 				action = action.getNextAction();
 				if (action == null) {
+					dialogueView.hide();
 					action = npc.getDialogue();
 				}
 			}
