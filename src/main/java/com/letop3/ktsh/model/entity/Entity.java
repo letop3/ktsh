@@ -9,15 +9,21 @@ public abstract class Entity implements Updatable {
     protected final Ground ground;
     private final Position position;
     private Direction direction;
+    private Direction lastDirection;
 
     public Entity(Position position, Ground ground) {
         this.position = position;
         this.direction = null;
         this.ground = ground;
+        this.lastDirection = Direction.SOUTH;
     }
 
     public Position getPosition() {
         return position;
+    }
+
+    public Direction getLastDirection() {
+        return lastDirection;
     }
 
     public Direction getDirection() {
@@ -43,6 +49,8 @@ public abstract class Entity implements Updatable {
         double[] newPos = predictPosition(direction);
         position.setX(newPos[0]);
         position.setY(newPos[1]);
+
+        if (direction != null) lastDirection = direction;
     }
 
     public void addDirection(Direction direction) {
