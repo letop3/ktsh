@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
+   <stylesheets>
+      <URL value="@css/mainMenu.css" />
+   </stylesheets>
    <children>
-      <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="imagePane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane fx:id="imagePane" prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-            </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+                  <ImageView fx:id="backgroundImage" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@images/menus/mainMenu/zelda-background.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor></ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="1000.0" maxWidth="1250.0" minHeight="300.0" minWidth="350.0" prefHeight="300.0" prefWidth="350.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
                      <children>
                         <Label text="Kill To Save Her" textAlignment="CENTER">
                            <font>
-                              <Font size="25.0" />
+                              <Font name="Dyuthi Regular" size="50.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="30.0" />
+                              <Insets bottom="10.0" />
                            </VBox.margin>
                         </Label>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#startGame" prefHeight="40.0" prefWidth="400.0" text="PLAY" textAlignment="CENTER">
+                        <Button alignment="CENTER" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#startGame" prefHeight="75.0" prefWidth="400.0" text="PLAY" textAlignment="CENTER" wrapText="true">
                            <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
+                              <Insets />
                            </VBox.margin>
+                           <font>
+                              <Font name="Dyuthi Regular" size="24.0" />
+                           </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="40.0" prefWidth="400.0" text="SETTINGS" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="10.0" layoutY="60.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="75.0" prefWidth="400.0" text="SETTINGS" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
+                              <Insets />
                            </VBox.margin>
+                           <font>
+                              <Font name="Dhurjati" size="24.0" />
+                           </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="105.0" mnemonicParsing="false" onAction="#showCredits" prefHeight="40.0" prefWidth="400.0" text="CREDITS" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="10.0" layoutY="105.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showCredits" prefHeight="75.0" prefWidth="400.0" text="CREDITS" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
+                              <Insets />
                            </VBox.margin>
+                           <font>
+                              <Font name="Dhurjati" size="24.0" />
+                           </font>
                         </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#showExit" prefHeight="40.0" prefWidth="400.0" text="EXIT" textAlignment="CENTER">
+                        <Button alignment="CENTER" layoutX="10.0" layoutY="145.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showExit" prefHeight="75.0" prefWidth="400.0" text="EXIT" textAlignment="CENTER">
                            <VBox.margin>
-                              <Insets bottom="5.0" top="5.0" />
+                              <Insets />
                            </VBox.margin>
+                           <font>
+                              <Font name="Dhurjati" size="24.0" />
+                           </font>
                         </Button>
                      </children>
                   </VBox>
@@ -55,19 +78,28 @@
                <children>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
                      <children>
-                        <Label text="EXIT ?" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="EXIT ?" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="20.0" />
+                              <Font name="Dyuthi Regular" size="36.0" />
                            </font></Label>
-                        <Label text="Do you really want to leave now?" textAlignment="CENTER">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="500.0" styleClass="with-border-bottom" text="Do you really want to leave now?" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font size="11.0" />
+                              <Font name="Dyuthi Regular" size="18.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="25.0" />
+                           </padding>
                         </Label>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#hideExit" prefHeight="25.0" prefWidth="130.0" text="Cancel" />
-                              <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="130.0" text="Exit" />
+                              <Button mnemonicParsing="false" onAction="#hideExit" prefHeight="25.0" prefWidth="130.0" styleClass="btn" text="Cancel" textFill="WHITE">
+                                 <font>
+                                    <Font name="Dyuthi Regular" size="18.0" />
+                                 </font></Button>
+                              <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="130.0" styleClass="btn" text="Exit" textFill="WHITE">
+                                 <font>
+                                    <Font name="Dyuthi Regular" size="18.0" />
+                                 </font></Button>
                            </children>
                         </HBox>
                      </children>

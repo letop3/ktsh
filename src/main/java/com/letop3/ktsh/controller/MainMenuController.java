@@ -6,23 +6,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    private AnchorPane imagePane, exitPopupPane;
+    private AnchorPane exitPopupPane;
+    @FXML
+    private StackPane imagePane;
     @FXML
     private ImageView backgroundImage;
     private MainMenuView menuView;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        backgroundImage.fitWidthProperty().bind(imagePane.widthProperty());
         backgroundImage.fitHeightProperty().bind(imagePane.heightProperty());
+        backgroundImage.fitWidthProperty().bind(imagePane.widthProperty());
         menuView = new MainMenuView();
-        menuView.playMusic("/home/x/IdeaProjects/ktshx/src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
+        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
     }
 
 

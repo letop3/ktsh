@@ -1,0 +1,23 @@
+.button {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-text-fill: #000000; /* Couleur du texte */
+    -fx-border-color: transparent; /* Couleur de la bordure */
+    -fx-transition: -fx-text-fill 0.3s; /* Transition pour la transformation et la couleur du texte */
+}
+
+.btn {
+    -fx-text-fill: #FFFFFF; /* Couleur du texte */
+}
+
+.with-border-bottom {
+    -fx-border-width: 0 0 2px 0; /* Bordure inférieure seulement */
+    -fx-border-color: transparent transparent white transparent; /* Bordure inférieure blanche */
+}
+
+.button:hover {
+    -fx-text-fill: #ff0000; /* Couleur du texte au survol */
+}
+
+.button:pressed {
+    -fx-text-fill: #0000ff; /* Couleur du texte au clic */
+}

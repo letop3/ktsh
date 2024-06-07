@@ -3,7 +3,6 @@ package com.letop3.ktsh.view;
 import javafx.animation.RotateTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,9 +18,13 @@ import java.util.Objects;
 import java.util.Random;
 
 public class LoadingView {
+    private final int MINMS = 25;
+    private final int MAXMS = 200;
+
     private ProgressBar progressBar;
     private Label messageLabel;
     private Circle loadingCircle;
+    private Random rand;
 
     private final List<String> messages = Arrays.asList(
             "Initialisation des paramètres...",
@@ -50,6 +53,7 @@ public class LoadingView {
         this.progressBar = progressBar;
         this.messageLabel = messageLabel;
         this.loadingCircle = loadingCircle;
+        this.rand = new Random();
     }
 
     public void startLoading() {
@@ -61,15 +65,15 @@ public class LoadingView {
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                Random random = new Random();
                 for (int i = 0; i <= 100; i++) {
-                    Thread.sleep(50); // Simule le temps de chargement
+                    Thread.sleep(rand.nextInt(MINMS, MAXMS)); // Simule le temps de chargement
                     updateProgress(i, 100);
                     if (i % 5 == 0) { // Change le message toutes les 5% de progression
-                        updateMessage(messages.get(random.nextInt(messages.size())));
+                        updateMessage(messages.get(rand.nextInt(messages.size())));
                     }
                 }
                 updateMessage("Chargement terminé !");
+                Thread.sleep(100);
                 Platform.runLater(() -> loadNewScene());
                 return null;
             }
