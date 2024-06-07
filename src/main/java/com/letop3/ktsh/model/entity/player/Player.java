@@ -1,10 +1,8 @@
 package com.letop3.ktsh.model.entity.player;
 
-import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
@@ -158,26 +156,24 @@ public class Player extends Entity {
 
                 switch (getLastDirection()) {
                     case NORTH:
-                        attackArea = new Rectangle(this.getPosition().getX(), this.getPosition().getY() - 32, 32, 32);
+                        attackArea = new Rectangle(this.getPosition().getX() - 8, this.getPosition().getY() - 24, 24, 48);
                         break;
                     case SOUTH:
-                        attackArea = new Rectangle(this.getPosition().getX(), this.getPosition().getY() + 32, 32, 32);
+                        attackArea = new Rectangle(this.getPosition().getX() - 8, this.getPosition().getY() + 32, 24, 48);
                         break;
                     case EAST:
-                        attackArea = new Rectangle(this.getPosition().getX() + 32, this.getPosition().getY(), 32, 32);
+                        attackArea = new Rectangle(this.getPosition().getX() + 30, this.getPosition().getY() - 8, 48, 24);
                         break;
                     case WEST:
-                        attackArea = new Rectangle(this.getPosition().getX() - 32, this.getPosition().getY(), 32, 32);
+                        attackArea = new Rectangle(this.getPosition().getX() - 20, this.getPosition().getY() - 28, 48, 24);
                         break;
                 }
 
-//        for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
-//            if (entity instanceof Ennemies && attackArea.intersects(entity.getBounds())) {
-//                ((Ennemies) entity).takeDamage(this.atk);
-//            }
-//        }
-//
-//          env.triggerAttackAnimation(this.getPosition(), getLastDirection());
+//                for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
+//                    if (entity instanceof Ennemies && attackArea.intersects(entity.getBounds())) {
+//                        ((Ennemies) entity).takeDamage(this.atk);
+//                    }
+//                }
             }
         }
     }

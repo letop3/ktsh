@@ -69,5 +69,7 @@ public abstract class Entity implements Updatable {
     public void takeDamage(int dmg) {
         this.hp.set(Math.max(this.hp.get() - dmg, 0));
     }
-
+    //TODO getBounds
+//    protected Bounds getBounds() {
+//    }
 }
