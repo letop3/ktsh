@@ -65,7 +65,6 @@ public class Pathfinder {
                 int newX = curX + direction.getX();
                 int newY = curY + direction.getY();
 
-
                 if (inRadius(newX, newY) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY)) &&
                     (direction.isDiagonal() && ground.isTileWalkable(ground.posXFromTile(curX), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(curY)))) {
                     int newDistance = currentDistance + 1;

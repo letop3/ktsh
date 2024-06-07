@@ -7,6 +7,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ground {
     public static final int MAP_WIDTH = 3, MAP_HEIGHT = 3;
@@ -51,6 +53,15 @@ public class Ground {
 
     public Chunk getCurrentChunk() {
         return chunks[currentChunkIdY.get()][currentChunkIdX.get()];
+    }
+
+    public List<Chunk> getCurrentChunks() {
+        List<Chunk> currentChunks = new ArrayList<>();
+        currentChunks.add(getCurrentChunk());
+        for (Chunk chunk : getCurrentChunk().getNeighbors()) {
+            currentChunks.add(chunk);
+        }
+        return currentChunks;
     }
 
     public int getCurrentChunkIdX() {
