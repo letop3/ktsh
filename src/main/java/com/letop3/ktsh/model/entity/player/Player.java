@@ -1,27 +1,34 @@
 package com.letop3.ktsh.model.entity.player;
 
+import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.shape.Rectangle;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Entity {
-    private IntegerProperty hp;
     private int maxHp;
     private Stuff stuff;
     private BooleanProperty lock;
     private int atk;
-
     private Interractible interractionTarget;
+    private PlayerListener pL;
+    private boolean attackOnCD = false;
 
     public Player(Position position, Ground ground) {
         super(position, ground);
@@ -34,9 +41,15 @@ public class Player extends Entity {
         stuff.addItem(new Excaliba(2, "Excalibur", "Un test pour arme", 100));
         stuff.addItem(new WornShield(1, "Shield Test", "Un test pour bouclier", 100));
         stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
-        stuff.addItem(new PotionAtk(1, "Potion atk","test",100));
-        stuff.addItem(new BotteErmS(1,"Bottes Dash", "Test", 100));
+        stuff.addItem(new PotionAtk(1, "Potion atk", "test", 100));
+        stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
+
+        this.pL = null;
+    }
+
+    public void setPL(PlayerListener pL) {
+        this.pL = pL;
     }
 
     public int getAtk() {
@@ -103,16 +116,16 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        if (!lock.get()){
+        if (!lock.get()) {
             super.update();
 
             double minDistance = Double.MAX_VALUE;
-            for (Chunk chunks[] : ground.getChunks()) {
+            for (Chunk chunks[] : getGround().getChunks()) {
                 for (Chunk chunk : chunks) {
                     for (Entity entity : chunk.getEntities()) {
-                        if (entity instanceof Interractible && ((Interractible)entity).isInterractible(this) && entity.getPosition().distance(super.getPosition()) < minDistance) {
+                        if (entity instanceof Interractible && ((Interractible) entity).isInterractible(this) && entity.getPosition().distance(super.getPosition()) < minDistance) {
                             minDistance = entity.getPosition().distance(super.getPosition());
-                            interractionTarget = (Interractible)entity;
+                            interractionTarget = (Interractible) entity;
                         }
                     }
                 }
@@ -125,5 +138,49 @@ public class Player extends Entity {
             this.stuff.getQuickSlot().action(this);
         }
     }
+
+    public void attack() {
+        if (!lock.get() && !attackOnCD) {
+            attackOnCD = true;
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> attackOnCD = false);
+                }
+            }, 400);
+
+            if (pL != null) {
+                pL.onAttack();
+
+                Rectangle attackArea = new Rectangle();
+
+                switch (getLastDirection()) {
+                    case NORTH:
+                        attackArea = new Rectangle(this.getPosition().getX(), this.getPosition().getY() - 32, 32, 32);
+                        break;
+                    case SOUTH:
+                        attackArea = new Rectangle(this.getPosition().getX(), this.getPosition().getY() + 32, 32, 32);
+                        break;
+                    case EAST:
+                        attackArea = new Rectangle(this.getPosition().getX() + 32, this.getPosition().getY(), 32, 32);
+                        break;
+                    case WEST:
+                        attackArea = new Rectangle(this.getPosition().getX() - 32, this.getPosition().getY(), 32, 32);
+                        break;
+                }
+
+//        for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
+//            if (entity instanceof Ennemies && attackArea.intersects(entity.getBounds())) {
+//                ((Ennemies) entity).takeDamage(this.atk);
+//            }
+//        }
+//
+//          env.triggerAttackAnimation(this.getPosition(), getLastDirection());
+            }
+        }
+    }
 }
+
 

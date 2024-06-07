@@ -2,11 +2,13 @@ package com.letop3.ktsh.model.entity;
 
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
+import javafx.beans.property.IntegerProperty;
+import javafx.geometry.Bounds;
 
 public abstract class Entity implements Updatable {
+    protected IntegerProperty hp;
     private final static double speed = 2;
-
-    protected final Ground ground;
+    private final Ground ground;
     private final Position position;
     private Direction direction;
     private Direction lastDirection;
@@ -63,4 +65,9 @@ public abstract class Entity implements Updatable {
             this.direction = this.direction.sub(direction);
         }
     }
+
+    public void takeDamage(int dmg) {
+        this.hp.set(Math.max(this.hp.get() - dmg, 0));
+    }
+
 }

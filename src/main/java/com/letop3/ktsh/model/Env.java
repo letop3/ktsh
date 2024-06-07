@@ -2,6 +2,7 @@ package com.letop3.ktsh.model;
 
 import java.util.ArrayList;
 
+import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
