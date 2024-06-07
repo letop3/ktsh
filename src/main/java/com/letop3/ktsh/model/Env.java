@@ -39,8 +39,7 @@ public class Env {
 
     public void update() {
         player.update();
-		ground.getCurrentChunk().update();
-        for (Chunk chunks : ground.getCurrentChunk().getNeighbors()) {
+        for (Chunk chunks : ground.getCurrentChunks()) {
             chunks.update();
         }
     }
