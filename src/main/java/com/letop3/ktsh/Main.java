@@ -1,5 +1,6 @@
 package com.letop3.ktsh;
 
+import com.letop3.ktsh.view.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,9 +17,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/gameGround.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/mainMenu.fxml")));
 
         Scene scene = new Scene(root);
+        SceneManager.getInstance().setMainScene(scene);
 
         primaryStage.setTitle("Kill To Save Her");
         primaryStage.setScene(scene);

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -47,6 +47,29 @@
                               <Insets bottom="5.0" top="5.0" />
                            </VBox.margin>
                         </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="exitPopupPane" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+                     <children>
+                        <Label text="EXIT ?" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font></Label>
+                        <Label text="Do you really want to leave now?" textAlignment="CENTER">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#hideExit" prefHeight="25.0" prefWidth="130.0" text="Cancel" />
+                              <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="130.0" text="Exit" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
