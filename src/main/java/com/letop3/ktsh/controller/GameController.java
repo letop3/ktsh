@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -32,7 +32,7 @@ public class GameController implements Initializable {
     @FXML
     private Pane gamePlayer;
     @FXML
-    private HBox dialogueBox;
+    private GridPane dialogueBox;
     @FXML
     private Label dialogueText;
     @FXML

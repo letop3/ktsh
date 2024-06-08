@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.GameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.GameController" stylesheets="@style.css">
    <top>
       <Label text="Kill To Save Her" translateZ="3.0" BorderPane.alignment="CENTER">
          <font>
@@ -17,7 +17,7 @@
         <StackPane maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" translateZ="-1.0" BorderPane.alignment="CENTER">
             <children>
                 <TilePane fx:id="gameGround" prefHeight="1056.0" prefWidth="1056.0" />
-				<Pane fx:id="entityPane" />
+                <Pane fx:id="entityPane" />
                 <Pane fx:id="gamePlayer" prefHeight="1056.0" prefWidth="1056.0" />
                 <Canvas fx:id="heartCanvas" height="1056.0" width="1056.0" />
                 <Pane fx:id="slotPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" />
@@ -25,12 +25,19 @@
             </children>
         </StackPane>
     </center>
-   <bottom>
-      <HBox fx:id="dialogueBox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="dialogueText" text="Label" />
-            <ListView fx:id="dialogueResponses" prefHeight="200.0" prefWidth="200.0" visible="false" />
-         </children>
-      </HBox>
-   </bottom>
+       <bottom>
+        <GridPane fx:id="dialogueBox" prefHeight="100.0" visible="false" BorderPane.alignment="CENTER" >
+            <children>
+                <Label fx:id="dialogueText" text="Text" alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <ListView fx:id="dialogueResponses" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            </children>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" prefWidth="200.0" />
+            </columnConstraints>
+        </GridPane>
+    </bottom>
 </BorderPane>

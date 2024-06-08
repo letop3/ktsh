@@ -4,14 +4,14 @@ import com.letop3.ktsh.model.entity.npc.action.textAction.AskAction;
 import com.letop3.ktsh.model.entity.npc.action.textAction.TextAction;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 
 public class DialogueView {
-    private HBox dialogueBox;
+    private GridPane dialogueBox;
     private Label dialogueText;
     private ListView<String> dialogueResponses;
 
-    public DialogueView(HBox dialogueBox, Label dialogueText, ListView<String> dialogueResponses) {
+    public DialogueView(GridPane dialogueBox, Label dialogueText, ListView<String> dialogueResponses) {
         this.dialogueBox = dialogueBox;
         this.dialogueText = dialogueText;
         this.dialogueResponses = dialogueResponses;

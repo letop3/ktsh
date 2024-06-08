@@ -1,0 +1,16 @@
+#dialogueBox {
+    -fx-background-color: black;
+}
+
+#dialogueText {
+	-fx-text-fill: white;
+	-fx-font-size: 16px;
+	-fx-alignment: center;
+}
+
+#dialogueResponses {
+	-fx-background-color: black;
+	-fx-text-fill: white;
+	-fx-font-size: 16px;
+	-fx-width: 20%;
+}

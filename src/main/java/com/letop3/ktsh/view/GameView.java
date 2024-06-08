@@ -19,7 +19,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -49,7 +49,7 @@ public class GameView {
                     Pane stuffPane,
                     Pane slotPane,
                     Pane entityPane,
-                    HBox dialogueBox,
+                    GridPane dialogueBox,
                     Label dialogueText,
                     ListView<String> dialogueResponses) {
         groundView = new GroundView(ground, gameGround, player);
