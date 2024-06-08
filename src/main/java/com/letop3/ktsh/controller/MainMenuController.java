@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    private AnchorPane exitPopupPane;
+    private AnchorPane exitPopupPane, creditsPopUpPane;
     @FXML
     private StackPane imagePane;
     @FXML
@@ -25,7 +25,7 @@ public class MainMenuController implements Initializable {
         backgroundImage.fitHeightProperty().bind(imagePane.heightProperty());
         backgroundImage.fitWidthProperty().bind(imagePane.widthProperty());
         menuView = new MainMenuView();
-        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
+        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu2.mp3");
     }
 
 
@@ -50,6 +50,13 @@ public class MainMenuController implements Initializable {
     @FXML
     public void showCredits() {
         System.out.println("Credits shown");
+        creditsPopUpPane.setVisible(true);
+    }
+
+    @FXML
+    public void hideCredits() {
+        System.out.println("Credits hidden");
+        creditsPopUpPane.setVisible(false);
     }
 
     @FXML
