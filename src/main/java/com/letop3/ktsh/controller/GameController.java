@@ -36,7 +36,7 @@ public class GameController implements Initializable {
     @FXML
     private Label dialogueText;
     @FXML
-    private ListView dialogueResponses;
+    private ListView<String> dialogueResponses;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -40,7 +40,7 @@ public class NPC extends Interractible {
 
     @Override
     public void interract() {
-        if (interractListener != null) interractListener.interract();
+        if (interractListener != null) interractListener.onInterract();
     }
 
     @Override

@@ -6,14 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
-import java.util.Scanner;
-
 public class DialogueView {
     private HBox dialogueBox;
     private Label dialogueText;
-    private ListView dialogueResponses;
+    private ListView<String> dialogueResponses;
 
-    public DialogueView(HBox dialogueBox, Label dialogueText, ListView dialogueResponses) {
+    public DialogueView(HBox dialogueBox, Label dialogueText, ListView<String> dialogueResponses) {
         this.dialogueBox = dialogueBox;
         this.dialogueText = dialogueText;
         this.dialogueResponses = dialogueResponses;

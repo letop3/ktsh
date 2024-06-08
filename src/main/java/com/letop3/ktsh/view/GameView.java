@@ -51,7 +51,7 @@ public class GameView {
                     Pane entityPane,
                     HBox dialogueBox,
                     Label dialogueText,
-                    ListView dialogueResponses) {
+                    ListView<String> dialogueResponses) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
