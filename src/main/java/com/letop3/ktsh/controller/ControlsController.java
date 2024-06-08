@@ -1,5 +1,6 @@
 package com.letop3.ktsh.controller;
 
+import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.Stuff;
@@ -19,11 +20,13 @@ public class ControlsController implements Initializable {
     private final TilePane gameGround;
     private static Player player;
     private StuffView stuffView;
+    private Env env;
 
-    public ControlsController(TilePane gameGround, Player player, StuffView stuffView) {
+    public ControlsController(TilePane gameGround, Player player, StuffView stuffView, Env env) {
         this.gameGround = gameGround;
         ControlsController.player = player;
         this.stuffView = stuffView;
+        this.env = env;
     }
 
     @Override
@@ -56,7 +59,7 @@ public class ControlsController implements Initializable {
         else if (key == KeyPreference.QUICK_SLOT)
             player.useQuickSlot();
         else if (key == KeyCode.P)
-            player.attack();
+            player.attack(env);
         else player.addDirection(keyToDirection(event.getCode()));
     }
 

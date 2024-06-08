@@ -1,8 +1,10 @@
 package com.letop3.ktsh.model.entity.player;
 
+import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
@@ -14,7 +16,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.shape.Rectangle;
+import javafx.geometry.Rectangle2D;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -131,13 +133,18 @@ public class Player extends Entity {
         }
     }
 
+    @Override
+    public Rectangle2D getHitbox() {
+        return null;
+    }
+
     public void useQuickSlot() {
         if (!lock.get() && this.stuff.getQuickSlot() != null) {
             this.stuff.getQuickSlot().action(this);
         }
     }
 
-    public void attack() {
+    public void attack(Env env) {
         if (!lock.get() && !attackOnCD) {
             attackOnCD = true;
 
@@ -152,28 +159,32 @@ public class Player extends Entity {
             if (pL != null) {
                 pL.onAttack();
 
-                Rectangle attackArea = new Rectangle();
+                Rectangle2D attackArea = null;
 
                 switch (getLastDirection()) {
                     case NORTH:
-                        attackArea = new Rectangle(this.getPosition().getX() - 8, this.getPosition().getY() - 24, 24, 48);
+                        attackArea = new Rectangle2D(this.getPosition().getX() - 8, this.getPosition().getY() - 24, 48, 24);
                         break;
                     case SOUTH:
-                        attackArea = new Rectangle(this.getPosition().getX() - 8, this.getPosition().getY() + 32, 24, 48);
+                        attackArea = new Rectangle2D(this.getPosition().getX() - 8, this.getPosition().getY() + 32, 48, 24);
                         break;
                     case EAST:
-                        attackArea = new Rectangle(this.getPosition().getX() + 30, this.getPosition().getY() - 8, 48, 24);
+                        attackArea = new Rectangle2D(this.getPosition().getX() + 30, this.getPosition().getY() - 8, 24, 48);
                         break;
                     case WEST:
-                        attackArea = new Rectangle(this.getPosition().getX() - 20, this.getPosition().getY() - 28, 48, 24);
+                        attackArea = new Rectangle2D(this.getPosition().getX() - 20, this.getPosition().getY() - 8, 24, 48);
                         break;
                 }
 
-//                for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
-//                    if (entity instanceof Ennemies && attackArea.intersects(entity.getBounds())) {
-//                        ((Ennemies) entity).takeDamage(this.atk);
-//                    }
-//                }
+                for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
+                    if (entity instanceof Ennemies) {
+                        assert attackArea != null;
+                        if (attackArea.intersects(entity.getHitbox())) {
+                            ((Ennemies) entity).takeDamage(this.atk);
+                            System.out.println("Mob HP : " + entity.getHp());
+                        }
+                    }
+                }
             }
         }
     }

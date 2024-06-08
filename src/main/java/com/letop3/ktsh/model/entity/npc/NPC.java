@@ -7,6 +7,7 @@ import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Pathfinder;
+import javafx.geometry.Rectangle2D;
 
 public class NPC extends Interractible {
     private NPCInterractListener interractListener;
@@ -56,5 +57,15 @@ public class NPC extends Interractible {
             setDirection(direction);
             if (direction == null) pathfinder = null;
         }
+    }
+
+    @Override
+    public Rectangle2D getHitbox() {
+        double x = getPosition().getX();
+        double y = getPosition().getY();
+        double width = 32;
+        double height = 32;
+
+        return new Rectangle2D(x, y, width, height);
     }
 }

@@ -52,7 +52,7 @@ public class GameController implements Initializable {
 
         //on s'occupe des controllers
         GameLoop gameLoopController = new GameLoop(env, gameGround, gameView);
-        ControlsController controlsController = new ControlsController(gameGround, env.getPlayer(), gameView.getStuffView());
+        ControlsController controlsController = new ControlsController(gameGround, env.getPlayer(), gameView.getStuffView(), env);
         ItemController itemController = new ItemController(view, env);
         StuffController stuffController = new StuffController(view, env, itemController);
 

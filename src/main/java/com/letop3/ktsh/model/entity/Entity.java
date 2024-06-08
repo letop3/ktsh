@@ -3,7 +3,7 @@ package com.letop3.ktsh.model.entity;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
 import javafx.beans.property.IntegerProperty;
-import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 
 public abstract class Entity implements Updatable {
     protected IntegerProperty hp;
@@ -69,7 +69,10 @@ public abstract class Entity implements Updatable {
     public void takeDamage(int dmg) {
         this.hp.set(Math.max(this.hp.get() - dmg, 0));
     }
-    //TODO getBounds
-//    protected Bounds getBounds() {
-//    }
+
+    public int getHp(){
+        return hp.get();
+    }
+
+    public abstract Rectangle2D getHitbox();
 }
