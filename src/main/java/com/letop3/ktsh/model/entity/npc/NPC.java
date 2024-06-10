@@ -58,14 +58,4 @@ public class NPC extends Interractible {
             if (direction == null) pathfinder = null;
         }
     }
-
-    @Override
-    public Rectangle2D getHitbox() {
-        double x = getPosition().getX();
-        double y = getPosition().getY();
-        double width = 32;
-        double height = 32;
-
-        return new Rectangle2D(x, y, width, height);
-    }
 }

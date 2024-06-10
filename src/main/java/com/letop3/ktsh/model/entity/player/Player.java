@@ -16,6 +16,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 
 import java.util.Timer;
@@ -133,11 +135,6 @@ public class Player extends Entity {
         }
     }
 
-    @Override
-    public Rectangle2D getHitbox() {
-        return null;
-    }
-
     public void useQuickSlot() {
         if (!lock.get() && this.stuff.getQuickSlot() != null) {
             this.stuff.getQuickSlot().action(this);
@@ -159,29 +156,29 @@ public class Player extends Entity {
             if (pL != null) {
                 pL.onAttack();
 
-                Rectangle2D attackArea = null;
+                Bounds attackArea = null;
 
                 switch (getLastDirection()) {
-                    case NORTH:
-                        attackArea = new Rectangle2D(this.getPosition().getX() - 8, this.getPosition().getY() - 24, 48, 24);
+                    case NORTH, NORTH_EAST, NORTH_WEST:
+                        attackArea = new BoundingBox(this.getPosition().getX() - 8, this.getPosition().getY() - 24, 48, 24);
                         break;
-                    case SOUTH:
-                        attackArea = new Rectangle2D(this.getPosition().getX() - 8, this.getPosition().getY() + 32, 48, 24);
+                    case SOUTH, SOUTH_EAST, SOUTH_WEST:
+                        attackArea = new BoundingBox(this.getPosition().getX() - 8, this.getPosition().getY() + 32, 48, 24);
                         break;
                     case EAST:
-                        attackArea = new Rectangle2D(this.getPosition().getX() + 30, this.getPosition().getY() - 8, 24, 48);
+                        attackArea = new BoundingBox(this.getPosition().getX() + 30, this.getPosition().getY() - 8, 24, 48);
                         break;
                     case WEST:
-                        attackArea = new Rectangle2D(this.getPosition().getX() - 20, this.getPosition().getY() - 8, 24, 48);
+                        attackArea = new BoundingBox(this.getPosition().getX() - 20, this.getPosition().getY() - 8, 24, 48);
                         break;
                 }
 
-                for (Entity entity : env.getGround().getCurrentChunk().getEntities()) {
-                    if (entity instanceof Ennemies) {
-                        assert attackArea != null;
-                        if (attackArea.intersects(entity.getHitbox())) {
-                            ((Ennemies) entity).takeDamage(this.atk);
-                            System.out.println("Mob HP : " + entity.getHp());
+                for (Chunk chunk : env.getGround().getCurrentChunks()) {
+                    for (Entity entity : chunk.getEntities()) {
+                        if (entity instanceof Ennemies) {
+                            if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
+                                ((Ennemies) entity).takeDamage(this.atk);
+                            }
                         }
                     }
                 }

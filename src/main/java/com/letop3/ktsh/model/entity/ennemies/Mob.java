@@ -10,14 +10,4 @@ public class Mob extends Ennemies {
 		super(position, player, 10);
 		this.hp = new SimpleIntegerProperty(3);
 	}
-
-	@Override
-	public Rectangle2D getHitbox() {
-		double x = getPosition().getX();
-		double y = getPosition().getY();
-		double width = 32;
-		double height = 32;
-
-		return new Rectangle2D(x, y, width, height);
-	}
 }

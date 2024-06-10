@@ -3,7 +3,8 @@ package com.letop3.ktsh.model.entity;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
 import javafx.beans.property.IntegerProperty;
-import javafx.geometry.Rectangle2D;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 
 public abstract class Entity implements Updatable {
     protected IntegerProperty hp;
@@ -13,11 +14,18 @@ public abstract class Entity implements Updatable {
     private Direction direction;
     private Direction lastDirection;
 
+    private double hitboxWidth, hitboxHeight;
+    private Bounds hitbox;
+
     public Entity(Position position, Ground ground) {
         this.position = position;
         this.direction = null;
         this.ground = ground;
         this.lastDirection = Direction.SOUTH;
+
+        this.hitboxWidth = 50.0;
+        this.hitboxHeight = 52.0;
+        this.hitbox = new BoundingBox(position.getX(), position.getY(), hitboxWidth, hitboxHeight);
     }
 
     public Position getPosition() {
@@ -52,7 +60,10 @@ public abstract class Entity implements Updatable {
         position.setX(newPos[0]);
         position.setY(newPos[1]);
 
-        if (direction != null) lastDirection = direction;
+        if (direction != null) {
+            lastDirection = direction;
+            hitbox = new BoundingBox(position.getX(), position.getY(), hitboxWidth, hitboxHeight);
+        }
     }
 
     public void addDirection(Direction direction) {
@@ -74,5 +85,12 @@ public abstract class Entity implements Updatable {
         return hp.get();
     }
 
-    public abstract Rectangle2D getHitbox();
+    public void setHitboxSize(double width, double height) {
+        hitboxWidth = width;
+        hitboxHeight = height;
+    }
+
+    public Bounds getHitbox() {
+        return hitbox;
+    }
 }
