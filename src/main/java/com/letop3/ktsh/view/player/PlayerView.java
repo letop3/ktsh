@@ -57,7 +57,7 @@ public class PlayerView {
         ImageView hitbox = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
         Timer timer = new Timer();
         switch (direction) {
-            case NORTH:
+            case NORTH, NORTH_EAST, NORTH_WEST:
                 gamePlayer.getChildren().add(hitbox);
                 hitbox.setFitHeight(24);
                 hitbox.setFitWidth(48);
@@ -70,7 +70,7 @@ public class PlayerView {
                     }
                 }, 150);
                 break;
-            case SOUTH:
+            case SOUTH, SOUTH_EAST, SOUTH_WEST:
                 gamePlayer.getChildren().add(hitbox);
                 hitbox.setFitHeight(24);
                 hitbox.setFitWidth(48);

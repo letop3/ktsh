@@ -1,5 +1,7 @@
 package com.letop3.ktsh.model.entity;
 
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
 import javafx.beans.property.IntegerProperty;
@@ -25,7 +27,7 @@ public abstract class Entity implements Updatable {
 
         this.hitboxWidth = 50.0;
         this.hitboxHeight = 52.0;
-        this.hitbox = new BoundingBox(position.getX(), position.getY(), hitboxWidth, hitboxHeight);
+        this.hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
     }
 
     public Position getPosition() {
@@ -50,7 +52,7 @@ public abstract class Entity implements Updatable {
 
     public double[] predictPosition(Direction direction) {
         if (direction != null) {
-            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed);
+            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed, this instanceof Player);
         }
         return new double[] {position.getX(), position.getY()};
     }
@@ -62,7 +64,7 @@ public abstract class Entity implements Updatable {
 
         if (direction != null) {
             lastDirection = direction;
-            hitbox = new BoundingBox(position.getX(), position.getY(), hitboxWidth, hitboxHeight);
+            hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
         }
     }
 

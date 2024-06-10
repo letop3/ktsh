@@ -178,6 +178,7 @@ public class Player extends Entity {
                         if (entity instanceof Ennemies) {
                             if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
                                 ((Ennemies) entity).takeDamage(this.atk);
+                                System.out.println(entity.getHp());
                             }
                         }
                     }

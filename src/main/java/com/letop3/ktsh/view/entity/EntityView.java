@@ -22,6 +22,7 @@ public abstract class EntityView {
 		spriteTarget.getChildren().add(sprite);
 
         entity = animationAdapter.getEntity();
+		entity.setHitboxSize(spriteTarget.getWidth(), spriteTarget.getHeight());
 
 		spriteTarget.setTranslateX(entity.getPosition().getX() + screenPosition.getX() - (Chunk.CHUNK_SIZE / 22));
 		spriteTarget.setTranslateY(entity.getPosition().getY() + screenPosition.getY() - (Chunk.CHUNK_SIZE / 22));
