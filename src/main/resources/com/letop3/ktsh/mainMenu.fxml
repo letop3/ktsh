@@ -6,149 +6,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
+<?import java.lang.Double?>
+<AnchorPane fx:id="root" prefHeight="539.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
    <stylesheets>
       <URL value="@css/mainMenu.css" />
    </stylesheets>
    <children>
-      <StackPane fx:id="imagePane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="mainPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <ImageView fx:id="backgroundImage">
+               <image>
+                  <Image url="@images/menus/mainMenu/bg.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </ImageView>
+            <VBox fx:id="mainMenu" alignment="CENTER">
+               <StackPane.margin>
+                  <Insets bottom="100.0" left="200.0" right="200.0" top="100.0" />
+               </StackPane.margin>
                <children>
-                  <ImageView fx:id="backgroundImage" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fx:id="logoImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/menus/mainMenu/zelda-background.png" />
+                        <Image url="@images/menus/mainMenu/logo.png" />
                      </image>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor></ImageView>
-               </children>
-            </AnchorPane>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
-               <children>
-                  <VBox alignment="CENTER" maxHeight="1000.0" maxWidth="1250.0" minHeight="300.0" minWidth="350.0" prefHeight="300.0" prefWidth="350.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
+                  </ImageView>
+                  <VBox fx:id="buttonVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label text="Kill To Save Her" textAlignment="CENTER">
-                           <font>
-                              <Font name="Dyuthi Regular" size="50.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Button alignment="CENTER" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#startGame" prefHeight="75.0" prefWidth="400.0" text="PLAY" textAlignment="CENTER" wrapText="true">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Dyuthi Regular" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="60.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="75.0" prefWidth="400.0" text="SETTINGS" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Dhurjati" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="105.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showCredits" prefHeight="75.0" prefWidth="400.0" text="CREDITS" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Dhurjati" size="24.0" />
-                           </font>
-                        </Button>
-                        <Button alignment="CENTER" layoutX="10.0" layoutY="145.0" maxHeight="250.0" maxWidth="1000.0" minHeight="20.0" minWidth="200.0" mnemonicParsing="false" onAction="#showExit" prefHeight="75.0" prefWidth="400.0" text="EXIT" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                           <font>
-                              <Font name="Dhurjati" size="24.0" />
-                           </font>
-                        </Button>
+                        <Button fx:id="button1" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="button2" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="button3" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="button4" mnemonicParsing="false" text="Button" />
                      </children>
                   </VBox>
                </children>
-            </AnchorPane>
-            <AnchorPane fx:id="exitPopupPane" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="EXIT ?" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="36.0" />
-                           </font></Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="500.0" styleClass="with-border-bottom" text="Do you really want to leave now?" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="18.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="25.0" />
-                           </padding>
-                        </Label>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#hideExit" prefHeight="25.0" prefWidth="130.0" styleClass="btn" text="Cancel" textFill="WHITE">
-                                 <font>
-                                    <Font name="Dyuthi Regular" size="18.0" />
-                                 </font></Button>
-                              <Button mnemonicParsing="false" onAction="#exitGame" prefHeight="25.0" prefWidth="130.0" styleClass="btn" text="Exit" textFill="WHITE">
-                                 <font>
-                                    <Font name="Dyuthi Regular" size="18.0" />
-                                 </font></Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="creditsPopUpPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="CREDITS" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="36.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="10.0" />
-                           </padding>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="500.0" text="Aimane Adhachour - Ai - Le Mangeur de Couscous" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="71.0" prefHeight="50.0" prefWidth="500.0" text="Ange Rollet - angerenage - Le Mangeur de Galettes" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="14.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="102.0" prefHeight="50.0" prefWidth="500.0" styleClass="with-border-bottom" text="Armand Agogué - aagogue - Le Mangeur d'Aligot" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="Dyuthi Regular" size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="25.0" />
-                           </padding>
-                        </Label>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Button mnemonicParsing="false" onAction="#hideCredits" prefHeight="25.0" prefWidth="130.0" styleClass="btn" text="Close" textFill="WHITE">
-                                 <font>
-                                    <Font name="Dyuthi Regular" size="18.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </children>
-            </AnchorPane>
+            </VBox>
          </children>
       </StackPane>
    </children>
