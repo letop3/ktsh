@@ -52,7 +52,7 @@ public abstract class Entity implements Updatable {
 
     public double[] predictPosition(Direction direction) {
         if (direction != null) {
-            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed, this instanceof Player);
+            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed, this);
         }
         return new double[] {position.getX(), position.getY()};
     }

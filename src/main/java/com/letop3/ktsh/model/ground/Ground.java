@@ -161,7 +161,7 @@ public class Ground {
         return tileValue != 1 && tileValue != 2;
     }
 
-    public double[] getFinalPositionAfterCollision(double startX, double startY, Direction direction, double speed, boolean b) {
+    public double[] getFinalPositionAfterCollision(double startX, double startY, Direction direction, double speed, Entity e) {
         double diagonalMove = direction.isDiagonal() ? Math.sqrt(0.5) : 1;
         double stepX = direction.getX() * diagonalMove * speed;
         double stepY = direction.getY() * diagonalMove * speed;
@@ -169,14 +169,24 @@ public class Ground {
         boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY);
         boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY);
         
-        Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
-        for (Chunk chunk : this.getCurrentChunks()) {
-            for (Entity entity : chunk.getEntities()) {
-                Position pos = entity.getPosition();
-                if (entity.getHitbox().intersects(hitbox)) {
-                    if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
-                    if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
+
+        if (e instanceof Player) {
+            Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
+            for (Chunk chunk : this.getCurrentChunks()) {
+                for (Entity entity : chunk.getEntities()) {
+                    Position pos = entity.getPosition();
+                    if (entity.getHitbox().intersects(hitbox)) {
+                        if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
+                        if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
+                    }
                 }
+            }
+        }
+        else {
+            Bounds hitbox = new BoundingBox(player.getPosition().getX(), player.getPosition().getY(), player.getHitbox().getWidth(), player.getHitbox().getHeight());
+            if (e.getHitbox().intersects(hitbox)) {
+                if (passX) passX = Math.abs(player.getPosition().getX() - startX) < Math.abs(player.getPosition().getX() - (startX + stepX));
+                if (passY) passY = Math.abs(player.getPosition().getY() - startY) < Math.abs(player.getPosition().getY() - (startY - stepY));
             }
         }
 
