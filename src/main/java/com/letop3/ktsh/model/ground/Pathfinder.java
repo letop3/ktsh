@@ -11,18 +11,17 @@ import com.letop3.ktsh.model.entity.Position;
 public class Pathfinder {
     private final Ground ground;
     private Position target;
-    private int radius;
+    private final int radius;
 
-    private int targetX;
-    private int targetY;
+    private int targetX, targetY;
 
-    private Map<String, Integer> distancesMap;
+    private final Map<String, Integer> distancesMap;
     private double currentDistance;
 
     public Pathfinder(Position target, Ground ground, int radius) {
         this.target = target;
         this.ground = ground;
-        this.radius = radius;
+        this.radius = radius * 2 + 10;
         distancesMap = new HashMap<>();
         currentDistance = Double.MAX_VALUE;
 
@@ -48,6 +47,10 @@ public class Pathfinder {
         return Math.abs(targetX - x) <= radius && Math.abs(targetY - y) <= radius;
     }
 
+    public boolean isArrived() {
+        return currentDistance <= 2;
+    }
+
     private void calculateDistance() {
         distancesMap.clear();
         distancesMap.put(targetX + "," + targetY, 0);
@@ -63,12 +66,13 @@ public class Pathfinder {
 
             for (Direction direction : Direction.values()) {
                 int newX = curX + direction.getX();
-                int newY = curY + direction.getY();
+                int newY = curY - direction.getY();
 
                 if (inRadius(newX, newY) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY)) &&
-                    (direction.isDiagonal() && ground.isTileWalkable(ground.posXFromTile(curX), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(curY)))) {
+                        (direction.isDiagonal() && ground.isTileWalkable(ground.posXFromTile(curX), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(curY)))) {
                     int newDistance = currentDistance + 1;
                     String newKey = newX + "," + newY;
+                    System.out.println("exploring " + newKey + " : " + newDistance);
 
                     if (newDistance < distancesMap.getOrDefault(newKey, Integer.MAX_VALUE)) {
                         int heuristic = Math.abs(newX - targetX) + Math.abs(newY - targetY); // Manhattan distance
@@ -81,16 +85,14 @@ public class Pathfinder {
     }
 
     public Direction directionToTarget(Position start) {
-        if (currentDistance < start.distance(target)) return null;
-
         int startX = ground.tileFromPosX(start.getX());
         int startY = ground.tileFromPosY(start.getY());
 
         Direction direction = null;
 
         if (startX == targetX && startY == targetY) {
-            double deltaX = target.getX() - start.getX();
-            double deltaY = target.getY() - start.getY();
+            double deltaX = Math.abs(target.getX() - start.getX());
+            double deltaY = Math.abs(target.getY() - start.getY());
 
             if (Math.abs(deltaX) > 2) {
                 direction = deltaX > 0 ? Direction.EAST : Direction.WEST;
@@ -110,13 +112,15 @@ public class Pathfinder {
                 int newY = startY - dir.getY();
 
                 int distance = distancesMap.getOrDefault(newX + "," + newY, Integer.MAX_VALUE);
+                //System.out.println(direction + " : " + distance);
+
                 if (inRadius(newX, newY) && distance <= minDistance) {
                     minDistance = distance;
                     direction = dir;
                 }
             }
         }
-        
+
         currentDistance = start.distance(target);
 
         return direction;
