@@ -113,11 +113,11 @@ public class GameView {
 
         for (int i = 0; i < totalHearts; i++) {
             if (i < fullHearts) {
-                heartCanvas.getGraphicsContext2D().drawImage(fullHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(fullHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             } else if (i == fullHearts && halfHearts == 1) {
-                heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             } else {
-                heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             }
         }
 

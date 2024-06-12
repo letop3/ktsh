@@ -168,7 +168,7 @@ public class Ground {
 
         boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY);
         boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY);
-        
+
 
         if (e instanceof Player) {
             Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
