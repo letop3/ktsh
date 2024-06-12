@@ -7,15 +7,14 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.lang.Double?>
-<AnchorPane fx:id="root" prefHeight="539.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
+<AnchorPane fx:id="rootPane" prefHeight="539.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.MainMenuController">
    <stylesheets>
       <URL value="@css/mainMenu.css" />
    </stylesheets>
    <children>
       <StackPane fx:id="mainPane" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="backgroundImage">
+            <ImageView fx:id="backgroundImageView">
                <image>
                   <Image url="@images/menus/mainMenu/bg.png" />
                </image>
@@ -23,22 +22,37 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <VBox fx:id="mainMenu" alignment="CENTER">
+            <VBox fx:id="mainMenuVBox" alignment="CENTER">
                <StackPane.margin>
-                  <Insets bottom="100.0" left="200.0" right="200.0" top="100.0" />
+                  <Insets bottom="100.0" left="200.0" right="200.0" top="150.0" />
                </StackPane.margin>
                <children>
-                  <ImageView fx:id="logoImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="logoImageView" fitHeight="100.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0">
                      <image>
                         <Image url="@images/menus/mainMenu/logo.png" />
                      </image>
+                     <VBox.margin>
+                        <Insets bottom="100.0" />
+                     </VBox.margin>
                   </ImageView>
-                  <VBox fx:id="buttonVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox fx:id="buttonContainerVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button fx:id="button1" mnemonicParsing="false" text="Button" />
-                        <Button fx:id="button2" mnemonicParsing="false" text="Button" />
-                        <Button fx:id="button3" mnemonicParsing="false" text="Button" />
-                        <Button fx:id="button4" mnemonicParsing="false" text="Button" />
+                        <Button fx:id="startGameButton" mnemonicParsing="false" onAction="#startGame" text="Start Game">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="settingsButton" mnemonicParsing="false" onAction="#showSettings" text="Settings">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="creditsButton" mnemonicParsing="false" onAction="#showCredits" text="Credits">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></Button>
+                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#showExit" text="Exit">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin></Button>
                      </children>
                   </VBox>
                </children>

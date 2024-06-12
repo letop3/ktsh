@@ -15,44 +15,44 @@ import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    private AnchorPane exitPopupPane, creditsPopUpPane;
+    private AnchorPane exitPopupPane, creditsPopupPane;
     @FXML
-    private VBox mainMenu;
+    private VBox mainMenuVBox;
     @FXML
     private StackPane mainPane;
     @FXML
-    private ImageView backgroundImage;
+    private ImageView backgroundImageView;
     private MainMenuView menuView;
     @FXML
     private ImageView logoImageView;
     @FXML
-    private VBox buttonVBox;
+    private VBox buttonContainerVBox;
     @FXML
-    private Button button1, button2, button3, button4;
+    private Button startGameButton, settingsButton, creditsButton, exitButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Lier la taille de l'image de fond
-        backgroundImage.fitWidthProperty().bind(mainPane.widthProperty());
-        backgroundImage.fitHeightProperty().bind(mainPane.heightProperty());
+        backgroundImageView.fitWidthProperty().bind(mainPane.widthProperty());
+        backgroundImageView.fitHeightProperty().bind(mainPane.heightProperty());
 
         // Lier la taille de l'image du logo
         logoImageView.fitWidthProperty().bind(mainPane.widthProperty().multiply(0.2));
         logoImageView.fitHeightProperty().bind(mainPane.heightProperty().multiply(0.2));
 
         // Lier la VBox interne à la taille du mainPane
-        buttonVBox.prefWidthProperty().bind(mainPane.widthProperty().multiply(0.5));
-        buttonVBox.prefHeightProperty().bind(mainPane.heightProperty().multiply(0.4));
+        buttonContainerVBox.prefWidthProperty().bind(mainPane.widthProperty().multiply(0.5));
+        buttonContainerVBox.prefHeightProperty().bind(mainPane.heightProperty().multiply(0.4));
 
         // Lier la taille des boutons
-        button1.prefWidthProperty().bind(buttonVBox.prefWidthProperty().multiply(0.8));
-        button1.prefHeightProperty().bind(buttonVBox.prefHeightProperty().multiply(0.2));
-        button2.prefWidthProperty().bind(buttonVBox.prefWidthProperty().multiply(0.8));
-        button2.prefHeightProperty().bind(buttonVBox.prefHeightProperty().multiply(0.2));
-        button3.prefWidthProperty().bind(buttonVBox.prefWidthProperty().multiply(0.8));
-        button3.prefHeightProperty().bind(buttonVBox.prefHeightProperty().multiply(0.2));
-        button4.prefWidthProperty().bind(buttonVBox.prefWidthProperty().multiply(0.8));
-        button4.prefHeightProperty().bind(buttonVBox.prefHeightProperty().multiply(0.2));
+        startGameButton.prefWidthProperty().bind(buttonContainerVBox.prefWidthProperty().multiply(0.8));
+        startGameButton.prefHeightProperty().bind(buttonContainerVBox.prefHeightProperty().multiply(0.2));
+        settingsButton.prefWidthProperty().bind(buttonContainerVBox.prefWidthProperty().multiply(0.8));
+        settingsButton.prefHeightProperty().bind(buttonContainerVBox.prefHeightProperty().multiply(0.2));
+        creditsButton.prefWidthProperty().bind(buttonContainerVBox.prefWidthProperty().multiply(0.8));
+        creditsButton.prefHeightProperty().bind(buttonContainerVBox.prefHeightProperty().multiply(0.2));
+        exitButton.prefWidthProperty().bind(buttonContainerVBox.prefWidthProperty().multiply(0.8));
+        exitButton.prefHeightProperty().bind(buttonContainerVBox.prefHeightProperty().multiply(0.2));
 
         menuView = new MainMenuView();
         menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
@@ -67,7 +67,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void showExit() {
-        System.out.println("Game exited");
+        System.out.println("Exit popup shown");
         exitPopupPane.setVisible(true);
     }
 
@@ -79,18 +79,18 @@ public class MainMenuController implements Initializable {
     @FXML
     public void showCredits() {
         System.out.println("Credits shown");
-        creditsPopUpPane.setVisible(true);
+        creditsPopupPane.setVisible(true);
     }
 
     @FXML
     public void hideCredits() {
         System.out.println("Credits hidden");
-        creditsPopUpPane.setVisible(false);
+        creditsPopupPane.setVisible(false);
     }
 
     @FXML
     public void hideExit() {
-        System.out.println("Exit hidden");
+        System.out.println("Exit popup hidden");
         exitPopupPane.setVisible(false);
     }
 
