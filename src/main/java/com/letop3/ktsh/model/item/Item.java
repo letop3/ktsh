@@ -75,4 +75,8 @@ public abstract class Item {
     protected void notifyActionListener(){
         actionListener.onActionCalled();
     }
+
+    public int getAtk() {
+        return 0;
+    }
 }

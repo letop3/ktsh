@@ -56,7 +56,8 @@ public class StuffController implements Initializable, StuffClickListener {
             @Override
             public void onChanged(Change<? extends Item> change) {
                 Platform.runLater(() -> view.getStuffView().updateStuff(env.getPlayer().getStuff())); //Platform.runLater fait tourner sur le meme thread de l'app javafx
-                env.getPlayer().getStuff().getQuickSlot().setActionListener(itemController);
+                if (env.getPlayer().getStuff().getQuickSlot() != null)
+                    env.getPlayer().getStuff().getQuickSlot().setActionListener(itemController);
             }
         });
 

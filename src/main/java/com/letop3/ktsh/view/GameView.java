@@ -54,7 +54,7 @@ public class GameView {
                     Label dialogueText,
                     ListView<String> dialogueResponses, Pane itemEffectPane) {
         groundView = new GroundView(ground, gameGround, player);
-        playerView = new PlayerView(player, gamePlayer);
+        playerView = new PlayerView(player, gamePlayer, this);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
         itemView = new ItemView(playerView, itemEffectPane);
         DialogueView dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
@@ -146,5 +146,9 @@ public class GameView {
                 entities.get(entity).update();
             }
         }
+    }
+
+    public Map<Entity, EntityView> getEntities() {
+        return entities;
     }
 }

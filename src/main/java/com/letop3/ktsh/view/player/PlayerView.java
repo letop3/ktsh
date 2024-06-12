@@ -1,17 +1,15 @@
 package com.letop3.ktsh.view.player;
 
-import com.letop3.ktsh.model.entity.Direction;
-import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.PlayerListener;
+import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -21,10 +19,12 @@ public class PlayerView {
     private final ImageView playerImageView;
     private final AnimationHandler animHandler;
     private Pane gamePlayer;
+    private GameView gameView;
 
-    public PlayerView(Player player, Pane gamePlayer) {
+    public PlayerView(Player player, Pane gamePlayer, GameView gameView) {
         animHandler = new AnimationHandler(new PlayerAnimationAdapter(player));
         this.gamePlayer = gamePlayer;
+        this.gameView = gameView;
 
         this.playerImageView = new ImageView(animHandler.getFrame());
 
@@ -36,7 +36,7 @@ public class PlayerView {
         player.setPL(new PlayerListener() {
             @Override
             public void onAttack() {
-                triggerAttackAnimation(player.getPosition(), player.getLastDirection());
+                triggerAttackAnimation(player);
             }
         });
 
@@ -60,65 +60,84 @@ public class PlayerView {
         return playerImageView.layoutYProperty();
     }
 
-    public void triggerAttackAnimation(Position position, Direction direction) {
-        ImageView hitbox = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
+    public void triggerAttackAnimation(Player player) {
+        ImageView hitboxAtk = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
         Timer timer = new Timer();
-        switch (direction) {
+        switch (player.getLastDirection()) {
             case NORTH, NORTH_EAST, NORTH_WEST:
-                gamePlayer.getChildren().add(hitbox);
-                hitbox.setFitHeight(24);
-                hitbox.setFitWidth(48);
-                hitbox.setX(getScreenPlayerX().get() - 8);
-                hitbox.setY(getScreenPlayerY().get() - 24);
+                gamePlayer.getChildren().add(hitboxAtk);
+                hitboxAtk.setFitHeight(24);
+                hitboxAtk.setFitWidth(48);
+                hitboxAtk.setX(getScreenPlayerX().get() - 8);
+                hitboxAtk.setY(getScreenPlayerY().get() - 24);
+
+                dmgToEntity(player, hitboxAtk);
+
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitbox));
+                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitboxAtk));
                     }
                 }, 150);
                 break;
             case SOUTH, SOUTH_EAST, SOUTH_WEST:
-                gamePlayer.getChildren().add(hitbox);
-                hitbox.setFitHeight(24);
-                hitbox.setFitWidth(48);
-                hitbox.setX(getScreenPlayerX().get() - 8);
-                hitbox.setY(getScreenPlayerY().get() + 32);
+                gamePlayer.getChildren().add(hitboxAtk);
+                hitboxAtk.setFitHeight(24);
+                hitboxAtk.setFitWidth(48);
+                hitboxAtk.setX(getScreenPlayerX().get() - 8);
+                hitboxAtk.setY(getScreenPlayerY().get() + 32);
+
+                dmgToEntity(player, hitboxAtk);
 
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitbox));
+                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitboxAtk));
                     }
                 }, 150);
                 break;
             case EAST:
-                gamePlayer.getChildren().add(hitbox);
-                hitbox.setFitHeight(48);
-                hitbox.setFitWidth(24);
-                hitbox.setX(getScreenPlayerX().get() + 30);
-                hitbox.setY(getScreenPlayerY().get() - 8);
+                gamePlayer.getChildren().add(hitboxAtk);
+                hitboxAtk.setFitHeight(48);
+                hitboxAtk.setFitWidth(24);
+                hitboxAtk.setX(getScreenPlayerX().get() + 30);
+                hitboxAtk.setY(getScreenPlayerY().get() - 8);
+
+                dmgToEntity(player, hitboxAtk);
 
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitbox));
+                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitboxAtk));
                     }
                 }, 150);
                 break;
             case WEST:
-                gamePlayer.getChildren().add(hitbox);
-                hitbox.setFitHeight(48);
-                hitbox.setFitWidth(24);
-                hitbox.setX(getScreenPlayerX().get() - 20);
-                hitbox.setY(getScreenPlayerY().get() - 8);
+                gamePlayer.getChildren().add(hitboxAtk);
+                hitboxAtk.setFitHeight(48);
+                hitboxAtk.setFitWidth(24);
+                hitboxAtk.setX(getScreenPlayerX().get() - 20);
+                hitboxAtk.setY(getScreenPlayerY().get() - 8);
+
+                dmgToEntity(player, hitboxAtk);
 
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitbox));
+                        Platform.runLater(() -> gamePlayer.getChildren().remove(hitboxAtk));
                     }
                 }, 150);
                 break;
+        }
+    }
+
+    private void dmgToEntity(Player player, ImageView hitboxAtk){
+        for (Entity e : player.getGround().getCurrentChunk().getEntities()){
+            System.out.println(e);
+            if (hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
+                e.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
+                System.out.println(e.getHp());
+            }
         }
     }
 }

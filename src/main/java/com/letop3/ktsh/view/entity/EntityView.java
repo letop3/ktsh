@@ -17,11 +17,13 @@ public abstract class EntityView {
     private final Entity entity;
     private final AnimationHandler animHandler;
     private final ImageView sprite;
+	private Pane spriteTarget;
 
     public EntityView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition) {
         this.animHandler = new AnimationHandler(animationAdapter);
         this.sprite = new ImageView();
 		spriteTarget.getChildren().add(sprite);
+		this.spriteTarget = spriteTarget;
 
         entity = animationAdapter.getEntity();
 		entity.setHitboxSize(spriteTarget.getWidth(), spriteTarget.getHeight());
@@ -47,6 +49,10 @@ public abstract class EntityView {
 //		spriteTarget.getChildren().add(testNpcHB);
 
     }
+
+	public Pane getSpriteTarget() {
+		return spriteTarget;
+	}
 
 	public Entity getEntity() {
 		return entity;
