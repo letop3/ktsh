@@ -24,9 +24,8 @@ public abstract class Entity implements Updatable {
         this.direction = null;
         this.ground = ground;
         this.lastDirection = Direction.SOUTH;
-
-        this.hitboxWidth = 50.0;
-        this.hitboxHeight = 52.0;
+        this.hitboxWidth = 64;
+        this.hitboxHeight = 64;
         this.hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
     }
 

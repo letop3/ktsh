@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -81,5 +82,9 @@ public class GameController implements Initializable {
         controlsController.initialize(location, resources);
         stuffController.initialize(location, resources);
         itemController.initialize(location, resources);
+    }
+
+    public void coord(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getX() + " : " + mouseEvent.getY());
     }
 }

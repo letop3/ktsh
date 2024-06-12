@@ -40,16 +40,16 @@ public class StuffController implements Initializable, StuffClickListener {
         });
 
 //        // Test perte hp pour update bar hp
-        Timer timer = new Timer();
-        for (int i = 1; i <= 10; i++) {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("-1 hp");
-                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
-                }
-            }, i * 5000);
-        }
+//        Timer timer = new Timer();
+//        for (int i = 1; i <= 10; i++) {
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    System.out.println("-1 hp");
+//                    env.getPlayer().setHp(env.getPlayer().getHp() - 1);
+//                }
+//            }, i * 5000);
+//        }
 
         // ajouter listener sur changement stuff
         env.getPlayer().getStuff().getInventaire().addListener(new ListChangeListener<Item>() {

@@ -41,10 +41,10 @@ public abstract class EntityView {
         screenPosition.yProperty().addListener(yListener);
 		entity.getPosition().yProperty().addListener(yListener);
 
-		ImageView testNpcHB = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
-		testNpcHB.setFitHeight(spriteTarget.getHeight());
-		testNpcHB.setFitWidth(spriteTarget.getWidth());
-		spriteTarget.getChildren().add(testNpcHB);
+//		ImageView testNpcHB = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
+//		testNpcHB.setFitHeight(spriteTarget.getHeight());
+//		testNpcHB.setFitWidth(spriteTarget.getWidth());
+//		spriteTarget.getChildren().add(testNpcHB);
 
     }
 

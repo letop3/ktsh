@@ -39,6 +39,13 @@ public class PlayerView {
                 triggerAttackAnimation(player.getPosition(), player.getLastDirection());
             }
         });
+
+//        ImageView testNpcHB = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
+//        testNpcHB.setLayoutX(player.getPosition().getX());
+//        testNpcHB.setLayoutY(player.getPosition().getY());
+//        testNpcHB.setFitHeight(playerImageView.getFitHeight());
+//        testNpcHB.setFitWidth(playerImageView.getFitWidth());
+//        gamePlayer.getChildren().add(testNpcHB);
     }
 
     public void update() {

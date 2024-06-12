@@ -119,11 +119,45 @@ public class Ground {
         return y * (Chunk.CHUNK_SIZE / 11);
     }
 
-    public boolean isTileWalkable(double x, double y) {
+    public boolean isTileWalkable(double x, double y){
+
+        if (player.getDirection() == null)
+            return true;
+
+        switch (player.getDirection()){
+            case NORTH -> {
+                return isTileWalkable1P(x, y-16);
+            }
+            case EAST -> {
+                return isTileWalkable1P(x+16,y);
+            }
+            case SOUTH -> {
+                return isTileWalkable1P(x, y+16);
+            }
+            case WEST -> {
+                return isTileWalkable1P(x-16, y);
+            }
+            case NORTH_EAST -> {
+                return isTileWalkable1P(x+16, y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x+16,y);
+            }
+            case SOUTH_EAST -> {
+                return isTileWalkable1P(x+16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x+16,y);
+            }
+            case SOUTH_WEST -> {
+                return isTileWalkable1P(x-16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x-16,y);
+            }
+            case NORTH_WEST -> {
+                return isTileWalkable1P(x-16,y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x-16,y);
+            }
+        }
+        return true;
+    }
+
+    public boolean isTileWalkable1P(double x, double y) {
         int tileSize = Chunk.CHUNK_SIZE / 11; // divisé par 11 pcq chunk de 11*11
 
         // en dehors de map
-        if (x < 0 || x >= MAP_WIDTH * Chunk.CHUNK_SIZE || y < 0 || y >= MAP_HEIGHT * Chunk.CHUNK_SIZE) {
+        if (x < 0 || x > MAP_WIDTH * Chunk.CHUNK_SIZE || y < 0 || y > MAP_HEIGHT * Chunk.CHUNK_SIZE) {
             return false;
         }
 
@@ -178,9 +212,6 @@ public class Ground {
                     if (entity.getHitbox().intersects(hitbox)) {
                         if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
                         if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
-                    }
-                    while (true){
-                        System.out.println("Aimane is a terrorist! ");
                     }
                 }
             }
