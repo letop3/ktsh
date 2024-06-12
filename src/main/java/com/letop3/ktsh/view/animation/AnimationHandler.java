@@ -11,7 +11,6 @@ public class AnimationHandler {
     private int currentImageIndex;
     private Animation currentAnimation;
     private boolean moved;
-    private Direction lastDirection;
 
     public AnimationHandler(AnimationAdapter adapter) {
         this.adapter = adapter;
@@ -19,11 +18,9 @@ public class AnimationHandler {
         currentImageIndex = 0;
         currentAnimation = null;
         moved = false;
-        lastDirection = Direction.SOUTH;
 
         ChangeListener<Number> move = (obs, old, nouv) -> {
             moved = true;
-            lastDirection = adapter.getEntity().getDirection();
         };
 
         adapter.getEntity().getPosition().xProperty().addListener(move);
@@ -33,10 +30,10 @@ public class AnimationHandler {
     public Image getFrame() {
         Animation anim;
         if (moved) {
-            anim = adapter.getMovingAnim(lastDirection);
+            anim = adapter.getMovingAnim(adapter.getEntity().getLastDirection());
         }
         else {
-            anim = adapter.getIdleAnim(lastDirection);
+            anim = adapter.getIdleAnim(adapter.getEntity().getLastDirection());
         }
 
         if (anim != currentAnimation) {

@@ -36,6 +36,7 @@ public class GameView {
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
+    private ItemView itemView;
 
     private Position screenPosition;
 
@@ -51,10 +52,11 @@ public class GameView {
                     Pane entityPane,
                     GridPane dialogueBox,
                     Label dialogueText,
-                    ListView<String> dialogueResponses) {
+                    ListView<String> dialogueResponses, Pane itemEffectPane) {
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
+        itemView = new ItemView(playerView, itemEffectPane);
         DialogueView dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
 
         this.player = player;
@@ -113,6 +115,10 @@ public class GameView {
         return stuffView;
     }
 
+    public ItemView getItemView(){
+        return itemView;
+    }
+
     public void update() {
         int fullHearts = player.getHearts()[0];
         int halfHearts = player.getHearts()[1];
@@ -122,11 +128,11 @@ public class GameView {
 
         for (int i = 0; i < totalHearts; i++) {
             if (i < fullHearts) {
-                heartCanvas.getGraphicsContext2D().drawImage(fullHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(fullHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             } else if (i == fullHearts && halfHearts == 1) {
-                heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             } else {
-                heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 20, playerView.getScreenPlayerY().get() - 200);
+                heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
             }
         }
 

@@ -2,6 +2,7 @@ package com.letop3.ktsh.model;
 
 import java.util.ArrayList;
 
+import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
@@ -34,7 +35,7 @@ public class Env {
         addEntity(new NPC(new Position(252, 512), ground, dialogue));
 
 		//Debug Mob
-		addEntity(new Mob(new Position(800, 480), player));
+		addEntity(new Mob(new Position(860, 480), player));
     }
 
     public void update() {
