@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ListView?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
-            fx:controller="com.letop3.ktsh.controller.GameController">
+            fx:controller="com.letop3.ktsh.controller.GameController" stylesheets="@style.css">
    <top>
       <Label text="Kill To Save Her" BorderPane.alignment="CENTER">
          <font>
