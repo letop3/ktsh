@@ -7,9 +7,11 @@ import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 
 import javafx.beans.value.ChangeListener;
-import javafx.geometry.Rectangle2D;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+import java.util.Objects;
 
 public abstract class EntityView {
     private final Entity entity;
@@ -38,6 +40,12 @@ public abstract class EntityView {
 		entity.getPosition().xProperty().addListener(xListener);
         screenPosition.yProperty().addListener(yListener);
 		entity.getPosition().yProperty().addListener(yListener);
+
+		ImageView testNpcHB = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/hitbox.png"))));
+		testNpcHB.setFitHeight(spriteTarget.getHeight());
+		testNpcHB.setFitWidth(spriteTarget.getWidth());
+		spriteTarget.getChildren().add(testNpcHB);
+
     }
 
 	public Entity getEntity() {

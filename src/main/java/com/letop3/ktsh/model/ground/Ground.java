@@ -179,6 +179,9 @@ public class Ground {
                         if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
                         if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
                     }
+                    while (true){
+                        System.out.println("Aimane is a terrorist! ");
+                    }
                 }
             }
         }

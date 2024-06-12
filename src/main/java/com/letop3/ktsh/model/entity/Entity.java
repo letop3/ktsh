@@ -61,7 +61,6 @@ public abstract class Entity implements Updatable {
         double[] newPos = predictPosition(direction);
         position.setX(newPos[0]);
         position.setY(newPos[1]);
-
         if (direction != null) {
             lastDirection = direction;
             hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
@@ -90,6 +89,7 @@ public abstract class Entity implements Updatable {
     public void setHitboxSize(double width, double height) {
         hitboxWidth = width;
         hitboxHeight = height;
+        hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
     }
 
     public Bounds getHitbox() {
