@@ -7,6 +7,7 @@ import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
 import com.letop3.ktsh.view.entity.EntityView;
 import com.letop3.ktsh.view.entity.MobView;

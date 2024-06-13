@@ -14,14 +14,16 @@ import com.letop3.ktsh.model.entity.npc.action.textAction.SpeakAction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.item.artefact.Projectile;
 
 public class Env {
     private final Ground ground;
     private final Player player;
+    private ArrayList<Projectile> projo;
 
     public Env() {
         this.ground = new Ground();
-        this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.45), (int)(Chunk.CHUNK_SIZE * 1.45)), ground);
+        this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.45), (int)(Chunk.CHUNK_SIZE * 1.45)), ground, this);
         ground.setPlayer(player);
 
 		// Debug NPC with dialogue
@@ -36,12 +38,18 @@ public class Env {
 
 		//Debug Mob
 		addEntity(new Mob(new Position(860, 480), player));
+
+        projo = new ArrayList<>();
     }
 
     public void update() {
         player.update();
         for (Chunk chunks : ground.getCurrentChunks()) {
             chunks.update();
+        }
+        for (Projectile projo : projo){
+            projo.update();
+            System.out.println(projo.getPosition());
         }
     }
 
@@ -55,5 +63,13 @@ public class Env {
 
     public Ground getGround() {
         return ground;
+    }
+
+    public void addProjo(Projectile projo){
+        this.projo.add(projo);
+    }
+
+    public ArrayList<Projectile> getProjo() {
+        return projo;
     }
 }

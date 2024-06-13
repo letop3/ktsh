@@ -1,8 +1,9 @@
 package com.letop3.ktsh.view;
 
+import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -14,6 +15,7 @@ import java.util.TimerTask;
 public class ItemView {
 
     private Image potionAtkEffectImg;
+    private Image projoDinImg;
     private Image ermsEffectImg;
     private PlayerView playerView;
     private Pane itemEffectPane;
@@ -23,6 +25,11 @@ public class ItemView {
         this.playerView = playerView;
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
         this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
+        this.projoDinImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/dinprojo.gif")));
+    }
+
+    public Pane getItemEffectPane() {
+        return itemEffectPane;
     }
 
     public void drawErmS(){
@@ -57,5 +64,17 @@ public class ItemView {
         }, 15000);
     }
 
+    public void drawDinStaff(Env env){
+        ImageView projoDin = new ImageView(this.projoDinImg);
+        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX());
+        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY());
+        itemEffectPane.getChildren().add(projoDin);
 
+        env.getProjo().get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
+            Platform.runLater(() -> projoDin.setLayoutX(newX.doubleValue()));
+        });
+        env.getProjo().get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
+            Platform.runLater(() -> projoDin.setLayoutY(newY.doubleValue()));
+        });
+    }
 }

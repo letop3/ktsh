@@ -9,6 +9,7 @@ import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
+import com.letop3.ktsh.model.item.artefact.DinStaff;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.application.Platform;
@@ -31,8 +32,9 @@ public class Player extends Entity {
     private Interractible interractionTarget;
     private PlayerListener pL;
     private boolean attackOnCD = false;
+    private Env env;
 
-    public Player(Position position, Ground ground) {
+    public Player(Position position, Ground ground, Env env) {
         super(position, ground);
         interractionTarget = null;
         this.maxHp = 12;
@@ -45,9 +47,15 @@ public class Player extends Entity {
         stuff.addItem(new PotionHP(1, "Potion Test Conso", "Un test pour conso", 100));
         stuff.addItem(new PotionAtk(1, "Potion atk", "test", 100));
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
+        stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
+        this.env = env;
 
         this.pL = null;
+    }
+
+    public Env getEnv() {
+        return env;
     }
 
     public void setPL(PlayerListener pL) {
