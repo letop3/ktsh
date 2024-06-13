@@ -1,7 +1,6 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Env;
-import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
@@ -19,10 +18,12 @@ public class ItemView {
     private Image ermsEffectImg;
     private PlayerView playerView;
     private Pane itemEffectPane;
+    private Pane gamePlayer;
 
-    public ItemView(PlayerView playerView, Pane itemEffectPane) {
+    public ItemView(PlayerView playerView, Pane itemEffectPane, Pane gamePlayer) {
         this.itemEffectPane = itemEffectPane;
         this.playerView = playerView;
+        this.gamePlayer = gamePlayer;
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
         this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
         this.projoDinImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/dinprojo.gif")));
@@ -38,12 +39,12 @@ public class ItemView {
         ImageView ermsEffect = new ImageView(this.ermsEffectImg);
         ermsEffect.setLayoutX(x - 16);
         ermsEffect.setLayoutY(y - 16);
-        itemEffectPane.getChildren().add(ermsEffect);
+        gamePlayer.getChildren().add(ermsEffect);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> itemEffectPane.getChildren().remove(ermsEffect));
+                Platform.runLater(() -> gamePlayer.getChildren().remove(ermsEffect));
             }
         }, 500);
     }
@@ -54,12 +55,12 @@ public class ItemView {
         ImageView potionAtkEffect = new ImageView(this.potionAtkEffectImg);
         potionAtkEffect.setLayoutX(x - 16);
         potionAtkEffect.setLayoutY(y - 16);
-        itemEffectPane.getChildren().add(potionAtkEffect);
+        gamePlayer.getChildren().add(potionAtkEffect);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> itemEffectPane.getChildren().remove(potionAtkEffect));
+                Platform.runLater(() -> gamePlayer.getChildren().remove(potionAtkEffect));
             }
         }, 15000);
     }

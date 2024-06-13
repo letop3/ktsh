@@ -17,8 +17,8 @@ public class Projectile {
     }
 
     public void update() {
-        position.setX(position.getX() + direction.getX());
-        position.setY(position.getY() - direction.getY());
+        position.setX(position.getX() + direction.getX()*3);
+        position.setY(position.getY() - direction.getY()*3);
     }
 
     public Direction getDirection() {
