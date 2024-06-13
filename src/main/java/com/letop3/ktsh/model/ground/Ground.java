@@ -119,12 +119,11 @@ public class Ground {
         return y * (Chunk.CHUNK_SIZE / 11);
     }
 
-    public boolean isTileWalkable(double x, double y){
-
-        if (player.getDirection() == null)
+    public boolean isTileWalkable(double x, double y, Direction direction){
+        if (direction == null)
             return true;
 
-        switch (player.getDirection()){
+        switch (direction){
             case NORTH -> {
                 return isTileWalkable1P(x, y-16);
             }
@@ -200,8 +199,8 @@ public class Ground {
         double stepX = direction.getX() * diagonalMove * speed;
         double stepY = direction.getY() * diagonalMove * speed;
 
-        boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY);
-        boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY);
+        boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY, e.getDirection());
+        boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY, e.getDirection());
 
 
         if (e instanceof Player) {

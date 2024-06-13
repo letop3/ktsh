@@ -11,7 +11,7 @@ public class Pathfinder {
     private Position target;
     private int targetX, targetY;
 
-    List<int[]> path;
+    List<double[]> path;
 
     public Pathfinder(Position target, Position position, Ground ground) {
         this.ground = ground;
@@ -43,22 +43,19 @@ public class Pathfinder {
                 int newX = x + direction.getX();
                 int newY = y - direction.getY();
 
-                boolean canMove = ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY));
-
+                boolean canMove = ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY), direction);
                 if (canMove && direction.isDiagonal()) {
-                    canMove = ground.isTileWalkable(ground.posXFromTile(x), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(y));
+                    canMove = ground.isTileWalkable(ground.posXFromTile(x), ground.posYFromTile(newY), direction) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(y), direction);
                 }
 
-                if (canMove) {
-                    neighbors.add(new int[] { newX, newY });
-                }
+                if (canMove) neighbors.add(new int[] { newX, newY });
             }
         }
 
         return neighbors;
     }
 
-    public List<int[]> findPath(int startX, int startY) {
+    private List<double[]> findPath(int startX, int startY) {
         PriorityQueue<int[]> openList = new PriorityQueue<>(Comparator.comparingDouble(n -> n[2]));
         Map<String, double[]> costMap = new HashMap<>();
         Map<String, int[]> parentMap = new HashMap<>();
@@ -90,35 +87,42 @@ public class Pathfinder {
             }
         }
 
+        System.out.println("aucun chemin trouver");
         return Collections.emptyList();
     }
 
-    private List<int[]> reconstructPath(Map<String, int[]> parentMap, int endX, int endY) {
-        List<int[]> path = new ArrayList<>();
+    private List<double[]> reconstructPath(Map<String, int[]> parentMap, int endX, int endY) {
+        List<double[]> path = new ArrayList<>();
         String currentKey = endX + "," + endY;
+
+        System.out.print("path : ");
 
         while (parentMap.containsKey(currentKey)) {
             String[] coords = currentKey.split(",");
             int x = Integer.parseInt(coords[0]);
             int y = Integer.parseInt(coords[1]);
-            path.add(new int[] { x, y });
+            System.out.print("[" + x + ", " + y + "], ");
+            path.add(new double[] {ground.posXFromTile(x), ground.posYFromTile(y)});
             int[] parent = parentMap.get(currentKey);
             currentKey = parent[0] + "," + parent[1];
         }
 
-        path.add(new int[] {endX, endY});
+        System.out.println("[" + endX + ", " + endY + "]");
+        path.add(new double[] {ground.posXFromTile(endX), ground.posYFromTile(endY)});
         Collections.reverse(path);
         return path;
     }
 
     public Direction getDirection(Position position) {
+        Direction direction = null;
         int currentX = ground.tileFromPosX(position.getX());
         int currentY = ground.tileFromPosY(position.getY());
 
-        Direction direction = null;
-        if (currentX == targetX && currentY == targetY) {
-            double deltaX = Math.abs(target.getX() - position.getX());
-            double deltaY = Math.abs(target.getY() - position.getY());
+        if (!path.isEmpty()) {
+            double[] nextPos = path.get(0);
+
+            double deltaX = Math.abs(nextPos[0] - position.getX());
+            double deltaY = Math.abs(nextPos[1] - position.getY());
 
             if (Math.abs(deltaX) > 2) {
                 direction = deltaX > 0 ? Direction.EAST : Direction.WEST;
@@ -129,14 +133,12 @@ public class Pathfinder {
                 if (direction == null) direction = dirY;
                 else direction = direction.add(dirY);
             }
-        }
-        else {
-            int[] nextTile = path.get(0);
-            if (ground.posXFromTile(nextTile[0]) - position.getX() <= 5 && ground.posYFromTile(nextTile[1]) - position.getY() <= 5) {
+
+            if (direction == null) {
                 path.remove(0);
-                nextTile = path.get(0);
+                System.out.println("cible atteinte");
+                direction = getDirection(position);
             }
-            direction = Direction.resolvDirection(nextTile[0] - currentX, nextTile[1] - currentY);
         }
 
         return direction;

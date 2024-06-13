@@ -23,7 +23,7 @@ public class BotteErmS extends Artefact{
             double newY = player.getPosition().getY() - player.getDirection().getY() * (Chunk.CHUNK_SIZE/11);
 
             int tpCount = 0;
-            while (player.getGround().isTileWalkable(newX + player.getDirection().getX() * (Chunk.CHUNK_SIZE/11), newY - player.getDirection().getY() * (Chunk.CHUNK_SIZE/11)) && tpCount < 2){
+            while (player.getGround().isTileWalkable(newX + player.getDirection().getX() * (Chunk.CHUNK_SIZE/11), newY - player.getDirection().getY() * (Chunk.CHUNK_SIZE/11), player.getDirection()) && tpCount < 2){
                 newX += player.getDirection().getX() * (Chunk.CHUNK_SIZE/11);
                 newY -= player.getDirection().getY() * (Chunk.CHUNK_SIZE/11);
                 tpCount++;
