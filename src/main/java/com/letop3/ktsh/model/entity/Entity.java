@@ -1,23 +1,40 @@
 package com.letop3.ktsh.model.entity;
 
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
+import javafx.beans.property.IntegerProperty;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 
 public abstract class Entity implements Updatable {
+    protected IntegerProperty hp;
     private final static double speed = 2;
-
-    protected final Ground ground;
+    private final Ground ground;
     private final Position position;
     private Direction direction;
+    private Direction lastDirection;
+
+    private double hitboxWidth, hitboxHeight;
+    private Bounds hitbox;
 
     public Entity(Position position, Ground ground) {
         this.position = position;
         this.direction = null;
         this.ground = ground;
+        this.lastDirection = Direction.SOUTH;
+        this.hitboxWidth = 64;
+        this.hitboxHeight = 64;
+        this.hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
     }
 
     public Position getPosition() {
         return position;
+    }
+
+    public Direction getLastDirection() {
+        return lastDirection;
     }
 
     public Direction getDirection() {
@@ -34,7 +51,7 @@ public abstract class Entity implements Updatable {
 
     public double[] predictPosition(Direction direction) {
         if (direction != null) {
-            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed);
+            return ground.getFinalPositionAfterCollision(position.getX(), position.getY(), direction, speed, this);
         }
         return new double[] {position.getX(), position.getY()};
     }
@@ -43,6 +60,10 @@ public abstract class Entity implements Updatable {
         double[] newPos = predictPosition(direction);
         position.setX(newPos[0]);
         position.setY(newPos[1]);
+        if (direction != null) {
+            lastDirection = direction;
+            hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
+        }
     }
 
     public void addDirection(Direction direction) {
@@ -54,5 +75,23 @@ public abstract class Entity implements Updatable {
         if (direction != null && this.direction != null && (this.direction.getX() - direction.getX() == 0 || this.direction.getY() - direction.getY() == 0)) {
             this.direction = this.direction.sub(direction);
         }
+    }
+
+    public void takeDamage(int dmg) {
+        this.hp.set(Math.max(this.hp.get() - dmg, 0));
+    }
+
+    public int getHp(){
+        return hp.get();
+    }
+
+    public void setHitboxSize(double width, double height) {
+        hitboxWidth = width;
+        hitboxHeight = height;
+        hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
+    }
+
+    public Bounds getHitbox() {
+        return hitbox;
     }
 }

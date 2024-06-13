@@ -1,10 +1,15 @@
 package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.entity.Direction;
+import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +21,8 @@ public class Ground {
     private final Chunk[][] chunks;
     private final IntegerProperty currentChunkIdX;
     private final IntegerProperty currentChunkIdY;
+
+    private Player player;
 
     public Ground() {
         this.chunks = new Chunk[MAP_HEIGHT][MAP_WIDTH];
@@ -29,6 +36,8 @@ public class Ground {
 
         currentChunkIdX = new SimpleIntegerProperty();
         currentChunkIdY = new SimpleIntegerProperty();
+
+        this.player = null;
     }
 
     public void setPlayer(Player player) {
@@ -41,6 +50,8 @@ public class Ground {
         player.getPosition().yProperty().addListener((obs, old, nouv) -> {
             currentChunkIdY.set((int)((double)nouv / Chunk.CHUNK_SIZE));
         });
+
+        this.player = player;
     }
 
     public Chunk getChunk(int x, int y) {
@@ -58,9 +69,7 @@ public class Ground {
     public List<Chunk> getCurrentChunks() {
         List<Chunk> currentChunks = new ArrayList<>();
         currentChunks.add(getCurrentChunk());
-        for (Chunk chunk : getCurrentChunk().getNeighbors()) {
-            currentChunks.add(chunk);
-        }
+        currentChunks.addAll(getCurrentChunk().getNeighbors());
         return currentChunks;
     }
 
@@ -110,11 +119,45 @@ public class Ground {
         return y * (Chunk.CHUNK_SIZE / 11);
     }
 
-    public boolean isTileWalkable(double x, double y) {
+    public boolean isTileWalkable(double x, double y){
+
+        if (player.getDirection() == null)
+            return true;
+
+        switch (player.getDirection()){
+            case NORTH -> {
+                return isTileWalkable1P(x, y-16);
+            }
+            case EAST -> {
+                return isTileWalkable1P(x+16,y);
+            }
+            case SOUTH -> {
+                return isTileWalkable1P(x, y+16);
+            }
+            case WEST -> {
+                return isTileWalkable1P(x-16, y);
+            }
+            case NORTH_EAST -> {
+                return isTileWalkable1P(x+16, y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x+16,y);
+            }
+            case SOUTH_EAST -> {
+                return isTileWalkable1P(x+16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x+16,y);
+            }
+            case SOUTH_WEST -> {
+                return isTileWalkable1P(x-16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x-16,y);
+            }
+            case NORTH_WEST -> {
+                return isTileWalkable1P(x-16,y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x-16,y);
+            }
+        }
+        return true;
+    }
+
+    public boolean isTileWalkable1P(double x, double y) {
         int tileSize = Chunk.CHUNK_SIZE / 11; // divisé par 11 pcq chunk de 11*11
 
         // en dehors de map
-        if (x < 0 || x >= MAP_WIDTH * Chunk.CHUNK_SIZE || y < 0 || y >= MAP_HEIGHT * Chunk.CHUNK_SIZE) {
+        if (x < 0 || x > MAP_WIDTH * Chunk.CHUNK_SIZE || y < 0 || y > MAP_HEIGHT * Chunk.CHUNK_SIZE) {
             return false;
         }
 
@@ -152,27 +195,35 @@ public class Ground {
         return tileValue != 1 && tileValue != 2;
     }
 
-    public double[] getFinalPositionAfterCollision(double startX, double startY, Direction direction, double speed) {
+    public double[] getFinalPositionAfterCollision(double startX, double startY, Direction direction, double speed, Entity e) {
         double diagonalMove = direction.isDiagonal() ? Math.sqrt(0.5) : 1;
-        double finalX = startX;
-        double finalY = startY;
-        
-        // Check horizontal movement
-        if (direction.getX() != 0) {
-            double stepX = direction.getX() * diagonalMove * speed;
-            if (isTileWalkable(startX + stepX, startY)) {
-                finalX += stepX;
+        double stepX = direction.getX() * diagonalMove * speed;
+        double stepY = direction.getY() * diagonalMove * speed;
+
+        boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY);
+        boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY);
+
+
+        if (e instanceof Player) {
+            Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
+            for (Chunk chunk : this.getCurrentChunks()) {
+                for (Entity entity : chunk.getEntities()) {
+                    Position pos = entity.getPosition();
+                    if (entity.getHitbox().intersects(hitbox)) {
+                        if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
+                        if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
+                    }
+                }
+            }
+        }
+        else {
+            Bounds hitbox = new BoundingBox(player.getPosition().getX(), player.getPosition().getY(), player.getHitbox().getWidth(), player.getHitbox().getHeight());
+            if (e.getHitbox().intersects(hitbox)) {
+                if (passX) passX = Math.abs(player.getPosition().getX() - startX) < Math.abs(player.getPosition().getX() - (startX + stepX));
+                if (passY) passY = Math.abs(player.getPosition().getY() - startY) < Math.abs(player.getPosition().getY() - (startY - stepY));
             }
         }
 
-        // Check vertical movement
-        if (direction.getY() != 0) {
-            double stepY = direction.getY() * diagonalMove * speed;
-            if (isTileWalkable(startX, startY - stepY)) {
-                finalY -= stepY;
-            }
-        }
-
-        return new double[] {finalX, finalY};
+        return new double[] {passX ? startX + stepX : startX, passY ? startY - stepY : startY};
     }
 }

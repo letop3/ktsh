@@ -1,12 +1,21 @@
 package com.letop3.ktsh.model.item.arme;
 
-public class Sword extends Arme {
-    public Sword(int id, String nom, String description, int prix) {
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.item.Item;
+
+public abstract class Sword extends Item {
+    private int atk;
+    public Sword(int id, String nom, String description, int prix, int atk) {
         super(id, nom, description, prix);
-        if (nom.equalsIgnoreCase("Excalibur")) {
-            this.setIcon("/com/letop3/ktsh/images/item/excalibur.png");
-        } else {
-            this.setIcon("/com/letop3/ktsh/images/item/sword.png");
-        }
+        this.atk = atk;
+    }
+
+    public int getAtk() {
+        return atk;
+    }
+
+    @Override
+    public void action(Player player) {
+
     }
 }
