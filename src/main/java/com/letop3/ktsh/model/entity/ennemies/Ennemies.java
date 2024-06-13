@@ -15,10 +15,10 @@ public abstract class Ennemies extends Entity {
 	public Ennemies(Position position, Player player, int detectionRange) {
 		super(position, player.getGround());
 		this.player = player;
-		playerfinder = new Pathfinder(player.getPosition(), player.getGround(), detectionRange);
+		playerfinder = new Pathfinder(player.getPosition(), getPosition(), player.getGround());
 
 		ChangeListener<Number> playerListener = (observable, oldValue, newValue) -> {
-			playerfinder.setTarget(player.getPosition());
+			playerfinder.setTarget(player.getPosition(), getPosition());
 		};
 
 		player.getPosition().xProperty().addListener(playerListener);
@@ -32,7 +32,7 @@ public abstract class Ennemies extends Entity {
 	@Override
 	public void update() {
 		super.update();
-        Direction direction = playerfinder.directionToTarget(getPosition());
+        Direction direction = playerfinder.getDirection(getPosition());
         setDirection(direction);
 	}
 }

@@ -1,98 +1,124 @@
 package com.letop3.ktsh.model.ground;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Position;
 
 public class Pathfinder {
-    private final Ground ground;
-    private Position target;
-    private final int radius;
+    private Ground ground;
 
+    private Position target;
     private int targetX, targetY;
 
-    private final Map<String, Integer> distancesMap;
-    private double currentDistance;
+    List<int[]> path;
 
-    public Pathfinder(Position target, Ground ground, int radius) {
-        this.target = target;
+    public Pathfinder(Position target, Position position, Ground ground) {
         this.ground = ground;
-        this.radius = radius * 2 + 10;
-        distancesMap = new HashMap<>();
-        currentDistance = Double.MAX_VALUE;
 
-        targetX = ground.tileFromPosX(target.getX());
-        targetY = ground.tileFromPosY(target.getY());
-
-        calculateDistance();
-    }
-
-    public Position getTarget() {
-        return target;
-    }
-
-    public void setTarget(Position target) {
         this.target = target;
-        currentDistance = Double.MAX_VALUE;
         targetX = ground.tileFromPosX(target.getX());
         targetY = ground.tileFromPosY(target.getY());
-        calculateDistance();
+
+        this.path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));
     }
 
-    private boolean inRadius(int x, int y) {
-        return Math.abs(targetX - x) <= radius && Math.abs(targetY - y) <= radius;
+    public void setTarget(Position target, Position position) {
+        this.target = target;
+        targetX = ground.tileFromPosX(target.getX());
+        targetY = ground.tileFromPosY(target.getY());
+
+        path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));
     }
 
-    public boolean isArrived() {
-        return currentDistance <= 2;
+    private double heuristic(int x1, int y1, int x2, int y2) {
+        return Math.abs(x1 - x2) + Math.abs(y1 - y2);
     }
 
-    private void calculateDistance() {
-        distancesMap.clear();
-        distancesMap.put(targetX + "," + targetY, 0);
+    private List<int[]> getNeighbors(int x, int y) {
+        List<int[]> neighbors = new ArrayList<>();
 
-        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
-        queue.add(new int[] {targetX, targetY, 0});
+        for (Direction direction : Direction.values()) {
+            if (direction != null) {
+                int newX = x + direction.getX();
+                int newY = y - direction.getY();
 
-        while (!queue.isEmpty()) {
-            int[] current = queue.poll();
-            int curX = current[0];
-            int curY = current[1];
-            int currentDistance = distancesMap.get(curX + "," + curY);
+                boolean canMove = ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY));
 
-            for (Direction direction : Direction.values()) {
-                int newX = curX + direction.getX();
-                int newY = curY - direction.getY();
+                if (canMove && direction.isDiagonal()) {
+                    canMove = ground.isTileWalkable(ground.posXFromTile(x), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(y));
+                }
 
-                if (inRadius(newX, newY) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY)) &&
-                        (direction.isDiagonal() && ground.isTileWalkable(ground.posXFromTile(curX), ground.posYFromTile(newY)) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(curY)))) {
-                    int newDistance = currentDistance + 1;
-                    String newKey = newX + "," + newY;
-                    System.out.println("exploring " + newKey + " : " + newDistance);
-
-                    if (newDistance < distancesMap.getOrDefault(newKey, Integer.MAX_VALUE)) {
-                        int heuristic = Math.abs(newX - targetX) + Math.abs(newY - targetY); // Manhattan distance
-                        distancesMap.put(newKey, newDistance);
-                        queue.add(new int[] {newX, newY, newDistance + heuristic});
-                    }
+                if (canMove) {
+                    neighbors.add(new int[] { newX, newY });
                 }
             }
         }
+
+        return neighbors;
     }
 
-    public Direction directionToTarget(Position start) {
-        int startX = ground.tileFromPosX(start.getX());
-        int startY = ground.tileFromPosY(start.getY());
+    public List<int[]> findPath(int startX, int startY) {
+        PriorityQueue<int[]> openList = new PriorityQueue<>(Comparator.comparingDouble(n -> n[2]));
+        Map<String, double[]> costMap = new HashMap<>();
+        Map<String, int[]> parentMap = new HashMap<>();
+
+        double[] startCost = {0, heuristic(startX, startY, targetX, targetY)};
+        costMap.put(startX + "," + startY, startCost);
+        openList.add(new int[] {startX, startY, (int) (startCost[0] + startCost[1])});
+
+        while (!openList.isEmpty()) {
+            int[] current = openList.poll();
+            int x = current[0];
+            int y = current[1];
+
+            if (x == targetX && y == targetY) {
+                return reconstructPath(parentMap, targetX, targetY);
+            }
+
+            for (int[] neighbor : getNeighbors(x, y)) {
+                int nx = neighbor[0];
+                int ny = neighbor[1];
+                double newCost = costMap.get(x + "," + y)[0] + 1;
+
+                String neighborKey = nx + "," + ny;
+                if (!costMap.containsKey(neighborKey) || newCost < costMap.get(neighborKey)[0]) {
+                    costMap.put(neighborKey, new double[] {newCost, heuristic(nx, ny, targetX, targetY)});
+                    parentMap.put(neighborKey, new int[] {x, y});
+                    openList.add(new int[] {nx, ny, (int) (newCost + heuristic(nx, ny, targetX, targetY))});
+                }
+            }
+        }
+
+        return Collections.emptyList();
+    }
+
+    private List<int[]> reconstructPath(Map<String, int[]> parentMap, int endX, int endY) {
+        List<int[]> path = new ArrayList<>();
+        String currentKey = endX + "," + endY;
+
+        while (parentMap.containsKey(currentKey)) {
+            String[] coords = currentKey.split(",");
+            int x = Integer.parseInt(coords[0]);
+            int y = Integer.parseInt(coords[1]);
+            path.add(new int[] { x, y });
+            int[] parent = parentMap.get(currentKey);
+            currentKey = parent[0] + "," + parent[1];
+        }
+
+        path.add(new int[] {endX, endY});
+        Collections.reverse(path);
+        return path;
+    }
+
+    public Direction getDirection(Position position) {
+        int currentX = ground.tileFromPosX(position.getX());
+        int currentY = ground.tileFromPosY(position.getY());
 
         Direction direction = null;
-
-        if (startX == targetX && startY == targetY) {
-            double deltaX = Math.abs(target.getX() - start.getX());
-            double deltaY = Math.abs(target.getY() - start.getY());
+        if (currentX == targetX && currentY == targetY) {
+            double deltaX = Math.abs(target.getX() - position.getX());
+            double deltaY = Math.abs(target.getY() - position.getY());
 
             if (Math.abs(deltaX) > 2) {
                 direction = deltaX > 0 ? Direction.EAST : Direction.WEST;
@@ -105,24 +131,18 @@ public class Pathfinder {
             }
         }
         else {
-            int minDistance = Integer.MAX_VALUE;
-
-            for (Direction dir : Direction.values()) {
-                int newX = startX + dir.getX();
-                int newY = startY - dir.getY();
-
-                int distance = distancesMap.getOrDefault(newX + "," + newY, Integer.MAX_VALUE);
-                //System.out.println(direction + " : " + distance);
-
-                if (inRadius(newX, newY) && distance <= minDistance) {
-                    minDistance = distance;
-                    direction = dir;
-                }
+            int[] nextTile = path.get(0);
+            if (ground.posXFromTile(nextTile[0]) - position.getX() <= 5 && ground.posYFromTile(nextTile[1]) - position.getY() <= 5) {
+                path.remove(0);
+                nextTile = path.get(0);
             }
+            direction = Direction.resolvDirection(nextTile[0] - currentX, nextTile[1] - currentY);
         }
 
-        currentDistance = start.distance(target);
-
         return direction;
+    }
+
+    public boolean isArrived() {
+        return path.isEmpty();
     }
 }

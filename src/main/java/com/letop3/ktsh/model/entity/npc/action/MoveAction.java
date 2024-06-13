@@ -2,7 +2,6 @@ package com.letop3.ktsh.model.entity.npc.action;
 
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.NPC;
-import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Pathfinder;
 
 public class MoveAction extends Action {
@@ -21,6 +20,6 @@ public class MoveAction extends Action {
 
     @Override
     public void execute(NPC target) {
-        target.setPathfinder(new Pathfinder(position, target.getGround(), (int)(position.distance(target.getPosition()) / (Chunk.CHUNK_SIZE / 11))));
+        target.setPathfinder(new Pathfinder(position, target.getPosition(), target.getGround()));
     }
 }
