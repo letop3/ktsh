@@ -35,7 +35,7 @@ public class Env {
         addEntity(new NPC(new Position(252, 512), ground, dialogue));
 
 		//Debug Mob
-		addEntity(new Mob(new Position(800, 480), player));
+		//addEntity(new Mob(new Position(800, 480), player));
     }
 
     public void update() {
