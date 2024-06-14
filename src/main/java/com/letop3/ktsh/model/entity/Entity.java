@@ -94,4 +94,12 @@ public abstract class Entity implements Updatable {
     public Bounds getHitbox() {
         return hitbox;
     }
+
+    public String getResistance() {
+        return "NORMAL";
+    }
+
+    public String getFaiblesse() {
+        return "NORMAL";
+    }
 }

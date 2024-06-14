@@ -1,8 +1,12 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -33,7 +37,7 @@ public class ItemView {
         return itemEffectPane;
     }
 
-    public void drawErmS(){
+    public void drawErmS() {
         double x = playerView.getScreenPlayerX().get();
         double y = playerView.getScreenPlayerY().get();
         ImageView ermsEffect = new ImageView(this.ermsEffectImg);
@@ -49,7 +53,7 @@ public class ItemView {
         }, 500);
     }
 
-    public void drawPotionAtk(){
+    public void drawPotionAtk() {
         double x = playerView.getScreenPlayerX().get();
         double y = playerView.getScreenPlayerY().get();
         ImageView potionAtkEffect = new ImageView(this.potionAtkEffectImg);
@@ -65,17 +69,47 @@ public class ItemView {
         }, 15000);
     }
 
-    public void drawDinStaff(Env env){
+    public void drawDinStaff(Env env) {
         ImageView projoDin = new ImageView(this.projoDinImg);
         projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX());
         projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY());
         itemEffectPane.getChildren().add(projoDin);
 
+        dmgSpeToEntity(env.getPlayer(), projoDin, "FIRE");
+
         env.getProjo().get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
-            Platform.runLater(() -> projoDin.setLayoutX(newX.doubleValue()));
+            Platform.runLater(() ->
+                    projoDin.setLayoutX(newX.doubleValue()));
         });
         env.getProjo().get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
             Platform.runLater(() -> projoDin.setLayoutY(newY.doubleValue()));
         });
+        env.getProjo().addListener(new ListChangeListener<Projectile>() {
+            @Override
+            public void onChanged(Change<? extends Projectile> change) {
+                while (change.next()) {
+                    if (change.wasRemoved()) {
+                        itemEffectPane.getChildren().remove(projoDin);
+                    }
+                }
+            }
+        });
+    }
+
+    private void dmgSpeToEntity(Player player, ImageView hitboxAtk, String type){
+        for (Entity e : player.getGround().getCurrentChunk().getEntities()){
+            if (hitboxAtk.intersects(playerView.getGameView().getEntities().get(e).getSpriteTarget().getBoundsInLocal())) {
+                String faiblesse = e.getFaiblesse();
+                String resistance = e.getResistance();
+
+                if (type.equals(resistance))
+                    e.takeDamage(0);
+                else if (type.equals(faiblesse))
+                    e.takeDamage(4);
+                else
+                    e.takeDamage(1);
+            }
+            System.out.println(e.getHp());
+        }
     }
 }

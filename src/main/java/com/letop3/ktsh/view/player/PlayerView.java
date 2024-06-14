@@ -140,4 +140,8 @@ public class PlayerView {
             }
         }
     }
+
+    public GameView getGameView() {
+        return gameView;
+    }
 }

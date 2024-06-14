@@ -15,11 +15,14 @@ import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.artefact.Projectile;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Env {
     private final Ground ground;
     private final Player player;
-    private ArrayList<Projectile> projo;
+    private ObservableList<Projectile> projo;
 
     public Env() {
         this.ground = new Ground();
@@ -39,7 +42,7 @@ public class Env {
 		//Debug Mob
 		addEntity(new Mob(new Position(860, 480), player));
 
-        projo = new ArrayList<>();
+        projo = FXCollections.observableArrayList();
     }
 
     public void update() {
@@ -49,7 +52,6 @@ public class Env {
         }
         for (Projectile projo : projo){
             projo.update();
-            System.out.println(projo.getPosition());
         }
     }
 
@@ -69,7 +71,11 @@ public class Env {
         this.projo.add(projo);
     }
 
-    public ArrayList<Projectile> getProjo() {
+    public ObservableList<Projectile> getProjo() {
         return projo;
+    }
+
+    public void removeProjo(Projectile projo) {
+        this.projo.remove(projo);
     }
 }
