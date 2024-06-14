@@ -7,7 +7,6 @@ import com.letop3.ktsh.model.entity.Position;
 
 public class Pathfinder {
     private Ground ground;
-    private Position target;
     private int targetX, targetY;
     private List<double[]> path;
 
@@ -17,7 +16,6 @@ public class Pathfinder {
     }
 
     public void setTarget(Position target, Position position) {
-        this.target = target;
         this.targetX = ground.tileFromPosX(target.getX());
         this.targetY = ground.tileFromPosY(target.getY());
         this.path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));

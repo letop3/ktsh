@@ -3,7 +3,6 @@ package com.letop3.ktsh.model.ground;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;

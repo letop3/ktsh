@@ -18,7 +18,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
-import javafx.geometry.Rectangle2D;
 
 import java.util.Timer;
 import java.util.TimerTask;

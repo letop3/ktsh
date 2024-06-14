@@ -1,8 +1,6 @@
 package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.item.Item;
-import com.letop3.ktsh.model.item.consomable.PotionAtk;
-import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

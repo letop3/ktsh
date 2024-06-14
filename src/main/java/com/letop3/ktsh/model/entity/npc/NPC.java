@@ -7,7 +7,6 @@ import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Pathfinder;
-import javafx.geometry.Rectangle2D;
 
 public class NPC extends Interractible {
     private NPCInterractListener interractListener;

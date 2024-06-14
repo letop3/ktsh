@@ -1,6 +1,5 @@
 package com.letop3.ktsh.model.entity;
 
-import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;

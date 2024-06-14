@@ -2,7 +2,6 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -56,6 +55,4 @@ public class ItemView {
             }
         }, 15000);
     }
-
-
 }
