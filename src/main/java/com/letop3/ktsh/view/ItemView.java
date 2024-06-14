@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,7 +98,9 @@ public class ItemView {
     }
 
     private void dmgSpeToEntity(Player player, ImageView hitboxAtk, String type){
-        for (Entity e : player.getGround().getCurrentChunk().getEntities()){
+        Iterator<Entity> iterator = player.getGround().getCurrentChunk().getEntities().iterator();
+        while (iterator.hasNext()) {
+            Entity e = iterator.next();
             if (hitboxAtk.intersects(playerView.getGameView().getEntities().get(e).getSpriteTarget().getBoundsInLocal())) {
                 String faiblesse = e.getFaiblesse();
                 String resistance = e.getResistance();
@@ -110,6 +113,15 @@ public class ItemView {
                     e.takeDamage(1);
             }
             System.out.println(e.getHp());
+            if (e.getHp() <= 0) {
+                iterator.remove();
+                Pane entityView = playerView.getGameView().getEntities().remove(e).getSpriteTarget();
+                Platform.runLater(() -> {
+                    if (entityView != null && entityView.getParent() instanceof Pane) {
+                        ((Pane) entityView.getParent()).getChildren().remove(entityView);
+                    }
+                });
+            }
         }
     }
 }

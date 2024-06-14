@@ -5,6 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.letop3.ktsh.model.entity.Entity;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 
 public class Chunk {
     public static final int CHUNK_SIZE = 352;
@@ -13,13 +17,13 @@ public class Chunk {
     private int[] tiles;
     private List<Chunk> neighbors;
 
-    private List<Entity> entities;
+    private ObservableList<Entity> entities;
 
     public Chunk(int id, int[] tiles) {
         this.id = id;
         this.tiles = tiles;
         this.neighbors = new ArrayList<>();
-        this.entities = new ArrayList<>();
+        this.entities = FXCollections.observableArrayList();
     }
 
     public void addEntity(Entity entity) {
@@ -30,7 +34,7 @@ public class Chunk {
         entities.remove(entity);
     }
 
-    public List<Entity> getEntities() {
+    public ObservableList<Entity> getEntities() {
         return entities;
     }
 

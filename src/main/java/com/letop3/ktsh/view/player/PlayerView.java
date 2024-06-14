@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -132,11 +133,22 @@ public class PlayerView {
     }
 
     private void dmgToEntity(Player player, ImageView hitboxAtk){
-        for (Entity e : player.getGround().getCurrentChunk().getEntities()){
+        Iterator<Entity> iterator = player.getGround().getCurrentChunk().getEntities().iterator();
+        while (iterator.hasNext()) {
+            Entity e = iterator.next();
             System.out.println(e);
             if (hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
                 e.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
                 System.out.println(e.getHp());
+                if (e.getHp() <= 0) {
+                    iterator.remove();
+                    Pane entityView = gameView.getEntities().remove(e).getSpriteTarget();
+                    Platform.runLater(() -> {
+                        if (entityView != null && entityView.getParent() instanceof Pane) {
+                            ((Pane) entityView.getParent()).getChildren().remove(entityView);
+                        }
+                    });
+                }
             }
         }
     }
