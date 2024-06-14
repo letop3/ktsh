@@ -33,6 +33,14 @@ public class MainMenuView {
         }
         mediaPlayer = new MediaPlayer(media);
 
+        // Configurer la lecture en boucle
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override
+            public void run() {
+                mediaPlayer.seek(javafx.util.Duration.ZERO);
+            }
+        });
+
         // Jouer la musique
         mediaPlayer.play();
     }

@@ -2,20 +2,22 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.view.MainMenuView;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    private AnchorPane exitPopupPane, creditsPopupPane;
+    private VBox exitPopupVBox, creditsPopupVBox;
     @FXML
     private VBox mainMenuVBox;
     @FXML
@@ -29,6 +31,10 @@ public class MainMenuController implements Initializable {
     private VBox buttonContainerVBox;
     @FXML
     private Button startGameButton, settingsButton, creditsButton, exitButton;
+    @FXML
+    private Button yesExitButton, noExitButton;
+    @FXML
+    private Label exitLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,8 +60,34 @@ public class MainMenuController implements Initializable {
         exitButton.prefWidthProperty().bind(buttonContainerVBox.prefWidthProperty().multiply(0.8));
         exitButton.prefHeightProperty().bind(buttonContainerVBox.prefHeightProperty().multiply(0.2));
 
+        // Lier la taille et la position des popups avec des limites maximales
+        exitPopupVBox.prefWidthProperty().bind(mainPane.widthProperty().multiply(0.5));
+        exitPopupVBox.prefHeightProperty().bind(mainPane.heightProperty().multiply(0.4));
+        exitPopupVBox.maxWidthProperty().setValue(800);  // Valeur maximale de la largeur
+        exitPopupVBox.maxHeightProperty().setValue(400); // Valeur maximale de la hauteur
+
+        creditsPopupVBox.prefWidthProperty().bind(mainPane.widthProperty().multiply(0.5));
+        creditsPopupVBox.prefHeightProperty().bind(mainPane.heightProperty().multiply(0.4));
+        creditsPopupVBox.maxWidthProperty().setValue(1000);  // Valeur maximale de la largeur
+        creditsPopupVBox.maxHeightProperty().setValue(600); // Valeur maximale de la hauteur
+
+        // Lier la taille des boutons et du label dans exitPopupVBox
+        yesExitButton.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.3));
+        yesExitButton.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
+        noExitButton.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.3));
+        noExitButton.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
+        exitLabel.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.8));
+        exitLabel.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
+
+        // Lier la taille de la police des labels
+        exitLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.02).asString(), "px;"));
+        startGameButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+        settingsButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+        creditsButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+        exitButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+
         menuView = new MainMenuView();
-        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
+        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu3.mp3");
     }
 
     @FXML
@@ -68,7 +100,7 @@ public class MainMenuController implements Initializable {
     @FXML
     public void showExit() {
         System.out.println("Exit popup shown");
-        exitPopupPane.setVisible(true);
+        exitPopupVBox.setVisible(true);
     }
 
     @FXML
@@ -79,19 +111,19 @@ public class MainMenuController implements Initializable {
     @FXML
     public void showCredits() {
         System.out.println("Credits shown");
-        creditsPopupPane.setVisible(true);
+        creditsPopupVBox.setVisible(true);
     }
 
     @FXML
     public void hideCredits() {
         System.out.println("Credits hidden");
-        creditsPopupPane.setVisible(false);
+        creditsPopupVBox.setVisible(false);
     }
 
     @FXML
     public void hideExit() {
         System.out.println("Exit popup hidden");
-        exitPopupPane.setVisible(false);
+        exitPopupVBox.setVisible(false);
     }
 
     @FXML
