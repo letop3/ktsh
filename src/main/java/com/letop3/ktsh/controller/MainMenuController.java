@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
     @FXML
-    private VBox exitPopupVBox, creditsPopupVBox;
+    private VBox exitPopupVBox, creditsPopupVBox, creditsTextVBox, creditsContentVBox;
     @FXML
     private VBox mainMenuVBox;
     @FXML
@@ -32,9 +32,11 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button startGameButton, settingsButton, creditsButton, exitButton;
     @FXML
-    private Button yesExitButton, noExitButton;
+    private Button yesExitButton, noExitButton, closeCreditsButton;
     @FXML
-    private Label exitLabel;
+    private Label exitLabel, creditsTitleLabel;
+    @FXML
+    private Label credit1, credit2, credit3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,12 +81,27 @@ public class MainMenuController implements Initializable {
         exitLabel.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.8));
         exitLabel.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
 
+        // Lier la taille et la position des éléments dans creditsPopupVBox
+        closeCreditsButton.prefWidthProperty().bind(creditsPopupVBox.prefWidthProperty().multiply(0.3));
+        closeCreditsButton.prefHeightProperty().bind(creditsPopupVBox.prefHeightProperty().multiply(0.2));
+        creditsTitleLabel.prefWidthProperty().bind(creditsPopupVBox.prefWidthProperty().multiply(0.8));
+        creditsTitleLabel.prefHeightProperty().bind(creditsPopupVBox.prefHeightProperty().multiply(0.2));
+        creditsContentVBox.prefWidthProperty().bind(creditsPopupVBox.prefWidthProperty().multiply(0.8));
+        creditsContentVBox.prefHeightProperty().bind(creditsPopupVBox.prefHeightProperty().multiply(0.6));
+        creditsTextVBox.prefWidthProperty().bind(creditsContentVBox.prefWidthProperty());
+        creditsTextVBox.prefHeightProperty().bind(creditsContentVBox.prefHeightProperty().multiply(0.6));
+
         // Lier la taille de la police des labels
         exitLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.02).asString(), "px;"));
         startGameButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
         settingsButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
         creditsButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
         exitButton.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+
+        creditsTitleLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.03).asString(), "px;"));
+        credit1.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+        credit2.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
+        credit3.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
 
         menuView = new MainMenuView();
         menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu3.mp3");

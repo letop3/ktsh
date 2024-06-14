@@ -100,23 +100,33 @@
                </StackPane.margin>
             </VBox>
 
-            <VBox fx:id="creditsPopupVBox" alignment="CENTER" spacing="10.0" style="-fx-background-color: rgba(0, 0, 0, 0.95); -fx-border-color: white; -fx-border-width: 2;">
+            <VBox fx:id="creditsPopupVBox" alignment="CENTER" spacing="10.0" style="-fx-background-color: rgba(0, 0, 0, 0.95); -fx-border-color: white; -fx-border-width: 2;" visible="false">
                <VBox.margin>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </VBox.margin>
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                  <VBox fx:id="creditsContentVBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Label style="-fx-font-size: 16px;" text="Credits" textFill="white">
+                        <Label fx:id="creditsTitleLabel" alignment="CENTER" style="-fx-font-size: 16px;" text="Credits" textAlignment="CENTER" textFill="white">
                            <font>
                               <Font size="25.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets bottom="50.0" top="50.0" />
+                           </VBox.margin>
                         </Label>
+                        <VBox fx:id="creditsTextVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label fx:id="credit1" text="Aimane Adahchour - ai - Le mangeur de Couscous" textFill="WHITE" />
+                              <Label fx:id="credit2" text="Ange Rollet - angerenage - Le mangeur de Galettes" textFill="WHITE" />
+                              <Label fx:id="credit3" text="Armand Agogué - aagogue - Le mangeur d'Aligot" textFill="WHITE" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button onAction="#hideCredits" text="Close" />
+                        <Button fx:id="closeCreditsButton" onAction="#hideCredits" text="Close" />
                      </children>
                   </VBox>
                </children>
