@@ -86,26 +86,18 @@ public class Pathfinder {
         List<double[]> path = new ArrayList<>();
         String currentKey = targetX + "," + targetY;
 
-        System.out.print("path : ");
-
         while (parentMap.containsKey(currentKey)) {
             String[] coords = currentKey.split(",");
             int x = Integer.parseInt(coords[0]);
             int y = Integer.parseInt(coords[1]);
-            System.out.print("[" + x + ", " + y + "], ");
             path.add(new double[] {ground.posXFromTile(x), ground.posYFromTile(y)});
             int[] parent = parentMap.get(currentKey);
             currentKey = parent[0] + "," + parent[1];
         }
-        System.out.println();
 
         path.add(new double[] {ground.posXFromTile(endX), ground.posYFromTile(endY)});
         Collections.reverse(path);
         path.remove(0);
-
-        for (double[] pos : path) {
-            System.out.println("[" + pos[0] + ", " + pos[1] + "]");
-        }
 
         return path;
     }
@@ -116,8 +108,6 @@ public class Pathfinder {
         double[] nextPos = path.get(0);
         double deltaX = nextPos[0] - position.getX();
         double deltaY = nextPos[1] - position.getY();
-
-        System.out.println(position + " - " + nextPos[0] + ", " + nextPos[1] + " : " + deltaX + " " + deltaY);
 
         Direction direction = null;
 
@@ -137,12 +127,7 @@ public class Pathfinder {
 
         if (direction == null) {
             path.remove(0);
-            System.out.println("cible atteinte");
-            if (!path.isEmpty()) {
-                return getDirection(position);
-            } else {
-                System.out.println("cible atteinte fin");
-            }
+            if (!path.isEmpty()) direction = getDirection(position);
         }
 
         return direction;
