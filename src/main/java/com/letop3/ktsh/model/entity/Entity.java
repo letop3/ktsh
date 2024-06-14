@@ -98,7 +98,6 @@ public abstract class Entity implements Updatable {
     public String getResistance() {
         return "NORMAL";
     }
-
     public String getFaiblesse() {
         return "NORMAL";
     }

@@ -22,7 +22,6 @@ import javafx.collections.ObservableList;
 public class Env {
     private final Ground ground;
     private final Player player;
-    private ObservableList<Projectile> projo;
 
     public Env() {
         this.ground = new Ground();
@@ -42,16 +41,12 @@ public class Env {
 		//Debug Mob
 		addEntity(new Mob(new Position(860, 480), player));
 
-        projo = FXCollections.observableArrayList();
     }
 
     public void update() {
         player.update();
         for (Chunk chunks : ground.getCurrentChunks()) {
             chunks.update();
-        }
-        for (Projectile projo : projo){
-            projo.update();
         }
     }
 
@@ -65,17 +60,5 @@ public class Env {
 
     public Ground getGround() {
         return ground;
-    }
-
-    public void addProjo(Projectile projo){
-        this.projo.add(projo);
-    }
-
-    public ObservableList<Projectile> getProjo() {
-        return projo;
-    }
-
-    public void removeProjo(Projectile projo) {
-        this.projo.remove(projo);
     }
 }

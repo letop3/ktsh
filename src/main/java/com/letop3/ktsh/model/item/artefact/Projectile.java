@@ -28,4 +28,8 @@ public class Projectile {
     public Position getPosition() {
         return position;
     }
+
+    public Ground getGround() {
+        return ground;
+    }
 }

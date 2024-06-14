@@ -7,6 +7,7 @@ import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -72,20 +73,21 @@ public class ItemView {
 
     public void drawDinStaff(Env env) {
         ImageView projoDin = new ImageView(this.projoDinImg);
-        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX());
-        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY());
+        ObservableList<Projectile> projo = env.getGround().getCurrentChunk().getProjo();
+        projoDin.setLayoutX(projo.get(0).getPosition().getX());
+        projoDin.setLayoutY(projo.get(0).getPosition().getY());
         itemEffectPane.getChildren().add(projoDin);
 
         dmgSpeToEntity(env.getPlayer(), projoDin, "FIRE");
 
-        env.getProjo().get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
+        projo.get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
             Platform.runLater(() ->
                     projoDin.setLayoutX(newX.doubleValue()));
         });
-        env.getProjo().get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
+        projo.get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
             Platform.runLater(() -> projoDin.setLayoutY(newY.doubleValue()));
         });
-        env.getProjo().addListener(new ListChangeListener<Projectile>() {
+        projo.addListener(new ListChangeListener<Projectile>() {
             @Override
             public void onChanged(Change<? extends Projectile> change) {
                 while (change.next()) {

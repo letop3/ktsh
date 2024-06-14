@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.item.artefact.Projectile;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -12,18 +13,20 @@ import javafx.collections.ObservableList;
 
 public class Chunk {
     public static final int CHUNK_SIZE = 352;
-
     private int id;
     private int[] tiles;
     private List<Chunk> neighbors;
 
     private ObservableList<Entity> entities;
 
+    private ObservableList<Projectile> projo;
+
     public Chunk(int id, int[] tiles) {
         this.id = id;
         this.tiles = tiles;
         this.neighbors = new ArrayList<>();
         this.entities = FXCollections.observableArrayList();
+        projo = FXCollections.observableArrayList();
     }
 
     public void addEntity(Entity entity) {
@@ -49,6 +52,17 @@ public class Chunk {
                 currentChunk.addEntity(entity);
             }
         }
+        Iterator<Projectile> iteratorProjo = projo.iterator();
+        while (iteratorProjo.hasNext()) {
+            Projectile projo = iteratorProjo.next();
+            projo.update();
+            System.out.println(projo.getPosition());
+            Chunk currentChunk = projo.getGround().getChunkFromPos(projo.getPosition().getX(), projo.getPosition().getY());
+            if (currentChunk != this) {
+                iteratorProjo.remove();
+                currentChunk.addProjo(projo);
+            }
+        }
     }
 
     public int getId() {
@@ -65,6 +79,18 @@ public class Chunk {
 
     public void addNeighbor(Chunk neighbor) {
         this.neighbors.add(neighbor);
+    }
+
+    public void addProjo(Projectile projo){
+        this.projo.add(projo);
+    }
+
+    public ObservableList<Projectile> getProjo() {
+        return projo;
+    }
+
+    public void removeProjo(Projectile projo) {
+        this.projo.remove(projo);
     }
 
     @Override
