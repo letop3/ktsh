@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +36,8 @@ public class MainMenuController implements Initializable {
     private Label exitLabel, creditsTitleLabel;
     @FXML
     private Label credit1, credit2, credit3;
+
+    private boolean isPopupOpen = false; // Nouveau booléen pour suivre l'état des popups
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,7 +80,7 @@ public class MainMenuController implements Initializable {
         noExitButton.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.3));
         noExitButton.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
         exitLabel.prefWidthProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.8));
-        exitLabel.prefHeightProperty().bind(exitPopupVBox.prefHeightProperty().multiply(0.2));
+        exitLabel.prefHeightProperty().bind(exitPopupVBox.prefWidthProperty().multiply(0.2));
 
         // Lier la taille et la position des éléments dans creditsPopupVBox
         closeCreditsButton.prefWidthProperty().bind(creditsPopupVBox.prefWidthProperty().multiply(0.3));
@@ -109,6 +110,7 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void startGame() {
+        if (isPopupOpen) return;
         System.out.println("Game started");
         menuView.loadNewScene();
         menuView.stopMusic();
@@ -116,35 +118,43 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void showExit() {
+        if (isPopupOpen) return;
         System.out.println("Exit popup shown");
         exitPopupVBox.setVisible(true);
+        isPopupOpen = true;
     }
 
     @FXML
     public void showSettings() {
+        if (isPopupOpen) return;
         System.out.println("Settings shown");
     }
 
     @FXML
     public void showCredits() {
+        if (isPopupOpen) return;
         System.out.println("Credits shown");
         creditsPopupVBox.setVisible(true);
+        isPopupOpen = true;
     }
 
     @FXML
     public void hideCredits() {
         System.out.println("Credits hidden");
         creditsPopupVBox.setVisible(false);
+        isPopupOpen = false;
     }
 
     @FXML
     public void hideExit() {
         System.out.println("Exit popup hidden");
         exitPopupVBox.setVisible(false);
+        isPopupOpen = false;
     }
 
     @FXML
     public void exitGame() {
+        if (isPopupOpen) return;
         System.out.println("Game exited");
         Platform.exit();
         System.exit(0);
