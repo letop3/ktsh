@@ -7,28 +7,20 @@ import com.letop3.ktsh.model.entity.Position;
 
 public class Pathfinder {
     private Ground ground;
-
     private Position target;
     private int targetX, targetY;
-
-    List<double[]> path;
+    private List<double[]> path;
 
     public Pathfinder(Position target, Position position, Ground ground) {
         this.ground = ground;
-
-        this.target = target;
-        targetX = ground.tileFromPosX(target.getX());
-        targetY = ground.tileFromPosY(target.getY());
-
-        this.path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));
+        setTarget(target, position);
     }
 
     public void setTarget(Position target, Position position) {
         this.target = target;
-        targetX = ground.tileFromPosX(target.getX());
-        targetY = ground.tileFromPosY(target.getY());
-
-        path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));
+        this.targetX = ground.tileFromPosX(target.getX());
+        this.targetY = ground.tileFromPosY(target.getY());
+        this.path = findPath(ground.tileFromPosX(position.getX()), ground.tileFromPosY(position.getY()));
     }
 
     private double heuristic(int x1, int y1, int x2, int y2) {
@@ -42,10 +34,11 @@ public class Pathfinder {
             if (direction != null) {
                 int newX = x + direction.getX();
                 int newY = y - direction.getY();
-
                 boolean canMove = ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(newY), direction);
+
                 if (canMove && direction.isDiagonal()) {
-                    canMove = ground.isTileWalkable(ground.posXFromTile(x), ground.posYFromTile(newY), direction) && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(y), direction);
+                    canMove = ground.isTileWalkable(ground.posXFromTile(x), ground.posYFromTile(newY), direction)
+                            && ground.isTileWalkable(ground.posXFromTile(newX), ground.posYFromTile(y), direction);
                 }
 
                 if (canMove) neighbors.add(new int[] { newX, newY });
@@ -87,13 +80,13 @@ public class Pathfinder {
             }
         }
 
-        System.out.println("aucun chemin trouver");
+        System.out.println("aucun chemin trouvé");
         return Collections.emptyList();
     }
 
     private List<double[]> reconstructPath(Map<String, int[]> parentMap, int endX, int endY) {
         List<double[]> path = new ArrayList<>();
-        String currentKey = endX + "," + endY;
+        String currentKey = targetX + "," + targetY;
 
         System.out.print("path : ");
 
@@ -106,38 +99,51 @@ public class Pathfinder {
             int[] parent = parentMap.get(currentKey);
             currentKey = parent[0] + "," + parent[1];
         }
+        System.out.println();
 
-        System.out.println("[" + endX + ", " + endY + "]");
         path.add(new double[] {ground.posXFromTile(endX), ground.posYFromTile(endY)});
         Collections.reverse(path);
+        path.remove(0);
+
+        for (double[] pos : path) {
+            System.out.println("[" + pos[0] + ", " + pos[1] + "]");
+        }
+
         return path;
     }
 
     public Direction getDirection(Position position) {
+        if (path.isEmpty()) return null;
+
+        double[] nextPos = path.get(0);
+        double deltaX = nextPos[0] - position.getX();
+        double deltaY = nextPos[1] - position.getY();
+
+        System.out.println(position + " - " + nextPos[0] + ", " + nextPos[1] + " : " + deltaX + " " + deltaY);
+
         Direction direction = null;
-        int currentX = ground.tileFromPosX(position.getX());
-        int currentY = ground.tileFromPosY(position.getY());
 
-        if (!path.isEmpty()) {
-            double[] nextPos = path.get(0);
+        if (Math.abs(deltaX) > 2) {
+            direction = deltaX > 0 ? Direction.EAST : Direction.WEST;
+        }
 
-            double deltaX = Math.abs(nextPos[0] - position.getX());
-            double deltaY = Math.abs(nextPos[1] - position.getY());
-
-            if (Math.abs(deltaX) > 2) {
-                direction = deltaX > 0 ? Direction.EAST : Direction.WEST;
-            }
-            if (Math.abs(deltaY) > 2) {
-                Direction dirY = deltaY < 0 ? Direction.NORTH : Direction.SOUTH;
-
-                if (direction == null) direction = dirY;
-                else direction = direction.add(dirY);
-            }
+        if (Math.abs(deltaY) > 2) {
+            Direction dirY = deltaY > 0 ? Direction.SOUTH : Direction.NORTH;
 
             if (direction == null) {
-                path.remove(0);
-                System.out.println("cible atteinte");
-                direction = getDirection(position);
+                direction = dirY;
+            } else {
+                direction = direction.add(dirY);
+            }
+        }
+
+        if (direction == null) {
+            path.remove(0);
+            System.out.println("cible atteinte");
+            if (!path.isEmpty()) {
+                return getDirection(position);
+            } else {
+                System.out.println("cible atteinte fin");
             }
         }
 

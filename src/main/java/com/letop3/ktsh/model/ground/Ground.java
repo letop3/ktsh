@@ -112,11 +112,11 @@ public class Ground {
     }
 
     public double posXFromTile(int x) {
-        return x * (Chunk.CHUNK_SIZE / 11);
+        return x * (Chunk.CHUNK_SIZE / 11) + 16;
     }
 
     public double posYFromTile(int y) {
-        return y * (Chunk.CHUNK_SIZE / 11);
+        return y * (Chunk.CHUNK_SIZE / 11) + 16;
     }
 
     public boolean isTileWalkable(double x, double y, Direction direction){
