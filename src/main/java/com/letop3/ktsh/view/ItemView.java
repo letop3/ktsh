@@ -5,6 +5,8 @@ import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.ground.Chunk;
+import com.letop3.ktsh.model.item.artefact.Bombe;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
 import javafx.application.Platform;
@@ -23,6 +25,10 @@ public class ItemView {
     private Image potionAtkEffectImg;
     private Image projoDinImg;
     private Image ermsEffectImg;
+    private Image bombeMeguImg;
+    private Image explosionMeguImg;
+
+
     private PlayerView playerView;
     private Pane itemEffectPane;
     private Pane gamePlayer;
@@ -35,6 +41,8 @@ public class ItemView {
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
         this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
         this.projoDinImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/dinprojo.gif")));
+        this.bombeMeguImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/bombe.gif")));
+        this.explosionMeguImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/explosion.gif")));
     }
 
     public Pane getItemEffectPane() {
@@ -47,12 +55,12 @@ public class ItemView {
         ImageView ermsEffect = new ImageView(this.ermsEffectImg);
         ermsEffect.setLayoutX(x - 16);
         ermsEffect.setLayoutY(y - 16);
-        gamePlayer.getChildren().add(ermsEffect);
+        itemEffectPane.getChildren().add(ermsEffect);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> gamePlayer.getChildren().remove(ermsEffect));
+                Platform.runLater(() -> itemEffectPane.getChildren().remove(ermsEffect));
             }
         }, 500);
     }
@@ -63,12 +71,12 @@ public class ItemView {
         ImageView potionAtkEffect = new ImageView(this.potionAtkEffectImg);
         potionAtkEffect.setLayoutX(x - 16);
         potionAtkEffect.setLayoutY(y - 16);
-        gamePlayer.getChildren().add(potionAtkEffect);
+        itemEffectPane.getChildren().add(potionAtkEffect);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> gamePlayer.getChildren().remove(potionAtkEffect));
+                Platform.runLater(() -> itemEffectPane.getChildren().remove(potionAtkEffect));
             }
         }, 15000);
     }
@@ -92,12 +100,57 @@ public class ItemView {
             Platform.runLater(() ->
                     projoDin.setLayoutY(newY.doubleValue() + screenY));
         });
+
         env.getProjo().addListener(new ListChangeListener<Projectile>() {
             @Override
             public void onChanged(Change<? extends Projectile> change) {
                 while (change.next()) {
                     if (change.wasRemoved()) {
                         itemEffectPane.getChildren().remove(projoDin);
+                    }
+                }
+            }
+        });
+    }
+
+    public void drawBombe(Env env){
+        ImageView bombeMegu = new ImageView(this.bombeMeguImg);
+        bombeMegu.setLayoutX(env.getBombe().get(0).getPosition().getX() + screenPosition.getX());
+        bombeMegu.setLayoutY(env.getBombe().get(0).getPosition().getY() + screenPosition.getY());
+        itemEffectPane.getChildren().add(bombeMegu);
+
+        screenPosition.xProperty().addListener((obs, oldX, newX) -> {
+            Platform.runLater(() ->{
+                if (!env.getBombe().isEmpty())
+                    bombeMegu.setLayoutX(env.getBombe().get(0).getPosition().getX() + screenPosition.getX());
+            });
+
+        });
+        screenPosition.yProperty().addListener((obs, oldY, newY) -> {
+            Platform.runLater(() ->{
+                if (!env.getBombe().isEmpty())
+                    bombeMegu.setLayoutY(env.getBombe().get(0).getPosition().getY() + screenPosition.getY());
+            });
+        });
+
+        env.getBombe().get(0).detonationProperty().addListener((obs, old, nouv) -> {
+            Platform.runLater(() ->{
+                bombeMegu.setImage(this.explosionMeguImg);
+                bombeMegu.setFitWidth(96);
+                bombeMegu.setFitHeight(96);
+                bombeMegu.setTranslateX(-32);
+                bombeMegu.setTranslateY(-32);
+
+                dmgSpeToEntity(env.getPlayer(), bombeMegu, "EXPLOSION");
+            });
+        });
+
+        env.getBombe().addListener(new ListChangeListener<Bombe>() {
+            @Override
+            public void onChanged(Change<? extends Bombe> change) {
+                while (change.next()) {
+                    if (change.wasRemoved()) {
+                        itemEffectPane.getChildren().remove(bombeMegu);
                     }
                 }
             }
@@ -113,12 +166,18 @@ public class ItemView {
                 String resistance = e.getResistance();
                 if (!(e instanceof Mob))
                     return;
-                if (type.equals(resistance))
+                if (type.equals("EXPLOSION")) {
+                    if (type.equals(resistance))
+                        e.takeDamage(999999);
+                    else e.takeDamage(2);
+                }
+                else if (type.equals(resistance))
                     e.takeDamage(0);
                 else if (type.equals(faiblesse))
                     e.takeDamage(4);
                 else
                     e.takeDamage(1);
+                System.out.println(e.getHp());
             }
             if (e.getHp() <= 0) {
                 iterator.remove();

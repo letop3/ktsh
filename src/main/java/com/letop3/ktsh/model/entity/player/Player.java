@@ -8,6 +8,7 @@ import com.letop3.ktsh.model.entity.ennemies.Ennemies;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
+import com.letop3.ktsh.model.item.artefact.BombMegumin;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.artefact.DinStaff;
 import com.letop3.ktsh.model.item.artefact.GantHerkUl;
@@ -50,6 +51,7 @@ public class Player extends Entity {
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
         stuff.addItem(new GantHerkUl(1,"Gant Herk Ul", "Test", 100));
+        stuff.addItem(new BombMegumin(1,"Bomb Megumin", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
         this.enAtq = new SimpleBooleanProperty(false);
 
