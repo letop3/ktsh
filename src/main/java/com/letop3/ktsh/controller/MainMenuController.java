@@ -110,32 +110,34 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void startGame() {
-        if (isPopupOpen) return;
-        System.out.println("Game started");
-        menuView.loadNewScene();
-        menuView.stopMusic();
+        if (!isPopupOpen) {
+            System.out.println("Game started");
+            menuView.loadNewScene();
+            menuView.stopMusic();
+        }
     }
 
     @FXML
     public void showExit() {
-        if (isPopupOpen) return;
-        System.out.println("Exit popup shown");
-        exitPopupVBox.setVisible(true);
-        isPopupOpen = true;
+        if (!isPopupOpen) {
+            System.out.println("Exit popup shown");
+            exitPopupVBox.setVisible(true);
+            isPopupOpen = true;
+        }
     }
 
     @FXML
     public void showSettings() {
-        if (isPopupOpen) return;
         System.out.println("Settings shown");
     }
 
     @FXML
     public void showCredits() {
-        if (isPopupOpen) return;
-        System.out.println("Credits shown");
-        creditsPopupVBox.setVisible(true);
-        isPopupOpen = true;
+        if (!isPopupOpen) {
+            System.out.println("Credits shown");
+            creditsPopupVBox.setVisible(true);
+            isPopupOpen = true;
+        }
     }
 
     @FXML
@@ -154,7 +156,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void exitGame() {
-        if (isPopupOpen) return;
         System.out.println("Game exited");
         Platform.exit();
         System.exit(0);
