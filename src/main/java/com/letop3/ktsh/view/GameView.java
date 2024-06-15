@@ -54,27 +54,26 @@ public class GameView {
                     GridPane dialogueBox,
                     Label dialogueText,
                     ListView<String> dialogueResponses, Pane itemEffectPane) {
+
+        screenPosition = new Position(Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getX(), Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getY());
+
         groundView = new GroundView(ground, gameGround, player);
         playerView = new PlayerView(player, gamePlayer, this);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
-        itemView = new ItemView(playerView, itemEffectPane, gamePlayer);
+        itemView = new ItemView(playerView, itemEffectPane, gamePlayer, screenPosition);
         DialogueView dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
 
         this.player = player;
-
-        screenPosition = new Position(Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getX(), Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getY());
 
         gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
         gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getY() % Chunk.CHUNK_SIZE);
 
         player.getPosition().xProperty().addListener((obs, old, nouv) -> {
             gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
-            itemEffectPane.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
             screenPosition.setX(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
         player.getPosition().yProperty().addListener((obs, old, nouv) -> {
             gameGround.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
-            itemEffectPane.setTranslateY(Chunk.CHUNK_SIZE * 0.5 - (double)nouv % Chunk.CHUNK_SIZE);
             screenPosition.setY(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
 

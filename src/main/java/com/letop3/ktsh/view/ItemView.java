@@ -2,6 +2,7 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
@@ -18,6 +19,7 @@ import java.util.TimerTask;
 
 public class ItemView {
 
+    private Position screenPosition;
     private Image potionAtkEffectImg;
     private Image projoDinImg;
     private Image ermsEffectImg;
@@ -25,10 +27,11 @@ public class ItemView {
     private Pane itemEffectPane;
     private Pane gamePlayer;
 
-    public ItemView(PlayerView playerView, Pane itemEffectPane, Pane gamePlayer) {
+    public ItemView(PlayerView playerView, Pane itemEffectPane, Pane gamePlayer, Position screenPosition) {
         this.itemEffectPane = itemEffectPane;
         this.playerView = playerView;
         this.gamePlayer = gamePlayer;
+        this.screenPosition = screenPosition;
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
         this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
         this.projoDinImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/dinprojo.gif")));
@@ -72,18 +75,19 @@ public class ItemView {
 
     public void drawDinStaff(Env env) {
         ImageView projoDin = new ImageView(this.projoDinImg);
-        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX());
-        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY());
+        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX() + screenPosition.getX());
+        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY() + screenPosition.getY());
         itemEffectPane.getChildren().add(projoDin);
 
         dmgSpeToEntity(env.getPlayer(), projoDin, "FIRE");
 
         env.getProjo().get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
             Platform.runLater(() ->
-                    projoDin.setLayoutX(newX.doubleValue()));
+                    projoDin.setLayoutX(newX.doubleValue() + screenPosition.getX()));
         });
         env.getProjo().get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
-            Platform.runLater(() -> projoDin.setLayoutY(newY.doubleValue()));
+            Platform.runLater(() ->
+                    projoDin.setLayoutY(newY.doubleValue() + screenPosition.getY()));
         });
         env.getProjo().addListener(new ListChangeListener<Projectile>() {
             @Override
