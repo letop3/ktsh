@@ -22,6 +22,7 @@ public class SoundPlayer {
             String path = Paths.get(musicFile).toUri().toString();
             Media media = new Media(path);
             backgroundPlayer = new MediaPlayer(media);
+            backgroundPlayer.setVolume(0.75);
             backgroundPlayer.setOnEndOfMedia(() -> backgroundPlayer.seek(Duration.ZERO));
             backgroundPlayer.play();
         } catch (MediaException e) {

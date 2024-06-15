@@ -6,6 +6,7 @@ import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.PlayerListener;
 import com.letop3.ktsh.view.GameView;
 import com.letop3.ktsh.view.animation.AnimationHandler;
+import com.letop3.ktsh.view.music.SoundPlayer;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.image.Image;
@@ -20,8 +21,8 @@ import java.util.TimerTask;
 public class PlayerView {
     private final ImageView playerImageView;
     private final AnimationHandler animHandler;
-    private Pane gamePlayer;
-    private GameView gameView;
+    private final Pane gamePlayer;
+    private final GameView gameView;
 
     public PlayerView(Player player, Pane gamePlayer, GameView gameView) {
         animHandler = new AnimationHandler(new PlayerAnimationAdapter(player));
@@ -131,6 +132,7 @@ public class PlayerView {
                 }, 150);
                 break;
         }
+        SoundPlayer.playSound("src/main/resources/com/letop3/ktsh/audio/sound/sword.mp3");
     }
 
     private void dmgToEntity(Player player, ImageView hitboxAtk){
