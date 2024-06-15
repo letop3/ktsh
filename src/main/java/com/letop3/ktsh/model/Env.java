@@ -1,7 +1,11 @@
 package com.letop3.ktsh.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import com.letop3.ktsh.model.entity.BlockM;
+import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
@@ -39,6 +43,9 @@ public class Env {
 
 		//Debug Mob
 		addEntity(new Mob(new Position(900, 480), player));
+
+        //BlockM
+        addEntity(new BlockM(new Position(584, 100), ground, new ArrayList<>(List.of(Direction.EAST))));
 
         projo = FXCollections.observableArrayList();
     }

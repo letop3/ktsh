@@ -1,5 +1,6 @@
 package com.letop3.ktsh.view;
 
+import com.letop3.ktsh.model.entity.BlockM;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
@@ -10,6 +11,7 @@ import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
 import com.letop3.ktsh.view.entity.EntityView;
 import com.letop3.ktsh.view.entity.MobView;
+import com.letop3.ktsh.view.entity.NPC.BlockMView;
 import com.letop3.ktsh.view.entity.NPC.DialogueView;
 import com.letop3.ktsh.view.entity.NPC.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
@@ -89,7 +91,8 @@ public class GameView {
                     }
                     else if (entity instanceof Mob) {
                         entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
-                    }
+                    } else if (entity instanceof BlockM)
+                        entityView = new BlockMView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
 
                     if (entityView != null) entities.putIfAbsent(entity, entityView);
                 }
