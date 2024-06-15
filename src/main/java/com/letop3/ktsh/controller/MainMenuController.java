@@ -105,7 +105,7 @@ public class MainMenuController implements Initializable {
         credit3.styleProperty().bind(Bindings.concat("-fx-font-size: ", mainPane.widthProperty().multiply(0.015).asString(), "px;"));
 
         menuView = new MainMenuView();
-        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu3.mp3");
+        menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
     }
 
     @FXML
