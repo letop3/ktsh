@@ -1,0 +1,50 @@
+/* Style général des boutons */
+.button {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte blanche */
+    -fx-font-size: 20px; /* Taille du texte */
+    -fx-font-family: 'Arial', sans-serif; /* Police du texte */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 0 0 3px 0; /* Bordure inférieure seulement */
+    -fx-padding: 12px 25px; /* Espacement interne */
+    -fx-cursor: hand; /* Curseur pointeur */
+    -fx-transition: all 0.3s ease; /* Transition pour les effets */
+    -fx-background-radius: 15px; /* Coins très arrondis */
+    -fx-border-radius: 15px; /* Coins très arrondis pour la bordure */
+    -fx-background-insets: 0, 1 1 1 1; /* Ajustement du fond pour éviter le dépassement */
+    -fx-border-insets: 0 0 1 0; /* Ajustement de la bordure pour éviter le dépassement */
+    -fx-margin: 10px; /* Marges pour espacer les boutons */
+}
+
+/* Effet de survol */
+.button:hover {
+    -fx-background-color: rgba(50, 50, 50, 0.9); /* Fond gris foncé au survol */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au survol */
+    -fx-scale-x: 1.02; /* Agrandissement horizontal au survol */
+    -fx-scale-y: 1.02; /* Agrandissement vertical au survol */
+}
+
+/* Effet lors de l'appui */
+.button:pressed {
+    -fx-background-color: rgba(70, 70, 70, 0.9); /* Fond gris très foncé au clic */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au clic */
+    -fx-scale-x: 1.0; /* Réduction de l'agrandissement au clic */
+    -fx-scale-y: 1.0; /* Réduction de l'agrandissement au clic */
+}
+
+/* Style pour un bouton désactivé */
+.button:disabled {
+    -fx-background-color: rgba(50, 50, 50, 0.5); /* Fond semi-transparent gris */
+    -fx-text-fill: #888888; /* Couleur du texte désactivé (gris) */
+    -fx-border-color: #888888; /* Bordure grise désactivée */
+    -fx-cursor: default; /* Curseur par défaut */
+}
+
+/* Conteneur des boutons */
+.button-container {
+    -fx-alignment: center; /* Alignement centré */
+    -fx-spacing: 20px; /* Espacement entre les boutons */
+    -fx-padding: 30px 20px 20px 20px; /* Espacement interne du conteneur avec écart supérieur */
+}

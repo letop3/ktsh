@@ -29,9 +29,11 @@ public class ControlsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Platform.runLater(() -> {
-            gameGround.getScene().setOnKeyPressed(this::keyPressed);
-            gameGround.getScene().setOnKeyReleased(this::keyReleased);
+        gameGround.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setOnKeyPressed(this::keyPressed);
+                newScene.setOnKeyReleased(this::keyReleased);
+            }
         });
     }
 
