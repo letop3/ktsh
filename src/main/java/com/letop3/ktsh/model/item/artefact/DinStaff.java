@@ -23,6 +23,7 @@ public class DinStaff extends Artefact{
     @Override
     public void action(Player player) {
         if (projectile == null){
+            player.setEnAtq(true);
             double x = player.getPosition().getX() - 16;
             double y = player.getPosition().getY() - 16;
             projectile = new Projectile(new Position(x,y), player.getGround(), player.getLastDirection());
@@ -35,10 +36,11 @@ public class DinStaff extends Artefact{
                     Platform.runLater(() -> {
                                 player.getEnv().removeProjo(projectile);
                                 projectile = null;
+                                player.setEnAtq(false);
                             }
                     );
                 }
-            }, 1000);
+            }, 750);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.letop3.ktsh.model.item.artefact;
 
 import com.letop3.ktsh.model.entity.Direction;
-import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.ground.Ground;
 
@@ -17,8 +16,13 @@ public class Projectile {
     }
 
     public void update() {
-        position.setX(position.getX() + direction.getX()*3);
-        position.setY(position.getY() - direction.getY()*3);
+        double norm = Math.sqrt(direction.getX() * direction.getX() + direction.getY() * direction.getY());
+
+        double normX = direction.getX() / norm;
+        double normY = direction.getY() / norm;
+
+        position.setX(position.getX() + normX * 5);
+        position.setY(position.getY() - normY * 5);
     }
 
     public Direction getDirection() {

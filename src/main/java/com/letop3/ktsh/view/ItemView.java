@@ -75,19 +75,22 @@ public class ItemView {
 
     public void drawDinStaff(Env env) {
         ImageView projoDin = new ImageView(this.projoDinImg);
-        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX() + screenPosition.getX());
-        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY() + screenPosition.getY());
+        double screenX = screenPosition.getX();
+        double screenY = screenPosition.getY();
+        projoDin.setLayoutX(env.getProjo().get(0).getPosition().getX() + screenX);
+        projoDin.setLayoutY(env.getProjo().get(0).getPosition().getY() + screenY);
         itemEffectPane.getChildren().add(projoDin);
 
         dmgSpeToEntity(env.getPlayer(), projoDin, "FIRE");
 
         env.getProjo().get(0).getPosition().xProperty().addListener((obs, oldX, newX) -> {
-            Platform.runLater(() ->
-                    projoDin.setLayoutX(newX.doubleValue() + screenPosition.getX()));
+            Platform.runLater(() ->{
+                    projoDin.setLayoutX(newX.doubleValue() + screenX);
+            });
         });
         env.getProjo().get(0).getPosition().yProperty().addListener((obs, oldY, newY) -> {
             Platform.runLater(() ->
-                    projoDin.setLayoutY(newY.doubleValue() + screenPosition.getY()));
+                    projoDin.setLayoutY(newY.doubleValue() + screenY));
         });
         env.getProjo().addListener(new ListChangeListener<Projectile>() {
             @Override

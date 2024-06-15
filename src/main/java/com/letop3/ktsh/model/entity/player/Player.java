@@ -32,6 +32,7 @@ public class Player extends Entity {
     private Interractible interractionTarget;
     private PlayerListener pL;
     private boolean attackOnCD = false;
+    private BooleanProperty enAtq;
     private Env env;
 
     public Player(Position position, Ground ground, Env env) {
@@ -49,6 +50,8 @@ public class Player extends Entity {
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
+        this.enAtq = new SimpleBooleanProperty(false);
+
         this.env = env;
 
         this.pL = null;
@@ -56,6 +59,10 @@ public class Player extends Entity {
 
     public Env getEnv() {
         return env;
+    }
+
+    public void setEnAtq(boolean enAtq) {
+        this.enAtq.set(enAtq);
     }
 
     public void setPL(PlayerListener pL) {
@@ -126,7 +133,7 @@ public class Player extends Entity {
 
     @Override
     public void update() {
-        if (!lock.get()) {
+        if (!lock.get() && !enAtq.get()) {
             super.update();
 
             double minDistance = Double.MAX_VALUE;
@@ -144,20 +151,24 @@ public class Player extends Entity {
     }
 
     public void useQuickSlot() {
-        if (!lock.get() && this.stuff.getQuickSlot() != null) {
+        if ((!lock.get() && !enAtq.get()) && this.stuff.getQuickSlot() != null) {
             this.stuff.getQuickSlot().action(this);
         }
     }
 
     public void attack(Env env) {
-        if (!lock.get() && !attackOnCD) {
+        if ((!lock.get() && !enAtq.get()) && !attackOnCD) {
             attackOnCD = true;
+            setEnAtq(true);
 
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    Platform.runLater(() -> attackOnCD = false);
+                    Platform.runLater(() -> {
+                        attackOnCD = false;
+                        setEnAtq(false);
+                    });
                 }
             }, 400);
 
