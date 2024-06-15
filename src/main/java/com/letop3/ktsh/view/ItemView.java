@@ -1,6 +1,7 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
@@ -114,13 +115,13 @@ public class ItemView {
                 if (!(e instanceof Mob))
                     return;
                 if (type.equals(resistance))
-                    e.takeDamage(0);
+                    ((Attackable)e).takeDamage(0);
                 else if (type.equals(faiblesse))
-                    e.takeDamage(4);
+					((Attackable)e).takeDamage(4);
                 else
-                    e.takeDamage(1);
+					((Attackable)e).takeDamage(1);
             }
-            if (e.getHp() <= 0) {
+            if (((Attackable)e).getHp() <= 0) {
                 iterator.remove();
                 Pane entityView = playerView.getGameView().getEntities().remove(e).getSpriteTarget();
                 Platform.runLater(() -> {

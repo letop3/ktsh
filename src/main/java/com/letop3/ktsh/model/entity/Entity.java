@@ -3,12 +3,10 @@ package com.letop3.ktsh.model.entity;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.Updatable;
-import javafx.beans.property.IntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
 public abstract class Entity implements Updatable {
-    protected IntegerProperty hp;
     private final static double speed = 2;
     private final Ground ground;
     private final Position position;
@@ -20,9 +18,11 @@ public abstract class Entity implements Updatable {
 
     public Entity(Position position, Ground ground) {
         this.position = position;
-        this.direction = null;
         this.ground = ground;
+
+        this.direction = null;
         this.lastDirection = Direction.SOUTH;
+
         this.hitboxWidth = 64;
         this.hitboxHeight = 64;
         this.hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
@@ -74,14 +74,6 @@ public abstract class Entity implements Updatable {
         if (direction != null && this.direction != null && (this.direction.getX() - direction.getX() == 0 || this.direction.getY() - direction.getY() == 0)) {
             this.direction = this.direction.sub(direction);
         }
-    }
-
-    public void takeDamage(int dmg) {
-        this.hp.set(Math.max(this.hp.get() - dmg, 0));
-    }
-
-    public int getHp(){
-        return hp.get();
     }
 
     public void setHitboxSize(double width, double height) {

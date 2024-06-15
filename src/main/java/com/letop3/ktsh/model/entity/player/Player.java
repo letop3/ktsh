@@ -1,6 +1,7 @@
 package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
@@ -14,16 +15,14 @@ import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Player extends Entity {
+public class Player extends Attackable {
     private int maxHp;
     private Stuff stuff;
     private BooleanProperty lock;
@@ -34,12 +33,13 @@ public class Player extends Entity {
     private BooleanProperty enAtq;
     private Env env;
 
-    public Player(Position position, Ground ground, Env env) {
-        super(position, ground);
+	private Player(Position position, Ground ground, Env env, int maxHp) {
+		super(position, ground, maxHp);
+		this.maxHp = maxHp;
+		this.atk = 1;
+
         interractionTarget = null;
-        this.maxHp = 12;
-        this.atk = 1;
-        this.hp = new SimpleIntegerProperty(this.maxHp);
+
         this.stuff = new Stuff();
         stuff.addItem(new DulledSword(1, "Sword Test", "Un test pour arme", 100));
         stuff.addItem(new Excaliba(2, "Excalibur", "Un test pour arme", 100));
@@ -48,12 +48,16 @@ public class Player extends Entity {
         stuff.addItem(new PotionAtk(1, "Potion atk", "test", 100));
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
+
         this.lock = new SimpleBooleanProperty(false);
         this.enAtq = new SimpleBooleanProperty(false);
 
         this.env = env;
-
         this.pL = null;
+	}
+
+    public Player(Position position, Ground ground, Env env) {
+        this(position, ground, env, 12);
     }
 
     public Env getEnv() {
@@ -86,21 +90,13 @@ public class Player extends Entity {
         }
     }
 
-    public int getHp() {
-        return hp.get();
-    }
-
-    public void setHp(int hp) {
-        this.hp.setValue(hp);
-    }
-
     public int getMaxHp() {
         return maxHp;
     }
 
     public int[] getHearts() {
-        int fullHearts = hp.get() / 2;
-        int halfHearts = hp.get() % 2;
+        int fullHearts = getHp() / 2;
+        int halfHearts = getHp() % 2;
         int totalHearts = maxHp / 2;
         return new int[]{fullHearts, halfHearts, totalHearts};
     }
@@ -108,10 +104,6 @@ public class Player extends Entity {
     @Override
     public String toString() {
         return "Player";
-    }
-
-    public IntegerProperty hpProperty() {
-        return hp;
     }
 
     public Stuff getStuff() {
@@ -195,8 +187,9 @@ public class Player extends Entity {
                     for (Entity entity : chunk.getEntities()) {
                         if (entity instanceof Ennemies) {
                             if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
-                                ((Ennemies) entity).takeDamage(this.atk);
-                                System.out.println(entity.getHp());
+								Ennemies ennemie = (Ennemies)entity;
+                                ennemie.takeDamage(this.atk);
+                                System.out.println(ennemie.getHp());
                             }
                         }
                     }
