@@ -17,6 +17,7 @@ import com.letop3.ktsh.model.entity.npc.action.textAction.SpeakAction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.item.artefact.Bombe;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,7 @@ public class Env {
     private final Ground ground;
     private final Player player;
     private ObservableList<Projectile> projo;
+    private ObservableList<Bombe> bombes;
 
     public Env() {
         this.ground = new Ground();
@@ -48,6 +50,7 @@ public class Env {
         addEntity(new BlockM(new Position(584, 100), ground, new ArrayList<>(List.of(Direction.EAST))));
 
         projo = FXCollections.observableArrayList();
+        bombes = FXCollections.observableArrayList();
     }
 
     public void update() {
@@ -72,15 +75,28 @@ public class Env {
         return ground;
     }
 
-    public void addProjo(Projectile projo){
-        this.projo.add(projo);
-    }
-
     public ObservableList<Projectile> getProjo() {
         return projo;
+    }
+
+    public void addProjo(Projectile projo){
+        this.projo.add(projo);
     }
 
     public void removeProjo(Projectile projo) {
         this.projo.remove(projo);
     }
+
+    public ObservableList<Bombe> getBombe() {
+        return bombes;
+    }
+
+    public void addBombe(Bombe bombe){
+        this.bombes.add(bombe);
+    }
+
+    public void removeBombe(Bombe bombe) {
+        this.bombes.remove(bombe);
+    }
 }
+

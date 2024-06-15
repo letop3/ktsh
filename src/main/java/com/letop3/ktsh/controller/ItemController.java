@@ -1,6 +1,7 @@
 package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.item.artefact.BombMegumin;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.artefact.DinStaff;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
@@ -31,6 +32,7 @@ public class ItemController implements Initializable, ActionListener {
             view.getItemView().drawPotionAtk();
         } else if (env.getPlayer().getStuff().getQuickSlot() instanceof DinStaff){
             view.getItemView().drawDinStaff(env);
-        }
+        } else if (env.getPlayer().getStuff().getQuickSlot() instanceof BombMegumin)
+            view.getItemView().drawBombe(env);
     }
 }
