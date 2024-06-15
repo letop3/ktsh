@@ -136,6 +136,7 @@ public class PlayerView {
         Iterator<Entity> iterator = player.getGround().getCurrentChunk().getEntities().iterator();
         while (iterator.hasNext()) {
             Entity e = iterator.next();
+            System.out.println(e);
             if (hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
                 e.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
                 System.out.println(e.getHp());

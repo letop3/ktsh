@@ -26,14 +26,14 @@ public class DinStaff extends Artefact{
             double x = player.getPosition().getX() - 16;
             double y = player.getPosition().getY() - 16;
             projectile = new Projectile(new Position(x,y), player.getGround(), player.getLastDirection());
-            player.getEnv().getGround().getCurrentChunk().addProjo(projectile);
+            player.getEnv().addProjo(projectile);
             notifyActionListener();
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     Platform.runLater(() -> {
-                                player.getEnv().getGround().getCurrentChunk().removeProjo(projectile);
+                                player.getEnv().removeProjo(projectile);
                                 projectile = null;
                             }
                     );
