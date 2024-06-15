@@ -2,7 +2,6 @@ package com.letop3.ktsh.controller;
 
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.view.GameView;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -61,7 +60,7 @@ public class GameController implements Initializable {
         this.view = gameView;
 
         //on s'occupe des controllers
-        GameLoop gameLoopController = new GameLoop(env, gameGround, gameView);
+        GameLoop gameLoopController = new GameLoop(env, gameView);
         ControlsController controlsController = new ControlsController(gameGround, env.getPlayer(), gameView.getStuffView(), env);
         ItemController itemController = new ItemController(view, env);
         StuffController stuffController = new StuffController(view, env, itemController);
