@@ -3,6 +3,7 @@ package com.letop3.ktsh.view;
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
@@ -110,7 +111,8 @@ public class ItemView {
             if (hitboxAtk.intersects(playerView.getGameView().getEntities().get(e).getSpriteTarget().getBoundsInLocal())) {
                 String faiblesse = e.getFaiblesse();
                 String resistance = e.getResistance();
-
+                if (!(e instanceof Mob))
+                    return;
                 if (type.equals(resistance))
                     e.takeDamage(0);
                 else if (type.equals(faiblesse))
@@ -118,7 +120,6 @@ public class ItemView {
                 else
                     e.takeDamage(1);
             }
-            System.out.println(e.getHp());
             if (e.getHp() <= 0) {
                 iterator.remove();
                 Pane entityView = playerView.getGameView().getEntities().remove(e).getSpriteTarget();
