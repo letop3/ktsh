@@ -1,6 +1,7 @@
 package com.letop3.ktsh.view.player;
 
 import com.letop3.ktsh.model.entity.Entity;
+import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.PlayerListener;
 import com.letop3.ktsh.view.GameView;
@@ -138,6 +139,8 @@ public class PlayerView {
             Entity e = iterator.next();
             System.out.println(e);
             if (hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
+                if (!(e instanceof Mob))
+                    return;
                 e.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
                 System.out.println(e.getHp());
                 if (e.getHp() <= 0) {

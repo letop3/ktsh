@@ -10,6 +10,7 @@ import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.artefact.DinStaff;
+import com.letop3.ktsh.model.item.artefact.GantHerkUl;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.application.Platform;
@@ -48,6 +49,7 @@ public class Player extends Entity {
         stuff.addItem(new PotionAtk(1, "Potion atk", "test", 100));
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
+        stuff.addItem(new GantHerkUl(1,"Gant Herk Ul", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
         this.enAtq = new SimpleBooleanProperty(false);
 
