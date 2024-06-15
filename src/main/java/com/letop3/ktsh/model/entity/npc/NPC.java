@@ -52,9 +52,9 @@ public class NPC extends Interractible {
     public void update() {
         super.update();
         if (pathfinder != null) {
-            Direction direction = pathfinder.directionToTarget(getPosition());
+            Direction direction = pathfinder.getDirection(getPosition());
             setDirection(direction);
-            if (direction == null) pathfinder = null;
+            if (pathfinder.isArrived()) pathfinder = null;
         }
     }
 }

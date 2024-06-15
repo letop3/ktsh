@@ -13,7 +13,7 @@ public enum Direction {
         this.y = y;
     }
 
-    private int sign(int x) {
+    private static int sign(int x) {
         if (x > 0)
             return 1;
         else if (x < 0)
@@ -22,7 +22,7 @@ public enum Direction {
             return 0;
     }
 
-    private Direction resolvDirection(int x, int y) {
+    public static Direction resolvDirection(int x, int y) {
         for (Direction direction : Direction.values()) {
             if (direction.x == sign(x) && direction.y == sign(y)) {
                 return direction;

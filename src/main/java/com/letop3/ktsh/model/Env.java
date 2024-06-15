@@ -35,10 +35,10 @@ public class Env {
 		responses.add(new SpeakAction("I'm sorry to hear that", endAction));
 		Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
 
-        addEntity(new NPC(new Position(220, 450), ground, dialogue));
+        addEntity(new NPC(new Position(252, 512), ground, dialogue));
 
 		//Debug Mob
-		addEntity(new Mob(new Position(860, 480), player));
+		addEntity(new Mob(new Position(900, 480), player));
 
         projo = FXCollections.observableArrayList();
     }
