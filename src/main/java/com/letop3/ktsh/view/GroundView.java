@@ -1,22 +1,24 @@
 package com.letop3.ktsh.view;
 
-import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.view.music.SoundPlayer;
 import com.letop3.ktsh.view.viewUtils.TilesetCutter;
+import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
-import javafx.beans.value.ChangeListener;
 
 public class GroundView {
     private final TilesetCutter cutter;
+    private final SoundPlayer player;
     private final TilePane[][] chunks;
     private final Ground ground;
 
-    public GroundView(Ground ground, TilePane gameGround, Player player) {
+    public GroundView(Ground ground, TilePane gameGround) {
         this.ground = ground;
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/tiles/ground.png", 32);
+        this.player = new SoundPlayer();
         this.chunks = new TilePane[3][3];
 
         for (int y = 0; y < 3; y++) {
@@ -44,6 +46,9 @@ public class GroundView {
 
         ground.currentChunkIdXProperty().addListener(chunkUpdate);
         ground.currentChunkIdYProperty().addListener(chunkUpdate);
+
+        //jouer la musique d'arrère plan
+        player.playBackgroundMusic("src/main/resources/com/letop3/ktsh/audio/music/menu3.mp3");
     }
 
     private void loadChunkInto(TilePane dest, int x, int y) {

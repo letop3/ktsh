@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 import java.nio.file.Paths;
 
-public class MusicPlayer {
+public class SoundPlayer {
 
     private MediaPlayer backgroundPlayer;
 
@@ -28,7 +28,7 @@ public class MusicPlayer {
         }
     }
 
-    public void playSound(String soundFile) {
+    public static void playSound(String soundFile) {
         String path = Paths.get(soundFile).toUri().toString();
         Media sound = new Media(path);
         MediaPlayer mediaPlayer = new MediaPlayer(sound);

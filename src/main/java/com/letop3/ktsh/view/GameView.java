@@ -16,7 +16,6 @@ import com.letop3.ktsh.view.entity.NPC.DialogueView;
 import com.letop3.ktsh.view.entity.NPC.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
 import com.letop3.ktsh.view.player.stuff.StuffView;
-
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,19 +29,19 @@ import java.util.Map;
 import java.util.Objects;
 
 public class GameView {
-    private Player player;
-    private GroundView groundView;
-    private PlayerView playerView;
-    private StuffView stuffView;
-    private Canvas heartCanvas;
-    private Image fullHeart;
-    private Image halfHeart;
-    private Image emptyHeart;
-    private ItemView itemView;
+    private final Player player;
+    private final GroundView groundView;
+    private final PlayerView playerView;
+    private final StuffView stuffView;
+    private final Canvas heartCanvas;
+    private final Image fullHeart;
+    private final Image halfHeart;
+    private final Image emptyHeart;
+    private final ItemView itemView;
 
-    private Position screenPosition;
+    private final Position screenPosition;
 
-    private Map<Entity, EntityView> entities;
+    private final Map<Entity, EntityView> entities;
 
     public GameView(Player player,
                     Ground ground,
@@ -58,7 +57,7 @@ public class GameView {
 
         screenPosition = new Position(Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getX(), Chunk.CHUNK_SIZE * 1.5 - player.getPosition().getY());
 
-        groundView = new GroundView(ground, gameGround, player);
+        groundView = new GroundView(ground, gameGround);
         playerView = new PlayerView(player, gamePlayer, this);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
         itemView = new ItemView(playerView, itemEffectPane, gamePlayer, screenPosition);
@@ -79,7 +78,7 @@ public class GameView {
         });
 
         this.entities = new HashMap<>();
-        for (Chunk chunks[] : ground.getChunks()) {
+        for (Chunk[] chunks : ground.getChunks()) {
             for (Chunk chunk : chunks) {
                 for (Entity entity : chunk.getEntities()) {
                     Pane entityImageView = new Pane();
