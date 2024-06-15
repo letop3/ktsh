@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -15,7 +16,7 @@ public class MainMenuView {
 
     public void loadNewScene() {
         try {
-            Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/loading.fxml")));
+            Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/gameGround.fxml")));
             Scene scene = SceneManager.getInstance().getMainScene();
             scene.setRoot(newRoot);
         } catch (IOException e) {
