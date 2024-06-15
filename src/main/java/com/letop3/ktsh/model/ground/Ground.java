@@ -21,7 +21,6 @@ public class Ground {
     private final Chunk[][] chunks;
     private final IntegerProperty currentChunkIdX;
     private final IntegerProperty currentChunkIdY;
-
     private Player player;
 
     public Ground() {
