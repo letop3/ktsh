@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Mob;
+import com.letop3.ktsh.model.entity.ennemies.mobs.General;
 import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.npc.action.MoveAction;
@@ -18,44 +18,58 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Env {
+    private EnvListener listener;
+
     private final Ground ground;
     private final Player player;
     private ObservableList<Projectile> projo;
 
+    private long frame;
+
     public Env() {
+        frame = 0;
+        listener = null;
+
         this.ground = new Ground();
         this.player = new Player(new Position((int)(Chunk.CHUNK_SIZE * 1.45), (int)(Chunk.CHUNK_SIZE * 1.45)), ground, this);
         ground.setPlayer(player);
 
-		// Debug NPC with dialogue
-		Action endAction = new MoveAction(new Position(528, 480), null);
+        // Debug NPC with dialogue
+        Action endAction = new MoveAction(new Position(528, 480), null);
 
-		ArrayList<Action> responses = new ArrayList<>();
-		responses.add(new SpeakAction("Good to hear !", endAction));
-		responses.add(new SpeakAction("I'm sorry to hear that", endAction));
-		Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
+        ArrayList<Action> responses = new ArrayList<>();
+        responses.add(new SpeakAction("Good to hear !", endAction));
+        responses.add(new SpeakAction("I'm sorry to hear that", endAction));
+        Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
 
         addEntity(new NPC(new Position(252, 512), ground, dialogue));
 
-		//Debug Mob
-		addEntity(new Mob(new Position(900, 480), player));
+        //Debug Mob
+        addEntity(new General(new Position(900, 480), player));
 
         projo = FXCollections.observableArrayList();
     }
 
     public void update() {
-        player.update();
+        player.doUpdate(frame);
         for (Chunk chunks : ground.getCurrentChunks()) {
-            chunks.update();
+            chunks.doUpdate(frame);
         }
         for (Projectile projo : projo){
-            projo.update();
+            projo.doUpdate(frame);
         }
+
+        frame++;
     }
 
-	public void addEntity(Entity entity) {
-		ground.getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY()).addEntity(entity);
-	}
+    public void setListener(EnvListener listener) {
+        this.listener = listener;
+    }
+
+    public void addEntity(Entity entity) {
+        ground.getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY()).addEntity(entity);
+        if (listener != null) listener.onEntityAdded(entity);
+    }
 
     public Player getPlayer() {
         return player;

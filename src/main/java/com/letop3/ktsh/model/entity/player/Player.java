@@ -5,7 +5,7 @@ import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Ennemies;
+import com.letop3.ktsh.model.entity.ennemies.Enemy;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.arme.*;
@@ -23,7 +23,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player extends Attackable {
-    private int maxHp;
     private Stuff stuff;
     private BooleanProperty lock;
     private int atk;
@@ -33,10 +32,9 @@ public class Player extends Attackable {
     private BooleanProperty enAtq;
     private Env env;
 
-	private Player(Position position, Ground ground, Env env, int maxHp) {
-		super(position, ground, maxHp);
-		this.maxHp = maxHp;
-		this.atk = 1;
+    public Player(Position position, Ground ground, Env env) {
+        super(position, ground, 12);
+        this.atk = 1;
 
         interractionTarget = null;
 
@@ -54,10 +52,6 @@ public class Player extends Attackable {
 
         this.env = env;
         this.pL = null;
-	}
-
-    public Player(Position position, Ground ground, Env env) {
-        this(position, ground, env, 12);
     }
 
     public Env getEnv() {
@@ -90,14 +84,10 @@ public class Player extends Attackable {
         }
     }
 
-    public int getMaxHp() {
-        return maxHp;
-    }
-
     public int[] getHearts() {
         int fullHearts = getHp() / 2;
         int halfHearts = getHp() % 2;
-        int totalHearts = maxHp / 2;
+        int totalHearts = getMaxHp() / 2;
         return new int[]{fullHearts, halfHearts, totalHearts};
     }
 
@@ -123,10 +113,10 @@ public class Player extends Attackable {
     }
 
     @Override
-    public void update() {
+    public void update(long frame) {
+        super.update(frame);
+        
         if (!lock.get() && !enAtq.get()) {
-            super.update();
-
             double minDistance = Double.MAX_VALUE;
             for (Chunk chunks[] : getGround().getChunks()) {
                 for (Chunk chunk : chunks) {
@@ -185,9 +175,9 @@ public class Player extends Attackable {
 
                 for (Chunk chunk : env.getGround().getCurrentChunks()) {
                     for (Entity entity : chunk.getEntities()) {
-                        if (entity instanceof Ennemies) {
+                        if (entity instanceof Enemy) {
                             if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
-								Ennemies ennemie = (Ennemies)entity;
+                                Enemy ennemie = (Enemy)entity;
                                 ennemie.takeDamage(this.atk);
                                 System.out.println(ennemie.getHp());
                             }

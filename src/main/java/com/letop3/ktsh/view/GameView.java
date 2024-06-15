@@ -2,7 +2,7 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Mob;
+import com.letop3.ktsh.model.entity.ennemies.Enemy;
 import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
@@ -32,11 +32,13 @@ public class GameView {
     private GroundView groundView;
     private PlayerView playerView;
     private StuffView stuffView;
+    private DialogueView dialogueView;
     private Canvas heartCanvas;
     private Image fullHeart;
     private Image halfHeart;
     private Image emptyHeart;
     private ItemView itemView;
+    private Pane entityPane;
 
     private Position screenPosition;
 
@@ -60,8 +62,9 @@ public class GameView {
         playerView = new PlayerView(player, gamePlayer, this);
         stuffView = new StuffView(stuffPane, slotPane, playerView);
         itemView = new ItemView(playerView, itemEffectPane, gamePlayer, screenPosition);
-        DialogueView dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
+        dialogueView = new DialogueView(dialogueBox, dialogueText, dialogueResponses);
 
+        this.entityPane = entityPane;
         this.player = player;
 
         gameGround.setTranslateX(Chunk.CHUNK_SIZE * 0.5 - player.getPosition().getX() % Chunk.CHUNK_SIZE);
@@ -76,25 +79,19 @@ public class GameView {
             screenPosition.setY(Chunk.CHUNK_SIZE * 1.5 - (double)nouv);
         });
 
+        // Entity views creation
         this.entities = new HashMap<>();
         for (Chunk chunks[] : ground.getChunks()) {
             for (Chunk chunk : chunks) {
                 for (Entity entity : chunk.getEntities()) {
-                    Pane entityImageView = new Pane();
-                    entityPane.getChildren().add(entityImageView);
-
-                    EntityView entityView = null;
-                    if (entity instanceof NPC) {
-                        entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player, dialogueView);
-                    }
-                    else if (entity instanceof Mob) {
-                        entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
-                    }
-
-                    if (entityView != null) entities.putIfAbsent(entity, entityView);
+                    createEntityView(entity);
                 }
             }
         }
+
+        player.getEnv().setListener((entity) -> {
+            createEntityView(entity);
+        });
 
         this.heartCanvas = heartCanvas;
         this.fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/fullHeart.png")));
@@ -102,6 +99,21 @@ public class GameView {
         this.emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/emptyHeart.png")));
 
         stuffView.updateStuff(player.getStuff());
+    }
+
+    private void createEntityView(Entity entity) {
+        Pane entityImageView = new Pane();
+        entityPane.getChildren().add(entityImageView);
+
+        EntityView entityView = null;
+        if (entity instanceof NPC) {
+            entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player, dialogueView);
+        }
+        else if (entity instanceof Enemy) {
+            entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
+        }
+
+        if (entityView != null) entities.putIfAbsent(entity, entityView);
     }
 
     public GroundView getGroundView() {
@@ -141,7 +153,8 @@ public class GameView {
 
         for (Chunk chunk : groundView.getGround().getCurrentChunks()) {
             for (Entity entity : chunk.getEntities()) {
-                entities.get(entity).update();
+                EntityView entityView = entities.get(entity);
+                if (entityView != null) entityView.update();
             }
         }
     }

@@ -2,7 +2,7 @@ package com.letop3.ktsh.model.ground;
 
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
-import com.letop3.ktsh.model.entity.Position;
+import com.letop3.ktsh.model.entity.ennemies.Enemy;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.files.MapLoader;
 import javafx.beans.property.IntegerProperty;
@@ -201,20 +201,7 @@ public class Ground {
         boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY, e.getDirection());
         boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY, e.getDirection());
 
-
-        if (e instanceof Player) {
-            Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
-            for (Chunk chunk : this.getCurrentChunks()) {
-                for (Entity entity : chunk.getEntities()) {
-                    Position pos = entity.getPosition();
-                    if (entity.getHitbox().intersects(hitbox)) {
-                        if (passX) passX = Math.abs(pos.getX() - startX) < Math.abs(pos.getX() - (startX + stepX));
-                        if (passY) passY = Math.abs(pos.getY() - startY) < Math.abs(pos.getY() - (startY - stepY));
-                    }
-                }
-            }
-        }
-        else {
+        if (e instanceof Enemy) {
             Bounds hitbox = new BoundingBox(player.getPosition().getX(), player.getPosition().getY(), player.getHitbox().getWidth(), player.getHitbox().getHeight());
             if (e.getHitbox().intersects(hitbox)) {
                 if (passX) passX = Math.abs(player.getPosition().getX() - startX) < Math.abs(player.getPosition().getX() - (startX + stepX));

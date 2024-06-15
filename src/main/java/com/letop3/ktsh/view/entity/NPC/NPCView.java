@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 
 public class NPCView extends EntityView {
     private final NPC npc;
-    private final Label interactLabel;	
+    private final Label interactLabel;    
     private final Player player;
 
     private Action action;

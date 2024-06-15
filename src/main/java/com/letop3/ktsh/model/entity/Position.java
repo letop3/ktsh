@@ -22,6 +22,16 @@ public class Position {
     }
 
     /**
+     * Constructeur de la classe Position.
+     *
+     * @param position la position à copier
+     */
+    public Position(Position position) {
+        this.x = new SimpleDoubleProperty(position.getX());
+        this.y = new SimpleDoubleProperty(position.getY());
+    }
+
+    /**
      * Retourne la propriété x.
      *
      * @return la propriété x

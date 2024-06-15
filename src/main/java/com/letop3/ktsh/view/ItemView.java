@@ -4,7 +4,7 @@ import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Mob;
+import com.letop3.ktsh.model.entity.ennemies.mobs.Knight;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
@@ -112,14 +112,14 @@ public class ItemView {
             if (hitboxAtk.intersects(playerView.getGameView().getEntities().get(e).getSpriteTarget().getBoundsInLocal())) {
                 String faiblesse = e.getFaiblesse();
                 String resistance = e.getResistance();
-                if (!(e instanceof Mob))
+                if (!(e instanceof Knight))
                     return;
                 if (type.equals(resistance))
                     ((Attackable)e).takeDamage(0);
                 else if (type.equals(faiblesse))
-					((Attackable)e).takeDamage(4);
+                    ((Attackable)e).takeDamage(4);
                 else
-					((Attackable)e).takeDamage(1);
+                    ((Attackable)e).takeDamage(1);
             }
             if (((Attackable)e).getHp() <= 0) {
                 iterator.remove();

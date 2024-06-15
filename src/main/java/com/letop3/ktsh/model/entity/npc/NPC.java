@@ -49,8 +49,7 @@ public class NPC extends Interractible {
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void update(long frame) {
         if (pathfinder != null) {
             Direction direction = pathfinder.getDirection(getPosition());
             setDirection(direction);

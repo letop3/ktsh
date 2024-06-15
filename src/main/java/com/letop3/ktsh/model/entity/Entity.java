@@ -6,7 +6,7 @@ import com.letop3.ktsh.model.Updatable;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
-public abstract class Entity implements Updatable {
+public abstract class Entity extends Updatable {
     private final static double speed = 2;
     private final Ground ground;
     private final Position position;
@@ -55,16 +55,6 @@ public abstract class Entity implements Updatable {
         return new double[] {position.getX(), position.getY()};
     }
 
-    public void update() {
-        double[] newPos = predictPosition(direction);
-        position.setX(newPos[0]);
-        position.setY(newPos[1]);
-        if (direction != null) {
-            lastDirection = direction;
-            hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
-        }
-    }
-
     public void addDirection(Direction direction) {
         if (this.direction == null) this.direction = direction;
         else this.direction = this.direction.add(direction);
@@ -92,5 +82,17 @@ public abstract class Entity implements Updatable {
 
     public String getFaiblesse() {
         return "NORMAL";
+    }
+
+    @Override
+    protected void update(long frame) {
+        double[] newPos = predictPosition(direction);
+        position.setX(newPos[0]);
+        position.setY(newPos[1]);
+
+        if (direction != null) {
+            lastDirection = direction;
+            hitbox = new BoundingBox(position.getX() + (Chunk.CHUNK_SIZE / 11), position.getY() + (Chunk.CHUNK_SIZE / 11), hitboxWidth, hitboxHeight);
+        }
     }
 }

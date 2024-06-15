@@ -139,9 +139,9 @@ public class PlayerView {
             Entity e = iterator.next();
             System.out.println(e);
             if (e instanceof Attackable && hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
-				Attackable ennemie = (Attackable)e;
-				
-				ennemie.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
+                Attackable ennemie = (Attackable)e;
+                
+                ennemie.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
                 System.out.println(ennemie.getHp());
                 if (ennemie.getHp() <= 0) {
                     iterator.remove();
