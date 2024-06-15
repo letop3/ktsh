@@ -11,14 +11,12 @@ import javafx.scene.layout.TilePane;
 
 public class GroundView {
     private final TilesetCutter cutter;
-    private final SoundPlayer player;
     private final TilePane[][] chunks;
     private final Ground ground;
 
     public GroundView(Ground ground, TilePane gameGround) {
         this.ground = ground;
         this.cutter = new TilesetCutter("/com/letop3/ktsh/images/tiles/ground.png", 32);
-        this.player = new SoundPlayer();
         this.chunks = new TilePane[3][3];
 
         for (int y = 0; y < 3; y++) {
@@ -48,7 +46,7 @@ public class GroundView {
         ground.currentChunkIdYProperty().addListener(chunkUpdate);
 
         //jouer la musique d'arrère plan
-        player.playBackgroundMusic("src/main/resources/com/letop3/ktsh/audio/music/menu3.mp3");
+        SoundPlayer.playBackgroundMusic("src/main/resources/com/letop3/ktsh/audio/music/bg.mp3");
     }
 
     private void loadChunkInto(TilePane dest, int x, int y) {
