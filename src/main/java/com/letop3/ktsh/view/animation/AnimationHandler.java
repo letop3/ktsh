@@ -1,9 +1,7 @@
 package com.letop3.ktsh.view.animation;
 
-import com.letop3.ktsh.model.entity.Direction;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.image.Image;
-
 
 public class AnimationHandler {
     private AnimationAdapter adapter;

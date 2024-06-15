@@ -18,7 +18,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ItemView {
-
     private Position screenPosition;
     private Image potionAtkEffectImg;
     private Image projoDinImg;

@@ -2,7 +2,6 @@ package com.letop3.ktsh.model;
 
 import java.util.ArrayList;
 
-import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
@@ -15,7 +14,6 @@ import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.artefact.Projectile;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

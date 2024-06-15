@@ -5,9 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.letop3.ktsh.model.entity.Entity;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
 public class Chunk {

@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class DinStaff extends Artefact{
-
     private Projectile projectile = null;
 
     public DinStaff(int id, String nom, String description, int prix) {
@@ -26,7 +25,7 @@ public class DinStaff extends Artefact{
             player.setEnAtq(true);
             double x = player.getPosition().getX() - 16;
             double y = player.getPosition().getY() - 16;
-            projectile = new Projectile(new Position(x,y), player.getGround(), player.getLastDirection());
+            projectile = new Projectile(new Position(x,y), player.getLastDirection());
             player.getEnv().addProjo(projectile);
             notifyActionListener();
             Timer timer = new Timer();

@@ -7,7 +7,6 @@ import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.ground.Ground;
-import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.entity.EntityAnimationAdapter;
 import com.letop3.ktsh.view.entity.EntityView;
 import com.letop3.ktsh.view.entity.MobView;
@@ -88,9 +87,9 @@ public class GameView {
                     if (entity instanceof NPC) {
                         entityView = new NPCView(new EntityAnimationAdapter(entity), entityImageView, screenPosition, (NPC)entity, player, dialogueView);
                     }
-					else if (entity instanceof Mob) {
-						entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
-					}
+                    else if (entity instanceof Mob) {
+                        entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
+                    }
 
                     if (entityView != null) entities.putIfAbsent(entity, entityView);
                 }
@@ -140,10 +139,7 @@ public class GameView {
 
         playerView.update();
 
-        for (Entity entity : groundView.getGround().getCurrentChunk().getEntities()) {
-            entities.get(entity).update();
-        }
-        for (Chunk chunk : groundView.getGround().getCurrentChunk().getNeighbors()) {
+        for (Chunk chunk : groundView.getGround().getCurrentChunks()) {
             for (Entity entity : chunk.getEntities()) {
                 entities.get(entity).update();
             }

@@ -7,11 +7,8 @@ import com.letop3.ktsh.view.animation.AnimationAdapter;
 import com.letop3.ktsh.view.animation.AnimationHandler;
 
 import javafx.beans.value.ChangeListener;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.util.Objects;
 
 public abstract class EntityView {
     private final Entity entity;

@@ -14,8 +14,6 @@ import javafx.fxml.Initializable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class StuffController implements Initializable, StuffClickListener {
     private GameView view;

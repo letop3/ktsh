@@ -6,7 +6,7 @@ import com.letop3.ktsh.model.ground.Chunk;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class BotteErmS extends Artefact{
+public class BotteErmS extends Artefact {
     public BotteErmS(int id, String nom, String description, int prix) {
         super(id, nom, description, prix);
         this.setIcon("/com/letop3/ktsh/images/item/erm's.png");

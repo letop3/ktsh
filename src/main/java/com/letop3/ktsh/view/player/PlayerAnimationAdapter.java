@@ -14,8 +14,6 @@ public class PlayerAnimationAdapter implements AnimationAdapter {
     Animation nIdle, sIdle, eIdle, wIdle;
     Animation nAnim, sAnim, eAnim, wAnim;
 
-
-
     public PlayerAnimationAdapter(Player player) {
         this.player = player;
 

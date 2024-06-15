@@ -6,7 +6,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PotionAtk extends Consomable {
-
     public PotionAtk(int id, String nom, String description, int prix) {
         super(id, nom, description, prix);
         this.setIcon("/com/letop3/ktsh/images/item/potionatk.png");
