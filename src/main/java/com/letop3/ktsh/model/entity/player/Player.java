@@ -5,11 +5,14 @@ import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.ennemies.Ennemies;
-import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
-import com.letop3.ktsh.model.item.arme.*;
+import com.letop3.ktsh.model.ground.Ground;
+import com.letop3.ktsh.model.item.arme.DulledSword;
+import com.letop3.ktsh.model.item.arme.Excaliba;
+import com.letop3.ktsh.model.item.arme.WornShield;
 import com.letop3.ktsh.model.item.artefact.BotteErmS;
 import com.letop3.ktsh.model.item.artefact.DinStaff;
+import com.letop3.ktsh.model.item.artefact.FluteEnchantee;
 import com.letop3.ktsh.model.item.artefact.GantHerkUl;
 import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
@@ -25,15 +28,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Player extends Entity {
-    private int maxHp;
-    private Stuff stuff;
-    private BooleanProperty lock;
+    private final int maxHp;
+    private final Stuff stuff;
+    private final BooleanProperty lock;
     private int atk;
     private Interractible interractionTarget;
     private PlayerListener pL;
     private boolean attackOnCD = false;
-    private BooleanProperty enAtq;
-    private Env env;
+    private final BooleanProperty enAtq;
+    private final Env env;
 
     public Player(Position position, Ground ground, Env env) {
         super(position, ground);
@@ -50,6 +53,7 @@ public class Player extends Entity {
         stuff.addItem(new BotteErmS(1, "Bottes Dash", "Test", 100));
         stuff.addItem(new DinStaff(1,"Din Staff", "Test", 100));
         stuff.addItem(new GantHerkUl(1,"Gant Herk Ul", "Test", 100));
+        stuff.addItem(new FluteEnchantee(1, "Flute Enchantée", "Test", 100));
         this.lock = new SimpleBooleanProperty(false);
         this.enAtq = new SimpleBooleanProperty(false);
 
@@ -138,7 +142,7 @@ public class Player extends Entity {
             super.update();
 
             double minDistance = Double.MAX_VALUE;
-            for (Chunk chunks[] : getGround().getChunks()) {
+            for (Chunk[] chunks : getGround().getChunks()) {
                 for (Chunk chunk : chunks) {
                     for (Entity entity : chunk.getEntities()) {
                         if (entity instanceof Interractible && ((Interractible) entity).isInterractible(this) && entity.getPosition().distance(super.getPosition()) < minDistance) {
@@ -197,7 +201,7 @@ public class Player extends Entity {
                     for (Entity entity : chunk.getEntities()) {
                         if (entity instanceof Ennemies) {
                             if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
-                                ((Ennemies) entity).takeDamage(this.atk);
+                                entity.takeDamage(this.atk);
                                 System.out.println(entity.getHp());
                             }
                         }
