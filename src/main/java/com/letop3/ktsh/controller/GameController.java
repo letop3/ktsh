@@ -20,19 +20,27 @@ public class GameController implements Initializable {
     private GameView view;
 
     @FXML
-    public Pane itemEffectPane;
+    private Pane MainD;
     @FXML
-    public Pane slotPane;
+    private Pane MainG;
+    @FXML
+    private Pane quickSlot;
+
+    @FXML
+    public Pane itemEffectPane;
     @FXML
     public Pane entityPane;
     @FXML
     public Pane stuffPane;
+
     @FXML
     private HBox heartBox;
+
     @FXML
     private TilePane gameGround;
     @FXML
     private Pane gamePlayer;
+
     @FXML
     private GridPane dialogueBox;
     @FXML
@@ -51,7 +59,7 @@ public class GameController implements Initializable {
                 gamePlayer,
                 heartBox,
                 stuffPane,
-                slotPane,
+                new Pane[] {MainD, MainG, quickSlot},
                 entityPane,
                 dialogueBox,
                 dialogueText,

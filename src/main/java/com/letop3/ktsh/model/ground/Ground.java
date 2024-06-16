@@ -182,24 +182,24 @@ public class Ground {
         boolean passX = direction.getX() != 0 && isTileWalkable(startX + stepX, startY, e.getDirection());
         boolean passY = direction.getY() != 0 && isTileWalkable(startX, startY - stepY, e.getDirection());
 
-		if (e instanceof Enemy) {
+        if (e instanceof Enemy) {
             Bounds hitbox = new BoundingBox(player.getPosition().getX(), player.getPosition().getY(), player.getHitbox().getWidth(), player.getHitbox().getHeight());
             if (e.getHitbox().intersects(hitbox)) {
                 if (passX) passX = Math.abs(player.getPosition().getX() - startX) < Math.abs(player.getPosition().getX() - (startX + stepX));
                 if (passY) passY = Math.abs(player.getPosition().getY() - startY) < Math.abs(player.getPosition().getY() - (startY - stepY));
             }
         }
-		else if (e instanceof Player) {
-			Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
-			for (Chunk chunk : this.getCurrentChunks()) {
-				for (Entity entity : chunk.getEntities()) {
-					if (entity instanceof BlockM && entity.getHitbox().intersects(hitbox)) {
-						if (passX) passX = Math.abs(entity.getPosition().getX() - startX) < Math.abs(entity.getPosition().getX() - (startX + stepX));
-						if (passY) passY = Math.abs(entity.getPosition().getY() - startY) < Math.abs(entity.getPosition().getY() - (startY - stepY));
-					}
-				}
-			}
-		}
+        else if (e instanceof Player) {
+            Bounds hitbox = new BoundingBox(startX + stepX, startY + stepY, player.getHitbox().getWidth(), player.getHitbox().getHeight());
+            for (Chunk chunk : this.getCurrentChunks()) {
+                for (Entity entity : chunk.getEntities()) {
+                    if (entity instanceof BlockM && entity.getHitbox().intersects(hitbox)) {
+                        if (passX) passX = Math.abs(entity.getPosition().getX() - startX) < Math.abs(entity.getPosition().getX() - (startX + stepX));
+                        if (passY) passY = Math.abs(entity.getPosition().getY() - startY) < Math.abs(entity.getPosition().getY() - (startY - stepY));
+                    }
+                }
+            }
+        }
 
         return new double[] {passX ? startX + stepX : startX, passY ? startY - stepY : startY};
     }

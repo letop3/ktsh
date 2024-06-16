@@ -52,7 +52,7 @@ public class GameView {
                     Pane gamePlayer,
                     HBox heartBox,
                     Pane stuffPane,
-                    Pane slotPane,
+                    Pane[] slotPane,
                     Pane entityPane,
                     GridPane dialogueBox,
                     Label dialogueText,
@@ -142,26 +142,26 @@ public class GameView {
         int halfHearts = player.getHearts()[1];
         int totalHearts = player.getHearts()[2];
 
-		heartBox.getChildren().clear();
+        heartBox.getChildren().clear();
 
-		for (int i = 0; i < totalHearts; i++) {
-			if (i < fullHearts) {
-				ImageView fullHeartView = new ImageView(fullHeart);
-				//fullHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
-				//fullHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
-				heartBox.getChildren().add(fullHeartView);
-			} else if (i == fullHearts && halfHearts == 1) {
-				ImageView halfHeartView = new ImageView(halfHeart);
-				//halfHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
-				//halfHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
-				heartBox.getChildren().add(halfHeartView);
-			} else {
-				ImageView emptyHeartView = new ImageView(emptyHeart);
-				//emptyHeartView.setFitHeight(25); // Ajustez la taille selon vos besoins
-				//emptyHeartView.setFitWidth(25);  // Ajustez la taille selon vos besoins
-				heartBox.getChildren().add(emptyHeartView);
-			}
-		}
+        for (int i = 0; i < totalHearts; i++) {
+            if (i < fullHearts) {
+                ImageView fullHeartView = new ImageView(fullHeart);
+                //fullHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
+                //fullHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
+                heartBox.getChildren().add(fullHeartView);
+            } else if (i == fullHearts && halfHearts == 1) {
+                ImageView halfHeartView = new ImageView(halfHeart);
+                //halfHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
+                //halfHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
+                heartBox.getChildren().add(halfHeartView);
+            } else {
+                ImageView emptyHeartView = new ImageView(emptyHeart);
+                //emptyHeartView.setFitHeight(25); // Ajustez la taille selon vos besoins
+                //emptyHeartView.setFitWidth(25);  // Ajustez la taille selon vos besoins
+                heartBox.getChildren().add(emptyHeartView);
+            }
+        }
 
         playerView.update();
 

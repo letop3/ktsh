@@ -13,13 +13,13 @@ import javafx.scene.layout.Pane;
 import java.util.Objects;
 
 public class StuffView {
-    private Pane slotPane;
+    private Pane[] slotPane;
     private Pane stuffPane;
     private PlayerView playerView;
     private StuffClickListener stuffClickListener;
     private BooleanProperty isVisible = new SimpleBooleanProperty(false);
 
-    public StuffView(Pane stuffPane, Pane slotPane, PlayerView playerView) {
+    public StuffView(Pane stuffPane, Pane[] slotPane, PlayerView playerView) {
         this.stuffPane = stuffPane;
         this.playerView = playerView;
         this.slotPane = slotPane;
@@ -59,9 +59,9 @@ public class StuffView {
     }
 
     private void drawSlot(Stuff stuff) {
-        addSlotImage(stuff.getMainG(), "/com/letop3/ktsh/images/item/mainGView.png", 260, -200);
-        addSlotImage(stuff.getMainD(), "/com/letop3/ktsh/images/item/mainDView.png", 260, -150);
-        addSlotImage(stuff.getQuickSlot(), "/com/letop3/ktsh/images/item/quickSlot.png", 210, -175);
+        addSlotImage(stuff.getMainG(), "/com/letop3/ktsh/images/item/mainGView.png", 1);
+        addSlotImage(stuff.getMainD(), "/com/letop3/ktsh/images/item/mainDView.png", 0);
+        addSlotImage(stuff.getQuickSlot(), "/com/letop3/ktsh/images/item/quickSlot.png", 2);
     }
 
     private void addStuffImage(Item item, String defaultPath, double offsetX, double offsetY, Runnable onClick) {
@@ -73,12 +73,10 @@ public class StuffView {
         stuffPane.getChildren().add(imageView);
     }
 
-    private void addSlotImage(Item item, String defaultPath, double offsetX, double offsetY) {
+    private void addSlotImage(Item item, String defaultPath, int id) {
         String path = item == null ? defaultPath : item.getIconPath();
         ImageView imageView = createImageView(path, 48, 48);
-        imageView.setLayoutX(playerView.getScreenPlayerX().get() + offsetX);
-        imageView.setLayoutY(playerView.getScreenPlayerY().get() + offsetY);
-        slotPane.getChildren().add(imageView);
+        slotPane[id].getChildren().add(imageView);
     }
 
     private ImageView createImageView(String path, double width, double height) {
@@ -108,7 +106,7 @@ public class StuffView {
 
     public void toogleVisibility(){
         stuffPane.setVisible(!isVisible.get());
-        slotPane.setVisible(isVisible.get());
+        for (Pane slotPane : slotPane) slotPane.setVisible(!isVisible.get());
         isVisible.setValue(!isVisible.get());
     }
 

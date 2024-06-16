@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.ListView?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
-            fx:controller="com.letop3.ktsh.controller.GameController" stylesheets="@style.css">
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.GameController">
     <center>
-        <StackPane maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0"
-                   BorderPane.alignment="CENTER" onMouseClicked="#coord">
+        <StackPane maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" onMouseClicked="#coord" BorderPane.alignment="CENTER">
             <children>
-                <TilePane fx:id="gameGround" prefHeight="1056.0" prefWidth="1056.0"/>
-                <Pane fx:id="entityPane"/>
-                <Pane fx:id="gamePlayer" prefHeight="1056.0" prefWidth="1056.0"/>
-                <Pane fx:id="itemEffectPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0"/>
-                <Pane fx:id="slotPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" />
-                <Pane fx:id="stuffPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" visible="false"/>
+                <TilePane fx:id="gameGround" prefHeight="1056.0" prefWidth="1056.0" />
+                <Pane fx:id="entityPane" />
+                <Pane fx:id="gamePlayer" prefHeight="1056.0" prefWidth="1056.0" />
+                <Pane fx:id="itemEffectPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" />
+                <Pane fx:id="stuffPane" maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" visible="false" />
             </children>
         </StackPane>
     </center>
     <bottom>
-        <GridPane fx:id="dialogueBox" prefHeight="100.0" visible="false" BorderPane.alignment="CENTER" >
+        <GridPane fx:id="dialogueBox" prefHeight="100.0" visible="false" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="dialogueText" text="Text" alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="dialogueText" alignment="CENTER" text="Text" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
                 <ListView fx:id="dialogueResponses" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             </children>
             <rowConstraints>
@@ -36,7 +40,27 @@
             </columnConstraints>
         </GridPane>
     </bottom>
-	<top>
-		<HBox fx:id="heartBox" prefHeight="25.0" />
-	</top>
+   <top>
+        <HBox fx:id="heartBox" prefHeight="25.0" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="96.0" minWidth="96.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane fx:id="quickSlot" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0">
+               <padding>
+                  <Insets bottom="24.0" top="24.0" />
+               </padding>
+            </Pane>
+            <VBox prefHeight="200.0" prefWidth="200.0" spacing="5.0">
+               <children>
+                  <Pane fx:id="MainG" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
+                  <Pane fx:id="MainD" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
+               </children>
+            </VBox>
+         </children>
+         <BorderPane.margin>
+            <Insets right="20.0" top="-10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </right>
 </BorderPane>
