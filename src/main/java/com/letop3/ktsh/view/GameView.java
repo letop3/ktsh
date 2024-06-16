@@ -16,11 +16,12 @@ import com.letop3.ktsh.view.entity.NPC.DialogueView;
 import com.letop3.ktsh.view.entity.NPC.NPCView;
 import com.letop3.ktsh.view.player.PlayerView;
 import com.letop3.ktsh.view.player.stuff.StuffView;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -34,7 +35,7 @@ public class GameView {
     private final PlayerView playerView;
     private final StuffView stuffView;
     private final DialogueView dialogueView;
-    private final Canvas heartCanvas;
+    private final HBox heartBox;
     private final Image fullHeart;
     private final Image halfHeart;
     private final Image emptyHeart;
@@ -49,7 +50,7 @@ public class GameView {
                     Ground ground,
                     TilePane gameGround,
                     Pane gamePlayer,
-                    Canvas heartCanvas,
+                    HBox heartBox,
                     Pane stuffPane,
                     Pane slotPane,
                     Pane entityPane,
@@ -94,7 +95,7 @@ public class GameView {
             createEntityView(entity);
         });
 
-        this.heartCanvas = heartCanvas;
+        this.heartBox = heartBox;
         this.fullHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/fullHeart.png")));
         this.halfHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/halfHeart.png")));
         this.emptyHeart = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/player/emptyHeart.png")));
@@ -141,17 +142,26 @@ public class GameView {
         int halfHearts = player.getHearts()[1];
         int totalHearts = player.getHearts()[2];
 
-        heartCanvas.getGraphicsContext2D().clearRect(0, 0, heartCanvas.getWidth(), heartCanvas.getHeight());
+		heartBox.getChildren().clear();
 
-        for (int i = 0; i < totalHearts; i++) {
-            if (i < fullHearts) {
-                heartCanvas.getGraphicsContext2D().drawImage(fullHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
-            } else if (i == fullHearts && halfHearts == 1) {
-                heartCanvas.getGraphicsContext2D().drawImage(halfHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
-            } else {
-                heartCanvas.getGraphicsContext2D().drawImage(emptyHeart, (playerView.getScreenPlayerX().get() - 280) + i * 25, playerView.getScreenPlayerY().get() - 200);
-            }
-        }
+		for (int i = 0; i < totalHearts; i++) {
+			if (i < fullHearts) {
+				ImageView fullHeartView = new ImageView(fullHeart);
+				//fullHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
+				//fullHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
+				heartBox.getChildren().add(fullHeartView);
+			} else if (i == fullHearts && halfHearts == 1) {
+				ImageView halfHeartView = new ImageView(halfHeart);
+				//halfHeartView.setFitHeight(25);  // Ajustez la taille selon vos besoins
+				//halfHeartView.setFitWidth(25);   // Ajustez la taille selon vos besoins
+				heartBox.getChildren().add(halfHeartView);
+			} else {
+				ImageView emptyHeartView = new ImageView(emptyHeart);
+				//emptyHeartView.setFitHeight(25); // Ajustez la taille selon vos besoins
+				//emptyHeartView.setFitWidth(25);  // Ajustez la taille selon vos besoins
+				heartBox.getChildren().add(emptyHeartView);
+			}
+		}
 
         playerView.update();
 

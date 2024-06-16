@@ -4,11 +4,11 @@ import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.view.GameView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
@@ -28,7 +28,7 @@ public class GameController implements Initializable {
     @FXML
     public Pane stuffPane;
     @FXML
-    private Canvas heartCanvas;
+    private HBox heartBox;
     @FXML
     private TilePane gameGround;
     @FXML
@@ -49,7 +49,7 @@ public class GameController implements Initializable {
                 env.getGround(),
                 gameGround,
                 gamePlayer,
-                heartCanvas,
+                heartBox,
                 stuffPane,
                 slotPane,
                 entityPane,
