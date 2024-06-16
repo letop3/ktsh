@@ -1,40 +1,42 @@
-/**
- * Date: 04/05/2024
- * Auteur: aagogue
- */
-
 package com.letop3.ktsh.model.utils.preferences.prefs;
 
 /**
  * Enum pour les contrôles des paramètres audios.
  */
-public enum AudioPreference {
-    MASTER_VOLUME("masterVolume", 0.8f, Float.class),
-    MUSIC_VOLUME("musicVolume", 0.5f, Float.class),
-    EFFECTS_VOLUME("effectsVolume", 0.7f, Float.class);
+public enum AudioPreference implements GamePreference {
+    MASTER_VOLUME("masterVolume", 0.8f),
+    MUSIC_VOLUME("musicVolume", 0.5f),
+    EFFECTS_VOLUME("effectsVolume", 0.7f);
 
-    public final String key;
-    public final float defaultValue;
-    public final Class<?> valueType;
+    private final String key;
+    private final float defaultValue;
 
     /**
      * Constructeur pour l'énumération `AudioPreference`.
      *
-     * @param setting      La clé du paramètre audio.
-     * @param defaultValue La valeur par défaut du paramètre audio.
-     * @param valueType    Le type de la valeur du paramètre audio.
+     * @param key           La clé du paramètre audio.
+     * @param defaultValue  La valeur par défaut du paramètre audio.
      */
-    AudioPreference(String setting, float defaultValue, Class<?> valueType) {
-        this.key = setting;
+    AudioPreference(String key, float defaultValue) {
+        this.key = key;
         this.defaultValue = defaultValue;
-        this.valueType = valueType;
     }
 
-    /**
-     * Retourne la clé du paramètre audio.
-     *
-     * @return La clé du paramètre audio.
-     */
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    @Override
+    public Class<?> getValueType() {
+        return Float.class;
+    }
+
     @Override
     public String toString() {
         return key;

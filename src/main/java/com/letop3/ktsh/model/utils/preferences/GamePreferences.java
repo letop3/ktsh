@@ -1,12 +1,10 @@
-/**
- * Date: 04/05/2024
- * Auteur: aagogue
- */
-
 package com.letop3.ktsh.model.utils.preferences;
 
 import com.letop3.ktsh.model.utils.preferences.prefs.AudioPreference;
+import com.letop3.ktsh.model.utils.preferences.prefs.GamePreference;
 import com.letop3.ktsh.model.utils.preferences.prefs.GraphicsPreference;
+import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
+import javafx.scene.input.KeyCode;
 
 import java.util.prefs.Preferences;
 
@@ -14,21 +12,16 @@ import java.util.prefs.Preferences;
  * Classe de gestion des préférences du jeu.
  */
 public class GamePreferences {
-    private final Preferences preferences;
+    private static final Preferences preferences = Preferences.userRoot().node("com.leTop3.ktsh");
 
-    /**
-     * Constructeur de GamePreferences.
-     * Initialise les préférences avec les valeurs par défaut si elles n'ont pas déjà été initialisées.
-     */
-    public GamePreferences() {
-        this.preferences = Preferences.userRoot().node("com.leTop3.ktsh");
+    static {
         initializePreferences();
     }
 
     /**
      * Initialise les préférences avec les valeurs par défaut si elles n'ont pas déjà été initialisées.
      */
-    private void initializePreferences() {
+    public static void initializePreferences() {
         if (!preferences.getBoolean("initialized", false)) {
             setDefaultPreferences();
             preferences.putBoolean("initialized", true);
@@ -38,118 +31,81 @@ public class GamePreferences {
     /**
      * Réinitialise les préférences aux valeurs par défaut.
      */
-    public void resetDefaultPreferences() {
+    public static void resetDefaultPreferences() {
         setDefaultPreferences();
     }
 
     /**
      * Définit les préférences aux valeurs par défaut.
      */
-    private void setDefaultPreferences() {
-        for (AudioPreference setting : AudioPreference.values()) {
-            preferences.putFloat(setting.toString(), setting.defaultValue);
-        }
+    private static void setDefaultPreferences() {
+        setDefaultPreferences(AudioPreference.values());
+        setDefaultPreferences(GraphicsPreference.values());
+        setDefaultPreferences(KeyPreference.values());
 
-        for (GraphicsPreference setting : GraphicsPreference.values()) {
-            switch (setting.valueType.getSimpleName()) {
-                case "Boolean":
-                    preferences.putBoolean(setting.toString(), (Boolean) setting.defaultValue);
-                    break;
-                case "Integer":
-                    preferences.putInt(setting.toString(), (Integer) setting.defaultValue);
-                    break;
-                case "String":
-                    preferences.put(setting.toString(), (String) setting.defaultValue);
-                    break;
-            }
-        }
-
-        //for (KeyPreference setting : KeyPreference.values()) {
-        //    preferences.put(setting.toString(), setting.defaultValue);
-        //}
+        // Ajouter la préférence par défaut pour la touche de basculement en plein écran
+        setKeyCodePreference("fullScreenToggle", KeyCode.F11);
     }
 
-    /**
-     * Définit une préférence de type String.
-     *
-     * @param key   la clé de la préférence
-     * @param value la valeur de la préférence
-     */
-    public void setPreference(String key, String value) {
+    private static void setDefaultPreferences(GamePreference[] preferencesArray) {
+        for (GamePreference preference : preferencesArray) {
+            if (preference.getValueType() == Boolean.class) {
+                preferences.putBoolean(preference.getKey(), (Boolean) preference.getDefaultValue());
+            } else if (preference.getValueType() == Integer.class) {
+                preferences.putInt(preference.getKey(), (Integer) preference.getDefaultValue());
+            } else if (preference.getValueType() == Float.class) {
+                preferences.putFloat(preference.getKey(), (Float) preference.getDefaultValue());
+            } else if (preference.getValueType() == String.class) {
+                preferences.put(preference.getKey(), (String) preference.getDefaultValue());
+            } else if (preference.getValueType() == KeyCode.class) {
+                preferences.put(preference.getKey(), ((KeyCode) preference.getDefaultValue()).getName());
+            }
+        }
+    }
+
+    // Méthodes pour gérer les préférences de type String
+    public static void setPreference(String key, String value) {
         preferences.put(key, value);
     }
 
-    /**
-     * Récupère une préférence de type String.
-     *
-     * @param key          la clé de la préférence
-     * @param defaultValue la valeur par défaut si la préférence n'est pas définie
-     * @return la valeur de la préférence, ou la valeur par défaut si la préférence n'est pas définie
-     */
-    public String getPreference(String key, String defaultValue) {
+    public static String getPreference(String key, String defaultValue) {
         return preferences.get(key, defaultValue);
     }
 
-    /**
-     * Définit une préférence de type boolean.
-     *
-     * @param key   la clé de la préférence
-     * @param value la valeur de la préférence
-     */
-    public void setPreference(String key, boolean value) {
+    // Méthodes pour gérer les préférences de type boolean
+    public static void setPreference(String key, boolean value) {
         preferences.putBoolean(key, value);
     }
 
-    /**
-     * Récupère une préférence de type boolean.
-     *
-     * @param key          la clé de la préférence
-     * @param defaultValue la valeur par défaut si la préférence n'est pas définie
-     * @return la valeur de la préférence, ou la valeur par défaut si la préférence n'est pas définie
-     */
-    public boolean getBooleanPreference(String key, boolean defaultValue) {
+    public static boolean getBooleanPreference(String key, boolean defaultValue) {
         return preferences.getBoolean(key, defaultValue);
     }
 
-    /**
-     * Définit une préférence de type float.
-     *
-     * @param key   la clé de la préférence
-     * @param value la valeur de la préférence
-     */
-    public void setPreference(String key, float value) {
+    // Méthodes pour gérer les préférences de type float
+    public static void setPreference(String key, float value) {
         preferences.putFloat(key, value);
     }
 
-    /**
-     * Récupère une préférence de type float.
-     *
-     * @param key          la clé de la préférence
-     * @param defaultValue la valeur par défaut si la préférence n'est pas définie
-     * @return la valeur de la préférence, ou la valeur par défaut si la préférence n'est pas définie
-     */
-    public float getFloatPreference(String key, float defaultValue) {
+    public static float getFloatPreference(String key, float defaultValue) {
         return preferences.getFloat(key, defaultValue);
     }
 
-    /**
-     * Définit une préférence de type int.
-     *
-     * @param key   la clé de la préférence
-     * @param value la valeur de la préférence
-     */
-    public void setPreference(String key, int value) {
+    // Méthodes pour gérer les préférences de type int
+    public static void setPreference(String key, int value) {
         preferences.putInt(key, value);
     }
 
-    /**
-     * Récupère une préférence de type int.
-     *
-     * @param key          la clé de la préférence
-     * @param defaultValue la valeur par défaut si la préférence n'est pas définie
-     * @return la valeur de la préférence, ou la valeur par défaut si la préférence n'est pas définie
-     */
-    public int getIntPreference(String key, int defaultValue) {
+    public static int getIntPreference(String key, int defaultValue) {
         return preferences.getInt(key, defaultValue);
+    }
+
+    // Méthodes pour gérer les préférences de type KeyCode
+    public static void setKeyCodePreference(String key, KeyCode value) {
+        preferences.put(key, value.getName());
+    }
+
+    public static KeyCode getKeyCodePreference(String key, KeyCode defaultValue) {
+        String keyName = preferences.get(key, defaultValue.getName());
+        return KeyCode.getKeyCode(keyName);
     }
 }

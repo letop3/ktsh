@@ -3,6 +3,7 @@ package com.letop3.ktsh.controller;
 import com.letop3.ktsh.model.Env;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.utils.preferences.GamePreferences;
 import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 import com.letop3.ktsh.view.player.stuff.StuffView;
 import javafx.fxml.Initializable;
@@ -37,13 +38,13 @@ public class ControlsController implements Initializable {
     }
 
     private Direction keyToDirection(KeyCode key) {
-        if (key == KeyPreference.MOVE_UP)
+        if (key == GamePreferences.getKeyCodePreference(KeyPreference.MOVE_UP.getKey(), KeyPreference.MOVE_UP.getDefaultValue()))
             return Direction.NORTH;
-        else if (key == KeyPreference.MOVE_DOWN)
+        else if (key == GamePreferences.getKeyCodePreference(KeyPreference.MOVE_DOWN.getKey(), KeyPreference.MOVE_DOWN.getDefaultValue()))
             return Direction.SOUTH;
-        else if (key == KeyPreference.MOVE_RIGHT)
+        else if (key == GamePreferences.getKeyCodePreference(KeyPreference.MOVE_RIGHT.getKey(), KeyPreference.MOVE_RIGHT.getDefaultValue()))
             return Direction.EAST;
-        else if (key == KeyPreference.MOVE_LEFT)
+        else if (key == GamePreferences.getKeyCodePreference(KeyPreference.MOVE_LEFT.getKey(), KeyPreference.MOVE_LEFT.getDefaultValue()))
             return Direction.WEST;
 
         return null;
@@ -51,15 +52,17 @@ public class ControlsController implements Initializable {
 
     private void keyPressed(KeyEvent event) {
         KeyCode key = event.getCode();
-		if (key == KeyPreference.INTERACT)
-			player.interract();
-        else if (key == KeyPreference.INVENTORY)
+        if (key == GamePreferences.getKeyCodePreference(KeyPreference.INTERACT.getKey(), KeyPreference.INTERACT.getDefaultValue())) {
+            player.interract();
+        } else if (key == GamePreferences.getKeyCodePreference(KeyPreference.INVENTORY.getKey(), KeyPreference.INVENTORY.getDefaultValue())) {
             stuffView.toogleVisibility();
-        else if (key == KeyPreference.QUICK_SLOT)
+        } else if (key == GamePreferences.getKeyCodePreference(KeyPreference.QUICK_SLOT.getKey(), KeyPreference.QUICK_SLOT.getDefaultValue())) {
             player.useQuickSlot();
-        else if (key == KeyPreference.ATTACK)
+        } else if (key == GamePreferences.getKeyCodePreference(KeyPreference.ATTACK.getKey(), KeyPreference.ATTACK.getDefaultValue())) {
             player.attack(env);
-        else player.addDirection(keyToDirection(event.getCode()));
+        } else {
+            player.addDirection(keyToDirection(event.getCode()));
+        }
     }
 
     private void keyReleased(KeyEvent event) {

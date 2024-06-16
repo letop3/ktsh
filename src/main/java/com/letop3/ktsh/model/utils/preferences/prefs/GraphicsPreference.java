@@ -1,42 +1,46 @@
-/**
- * Date: 04/05/2024
- * Auteur: aagogue
- */
-
-
 package com.letop3.ktsh.model.utils.preferences.prefs;
 
 /**
  * Enum pour les contrôles des paramètres graphiques.
  */
-public enum GraphicsPreference {
+public enum GraphicsPreference implements GamePreference {
     FULL_SCREEN("fullScreen", true, Boolean.class),
-    SART_FULL_SCREEN("startFullScreen", false, Boolean.class);
+    START_FULL_SCREEN("startFullScreen", false, Boolean.class);
 
-    public final String setting;
-    public final Object defaultValue;
-    public final Class<?> valueType;
+    private final String key;
+    private final Object defaultValue;
+    private final Class<?> valueType;
 
     /**
      * Constructeur pour l'énumération GraphicsPreference.
      *
-     * @param setting      Le nom du paramètre
-     * @param defaultValue La valeur par défaut du paramètre
-     * @param valueType    Le type de la valeur du paramètre
+     * @param key           Le nom du paramètre
+     * @param defaultValue  La valeur par défaut du paramètre
+     * @param valueType     Le type de la valeur du paramètre
      */
-    GraphicsPreference(String setting, Object defaultValue, Class<?> valueType) {
-        this.setting = setting;
+    GraphicsPreference(String key, Object defaultValue, Class<?> valueType) {
+        this.key = key;
         this.defaultValue = defaultValue;
         this.valueType = valueType;
     }
 
-    /**
-     * Méthode pour obtenir une représentation sous forme de chaîne de l'énumération.
-     *
-     * @return Le nom du paramètre
-     */
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    @Override
+    public Class<?> getValueType() {
+        return valueType;
+    }
+
     @Override
     public String toString() {
-        return setting;
+        return key;
     }
 }
