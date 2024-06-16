@@ -1,5 +1,6 @@
 package com.letop3.ktsh.view.player;
 
+import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
@@ -140,12 +141,12 @@ public class PlayerView {
         while (iterator.hasNext()) {
             Entity e = iterator.next();
             System.out.println(e);
-            if (hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
-                if (!(e instanceof Mob))
-                    return;
-                e.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
-                System.out.println(e.getHp());
-                if (e.getHp() <= 0) {
+            if (e instanceof Attackable && hitboxAtk.intersects(gameView.getEntities().get(e).getSpriteTarget().getBoundsInParent())){
+                Attackable ennemie = (Attackable)e;
+                
+                ennemie.takeDamage(player.getAtk() + (player.getStuff().getMainG() == null ? 0 : player.getStuff().getMainG().getAtk()));
+                System.out.println(ennemie.getHp());
+                if (ennemie.getHp() <= 0) {
                     iterator.remove();
                     Pane entityView = gameView.getEntities().remove(e).getSpriteTarget();
                     Platform.runLater(() -> {

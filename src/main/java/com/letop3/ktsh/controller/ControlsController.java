@@ -52,8 +52,8 @@ public class ControlsController implements Initializable {
 
     private void keyPressed(KeyEvent event) {
         KeyCode key = event.getCode();
-		if (key == KeyPreference.INTERACT)
-			player.interract();
+        if (key == KeyPreference.INTERACT)
+            player.interract();
         else if (key == KeyPreference.INVENTORY)
             stuffView.toogleVisibility();
         else if (key == KeyPreference.QUICK_SLOT)

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.letop3.ktsh.model.Updatable;
 import com.letop3.ktsh.model.entity.Entity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Chunk {
+public class Chunk extends Updatable {
     public static final int CHUNK_SIZE = 352;
 
     private int id;
@@ -36,19 +37,6 @@ public class Chunk {
         return entities;
     }
 
-    public void update() {
-        Iterator<Entity> iterator = entities.iterator();
-        while (iterator.hasNext()) {
-            Entity entity = iterator.next();
-            entity.update();
-            Chunk currentChunk = entity.getGround().getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY());
-            if (currentChunk != this) {
-                iterator.remove();
-                currentChunk.addEntity(entity);
-            }
-        }
-    }
-
     public int getId() {
         return id;
     }
@@ -63,6 +51,20 @@ public class Chunk {
 
     public void addNeighbor(Chunk neighbor) {
         this.neighbors.add(neighbor);
+    }
+
+    @Override
+    protected void update(long frame) {
+        Iterator<Entity> iterator = entities.iterator();
+        while (iterator.hasNext()) {
+            Entity entity = iterator.next();
+            entity.doUpdate(frame);
+            Chunk currentChunk = entity.getGround().getChunkFromPos(entity.getPosition().getX(), entity.getPosition().getY());
+            if (currentChunk != this) {
+                iterator.remove();
+                currentChunk.addEntity(entity);
+            }
+        }
     }
 
     @Override

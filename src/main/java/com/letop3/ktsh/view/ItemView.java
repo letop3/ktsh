@@ -1,11 +1,10 @@
 package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
-import com.letop3.ktsh.model.ground.Chunk;
 import com.letop3.ktsh.model.item.artefact.Bombe;
 import com.letop3.ktsh.model.item.artefact.Projectile;
 import com.letop3.ktsh.view.player.PlayerView;
@@ -31,12 +30,10 @@ public class ItemView {
 
     private PlayerView playerView;
     private Pane itemEffectPane;
-    private Pane gamePlayer;
 
     public ItemView(PlayerView playerView, Pane itemEffectPane, Pane gamePlayer, Position screenPosition) {
         this.itemEffectPane = itemEffectPane;
         this.playerView = playerView;
-        this.gamePlayer = gamePlayer;
         this.screenPosition = screenPosition;
         this.ermsEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/erms.gif")));
         this.potionAtkEffectImg = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/letop3/ktsh/images/item/potionatk.gif")));
@@ -164,22 +161,25 @@ public class ItemView {
             if (hitboxAtk.intersects(playerView.getGameView().getEntities().get(e).getSpriteTarget().getBoundsInLocal())) {
                 String faiblesse = e.getFaiblesse();
                 String resistance = e.getResistance();
-                if (!(e instanceof Mob))
+
+                if (!(e instanceof Attackable))
                     return;
+
+				Attackable entity = (Attackable)e;
+				
                 if (type.equals("EXPLOSION")) {
                     if (type.equals(resistance))
-                        e.takeDamage(999999);
-                    else e.takeDamage(2);
+					entity.takeDamage(999999);
+                    else entity.takeDamage(2);
                 }
                 else if (type.equals(resistance))
-                    e.takeDamage(0);
+					entity.takeDamage(0);
                 else if (type.equals(faiblesse))
-                    e.takeDamage(4);
+					entity.takeDamage(4);
                 else
-                    e.takeDamage(1);
-                System.out.println(e.getHp());
+					entity.takeDamage(1);
             }
-            if (e.getHp() <= 0) {
+            if (((Attackable)e).getHp() <= 0) {
                 iterator.remove();
                 Pane entityView = playerView.getGameView().getEntities().remove(e).getSpriteTarget();
                 Platform.runLater(() -> {

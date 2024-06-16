@@ -6,12 +6,12 @@ import com.letop3.ktsh.view.animation.AnimationAdapter;
 import javafx.scene.layout.Pane;
 
 public class MobView extends EntityView {
-	public MobView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition) {
-		super(animationAdapter, spriteTarget, screenPosition);
-	}
-	
-	@Override
-	public void update() {
-		super.update();
-	}
+    public MobView(AnimationAdapter animationAdapter, Pane spriteTarget, Position screenPosition) {
+        super(animationAdapter, spriteTarget, screenPosition);
+    }
+    
+    @Override
+    public void update() {
+        super.update();
+    }
 }

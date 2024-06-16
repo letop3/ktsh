@@ -1,15 +1,14 @@
 package com.letop3.ktsh.model.entity.player;
 
 import com.letop3.ktsh.model.Env;
+import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
-import com.letop3.ktsh.model.entity.ennemies.Ennemies;
+import com.letop3.ktsh.model.entity.ennemies.Enemy;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Chunk;
-import com.letop3.ktsh.model.item.arme.*;
 import com.letop3.ktsh.model.item.artefact.BombMegumin;
-import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.item.arme.DulledSword;
 import com.letop3.ktsh.model.item.arme.Excaliba;
 import com.letop3.ktsh.model.item.arme.WornShield;
@@ -21,17 +20,14 @@ import com.letop3.ktsh.model.item.consomable.PotionAtk;
 import com.letop3.ktsh.model.item.consomable.PotionHP;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Player extends Entity {
-    private final int maxHp;
+public class Player extends Attackable {
     private final Stuff stuff;
     private final BooleanProperty lock;
     private int atk;
@@ -42,11 +38,11 @@ public class Player extends Entity {
     private final Env env;
 
     public Player(Position position, Ground ground, Env env) {
-        super(position, ground);
-        interractionTarget = null;
-        this.maxHp = 12;
+        super(position, ground, 12);
         this.atk = 1;
-        this.hp = new SimpleIntegerProperty(this.maxHp);
+
+        interractionTarget = null;
+
         this.stuff = new Stuff();
         stuff.addItem(new DulledSword(1, "Sword Test", "Un test pour arme", 100));
         stuff.addItem(new Excaliba(2, "Excalibur", "Un test pour arme", 100));
@@ -62,7 +58,6 @@ public class Player extends Entity {
         this.enAtq = new SimpleBooleanProperty(false);
 
         this.env = env;
-
         this.pL = null;
     }
 
@@ -96,32 +91,16 @@ public class Player extends Entity {
         }
     }
 
-    public int getHp() {
-        return hp.get();
-    }
-
-    public void setHp(int hp) {
-        this.hp.setValue(hp);
-    }
-
-    public int getMaxHp() {
-        return maxHp;
-    }
-
     public int[] getHearts() {
-        int fullHearts = hp.get() / 2;
-        int halfHearts = hp.get() % 2;
-        int totalHearts = maxHp / 2;
+        int fullHearts = getHp() / 2;
+        int halfHearts = getHp() % 2;
+        int totalHearts = getMaxHp() / 2;
         return new int[]{fullHearts, halfHearts, totalHearts};
     }
 
     @Override
     public String toString() {
         return "Player";
-    }
-
-    public IntegerProperty hpProperty() {
-        return hp;
     }
 
     public Stuff getStuff() {
@@ -141,10 +120,10 @@ public class Player extends Entity {
     }
 
     @Override
-    public void update() {
+    public void update(long frame) {
+        super.update(frame);
+        
         if (!lock.get() && !enAtq.get()) {
-            super.update();
-
             double minDistance = Double.MAX_VALUE;
             for (Chunk[] chunks : getGround().getChunks()) {
                 for (Chunk chunk : chunks) {
@@ -203,10 +182,11 @@ public class Player extends Entity {
 
                 for (Chunk chunk : env.getGround().getCurrentChunks()) {
                     for (Entity entity : chunk.getEntities()) {
-                        if (entity instanceof Ennemies) {
+                        if (entity instanceof Enemy) {
                             if (attackArea != null && attackArea.intersects(entity.getHitbox())) {
-                                ((Ennemies) entity).takeDamage(this.atk);
-                                System.out.println(entity.getHp());
+                                Enemy ennemie = (Enemy)entity;
+                                ennemie.takeDamage(this.atk);
+                                System.out.println(ennemie.getHp());
                             }
                         }
                     }

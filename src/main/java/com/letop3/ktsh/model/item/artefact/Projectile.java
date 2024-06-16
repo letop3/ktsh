@@ -1,9 +1,10 @@
 package com.letop3.ktsh.model.item.artefact;
 
+import com.letop3.ktsh.model.Updatable;
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Position;
 
-public class Projectile {
+public class Projectile extends Updatable {
     private Direction direction;
     private Position position;
 
@@ -12,7 +13,16 @@ public class Projectile {
         this.direction = direction;
     }
 
-    public void update() {
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    @Override
+    protected void update(long frame) {
         double norm = Math.sqrt(direction.getX() * direction.getX() + direction.getY() * direction.getY());
 
         double normX = direction.getX() / norm;
@@ -20,13 +30,5 @@ public class Projectile {
 
         position.setX(position.getX() + normX * 5);
         position.setY(position.getY() - normY * 5);
-    }
-
-    public Direction getDirection() {
-        return direction;
-    }
-
-    public Position getPosition() {
-        return position;
     }
 }

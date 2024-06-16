@@ -37,6 +37,9 @@ public class Main extends Application {
                 case F11:
                     primaryStage.setFullScreen(!primaryStage.isFullScreen());
                     break;
+                    
+                default:
+                    break;
             }
         });
 
