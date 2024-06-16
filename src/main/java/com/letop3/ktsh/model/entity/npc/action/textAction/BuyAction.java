@@ -36,8 +36,8 @@ public class BuyAction extends SelectTextAction {
     @Override
     public Action getNextAction() {
         return switch (transactionResult) {
-            case NO_MONEY -> new SpeakAction("Je n'ai pas assez d'argent pour acheter cet objet.", this);
-            case INVALID_ITEM -> new SpeakAction("Je ne peux pas acheter cet objet.", this);
+            case NO_MONEY -> new SpeakAction("I d'ont have enough money to buy you this.", this);
+            case INVALID_ITEM -> new SpeakAction("I can't buy you this object.", this);
             default -> nextAction;
         };
     }

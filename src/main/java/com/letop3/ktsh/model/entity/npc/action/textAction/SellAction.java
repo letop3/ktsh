@@ -29,7 +29,7 @@ public class SellAction extends SelectTextAction {
     @Override
     public Action getNextAction() {
         if (transactionSuccess) {
-            return new SpeakAction("Tu n'a pas assez d'argent pour acheter cet objet.", this);
+            return new SpeakAction("You d'ont have enough moneey to buy this.", this);
         }
         return nextAction;
     }
