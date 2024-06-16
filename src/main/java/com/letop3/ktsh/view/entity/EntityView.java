@@ -51,9 +51,9 @@ public abstract class EntityView {
         return entity;
     }
 
-	public ImageView getSprite() {
-		return sprite;
-	}
+    public ImageView getSprite() {
+        return sprite;
+    }
 
     public abstract void update();
 }

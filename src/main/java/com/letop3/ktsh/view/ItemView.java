@@ -165,19 +165,19 @@ public class ItemView {
                 if (!(e instanceof Attackable))
                     return;
 
-				Attackable entity = (Attackable)e;
-				
+                Attackable entity = (Attackable)e;
+                
                 if (type.equals("EXPLOSION")) {
                     if (type.equals(resistance))
-					entity.takeDamage(999999);
+                    entity.takeDamage(999999);
                     else entity.takeDamage(2);
                 }
                 else if (type.equals(resistance))
-					entity.takeDamage(0);
+                    entity.takeDamage(0);
                 else if (type.equals(faiblesse))
-					entity.takeDamage(4);
+                    entity.takeDamage(4);
                 else
-					entity.takeDamage(1);
+                    entity.takeDamage(1);
             }
             if (((Attackable)e).getHp() <= 0) {
                 iterator.remove();

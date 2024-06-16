@@ -9,6 +9,7 @@ public class Stuff {
     private Item mainG;
     private Item mainD;
     private Item quickSlot;
+    private int money;
     public static final int TAILLE_INVENTAIRE = 12;
 
     public Stuff() {
@@ -16,6 +17,33 @@ public class Stuff {
         this.mainG = null;
         this.mainD = null;
         this.quickSlot = null;
+        this.money = 0;
+    }
+
+    /*
+     * @return int, la quantité d'argent dans l'inventaire
+     */
+    public int getMoney() {
+        return money;
+    }
+
+    /*
+     * @param money la quantité d'argent à ajouter
+     */
+    public void addMoney(int money) {
+        this.money += money;
+    }
+
+    /*
+     * @param money la quantité d'argent à retirer
+     * @return boolean, true si l'argent a été retiré, false si non.
+     */
+    public boolean removeMoney(int money) {
+        if (this.money >= money) {
+            this.money -= money;
+            return true;
+        }
+        return false;
     }
 
     /**

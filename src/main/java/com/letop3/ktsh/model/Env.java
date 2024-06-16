@@ -12,6 +12,8 @@ import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.npc.action.MoveAction;
 import com.letop3.ktsh.model.entity.npc.action.textAction.AskAction;
+import com.letop3.ktsh.model.entity.npc.action.textAction.BuyAction;
+import com.letop3.ktsh.model.entity.npc.action.textAction.SellAction;
 import com.letop3.ktsh.model.entity.npc.action.textAction.SpeakAction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.ground.Chunk;
@@ -48,6 +50,18 @@ public class Env {
         Action dialogue = new SpeakAction("Hello", new AskAction("How are you ?", new String[] {"Fine", "Could be better"}, responses));
 
         addEntity(new NPC(new Position(252, 512), ground, dialogue));
+
+        // Adding a merchant
+        Action goodbyeAction = new SpeakAction("Goodbye !", null);
+        Action buyAction = new BuyAction("What do you want me to buy you ?", player, goodbyeAction);
+        Action sellAction = new SellAction("What do you want to sell me ?", player, buyAction);
+
+        ArrayList<Action> responsesAction = new ArrayList<>();
+        responsesAction.add(sellAction);
+        responsesAction.add(buyAction);
+        Action merchantDialogue = new SpeakAction("Hello !", new AskAction("What do you want ?", new String[] {"Buy", "Sell"}, responsesAction));
+
+        addEntity(new NPC(new Position(100, 100), ground, merchantDialogue));
 
         //Debug Mob
         addEntity(new General(new Position(900, 480), player));

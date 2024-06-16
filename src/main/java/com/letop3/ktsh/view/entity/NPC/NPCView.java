@@ -38,11 +38,14 @@ public class NPCView extends HumanView {
                     action = npc.getDialogue();
                     interactLabel.setText("Next");
                 }
-                else action = action.getNextAction();
+                else {
+                    if (action instanceof TextAction) action.execute(npc);
+                    action = action.getNextAction();
+                }
 
                 if (action != null) {
                     if (action instanceof TextAction) {
-                        dialogueView.show((TextAction) action);
+                        dialogueView.show((TextAction)action, npc);
                     } else {
                         action.execute(npc);
                     }

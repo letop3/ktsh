@@ -1,16 +1,20 @@
 package com.letop3.ktsh.model.entity.npc;
 
+import java.util.Random;
+
 import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Interractible;
 import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.player.Player;
+import com.letop3.ktsh.model.entity.player.Stuff;
 import com.letop3.ktsh.model.ground.Ground;
 import com.letop3.ktsh.model.ground.Pathfinder;
 
 public class NPC extends Interractible {
     private NPCInterractListener interractListener;
     private final Action dialogue;
+    private Stuff stuff;
 
     private Pathfinder pathfinder;
 
@@ -19,6 +23,18 @@ public class NPC extends Interractible {
         this.dialogue = dialogue;
         interractListener = null;
         pathfinder = null;
+        stuff = new Stuff();
+
+        Random random = new Random();
+        stuff.addMoney(random.nextInt(200));
+    }
+
+    public Stuff getStuff() {
+        return stuff;
+    }
+
+    public void setStuff(Stuff stuff) {
+        this.stuff = stuff;
     }
 
     public void setPathfinder(Pathfinder pathfinder) {

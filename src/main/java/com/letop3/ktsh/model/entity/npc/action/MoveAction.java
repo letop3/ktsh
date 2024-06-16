@@ -4,7 +4,7 @@ import com.letop3.ktsh.model.entity.Position;
 import com.letop3.ktsh.model.entity.npc.NPC;
 import com.letop3.ktsh.model.ground.Pathfinder;
 
-public class MoveAction extends Action {
+public class MoveAction implements Action {
     private Action nextAction;
     private Position position;
 

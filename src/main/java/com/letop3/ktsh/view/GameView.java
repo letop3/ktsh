@@ -33,13 +33,13 @@ public class GameView {
     private final GroundView groundView;
     private final PlayerView playerView;
     private final StuffView stuffView;
-	private final DialogueView dialogueView;
+    private final DialogueView dialogueView;
     private final Canvas heartCanvas;
     private final Image fullHeart;
     private final Image halfHeart;
     private final Image emptyHeart;
     private final ItemView itemView;
-	private final Pane entityPane;
+    private final Pane entityPane;
 
     private final Position screenPosition;
 
@@ -113,9 +113,9 @@ public class GameView {
         else if (entity instanceof Enemy) {
             entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
         }
-	 	else if (entity instanceof BlockM) {
-			entityView = new BlockMView(entity, entityImageView, screenPosition);
-		}
+         else if (entity instanceof BlockM) {
+            entityView = new BlockMView(entity, entityImageView, screenPosition);
+        }
 
         if (entityView != null) entities.putIfAbsent(entity, entityView);
     }
