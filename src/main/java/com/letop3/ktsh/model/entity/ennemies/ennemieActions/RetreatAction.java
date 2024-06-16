@@ -9,7 +9,7 @@ public class RetreatAction extends EnemyAction {
 
     public RetreatAction(Enemy enemy) {
         super(enemy);
-        retreatDistance = 3 * (Chunk.CHUNK_SIZE / 11);
+        retreatDistance = 2 * (Chunk.CHUNK_SIZE / 11);
     }
 
     @Override

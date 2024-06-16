@@ -77,10 +77,10 @@ public abstract class Enemy extends Attackable {
             if (action != null) action.execute();
             
             // state update
-            if (distance < (Chunk.CHUNK_SIZE / 11) * 2 && atkCooldown) {
+            if (distance < (Chunk.CHUNK_SIZE / 11) && atkCooldown) {
                 state = EnemyState.ENDENGERED;
             }
-            else if (distance < (Chunk.CHUNK_SIZE / 11) * 2 && getHp() < getMaxHp() / 4) {
+            else if (distance < (Chunk.CHUNK_SIZE / 11) && getHp() < getMaxHp() / 4) {
                 state = EnemyState.FREIGHTENED;
             }
             else {

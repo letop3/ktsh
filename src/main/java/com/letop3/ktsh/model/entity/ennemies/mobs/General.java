@@ -40,6 +40,7 @@ public class General extends Knight {
 
     @Override
     public void update(long frame) {
+        setControlled();
         super.update(frame);
 
         for (int i = 0; i < knights.size(); i++) {
@@ -48,6 +49,7 @@ public class General extends Knight {
             if (knight != this) {
                 knight.setControlled();
                 knight.doUpdate(frame);
+                knight.setControlled();
             }
 
             switch (knights.get(i).getState()) {
