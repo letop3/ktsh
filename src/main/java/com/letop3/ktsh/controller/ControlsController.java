@@ -50,7 +50,7 @@ public class ControlsController implements Initializable {
         return null;
     }
 
-    private void keyPressed(KeyEvent event) {
+    public void keyPressed(KeyEvent event) {
         KeyCode key = event.getCode();
         if (key == KeyPreference.INTERACT)
             player.interract();
@@ -63,7 +63,7 @@ public class ControlsController implements Initializable {
         else player.addDirection(keyToDirection(event.getCode()));
     }
 
-    private void keyReleased(KeyEvent event) {
+    public void keyReleased(KeyEvent event) {
         player.remDirection(keyToDirection(event.getCode()));
     }
 }
