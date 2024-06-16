@@ -28,8 +28,6 @@ public class GameController implements Initializable {
     
     @FXML
     public Pane stuffPane;
-    @FXML
-    private GridPane inventoryPane;
 
     @FXML
     private HBox heartBox;
