@@ -7,12 +7,12 @@ import com.letop3.ktsh.model.entity.npc.action.Action;
 import com.letop3.ktsh.model.entity.npc.action.textAction.TextAction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.view.animation.AnimationAdapter;
-import com.letop3.ktsh.view.entity.EntityView;
+import com.letop3.ktsh.view.entity.HumanView;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class NPCView extends EntityView {
+public class NPCView extends HumanView {
     private final NPC npc;
     private final Label interactLabel;    
     private final Player player;

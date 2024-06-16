@@ -114,7 +114,7 @@ public class GameView {
             entityView = new MobView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
         }
 	 	else if (entity instanceof BlockM) {
-			entityView = new BlockMView(new EntityAnimationAdapter(entity), entityImageView, screenPosition);
+			entityView = new BlockMView(entity, entityImageView, screenPosition);
 		}
 
         if (entityView != null) entities.putIfAbsent(entity, entityView);
