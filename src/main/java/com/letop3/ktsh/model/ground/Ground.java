@@ -122,33 +122,13 @@ public class Ground {
         if (direction == null)
             return true;
 
-        switch (direction){
-            case NORTH -> {
-                return isTileWalkable1P(x, y-16);
-            }
-            case EAST -> {
-                return isTileWalkable1P(x+16,y);
-            }
-            case SOUTH -> {
-                return isTileWalkable1P(x, y+16);
-            }
-            case WEST -> {
-                return isTileWalkable1P(x-16, y);
-            }
-            case NORTH_EAST -> {
-                return isTileWalkable1P(x+16, y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x+16,y);
-            }
-            case SOUTH_EAST -> {
-                return isTileWalkable1P(x+16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x+16,y);
-            }
-            case SOUTH_WEST -> {
-                return isTileWalkable1P(x-16,y+16) && isTileWalkable1P(x, y+16) && isTileWalkable1P(x-16,y);
-            }
-            case NORTH_WEST -> {
-                return isTileWalkable1P(x-16,y-16) && isTileWalkable1P(x, y-16) && isTileWalkable1P(x-16,y);
-            }
+        if (direction.isDiagonal()) {
+            return isTileWalkable1P(x + direction.getX() * 16, y - direction.getY() * 16) &&
+                    isTileWalkable1P(x + direction.getX() * 16, y) &&
+                    isTileWalkable1P(x, y - direction.getY() * 16);
         }
-        return true;
+        
+        return isTileWalkable1P(x + direction.getX() * 16, y - direction.getY() * 16);
     }
 
     public boolean isTileWalkable1P(double x, double y) {
