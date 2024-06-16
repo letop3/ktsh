@@ -11,8 +11,7 @@ package com.letop3.ktsh.model.utils.preferences.prefs;
  */
 public enum GraphicsPreference {
     FULL_SCREEN("fullScreen", true, Boolean.class),
-    RESOLUTION_WIDTH("resolutionWidth", 1920, Integer.class),
-    RESOLUTION_HEIGHT("resolutionHeight", 1080, Integer.class);
+    SART_FULL_SCREEN("startFullScreen", false, Boolean.class);
 
     public final String setting;
     public final Object defaultValue;
