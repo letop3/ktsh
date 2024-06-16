@@ -2,15 +2,45 @@ package com.letop3.ktsh.model.utils.preferences.prefs;
 
 import javafx.scene.input.KeyCode;
 
-public class KeyPreference {
-    public static KeyCode MOVE_UP = KeyCode.Z;
-    public static KeyCode MOVE_DOWN = KeyCode.S;
-    public static KeyCode MOVE_RIGHT = KeyCode.D;
-    public static KeyCode MOVE_LEFT = KeyCode.Q;
-    public static KeyCode QUICK_SLOT = KeyCode.A;
-    public static KeyCode INVENTORY = KeyCode.E;
-    public static KeyCode INTERACT = KeyCode.F;
-    public static KeyCode ATTACK = KeyCode.SPACE;
-    public static KeyCode SHIELD = KeyCode.SHIFT;
-    public static KeyCode ESCAPE = KeyCode.ESCAPE;
+/**
+ * Enum pour les préférences de touches.
+ */
+public enum KeyPreference implements GamePreference {
+    MOVE_UP("moveUp", KeyCode.Z),
+    MOVE_DOWN("moveDown", KeyCode.S),
+    MOVE_RIGHT("moveRight", KeyCode.D),
+    MOVE_LEFT("moveLeft", KeyCode.Q),
+    QUICK_SLOT("quickSlot", KeyCode.A),
+    INVENTORY("inventory", KeyCode.E),
+    INTERACT("interact", KeyCode.F),
+    ATTACK("attack", KeyCode.SPACE),
+    SHIELD("shield", KeyCode.SHIFT);
+
+    private final String key;
+    private final KeyCode defaultValue;
+
+    KeyPreference(String key, KeyCode defaultValue) {
+        this.key = key;
+        this.defaultValue = defaultValue;
+    }
+
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public KeyCode getDefaultValue() {
+        return defaultValue;
+    }
+
+    @Override
+    public Class<?> getValueType() {
+        return KeyCode.class;
+    }
+
+    @Override
+    public String toString() {
+        return key;
+    }
 }

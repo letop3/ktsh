@@ -1,5 +1,7 @@
 package com.letop3.ktsh.view;
 
+import com.letop3.ktsh.controller.ParentControllerInterface;
+import com.letop3.ktsh.controller.SettingsController;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -153,6 +156,19 @@ public class MainMenuView {
         loadingLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", pane.widthProperty().multiply(0.02).asString(), "px;"));
     }
 
+    public void hidemain() {
+        mainMenuVBox.setVisible(false);
+    }
+
+    public void showmain() {
+        mainMenuVBox.setVisible(true);
+    }
+
+    public void hideSettings(Pane settingsInjPane) {
+        settingsInjPane.getChildren().clear();
+        settingsInjPane.setVisible(false);
+    }
+
     public void loadNewScene() {
         try {
             Parent newRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/gameGround.fxml")));
@@ -218,5 +234,18 @@ public class MainMenuView {
 
     public void updateLoadingLabel(String text) {
         loadingLabel.setText(text);
+    }
+
+    public void inject(ParentControllerInterface controller, Pane pane, String path) {
+        try {
+            pane.setVisible(true);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+            Pane newPane = loader.load();
+            SettingsController settingsController = loader.getController();
+            settingsController.setParentController(controller);
+            pane.getChildren().add(newPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

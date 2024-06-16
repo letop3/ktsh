@@ -10,13 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+public class MainMenuController implements Initializable, ParentControllerInterface {
     @FXML
     private VBox exitPopupVBox, creditsPopupVBox, creditsTextVBox, creditsContentVBox;
     @FXML
@@ -41,6 +42,8 @@ public class MainMenuController implements Initializable {
     private ProgressBar progressBar;
     @FXML
     private ProgressIndicator loadingIndicator;
+    @FXML
+    private AnchorPane settingsInjPane;
 
     private boolean isPopupOpen = false;
     private MainMenuView menuView;
@@ -54,6 +57,7 @@ public class MainMenuController implements Initializable {
                 creditsTitleLabel, loadingLabel, credit1, credit2, credit3, progressBar, loadingIndicator);
         menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
     }
+
 
     private Task<Void> createLoadingTask() {
         return new Task<>() {
@@ -99,7 +103,8 @@ public class MainMenuController implements Initializable {
 
     @FXML
     public void showSettings() {
-        System.out.println("Settings shown");
+        menuView.hidemain();
+        menuView.inject(this, settingsInjPane, "/com/letop3/ktsh/settings.fxml");
     }
 
     @FXML
@@ -126,5 +131,10 @@ public class MainMenuController implements Initializable {
     public void exitGame() {
         Platform.exit();
         System.exit(0);
+    }
+
+    public void changeChild() {
+        menuView.showmain();
+        menuView.hideSettings(settingsInjPane);
     }
 }

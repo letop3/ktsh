@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="539.0" prefWidth="960.0" styleClass="anchor-pane"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.letop3.ktsh.controller.SettingsController">
+    <stylesheets>
+        <URL value="@css/settings.css"/>
+    </stylesheets>
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="v-box"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <TabPane prefHeight="539.0" prefWidth="960.0" styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab closable="false" text="Controls">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" styleClass="v-box" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <Label styleClass="title" text="Controls Settings ">
+                                                    <font>
+                                                        <Font size="40.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Separator prefWidth="800.0" styleClass="separator"/>
+                                                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                                                    <content>
+                                                        <GridPane alignment="CENTER" styleClass="grid-pane">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER"
+                                                                       text="Setting"/>
+                                                                <Label text="Actual" GridPane.columnIndex="2"/>
+                                                                <Label text="Choice" GridPane.columnIndex="3"/>
+                                                                <TextField fx:id="moveUpField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <TextField fx:id="moveDownField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="2"/>
+                                                                <TextField fx:id="moveRightField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="3"/>
+                                                                <Button fx:id="changeMoveUpButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="1"/>
+                                                                <Button fx:id="changeMoveDownButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="2"/>
+                                                                <Button fx:id="changeMoveRightButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="3"/>
+                                                                <Label text="Move Up" GridPane.rowIndex="1"/>
+                                                                <Label text="Move Down" GridPane.rowIndex="2"/>
+                                                                <Label text="Move Right" GridPane.rowIndex="3"/>
+                                                                <Label text="Move Left" GridPane.rowIndex="4"/>
+                                                                <Button fx:id="changeMoveLeftButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="4"/>
+                                                                <TextField fx:id="moveLeftField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="4"/>
+                                                                <TextField fx:id="quickSlotField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="5"/>
+                                                                <TextField fx:id="inventoryField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="6"/>
+                                                                <TextField fx:id="interactField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="7"/>
+                                                                <TextField fx:id="attackField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="8"/>
+                                                                <TextField fx:id="shieldField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="9"/>
+                                                                <Button fx:id="changeQuickSlotButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="5"/>
+                                                                <Button fx:id="changeInventoryButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="6"/>
+                                                                <Button fx:id="changeInteractButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="7"/>
+                                                                <Button fx:id="changeAttackButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="8"/>
+                                                                <Button fx:id="changeShieldButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="9"/>
+                                                                <Label text="Quick Slot" GridPane.rowIndex="5"/>
+                                                                <Label text="Inventory" GridPane.rowIndex="6"/>
+                                                                <Label text="Interract" GridPane.rowIndex="7"/>
+                                                                <Label text="Attack" GridPane.rowIndex="8"/>
+                                                                <Label text="Shield" GridPane.rowIndex="9"/>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="25.0" left="25.0" right="25.0"
+                                                                        top="25.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab closable="false" text="Audio">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" styleClass="v-box" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <Label styleClass="title" text="Audio Settings ">
+                                                    <font>
+                                                        <Font size="40.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Separator prefWidth="800.0" styleClass="separator"/>
+                                                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                                                    <content>
+                                                        <GridPane alignment="CENTER" styleClass="grid-pane">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER"
+                                                                       text="Setting"/>
+                                                                <Label text="Actual" GridPane.columnIndex="2"/>
+                                                                <Label text="Choice" GridPane.columnIndex="3"/>
+                                                                <TextField fx:id="masterVolumeField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <TextField fx:id="musicVolumeField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="2"/>
+                                                                <TextField fx:id="effectVolumeField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="3"/>
+                                                                <Button fx:id="changeMasterVolumeButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="1"/>
+                                                                <Button fx:id="changeMusicVolumeButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="2"/>
+                                                                <Button fx:id="changeEffectVolumeButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="3"/>
+                                                                <Label text="Master Volume" GridPane.rowIndex="1"/>
+                                                                <Label text="Music Volume" GridPane.rowIndex="2"/>
+                                                                <Label text="Effect Volume" GridPane.rowIndex="3"/>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="25.0" left="25.0" right="25.0"
+                                                                        top="25.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab closable="false" text="Video">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox alignment="TOP_CENTER" styleClass="v-box" AnchorPane.bottomAnchor="0.0"
+                                              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                              AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <Label styleClass="title" text="Video Settings ">
+                                                    <font>
+                                                        <Font size="40.0"/>
+                                                    </font>
+                                                </Label>
+                                                <Separator prefWidth="800.0" styleClass="separator"/>
+                                                <ScrollPane fitToWidth="true" styleClass="scroll-pane">
+                                                    <content>
+                                                        <GridPane alignment="CENTER" styleClass="grid-pane">
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER"
+                                                                       text="Setting"/>
+                                                                <Label text="Actual" GridPane.columnIndex="2"/>
+                                                                <Label text="Choice" GridPane.columnIndex="3"/>
+                                                                <TextField fx:id="fullScreenKeyField" disable="true"
+                                                                           styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <Button fx:id="changeFullScreenKeyButton"
+                                                                        mnemonicParsing="false"
+                                                                        onAction="#handleChangeAction" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="1"/>
+                                                                <Label text="FullScreen Key" GridPane.rowIndex="1"/>
+                                                                <Label text="Start In Fullscreen"
+                                                                       GridPane.rowIndex="2"/>
+                                                                <CheckBox fx:id="checkFullScreenButton"
+                                                                          mnemonicParsing="false"
+                                                                          onAction="#handleCheckBoxChange"
+                                                                          GridPane.columnIndex="3"
+                                                                          GridPane.rowIndex="2"/>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="25.0" left="25.0" right="25.0"
+                                                                        top="25.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
+                                                    </content>
+                                                </ScrollPane>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <HBox alignment="BOTTOM_CENTER">
+                    <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="960.0" styleClass="h-box">
+                            <children>
+                                <Button fx:id="resetSettingsButton" mnemonicParsing="false"
+                                        onAction="#handleResetSettings" styleClass="button" text="Reset Settings"/>
+                                <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose"
+                                        styleClass="button" text="Close"/>
+                            </children>
+                            <padding>
+                                <Insets right="100.0"/>
+                            </padding>
+                        </HBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

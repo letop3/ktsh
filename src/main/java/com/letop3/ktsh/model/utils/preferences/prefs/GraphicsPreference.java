@@ -1,43 +1,48 @@
-/**
- * Date: 04/05/2024
- * Auteur: aagogue
- */
-
-
 package com.letop3.ktsh.model.utils.preferences.prefs;
+
+import javafx.scene.input.KeyCode;
 
 /**
  * Enum pour les contrôles des paramètres graphiques.
  */
-public enum GraphicsPreference {
-    FULL_SCREEN("fullScreen", true, Boolean.class),
-    RESOLUTION_WIDTH("resolutionWidth", 1920, Integer.class),
-    RESOLUTION_HEIGHT("resolutionHeight", 1080, Integer.class);
+public enum GraphicsPreference implements GamePreference {
+    START_FULL_SCREEN("startFullScreen", false, Boolean.class),
+    FULL_SCREEN_TOGGLE("fullScreenToggle", KeyCode.F11, KeyCode.class);  // Ajout de la préférence de basculement en plein écran
 
-    public final String setting;
-    public final Object defaultValue;
-    public final Class<?> valueType;
+    private final String key;
+    private final Object defaultValue;
+    private final Class<?> valueType;
 
     /**
      * Constructeur pour l'énumération GraphicsPreference.
      *
-     * @param setting      Le nom du paramètre
-     * @param defaultValue La valeur par défaut du paramètre
-     * @param valueType    Le type de la valeur du paramètre
+     * @param key           Le nom du paramètre
+     * @param defaultValue  La valeur par défaut du paramètre
+     * @param valueType     Le type de la valeur du paramètre
      */
-    GraphicsPreference(String setting, Object defaultValue, Class<?> valueType) {
-        this.setting = setting;
+    GraphicsPreference(String key, Object defaultValue, Class<?> valueType) {
+        this.key = key;
         this.defaultValue = defaultValue;
         this.valueType = valueType;
     }
 
-    /**
-     * Méthode pour obtenir une représentation sous forme de chaîne de l'énumération.
-     *
-     * @return Le nom du paramètre
-     */
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public Object getDefaultValue() {
+        return defaultValue;
+    }
+
+    @Override
+    public Class<?> getValueType() {
+        return valueType;
+    }
+
     @Override
     public String toString() {
-        return setting;
+        return key;
     }
 }
