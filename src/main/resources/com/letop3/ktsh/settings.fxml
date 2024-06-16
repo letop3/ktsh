@@ -312,7 +312,7 @@
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="960.0" styleClass="h-box">
                             <children>
                                 <Button mnemonicParsing="false" styleClass="button" text="Reset Settings"/>
-                                <Button mnemonicParsing="false" styleClass="button" text="Save"/>
+                                <Button mnemonicParsing="false" styleClass="button" text="Close"/>
                             </children>
                             <padding>
                                 <Insets right="100.0"/>
