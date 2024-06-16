@@ -25,7 +25,11 @@ public class GameController implements Initializable {
     private Pane MainG;
     @FXML
     private Pane quickSlot;
-    
+
+    @FXML
+    public Pane itemEffectPane;
+    @FXML
+    public Pane entityPane;
     @FXML
     public Pane stuffPane;
 
@@ -34,10 +38,6 @@ public class GameController implements Initializable {
 
     @FXML
     private TilePane gameGround;
-    @FXML
-    public Pane itemEffectPane;
-    @FXML
-    public Pane entityPane;
     @FXML
     private Pane gamePlayer;
 
