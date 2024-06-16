@@ -15,10 +15,6 @@ import java.util.prefs.Preferences;
 public class GamePreferences {
     private static final Preferences preferences = Preferences.userRoot().node("com.leTop3.ktsh");
 
-    static {
-        initializePreferences();
-    }
-
     /**
      * Initialise les préférences avec les valeurs par défaut si elles n'ont pas déjà été initialisées.
      */
@@ -43,9 +39,6 @@ public class GamePreferences {
         setDefaultPreferences(AudioPreference.values());
         setDefaultPreferences(GraphicsPreference.values());
         setDefaultPreferences(KeyPreference.values());
-
-        // Ajouter la préférence par défaut pour la touche de basculement en plein écran
-        setKeyCodePreference("fullScreenToggle", KeyCode.F11);
     }
 
     private static void setDefaultPreferences(GamePreference[] preferencesArray) {
@@ -110,6 +103,7 @@ public class GamePreferences {
         return KeyCode.getKeyCode(keyName);
     }
 
+    // Méthode pour afficher toutes les préférences sauvegardées
     public static void printAllPreferences() {
         try {
             for (String key : preferences.keys()) {

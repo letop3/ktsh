@@ -1,11 +1,13 @@
 package com.letop3.ktsh.model.utils.preferences.prefs;
 
+import javafx.scene.input.KeyCode;
+
 /**
  * Enum pour les contrôles des paramètres graphiques.
  */
 public enum GraphicsPreference implements GamePreference {
-    FULL_SCREEN("fullScreen", true, Boolean.class),
-    START_FULL_SCREEN("startFullScreen", false, Boolean.class);
+    START_FULL_SCREEN("startFullScreen", false, Boolean.class),
+    FULL_SCREEN_TOGGLE("fullScreenToggle", KeyCode.F11, KeyCode.class);  // Ajout de la préférence de basculement en plein écran
 
     private final String key;
     private final Object defaultValue;

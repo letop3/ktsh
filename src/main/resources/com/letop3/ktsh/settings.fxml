@@ -328,6 +328,7 @@
                                                                        GridPane.rowIndex="2"/>
                                                                 <CheckBox fx:id="checkFullScreenButton"
                                                                           mnemonicParsing="false"
+                                                                          onAction="#handleCheckBoxChange"
                                                                           GridPane.columnIndex="3"
                                                                           GridPane.rowIndex="2"/>
                                                             </children>

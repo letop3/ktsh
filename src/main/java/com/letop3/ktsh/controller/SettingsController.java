@@ -1,12 +1,16 @@
 package com.letop3.ktsh.controller;
 
+import com.letop3.ktsh.model.utils.preferences.GamePreferences;
+import com.letop3.ktsh.model.utils.preferences.prefs.AudioPreference;
+import com.letop3.ktsh.model.utils.preferences.prefs.GraphicsPreference;
+import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyCode;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,13 +50,30 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Initialize any necessary data or state here
+        setFields();
     }
 
     public void setParentController(ParentControllerInterface parentController) {
         this.parentController = parentController;
     }
 
+    public void setFields() {
+        // Set the fields with the current values from the preferences
+        moveUpField.setText(GamePreferences.getKeyCodePreference(KeyPreference.MOVE_UP.getKey(), KeyPreference.MOVE_UP.getDefaultValue()).getName());
+        moveDownField.setText(GamePreferences.getKeyCodePreference(KeyPreference.MOVE_DOWN.getKey(), KeyPreference.MOVE_DOWN.getDefaultValue()).getName());
+        moveRightField.setText(GamePreferences.getKeyCodePreference(KeyPreference.MOVE_RIGHT.getKey(), KeyPreference.MOVE_RIGHT.getDefaultValue()).getName());
+        moveLeftField.setText(GamePreferences.getKeyCodePreference(KeyPreference.MOVE_LEFT.getKey(), KeyPreference.MOVE_LEFT.getDefaultValue()).getName());
+        quickSlotField.setText(GamePreferences.getKeyCodePreference(KeyPreference.QUICK_SLOT.getKey(), KeyPreference.QUICK_SLOT.getDefaultValue()).getName());
+        inventoryField.setText(GamePreferences.getKeyCodePreference(KeyPreference.INVENTORY.getKey(), KeyPreference.INVENTORY.getDefaultValue()).getName());
+        interactField.setText(GamePreferences.getKeyCodePreference(KeyPreference.INTERACT.getKey(), KeyPreference.INTERACT.getDefaultValue()).getName());
+        attackField.setText(GamePreferences.getKeyCodePreference(KeyPreference.ATTACK.getKey(), KeyPreference.ATTACK.getDefaultValue()).getName());
+        shieldField.setText(GamePreferences.getKeyCodePreference(KeyPreference.SHIELD.getKey(), KeyPreference.SHIELD.getDefaultValue()).getName());
+        masterVolumeField.setText(String.valueOf(GamePreferences.getFloatPreference(AudioPreference.MASTER_VOLUME.getKey(), (float) AudioPreference.MASTER_VOLUME.getDefaultValue())));
+        musicVolumeField.setText(String.valueOf(GamePreferences.getFloatPreference(AudioPreference.MUSIC_VOLUME.getKey(), (float) AudioPreference.MUSIC_VOLUME.getDefaultValue())));
+        effectVolumeField.setText(String.valueOf(GamePreferences.getFloatPreference(AudioPreference.EFFECTS_VOLUME.getKey(), (float) AudioPreference.EFFECTS_VOLUME.getDefaultValue())));
+        fullScreenKeyField.setText(GamePreferences.getKeyCodePreference(GraphicsPreference.FULL_SCREEN_TOGGLE.getKey(), (KeyCode) GraphicsPreference.FULL_SCREEN_TOGGLE.getDefaultValue()).getName());
+        checkFullScreenButton.setSelected(GamePreferences.getBooleanPreference(GraphicsPreference.START_FULL_SCREEN.getKey(), (boolean) GraphicsPreference.START_FULL_SCREEN.getDefaultValue()));
+    }
 
     @FXML
     private void handleChangeAction(ActionEvent event) {
@@ -99,24 +120,28 @@ public class SettingsController implements Initializable {
                 handleFieldChange(fullScreenKeyField);
                 break;
             default:
-                // Handle any other cases
                 break;
         }
     }
 
     @FXML
-    private void handleToggleAction(ActionEvent event) {
-        // Handle toggle button actions here
-        // You can access the button using event.getSource() and cast it to ToggleButton if needed
-        ToggleButton button = (ToggleButton) event.getSource();
-        if (button.getId().equals("toggleFullScreenButton")) {
-            handleToggleFullScreen(button);
+    private void handleCheckBoxChange(ActionEvent event) {
+        CheckBox checkBox = (CheckBox) event.getSource();
+        String checkBoxId = checkBox.getId();
+        switch (checkBoxId) {
+            case "checkFullScreenButton":
+                handleToggleFullScreen(checkBox);
+                break;
+            default:
+                break;
         }
     }
 
     @FXML
     private void handleResetSettings(ActionEvent event) {
         System.out.println("Settings reset");
+        GamePreferences.resetDefaultPreferences();
+        setFields();
     }
 
     @FXML
@@ -131,9 +156,13 @@ public class SettingsController implements Initializable {
         System.out.println("Field changed: " + field.getId());
     }
 
-    private void handleToggleFullScreen(ToggleButton button) {
+    private void handleToggleFullScreen(CheckBox button) {
         // Logic to toggle fullscreen setting
-        boolean isFullScreen = button.isSelected();
-        System.out.println("Fullscreen is " + (isFullScreen ? "enabled" : "disabled"));
+        if (button.isSelected()) {
+            System.out.println("Fullscreen enabled");
+            GamePreferences.setPreference(GraphicsPreference.START_FULL_SCREEN.getKey(), true);
+        } else {
+            System.out.println("Fullscreen disabled");
+        }
     }
 }

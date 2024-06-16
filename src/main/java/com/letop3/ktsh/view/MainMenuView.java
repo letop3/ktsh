@@ -167,6 +167,7 @@ public class MainMenuView {
     }
 
     public void hideSettings(Pane settingsInjPane) {
+        settingsInjPane.getChildren().clear();
         settingsInjPane.setVisible(false);
     }
 
