@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 
@@ -39,12 +40,19 @@ public class SettingsController implements Initializable {
     @FXML
     private TextField fullScreenKeyField;
     @FXML
-    private ToggleButton toggleFullScreenButton;
+    private CheckBox checkFullScreenButton;
+
+    private ParentControllerInterface parentController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize any necessary data or state here
     }
+
+    public void setParentController(ParentControllerInterface parentController) {
+        this.parentController = parentController;
+    }
+
 
     @FXML
     private void handleChangeAction(ActionEvent event) {
@@ -108,22 +116,24 @@ public class SettingsController implements Initializable {
 
     @FXML
     private void handleResetSettings(ActionEvent event) {
-        // Reset settings logic here
+        System.out.println("Settings reset");
     }
 
     @FXML
     private void handleClose(ActionEvent event) {
-        // Close the settings window logic here
+        parentController.changeChild();
+
     }
 
     private void handleFieldChange(TextField field) {
         // Logic to change the field value, e.g., show a dialog to input new value
-        field.setText("New Value"); // Placeholder logic
+        //field.setText("New Value"); // Placeholder logic
+        System.out.println("Field changed: " + field.getId());
     }
 
     private void handleToggleFullScreen(ToggleButton button) {
         // Logic to toggle fullscreen setting
         boolean isFullScreen = button.isSelected();
-        // Apply the fullscreen setting as needed
+        System.out.println("Fullscreen is " + (isFullScreen ? "enabled" : "disabled"));
     }
 }

@@ -23,7 +23,7 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <VBox fx:id="mainMenuVBox" alignment="CENTER" visible="false">
+            <VBox fx:id="mainMenuVBox" alignment="CENTER">
                <StackPane.margin>
                   <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
                </StackPane.margin>
@@ -149,7 +149,7 @@
                   <ProgressBar fx:id="progressBar" styleClass="custom-progress-bar"/>
                </children>
             </VBox>
-            <AnchorPane fx:id="settingsInjPane"/>
+            <AnchorPane fx:id="settingsInjPane" visible="false"/>
          </children>
       </StackPane>
    </children>

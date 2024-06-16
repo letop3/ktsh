@@ -78,6 +78,13 @@
 
 /* TabPane */
 
+/* Masquer le contenu des Tabs non sélectionnés */
+.tab-pane .tab-content-area .tab-content:empty {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+    -fx-background-insets: 0;
+}
+
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 0;
 }
@@ -85,7 +92,7 @@
 .tab-pane {
     -fx-background-color: rgba(30, 30, 30, 0.7);
     -fx-text-fill: #FFFFFF;
-    -fx-tab-min-width: 285px;
+    -fx-tab-min-width: 250px;
 }
 
 .tab-pane .tab {
