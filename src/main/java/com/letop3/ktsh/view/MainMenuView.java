@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -220,5 +221,13 @@ public class MainMenuView {
 
     public void updateLoadingLabel(String text) {
         loadingLabel.setText(text);
+    }
+
+    public void inject(Pane pane, String path) {
+        try {
+            pane.getChildren().add((new FXMLLoader(getClass().getResource(path))).load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

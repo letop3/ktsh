@@ -5,7 +5,6 @@ import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 import com.letop3.ktsh.view.player.stuff.StuffView;
-import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -17,8 +16,8 @@ import java.util.ResourceBundle;
 public class ControlsController implements Initializable {
     private final TilePane gameGround;
     private static Player player;
-    private StuffView stuffView;
-    private Env env;
+    private final StuffView stuffView;
+    private final Env env;
 
     public ControlsController(TilePane gameGround, Player player, StuffView stuffView, Env env) {
         this.gameGround = gameGround;
@@ -58,7 +57,7 @@ public class ControlsController implements Initializable {
             stuffView.toogleVisibility();
         else if (key == KeyPreference.QUICK_SLOT)
             player.useQuickSlot();
-        else if (key == KeyCode.P)
+        else if (key == KeyPreference.ATTACK)
             player.attack(env);
         else player.addDirection(keyToDirection(event.getCode()));
     }

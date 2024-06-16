@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="539.0" prefWidth="960.0"
             xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.letop3.ktsh.controller.SettingsController">
     <children>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane prefHeight="539.0" prefWidth="960.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Controls">
                             <content>
@@ -70,20 +71,20 @@
                                                         <TextField disable="true" GridPane.columnIndex="2"
                                                                    GridPane.rowIndex="3"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="1"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="2"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="3"/>
                                                         <Label text="Move Up" GridPane.rowIndex="1"/>
                                                         <Label text="Move Down" GridPane.rowIndex="2"/>
                                                         <Label text="Move Right" GridPane.rowIndex="3"/>
                                                         <Label text="Move Left" GridPane.rowIndex="4"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="4"/>
                                                         <TextField disable="true" GridPane.columnIndex="2"
                                                                    GridPane.rowIndex="4"/>
@@ -98,19 +99,19 @@
                                                         <TextField disable="true" GridPane.columnIndex="2"
                                                                    GridPane.rowIndex="9"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="5"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="6"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="7"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="8"/>
                                                         <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="150.0" text="Button" GridPane.columnIndex="3"
+                                                                prefWidth="150.0" text="Change" GridPane.columnIndex="3"
                                                                 GridPane.rowIndex="9"/>
                                                         <Label text="Quick Slot" GridPane.rowIndex="5"/>
                                                         <Label text="Inventory" GridPane.rowIndex="6"/>
@@ -118,6 +119,9 @@
                                                         <Label text="Attack" GridPane.rowIndex="8"/>
                                                         <Label text="Shield" GridPane.rowIndex="9"/>
                                                     </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                                                    </VBox.margin>
                                                 </GridPane>
                                             </children>
                                         </VBox>
@@ -184,6 +188,9 @@
                                                         <Label text="Music Volume" GridPane.rowIndex="2"/>
                                                         <Label text="Effect Volume" GridPane.rowIndex="3"/>
                                                     </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                                                    </VBox.margin>
                                                 </GridPane>
                                             </children>
                                         </VBox>
@@ -240,6 +247,9 @@
                                                                       prefWidth="150.0" text="ToggleButton"
                                                                       GridPane.columnIndex="3" GridPane.rowIndex="2"/>
                                                     </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                                                    </VBox.margin>
                                                 </GridPane>
                                             </children>
                                         </VBox>
@@ -251,12 +261,14 @@
                 </TabPane>
                 <HBox alignment="BOTTOM_CENTER">
                     <children>
-                        <Button mnemonicParsing="false" text="Reset"/>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="500.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="960.0">
                             <children>
-                                <Button mnemonicParsing="false" text="Cancel"/>
+                                <Button mnemonicParsing="false" text="Reset Settings"/>
                                 <Button mnemonicParsing="false" text="Save"/>
                             </children>
+                            <padding>
+                                <Insets right="100.0"/>
+                            </padding>
                         </HBox>
                     </children>
                 </HBox>

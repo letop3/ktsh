@@ -149,7 +149,7 @@
                   <ProgressBar fx:id="progressBar" styleClass="custom-progress-bar"/>
                </children>
             </VBox>
-            <AnchorPane fx:id="settingsInjPane" prefHeight="200.0" prefWidth="200.0"/>
+            <AnchorPane fx:id="settingsInjPane"/>
          </children>
       </StackPane>
    </children>
