@@ -17,7 +17,7 @@
             <children>
                 <TabPane prefHeight="539.0" prefWidth="960.0" styleClass="tab-pane" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab text="Controls">
+                        <Tab closable="false" text="Controls">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -157,7 +157,7 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Audio">
+                        <Tab closable="false" text="Audio">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -174,54 +174,61 @@
                                                 <ScrollPane fitToWidth="true" styleClass="scroll-pane">
                                                     <content>
                                                         <GridPane alignment="CENTER" styleClass="grid-pane">
-                                                    <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                    </columnConstraints>
-                                                    <rowConstraints>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                    </rowConstraints>
-                                                    <children>
-                                                        <Label alignment="CENTER" contentDisplay="CENTER"
-                                                               text="Setting"/>
-                                                        <Label text="Actual" GridPane.columnIndex="2"/>
-                                                        <Label text="Choice" GridPane.columnIndex="3"/>
-                                                        <TextField disable="true" styleClass="text-field"
-                                                                   GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                                        <TextField disable="true" styleClass="text-field"
-                                                                   GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                                                        <TextField disable="true" styleClass="text-field"
-                                                                   GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                                                        <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="100.0" styleClass="button" text="Change"
-                                                                GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                                                        <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="100.0" styleClass="button" text="Change"
-                                                                GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                                                        <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="100.0" styleClass="button" text="Change"
-                                                                GridPane.columnIndex="3" GridPane.rowIndex="3"/>
-                                                        <Label text="Master Volume" GridPane.rowIndex="1"/>
-                                                        <Label text="Music Volume" GridPane.rowIndex="2"/>
-                                                        <Label text="Effect Volume" GridPane.rowIndex="3"/>
-                                                    </children>
-                                                    <VBox.margin>
-                                                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
-                                                    </VBox.margin>
-                                                </GridPane>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER"
+                                                                       text="Setting"/>
+                                                                <Label text="Actual" GridPane.columnIndex="2"/>
+                                                                <Label text="Choice" GridPane.columnIndex="3"/>
+                                                                <TextField disable="true" styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <TextField disable="true" styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="2"/>
+                                                                <TextField disable="true" styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="3"/>
+                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="1"/>
+                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="2"/>
+                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="3"/>
+                                                                <Label text="Master Volume" GridPane.rowIndex="1"/>
+                                                                <Label text="Music Volume" GridPane.rowIndex="2"/>
+                                                                <Label text="Effect Volume" GridPane.rowIndex="3"/>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="25.0" left="25.0" right="25.0"
+                                                                        top="25.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
                                                     </content>
                                                 </ScrollPane>
                                             </children>
@@ -230,7 +237,7 @@
                                 </AnchorPane>
                             </content>
                         </Tab>
-                        <Tab text="Video">
+                        <Tab closable="false" text="Video">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
@@ -247,45 +254,49 @@
                                                 <ScrollPane fitToWidth="true" styleClass="scroll-pane">
                                                     <content>
                                                         <GridPane alignment="CENTER" styleClass="grid-pane">
-                                                    <columnConstraints>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
-                                                                           prefWidth="200.0"/>
-                                                    </columnConstraints>
-                                                    <rowConstraints>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                        <RowConstraints minHeight="10.0" prefHeight="40.0"
-                                                                        vgrow="SOMETIMES"/>
-                                                    </rowConstraints>
-                                                    <children>
-                                                        <Label alignment="CENTER" contentDisplay="CENTER"
-                                                               text="Setting"/>
-                                                        <Label text="Actual" GridPane.columnIndex="2"/>
-                                                        <Label text="Choice" GridPane.columnIndex="3"/>
-                                                        <TextField disable="true" styleClass="text-field"
-                                                                   GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                                                        <Button mnemonicParsing="false" prefHeight="25.0"
-                                                                prefWidth="100.0" styleClass="button" text="Change"
-                                                                GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                                                        <Label text="FullScreen Key" GridPane.rowIndex="1"/>
-                                                        <Label text="Start In Fullscreen" GridPane.rowIndex="2"/>
-                                                        <ToggleButton mnemonicParsing="false" prefHeight="25.0"
-                                                                      prefWidth="100.0" styleClass="button"
-                                                                      text="ToggleButton" GridPane.columnIndex="3"
-                                                                      GridPane.rowIndex="2"/>
-                                                    </children>
-                                                    <VBox.margin>
-                                                        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
-                                                    </VBox.margin>
-                                                </GridPane>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                                   prefWidth="200.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                                <RowConstraints minHeight="10.0" prefHeight="40.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER"
+                                                                       text="Setting"/>
+                                                                <Label text="Actual" GridPane.columnIndex="2"/>
+                                                                <Label text="Choice" GridPane.columnIndex="3"/>
+                                                                <TextField disable="true" styleClass="text-field"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="1"/>
+                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        prefWidth="100.0" styleClass="button"
+                                                                        text="Change" GridPane.columnIndex="3"
+                                                                        GridPane.rowIndex="1"/>
+                                                                <Label text="FullScreen Key" GridPane.rowIndex="1"/>
+                                                                <Label text="Start In Fullscreen"
+                                                                       GridPane.rowIndex="2"/>
+                                                                <ToggleButton mnemonicParsing="false" prefHeight="25.0"
+                                                                              prefWidth="100.0" styleClass="button"
+                                                                              text="Toggle" GridPane.columnIndex="3"
+                                                                              GridPane.rowIndex="2"/>
+                                                            </children>
+                                                            <VBox.margin>
+                                                                <Insets bottom="25.0" left="25.0" right="25.0"
+                                                                        top="25.0"/>
+                                                            </VBox.margin>
+                                                        </GridPane>
                                                     </content>
                                                 </ScrollPane>
                                             </children>

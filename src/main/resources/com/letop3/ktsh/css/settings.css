@@ -77,21 +77,40 @@
 }
 
 /* TabPane */
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
 .tab-pane {
     -fx-background-color: rgba(30, 30, 30, 0.7);
     -fx-text-fill: #FFFFFF;
-    -fx-tab-min-height: 30px; /* Hauteur minimale de l'onglet */
-    -fx-tab-max-height: 30px; /* Hauteur maximale de l'onglet */
+    -fx-tab-min-width: 285px;
 }
 
-.tab {
-    -fx-background-color: rgba(50, 50, 50, 0.9);
+.tab-pane .tab {
+    -fx-background-color: rgba(30, 30, 30, 0.7);
     -fx-text-fill: #FFFFFF;
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 0 0 3px 0; /* Bordure inférieure seulement */
+    -fx-padding: 8px 15px; /* Espacement interne réduit */
+    -fx-background-radius: 10px; /* Coins arrondis */
+    -fx-border-radius: 10px; /* Coins arrondis pour la bordure */
+}
+
+.tab-pane .tab:hover {
+    -fx-background-color: rgba(50, 50, 50, 0.9); /* Fond gris foncé au survol */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au survol */
+    -fx-scale-x: 1.02; /* Agrandissement horizontal au survol */
+    -fx-scale-y: 1.02; /* Agrandissement vertical au survol */
 }
 
 .tab:selected {
     -fx-background-color: rgba(70, 70, 70, 0.9);
     -fx-text-fill: #00CED1;
+    -fx-border-color: #00CED1;
+    -fx-border-width: 0 0 3px 0;
 }
 
 /* GridPane */
@@ -214,3 +233,5 @@
     -fx-scale-x: 1.0; /* Réduction de l'agrandissement au clic */
     -fx-scale-y: 1.0; /* Réduction de l'agrandissement au clic */
 }
+
+
