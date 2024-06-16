@@ -13,11 +13,11 @@ import javafx.scene.layout.Pane;
 import java.util.Objects;
 
 public class StuffView {
-    private Pane[] slotPane;
-    private Pane stuffPane;
-    private PlayerView playerView;
+    private final Pane[] slotPane;
+    private final Pane stuffPane;
+    private final PlayerView playerView;
     private StuffClickListener stuffClickListener;
-    private BooleanProperty isVisible = new SimpleBooleanProperty(false);
+    private final BooleanProperty isVisible = new SimpleBooleanProperty(false);
 
     public StuffView(Pane stuffPane, Pane[] slotPane, PlayerView playerView) {
         this.stuffPane = stuffPane;
@@ -106,7 +106,7 @@ public class StuffView {
 
     public void toogleVisibility(){
         stuffPane.setVisible(!isVisible.get());
-        for (Pane slotPane : slotPane) slotPane.setVisible(!isVisible.get());
+        for (Pane slotPane : slotPane) slotPane.setVisible(isVisible.get());
         isVisible.setValue(!isVisible.get());
     }
 
