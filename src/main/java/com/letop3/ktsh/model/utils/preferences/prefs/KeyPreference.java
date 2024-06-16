@@ -12,5 +12,4 @@ public class KeyPreference {
     public static KeyCode INTERACT = KeyCode.F;
     public static KeyCode ATTACK = KeyCode.SPACE;
     public static KeyCode SHIELD = KeyCode.SHIFT;
-    public static KeyCode ESCAPE = KeyCode.ESCAPE;
 }

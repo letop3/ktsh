@@ -71,73 +71,100 @@
                                                                        text="Setting"/>
                                                                 <Label text="Actual" GridPane.columnIndex="2"/>
                                                                 <Label text="Choice" GridPane.columnIndex="3"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="moveUpField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="1"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="moveDownField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="2"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="moveRightField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="3"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                <Button id="changeMoveUpButton" mnemonicParsing="false"
+                                                                        prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="1"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="1"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeMoveDownButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="2"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="2"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeMoveRightButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="3"/>
+                                                                        GridPane.rowIndex="3"
+                                                                        onAction="#handleChangeAction"/>
                                                                 <Label text="Move Up" GridPane.rowIndex="1"/>
                                                                 <Label text="Move Down" GridPane.rowIndex="2"/>
                                                                 <Label text="Move Right" GridPane.rowIndex="3"/>
                                                                 <Label text="Move Left" GridPane.rowIndex="4"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                <Button id="changeMoveLeftButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="4"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                        GridPane.rowIndex="4"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <TextField id="moveLeftField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="4"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="quickSlotField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="5"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="inventoryField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="6"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="interactField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="7"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="attackField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="8"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="shieldField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="9"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                <Button id="changeQuickSlotButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="5"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="5"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeInventoryButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="6"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="6"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeInteractButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="7"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="7"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeAttackButton" mnemonicParsing="false"
+                                                                        prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="8"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="8"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeShieldButton" mnemonicParsing="false"
+                                                                        prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="9"/>
+                                                                        GridPane.rowIndex="9"
+                                                                        onAction="#handleChangeAction"/>
                                                                 <Label text="Quick Slot" GridPane.rowIndex="5"/>
                                                                 <Label text="Inventory" GridPane.rowIndex="6"/>
                                                                 <Label text="Interract" GridPane.rowIndex="7"/>
@@ -199,27 +226,36 @@
                                                                        text="Setting"/>
                                                                 <Label text="Actual" GridPane.columnIndex="2"/>
                                                                 <Label text="Choice" GridPane.columnIndex="3"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="masterVolumeField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="1"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="musicVolumeField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="2"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="effectVolumeField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="3"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                <Button id="changeMasterVolumeButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="1"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="1"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeMusicVolumeButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="2"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                        GridPane.rowIndex="2"
+                                                                        onAction="#handleChangeAction"/>
+                                                                <Button id="changeEffectVolumeButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="3"/>
+                                                                        GridPane.rowIndex="3"
+                                                                        onAction="#handleChangeAction"/>
                                                                 <Label text="Master Volume" GridPane.rowIndex="1"/>
                                                                 <Label text="Music Volume" GridPane.rowIndex="2"/>
                                                                 <Label text="Effect Volume" GridPane.rowIndex="3"/>
@@ -277,20 +313,25 @@
                                                                        text="Setting"/>
                                                                 <Label text="Actual" GridPane.columnIndex="2"/>
                                                                 <Label text="Choice" GridPane.columnIndex="3"/>
-                                                                <TextField disable="true" styleClass="text-field"
+                                                                <TextField id="fullScreenKeyField" disable="true"
+                                                                           styleClass="text-field"
                                                                            GridPane.columnIndex="2"
                                                                            GridPane.rowIndex="1"/>
-                                                                <Button mnemonicParsing="false" prefHeight="25.0"
+                                                                <Button id="changeFullScreenKeyButton"
+                                                                        mnemonicParsing="false" prefHeight="25.0"
                                                                         prefWidth="100.0" styleClass="button"
                                                                         text="Change" GridPane.columnIndex="3"
-                                                                        GridPane.rowIndex="1"/>
+                                                                        GridPane.rowIndex="1"
+                                                                        onAction="#handleChangeAction"/>
                                                                 <Label text="FullScreen Key" GridPane.rowIndex="1"/>
                                                                 <Label text="Start In Fullscreen"
                                                                        GridPane.rowIndex="2"/>
-                                                                <ToggleButton mnemonicParsing="false" prefHeight="25.0"
+                                                                <ToggleButton id="toggleFullScreenButton"
+                                                                              mnemonicParsing="false" prefHeight="25.0"
                                                                               prefWidth="100.0" styleClass="button"
                                                                               text="Toggle" GridPane.columnIndex="3"
-                                                                              GridPane.rowIndex="2"/>
+                                                                              GridPane.rowIndex="2"
+                                                                              onAction="#handleToggleAction"/>
                                                             </children>
                                                             <VBox.margin>
                                                                 <Insets bottom="25.0" left="25.0" right="25.0"
@@ -311,8 +352,10 @@
                     <children>
                         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="960.0" styleClass="h-box">
                             <children>
-                                <Button mnemonicParsing="false" styleClass="button" text="Reset Settings"/>
-                                <Button mnemonicParsing="false" styleClass="button" text="Close"/>
+                                <Button id="resetSettingsButton" mnemonicParsing="false" styleClass="button"
+                                        text="Reset Settings" onAction="#handleResetSettings"/>
+                                <Button id="closeButton" mnemonicParsing="false" styleClass="button" text="Close"
+                                        onAction="#handleClose"/>
                             </children>
                             <padding>
                                 <Insets right="100.0"/>
