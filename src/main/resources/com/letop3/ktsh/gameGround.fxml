@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.GameController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.letop3.ktsh.controller.GameController">
     <center>
         <StackPane maxHeight="1056.0" maxWidth="1056.0" minHeight="1056.0" minWidth="1056.0" onMouseClicked="#coord" BorderPane.alignment="CENTER">
             <children>
@@ -40,27 +40,42 @@
             </columnConstraints>
         </GridPane>
     </bottom>
-   <top>
+    <top>
         <HBox fx:id="heartBox" prefHeight="25.0" BorderPane.alignment="CENTER" />
-   </top>
-   <right>
-      <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="96.0" minWidth="96.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane fx:id="quickSlot" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0">
-               <padding>
-                  <Insets bottom="24.0" top="24.0" />
-               </padding>
-            </Pane>
-            <VBox prefHeight="200.0" prefWidth="200.0" spacing="5.0">
-               <children>
-                  <Pane fx:id="MainG" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
-                  <Pane fx:id="MainD" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
-               </children>
-            </VBox>
-         </children>
+    </top>
+    <right>
+      <StackPane BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="20.0" top="-10.0" />
          </BorderPane.margin>
-      </HBox>
-   </right>
+         <children>
+            <GridPane fx:id="inventoryPane">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="96.0" minWidth="96.0" prefWidth="100.0" spacing="5.0">
+                  <children>
+                      <Pane fx:id="quickSlot" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0">
+                          <padding>
+                              <Insets bottom="24.0" top="24.0" />
+                          </padding>
+                      </Pane>
+                      <VBox prefHeight="200.0" prefWidth="200.0" spacing="5.0">
+                          <children>
+                              <Pane fx:id="MainG" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
+                              <Pane fx:id="MainD" minHeight="48.0" minWidth="48.0" prefHeight="48.0" prefWidth="48.0" />
+                          </children>
+                      </VBox>
+                  </children>
+              </HBox>
+         </children>
+      </StackPane>
+    </right>
 </BorderPane>
