@@ -61,7 +61,7 @@ public class Env {
         responsesAction.add(buyAction);
         Action merchantDialogue = new SpeakAction("Hello !", new AskAction("What do you want ?", new String[] {"Buy", "Sell"}, responsesAction));
 
-        addEntity(new NPC(new Position(100, 100), ground, merchantDialogue));
+        addEntity(new NPC(new Position(100, 75), ground, merchantDialogue));
 
         //Debug Mob
         addEntity(new General(new Position(900, 480), player));
