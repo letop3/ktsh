@@ -28,9 +28,14 @@ public class General extends Knight {
     public void summonKnight() {
         Knight knight = new Knight(new Position(getPosition()), getPlayer());
         knight.setAction(null);
+        knight.setControlled();
 
         knights.add(knight);
         getPlayer().getEnv().addEntity(knight);
+    }
+
+    public void test() {
+        System.out.println("General: test");
     }
 
     @Override
@@ -40,13 +45,14 @@ public class General extends Knight {
         for (int i = 0; i < knights.size(); i++) {
             Knight knight = knights.get(i);
 
-            if (knight != this) knight.doUpdate(frame);
+            if (knight != this) {
+                knight.setControlled();
+                knight.doUpdate(frame);
+            }
 
             switch (knights.get(i).getState()) {
                 case EnemyState.NORMAL:
                     if (i == currentAttackingKnightIndex && !attackInProgress) {
-                        System.out.println("General: Knight " + i + " is attacking");
-
                         knights.get(i).setAction(new AttackAction(knights.get(i)));
                         attackInProgress = true;
                     }
@@ -55,8 +61,6 @@ public class General extends Knight {
                 case EnemyState.ENDENGERED:
                     if (!(knights.get(i).getAction() instanceof RetreatAction)) {
                         if (i == currentAttackingKnightIndex && attackInProgress) {
-                            System.out.println("General: Knight " + i + " is backing off");
-    
                             attackInProgress = false;
                             currentAttackingKnightIndex = (currentAttackingKnightIndex + 1) % knights.size();
                         }
