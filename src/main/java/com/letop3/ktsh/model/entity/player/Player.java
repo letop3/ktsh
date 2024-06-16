@@ -121,9 +121,10 @@ public class Player extends Attackable {
 
     @Override
     public void update(long frame) {
-        super.update(frame);
         
         if (!lock.get() && !enAtq.get()) {
+            super.update(frame);
+
             double minDistance = Double.MAX_VALUE;
             for (Chunk[] chunks : getGround().getChunks()) {
                 for (Chunk chunk : chunks) {
