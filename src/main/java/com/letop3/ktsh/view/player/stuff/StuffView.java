@@ -106,7 +106,7 @@ public class StuffView {
 
     public void toogleVisibility(){
         stuffPane.setVisible(!isVisible.get());
-        for (Pane slotPane : slotPane) slotPane.setVisible(!isVisible.get());
+        for (Pane slotPane : slotPane) slotPane.setVisible(isVisible.get());
         isVisible.setValue(!isVisible.get());
     }
 
