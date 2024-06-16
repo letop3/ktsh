@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Initialiser les préférences
         GamePreferences.initializePreferences();
+        GamePreferences.printAllPreferences();
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/letop3/ktsh/mainMenu.fxml")));
 

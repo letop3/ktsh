@@ -6,6 +6,7 @@ import com.letop3.ktsh.model.utils.preferences.prefs.GraphicsPreference;
 import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
 import javafx.scene.input.KeyCode;
 
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 /**
@@ -107,5 +108,16 @@ public class GamePreferences {
     public static KeyCode getKeyCodePreference(String key, KeyCode defaultValue) {
         String keyName = preferences.get(key, defaultValue.getName());
         return KeyCode.getKeyCode(keyName);
+    }
+
+    public static void printAllPreferences() {
+        try {
+            for (String key : preferences.keys()) {
+                String value = preferences.get(key, "Undefined");
+                System.out.println(key + ": " + value);
+            }
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
     }
 }
