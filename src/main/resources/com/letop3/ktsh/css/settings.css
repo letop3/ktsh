@@ -1,0 +1,216 @@
+/* Application du fond sombre sur l'AnchorPane */
+.anchor-pane {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+}
+
+/* Bouton */
+.button {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte blanche */
+    -fx-font-size: 16px; /* Taille du texte réduite */
+    -fx-font-family: 'Arial', sans-serif; /* Police du texte */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 0 0 3px 0; /* Bordure inférieure seulement */
+    -fx-padding: 8px 15px; /* Espacement interne réduit */
+    -fx-cursor: hand; /* Curseur pointeur */
+    -fx-transition: all 0.3s ease; /* Transition pour les effets */
+    -fx-background-radius: 10px; /* Coins arrondis */
+    -fx-border-radius: 10px; /* Coins arrondis pour la bordure */
+    -fx-background-insets: 0, 1 1 1 1; /* Ajustement du fond pour éviter le dépassement */
+    -fx-border-insets: 0 0 1 0; /* Ajustement de la bordure pour éviter le dépassement */
+    -fx-margin: 10px; /* Marges pour espacer les boutons */
+}
+
+/* Effet de survol */
+.button:hover {
+    -fx-background-color: rgba(50, 50, 50, 0.9); /* Fond gris foncé au survol */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au survol */
+    -fx-scale-x: 1.02; /* Agrandissement horizontal au survol */
+    -fx-scale-y: 1.02; /* Agrandissement vertical au survol */
+}
+
+/* Effet lors de l'appui */
+.button:pressed {
+    -fx-background-color: rgba(70, 70, 70, 0.9); /* Fond gris très foncé au clic */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au clic */
+    -fx-scale-x: 1.0; /* Réduction de l'agrandissement au clic */
+    -fx-scale-y: 1.0; /* Réduction de l'agrandissement au clic */
+}
+
+/* Style pour un bouton désactivé */
+.button:disabled {
+    -fx-background-color: rgba(50, 50, 50, 0.5); /* Fond semi-transparent gris */
+    -fx-text-fill: #888888; /* Couleur du texte désactivé (gris) */
+    -fx-border-color: #888888; /* Bordure grise désactivée */
+    -fx-cursor: default; /* Curseur par défaut */
+}
+
+/* Conteneur des boutons */
+.button-container {
+    -fx-alignment: center; /* Alignement centré */
+    -fx-spacing: 20px; /* Espacement entre les boutons */
+    -fx-padding: 30px 20px 20px 20px; /* Espacement interne du conteneur avec écart supérieur */
+}
+
+/* Label */
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* Progress Indicator */
+.progress-indicator {
+    -fx-progress-color: #00CED1;
+}
+
+/* Progress Bar */
+.progress-bar {
+    -fx-accent: #00CED1;
+    -fx-control-inner-background: rgba(30, 30, 30, 0.7); /* Fond gris foncé */
+    -fx-control-inner-border: #00CED1; /* Bordure cyan */
+    -fx-background-radius: 0; /* Coins carrés */
+    -fx-border-radius: 0; /* Coins carrés */
+    -fx-border-width: 1px; /* Bordures noires fines */
+}
+
+/* TabPane */
+.tab-pane {
+    -fx-background-color: rgba(30, 30, 30, 0.7);
+    -fx-text-fill: #FFFFFF;
+    -fx-tab-min-height: 30px; /* Hauteur minimale de l'onglet */
+    -fx-tab-max-height: 30px; /* Hauteur maximale de l'onglet */
+}
+
+.tab {
+    -fx-background-color: rgba(50, 50, 50, 0.9);
+    -fx-text-fill: #FFFFFF;
+}
+
+.tab:selected {
+    -fx-background-color: rgba(70, 70, 70, 0.9);
+    -fx-text-fill: #00CED1;
+}
+
+/* GridPane */
+.grid-pane {
+    -fx-background-color: rgba(30, 30, 30, 0.7);
+    -fx-padding: 20px;
+    -fx-hgap: 20px; /* Espacement horizontal */
+    -fx-vgap: 15px; /* Espacement vertical augmenté */
+}
+
+.grid-pane .label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 18px;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* TextField */
+.text-field {
+    -fx-background-color: rgba(30, 30, 30, 0.7);
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-border-color: #00CED1;
+    -fx-border-width: 1px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* VBox */
+.v-box {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+/* HBox */
+.h-box {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+/* Separator */
+.separator {
+    -fx-background-color: #00CED1;
+    -fx-padding: 1px; /* Barre de séparation plus fine */
+}
+
+/* Titre de la page */
+.label.title {
+    -fx-text-fill: white;
+    -fx-font-size: 40px; /* Taille du titre augmentée */
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 1px; /* Épaisseur de la bordure */
+}
+
+.scroll-pane .viewport {
+    -fx-background: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 1px; /* Épaisseur de la bordure */
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #00CED1; /* Couleur de la barre de défilement */
+    -fx-background-insets: 0; /* Aucun espacement interne */
+    -fx-background-radius: 2px; /* Coins arrondis */
+}
+
+/* GridPane in ScrollPane */
+.scroll-pane .grid-pane {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+}
+
+/* TextField in GridPane */
+.scroll-pane .grid-pane .text-field {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte blanche */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 1px; /* Épaisseur de la bordure */
+    -fx-background-radius: 5px; /* Coins arrondis */
+    -fx-border-radius: 5px; /* Coins arrondis pour la bordure */
+}
+
+/* Button in GridPane */
+.scroll-pane .grid-pane .button {
+    -fx-background-color: rgba(30, 30, 30, 0.7); /* Fond semi-transparent foncé */
+    -fx-text-fill: #FFFFFF; /* Couleur du texte blanche */
+    -fx-font-size: 16px; /* Taille du texte */
+    -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
+    -fx-border-width: 1px; /* Épaisseur de la bordure */
+    -fx-background-radius: 5px; /* Coins arrondis */
+    -fx-border-radius: 5px; /* Coins arrondis pour la bordure */
+}
+
+/* Effet de survol pour les boutons */
+.scroll-pane .grid-pane .button:hover {
+    -fx-background-color: rgba(50, 50, 50, 0.9); /* Fond gris foncé au survol */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au survol */
+    -fx-scale-x: 1.02; /* Agrandissement horizontal au survol */
+    -fx-scale-y: 1.02; /* Agrandissement vertical au survol */
+}
+
+/* Effet lors de l'appui pour les boutons */
+.scroll-pane .grid-pane .button:pressed {
+    -fx-background-color: rgba(70, 70, 70, 0.9); /* Fond gris très foncé au clic */
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
+    -fx-border-color: #00CED1; /* Bordure cyan au clic */
+    -fx-scale-x: 1.0; /* Réduction de l'agrandissement au clic */
+    -fx-scale-y: 1.0; /* Réduction de l'agrandissement au clic */
+}
