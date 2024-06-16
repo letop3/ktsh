@@ -34,10 +34,10 @@ public class Main extends Application {
         // Fix the window size
         primaryStage.setWidth(960);
         primaryStage.setHeight(539);
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
 
         // Remove the title bar and borders
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
 
         // Set fullscreen toggle on user-defined key (default is F11)
         KeyCode fullScreenToggleKey = GamePreferences.getKeyCodePreference(
