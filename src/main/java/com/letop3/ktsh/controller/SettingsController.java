@@ -158,11 +158,7 @@ public class SettingsController implements Initializable {
 
     private void handleToggleFullScreen(CheckBox button) {
         // Logic to toggle fullscreen setting
-        if (button.isSelected()) {
-            System.out.println("Fullscreen enabled");
-            GamePreferences.setPreference(GraphicsPreference.START_FULL_SCREEN.getKey(), true);
-        } else {
-            System.out.println("Fullscreen disabled");
-        }
+        GamePreferences.setPreference(GraphicsPreference.START_FULL_SCREEN.getKey(), button.isSelected());
+
     }
 }
