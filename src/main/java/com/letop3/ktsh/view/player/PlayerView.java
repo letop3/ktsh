@@ -2,7 +2,6 @@ package com.letop3.ktsh.view.player;
 
 import com.letop3.ktsh.model.entity.Attackable;
 import com.letop3.ktsh.model.entity.Entity;
-import com.letop3.ktsh.model.entity.ennemies.Mob;
 import com.letop3.ktsh.model.entity.player.Player;
 import com.letop3.ktsh.model.entity.player.PlayerListener;
 import com.letop3.ktsh.view.GameView;

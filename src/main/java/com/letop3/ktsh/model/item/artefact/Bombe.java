@@ -1,6 +1,5 @@
 package com.letop3.ktsh.model.item.artefact;
 
-import com.letop3.ktsh.model.entity.Direction;
 import com.letop3.ktsh.model.entity.Position;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
@@ -13,11 +12,9 @@ public class Bombe {
 
     private Position position;
     private IntegerProperty detonation;
-    private int dmg;
 
     public Bombe(Position position) {
         this.position = position;
-        this.dmg = 2;
         this.detonation = new SimpleIntegerProperty(0);
 
         Timer timer = new Timer();

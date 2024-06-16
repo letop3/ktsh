@@ -33,7 +33,6 @@ public class MainMenuView {
     private Label exitLabel, creditsTitleLabel, loadingLabel;
     private Label credit1, credit2, credit3;
     private ProgressBar progressBar;
-    private ProgressIndicator loadingIndicator;
 
     public void initializeViewComponents(VBox exitPopupVBox, VBox creditsPopupVBox, VBox creditsTextVBox, VBox creditsContentVBox,
                                          VBox mainMenuVBox, VBox loadingVbox, StackPane mainPane, ImageView backgroundImageView,
@@ -67,7 +66,6 @@ public class MainMenuView {
         this.credit2 = credit2;
         this.credit3 = credit3;
         this.progressBar = progressBar;
-        this.loadingIndicator = loadingIndicator;
 
         // Appel de la méthode de liaison des composants
         bindUIComponents();

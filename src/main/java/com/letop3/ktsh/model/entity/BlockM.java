@@ -24,12 +24,12 @@ public class BlockM extends Entity {
     }
 
     @Override
-    public void update() {
+    public void update(long frame) {
         if (distanceParcouru < MAX_DISTANCE) {
             double xOrigin = getPosition().getX();
             double yOrigin = getPosition().getY();
 
-            super.update();
+            super.update(frame);
 
             double xNew = getPosition().getX();
             double yNew = getPosition().getY();
