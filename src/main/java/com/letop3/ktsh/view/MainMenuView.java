@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,13 +33,14 @@ public class MainMenuView {
     private Label exitLabel, creditsTitleLabel, loadingLabel;
     private Label credit1, credit2, credit3;
     private ProgressBar progressBar;
+    private AnchorPane settingsInjPane;
 
     public void initializeViewComponents(VBox exitPopupVBox, VBox creditsPopupVBox, VBox creditsTextVBox, VBox creditsContentVBox,
                                          VBox mainMenuVBox, VBox loadingVbox, StackPane mainPane, ImageView backgroundImageView,
                                          ImageView logoImageView, VBox buttonContainerVBox, Button startGameButton, Button settingsButton,
                                          Button creditsButton, Button exitButton, Button yesExitButton, Button noExitButton, Button closeCreditsButton,
                                          Label exitLabel, Label creditsTitleLabel, Label loadingLabel, Label credit1, Label credit2, Label credit3,
-                                         ProgressBar progressBar, ProgressIndicator loadingIndicator) {
+                                         ProgressBar progressBar, ProgressIndicator loadingIndicator, AnchorPane settingsInjPane {
 
         // Initialisation des composants
         this.exitPopupVBox = exitPopupVBox;
@@ -65,6 +67,7 @@ public class MainMenuView {
         this.credit2 = credit2;
         this.credit3 = credit3;
         this.progressBar = progressBar;
+        this.settingsInjPane = settingsInjPane;
 
         // Appel de la méthode de liaison des composants
         bindUIComponents();
@@ -160,7 +163,7 @@ public class MainMenuView {
         mainMenuVBox.setVisible(true);
     }
 
-    public void hideSettings(Pane settingsInjPane) {
+    public void hideSettings() {
         settingsInjPane.getChildren().clear();
         settingsInjPane.setVisible(false);
     }
@@ -217,14 +220,14 @@ public class MainMenuView {
         loadingLabel.setText(text);
     }
 
-    public void inject(ParentControllerInterface controller, Pane pane, String path) {
+    public void inject(ParentControllerInterface controller, String path) {
         try {
-            pane.setVisible(true);
+            settingsInjPane.setVisible(true);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Pane newPane = loader.load();
             SettingsController settingsController = loader.getController();
             settingsController.setParentController(controller);
-            pane.getChildren().add(newPane);
+            settingsInjPane.getChildren().add(newPane);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -104,7 +104,7 @@ public class MainMenuController implements Initializable, ParentControllerInterf
     @FXML
     public void showSettings() {
         menuView.hidemain();
-        menuView.inject(this, settingsInjPane, "/com/letop3/ktsh/settings.fxml");
+        menuView.inject(this, "/com/letop3/ktsh/settings.fxml");
     }
 
     @FXML
@@ -135,6 +135,6 @@ public class MainMenuController implements Initializable, ParentControllerInterf
 
     public void changeChild() {
         menuView.showmain();
-        menuView.hideSettings(settingsInjPane);
+        menuView.hideSettings();
     }
 }
