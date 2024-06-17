@@ -91,13 +91,13 @@
 
 .tab-pane {
     -fx-background-color: rgba(30, 30, 30, 0.7);
-    -fx-text-fill: #FFFFFF;
-    -fx-tab-min-width: 250px;
+    -fx-tab-min-width: 265px;
 }
 
 .tab-pane .tab {
+    -fx-alignment: CENTER;
     -fx-background-color: rgba(30, 30, 30, 0.7);
-    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 20px;
     -fx-border-color: #00CED1; /* Couleur de la bordure cyan */
     -fx-border-width: 0 0 3px 0; /* Bordure inférieure seulement */
     -fx-padding: 8px 15px; /* Espacement interne réduit */
@@ -105,19 +105,24 @@
     -fx-border-radius: 10px; /* Coins arrondis pour la bordure */
 }
 
+.tab-pane .tab-label {
+    -fx-text-fill: #FFFFFF; /* Couleur du texte blanche */
+}
+
 .tab-pane .tab:hover {
     -fx-background-color: rgba(50, 50, 50, 0.9); /* Fond gris foncé au survol */
-    -fx-text-fill: #00CED1; /* Couleur du texte cyan */
-    -fx-border-color: #00CED1; /* Bordure cyan au survol */
+    -fx-alignment: CENTER;
     -fx-scale-x: 1.02; /* Agrandissement horizontal au survol */
     -fx-scale-y: 1.02; /* Agrandissement vertical au survol */
 }
 
-.tab:selected {
+.tab-pane .tab:selected {
     -fx-background-color: rgba(70, 70, 70, 0.9);
-    -fx-text-fill: #00CED1;
-    -fx-border-color: #00CED1;
-    -fx-border-width: 0 0 3px 0;
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan pour l'onglet sélectionné */
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #00CED1; /* Couleur du texte cyan pour l'onglet sélectionné */
 }
 
 /* GridPane */
