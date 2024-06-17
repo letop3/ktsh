@@ -54,7 +54,7 @@ public class MainMenuController implements Initializable, ParentControllerInterf
         menuView.initializeViewComponents(exitPopupVBox, creditsPopupVBox, creditsTextVBox, creditsContentVBox, mainMenuVBox, loadingVbox,
                 mainPane, backgroundImageView, logoImageView, buttonContainerVBox, startGameButton, settingsButton,
                 creditsButton, exitButton, yesExitButton, noExitButton, closeCreditsButton, exitLabel,
-                creditsTitleLabel, loadingLabel, credit1, credit2, credit3, progressBar, loadingIndicator);
+                creditsTitleLabel, loadingLabel, credit1, credit2, credit3, progressBar, loadingIndicator, settingsInjPane);
         menuView.playMusic("src/main/resources/com/letop3/ktsh/audio/music/menu.mp3");
     }
 
@@ -104,7 +104,7 @@ public class MainMenuController implements Initializable, ParentControllerInterf
     @FXML
     public void showSettings() {
         menuView.hidemain();
-        menuView.inject(this, settingsInjPane, "/com/letop3/ktsh/settings.fxml");
+        menuView.inject(this, "/com/letop3/ktsh/settings.fxml");
     }
 
     @FXML
@@ -135,6 +135,6 @@ public class MainMenuController implements Initializable, ParentControllerInterf
 
     public void changeChild() {
         menuView.showmain();
-        menuView.hideSettings(settingsInjPane);
+        menuView.hideSettings();
     }
 }

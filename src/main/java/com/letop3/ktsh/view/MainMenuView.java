@@ -2,6 +2,7 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.controller.ParentControllerInterface;
 import com.letop3.ktsh.controller.SettingsController;
+import com.letop3.ktsh.view.music.SoundPlayer;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -12,20 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 public class MainMenuView {
 
-    private MediaPlayer mediaPlayer;
     private VBox exitPopupVBox, creditsPopupVBox, creditsTextVBox, creditsContentVBox;
     private VBox mainMenuVBox, loadingVbox;
     private StackPane mainPane;
@@ -36,13 +33,14 @@ public class MainMenuView {
     private Label exitLabel, creditsTitleLabel, loadingLabel;
     private Label credit1, credit2, credit3;
     private ProgressBar progressBar;
+    private AnchorPane settingsInjPane;
 
     public void initializeViewComponents(VBox exitPopupVBox, VBox creditsPopupVBox, VBox creditsTextVBox, VBox creditsContentVBox,
                                          VBox mainMenuVBox, VBox loadingVbox, StackPane mainPane, ImageView backgroundImageView,
                                          ImageView logoImageView, VBox buttonContainerVBox, Button startGameButton, Button settingsButton,
                                          Button creditsButton, Button exitButton, Button yesExitButton, Button noExitButton, Button closeCreditsButton,
                                          Label exitLabel, Label creditsTitleLabel, Label loadingLabel, Label credit1, Label credit2, Label credit3,
-                                         ProgressBar progressBar, ProgressIndicator loadingIndicator) {
+                                         ProgressBar progressBar, ProgressIndicator loadingIndicator, AnchorPane settingsInjPane) {
 
         // Initialisation des composants
         this.exitPopupVBox = exitPopupVBox;
@@ -69,6 +67,7 @@ public class MainMenuView {
         this.credit2 = credit2;
         this.credit3 = credit3;
         this.progressBar = progressBar;
+        this.settingsInjPane = settingsInjPane;
 
         // Appel de la méthode de liaison des composants
         bindUIComponents();
@@ -85,6 +84,7 @@ public class MainMenuView {
         bindCreditsPopupComponents(closeCreditsButton, creditsTitleLabel, creditsContentVBox, creditsPopupVBox, creditsTextVBox);
         bindTextStyles();
         bindProgressBar(loadingLabel, progressBar, mainPane);
+        bindSettingsPane(settingsInjPane, mainPane);
     }
 
     private void bindImageView(ImageView imageView, StackPane pane) {
@@ -156,6 +156,11 @@ public class MainMenuView {
         loadingLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", pane.widthProperty().multiply(0.02).asString(), "px;"));
     }
 
+    private void bindSettingsPane(AnchorPane settingsPane, StackPane pane) {
+        settingsPane.prefWidthProperty().bind(pane.widthProperty());
+        settingsPane.prefHeightProperty().bind(pane.heightProperty());
+    }
+
     public void hidemain() {
         mainMenuVBox.setVisible(false);
     }
@@ -164,7 +169,7 @@ public class MainMenuView {
         mainMenuVBox.setVisible(true);
     }
 
-    public void hideSettings(Pane settingsInjPane) {
+    public void hideSettings() {
         settingsInjPane.getChildren().clear();
         settingsInjPane.setVisible(false);
     }
@@ -180,26 +185,11 @@ public class MainMenuView {
     }
 
     public void playMusic(String musicFile) {
-        Media media = new Media(new File(musicFile).toURI().toString());
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.play();
+        SoundPlayer.playBackgroundMusic(musicFile);
     }
 
     public void stopMusic() {
-        if (mediaPlayer != null) {
-            for (double i = 1.0; i > 0.0; i -= 0.1) {
-                mediaPlayer.setVolume(i);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        SoundPlayer.stopBackgroundMusic();
     }
 
     public void showExitPopup() {
@@ -236,14 +226,14 @@ public class MainMenuView {
         loadingLabel.setText(text);
     }
 
-    public void inject(ParentControllerInterface controller, Pane pane, String path) {
+    public void inject(ParentControllerInterface controller, String path) {
         try {
-            pane.setVisible(true);
+            settingsInjPane.setVisible(true);
             FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
             Pane newPane = loader.load();
             SettingsController settingsController = loader.getController();
             settingsController.setParentController(controller);
-            pane.getChildren().add(newPane);
+            settingsInjPane.getChildren().add(newPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
