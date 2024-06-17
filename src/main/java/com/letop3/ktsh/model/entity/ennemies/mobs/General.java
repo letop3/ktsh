@@ -53,14 +53,14 @@ public class General extends Knight {
             }
 
             switch (knights.get(i).getState()) {
-                case EnemyState.NORMAL:
+                case NORMAL:
                     if (i == currentAttackingKnightIndex && !attackInProgress) {
                         knights.get(i).setAction(new AttackAction(knights.get(i)));
                         attackInProgress = true;
                     }
                     break;
 
-                case EnemyState.ENDENGERED:
+                case ENDENGERED:
                     if (!(knights.get(i).getAction() instanceof RetreatAction)) {
                         if (i == currentAttackingKnightIndex && attackInProgress) {
                             attackInProgress = false;
