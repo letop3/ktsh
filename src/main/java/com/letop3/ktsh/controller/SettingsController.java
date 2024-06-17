@@ -15,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
@@ -60,6 +61,8 @@ public class SettingsController implements Initializable {
     private Slider effectsVolumeSlider;
     @FXML
     private VBox keyChangePopup;
+    @FXML
+    private AnchorPane settingRoot;
 
     private ParentControllerInterface parentController;
     private String currentKeyPreference;
@@ -90,7 +93,24 @@ public class SettingsController implements Initializable {
 
         // Add a global key listener to handle key change
         keyChangePopup.setOnKeyPressed(this::handleKeyPress);
+
+        // Add a listener to the scene property to ensure settingRoot and its parent are loaded
+        settingRoot.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                // Center settingRoot in its parent container
+                AnchorPane parentContainer = (AnchorPane) settingRoot.getParent();
+                parentContainer.widthProperty().addListener((obs, oldWidth, newWidth) ->
+                        settingRoot.setLayoutX((newWidth.doubleValue() - settingRoot.getWidth()) / 2)
+                );
+                parentContainer.heightProperty().addListener((obs, oldHeight, newHeight) ->
+                        settingRoot.setLayoutY((newHeight.doubleValue() - settingRoot.getHeight()) / 2)
+                );
+            }
+        });
     }
+
+
+
 
 
     public void setParentController(ParentControllerInterface parentController) {

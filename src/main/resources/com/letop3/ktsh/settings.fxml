@@ -6,7 +6,8 @@
 <?import javafx.scene.text.Font?>
 <?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="539.0" prefWidth="960.0" styleClass="anchor-pane"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.letop3.ktsh.controller.SettingsController">
+            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.letop3.ktsh.controller.SettingsController"
+            fx:id="settingRoot">
     <stylesheets>
         <URL value="@css/settings.css"/>
     </stylesheets>

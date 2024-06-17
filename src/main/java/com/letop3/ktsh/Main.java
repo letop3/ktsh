@@ -64,23 +64,33 @@ public class Main extends Application {
 
         // Set event handler for key presses
         scene.setOnKeyPressed(event -> {
-            if (event.getCode() == GamePreferences.getKeyCodePreference(
+            KeyCode toggleKey = GamePreferences.getKeyCodePreference(
                     GraphicsPreference.FULL_SCREEN_TOGGLE.getKey(),
                     (KeyCode) GraphicsPreference.FULL_SCREEN_TOGGLE.getDefaultValue()
-            )) {
+            );
+
+            if (event.getCode() == toggleKey) {
                 if (fullscreenToggleAllowed && !keyRecentlyChanged) {
-                    primaryStage.setFullScreen(!primaryStage.isFullScreen());
-                    fullscreenToggleAllowed = false;
-                    scheduler.schedule(() -> fullscreenToggleAllowed = true, FULLSCREEN_TOGGLE_DEBOUNCE_DELAY, TimeUnit.MILLISECONDS);
+                    toggleFullScreen(primaryStage);
+                    debounceFullScreenToggle();
                 }
-                // Reset keyRecentlyChanged after debounce delay
-                keyRecentlyChanged = false;
+                keyRecentlyChanged = false; // Ensure this is reset after debounce
             }
         });
+
 
         primaryStage.setTitle("Kill To Save Her");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void toggleFullScreen(Stage primaryStage) {
+        primaryStage.setFullScreen(!primaryStage.isFullScreen());
+    }
+
+    private void debounceFullScreenToggle() {
+        fullscreenToggleAllowed = false;
+        scheduler.schedule(() -> fullscreenToggleAllowed = true, FULLSCREEN_TOGGLE_DEBOUNCE_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override

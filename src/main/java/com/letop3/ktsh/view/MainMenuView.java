@@ -84,6 +84,7 @@ public class MainMenuView {
         bindCreditsPopupComponents(closeCreditsButton, creditsTitleLabel, creditsContentVBox, creditsPopupVBox, creditsTextVBox);
         bindTextStyles();
         bindProgressBar(loadingLabel, progressBar, mainPane);
+        bindSettingsPane(settingsInjPane, mainPane);
     }
 
     private void bindImageView(ImageView imageView, StackPane pane) {
@@ -153,6 +154,11 @@ public class MainMenuView {
         progressBar.prefWidthProperty().bind(pane.widthProperty().multiply(0.6));
         progressBar.prefHeightProperty().bind(pane.heightProperty().multiply(0.05));
         loadingLabel.styleProperty().bind(Bindings.concat("-fx-font-size: ", pane.widthProperty().multiply(0.02).asString(), "px;"));
+    }
+
+    private void bindSettingsPane(AnchorPane settingsPane, StackPane pane) {
+        settingsPane.prefWidthProperty().bind(pane.widthProperty());
+        settingsPane.prefHeightProperty().bind(pane.heightProperty());
     }
 
     public void hidemain() {
