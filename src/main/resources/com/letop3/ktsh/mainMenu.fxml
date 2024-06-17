@@ -120,10 +120,9 @@
                         </Label>
                         <VBox fx:id="creditsTextVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label fx:id="credit1" text="Aimane Adahchour - ai -"
-                                     textFill="WHITE"/>
-                              <Label fx:id="credit2" text="Ange Rollet - angerenage - Le mangeur de Galettes" textFill="WHITE" />
-                              <Label fx:id="credit3" text="Armand Agogué - aagogue - Le mangeur d'Aligot" textFill="WHITE" />
+                              <Label fx:id="credit1" text="Aimane Adahchour - ai" textFill="WHITE"/>
+                              <Label fx:id="credit2" text="Ange Rollet - angerenage" textFill="WHITE" />
+                              <Label fx:id="credit3" text="Armand Agogué - aagogue" textFill="WHITE" />
                            </children>
                         </VBox>
                      </children>
