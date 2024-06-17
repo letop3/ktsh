@@ -40,7 +40,7 @@ public class MainMenuView {
                                          ImageView logoImageView, VBox buttonContainerVBox, Button startGameButton, Button settingsButton,
                                          Button creditsButton, Button exitButton, Button yesExitButton, Button noExitButton, Button closeCreditsButton,
                                          Label exitLabel, Label creditsTitleLabel, Label loadingLabel, Label credit1, Label credit2, Label credit3,
-                                         ProgressBar progressBar, ProgressIndicator loadingIndicator, AnchorPane settingsInjPane {
+                                         ProgressBar progressBar, ProgressIndicator loadingIndicator, AnchorPane settingsInjPane) {
 
         // Initialisation des composants
         this.exitPopupVBox = exitPopupVBox;
