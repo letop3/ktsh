@@ -2,6 +2,7 @@ package com.letop3.ktsh.view;
 
 import com.letop3.ktsh.controller.ParentControllerInterface;
 import com.letop3.ktsh.controller.SettingsController;
+import com.letop3.ktsh.view.music.SoundPlayer;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
@@ -15,17 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 public class MainMenuView {
 
-    private MediaPlayer mediaPlayer;
     private VBox exitPopupVBox, creditsPopupVBox, creditsTextVBox, creditsContentVBox;
     private VBox mainMenuVBox, loadingVbox;
     private StackPane mainPane;
@@ -180,26 +176,11 @@ public class MainMenuView {
     }
 
     public void playMusic(String musicFile) {
-        Media media = new Media(new File(musicFile).toURI().toString());
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        mediaPlayer.play();
+        SoundPlayer.playBackgroundMusic(musicFile);
     }
 
     public void stopMusic() {
-        if (mediaPlayer != null) {
-            for (double i = 1.0; i > 0.0; i -= 0.1) {
-                mediaPlayer.setVolume(i);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        SoundPlayer.stopBackgroundMusic();
     }
 
     public void showExitPopup() {

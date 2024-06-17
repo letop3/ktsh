@@ -5,6 +5,7 @@ import com.letop3.ktsh.model.utils.preferences.GamePreferences;
 import com.letop3.ktsh.model.utils.preferences.prefs.AudioPreference;
 import com.letop3.ktsh.model.utils.preferences.prefs.GraphicsPreference;
 import com.letop3.ktsh.model.utils.preferences.prefs.KeyPreference;
+import com.letop3.ktsh.view.music.SoundPlayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,8 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
@@ -65,13 +68,30 @@ public class SettingsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setFields();
 
-        masterVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> handleSliderChange(masterVolumeSlider, newValue));
-        musicVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> handleSliderChange(musicVolumeSlider, newValue));
-        effectsVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> handleSliderChange(effectsVolumeSlider, newValue));
+        StringConverter<Double> sliderConverter = createSliderConverter();
+
+        masterVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleSliderChange(masterVolumeSlider, newValue);
+            SoundPlayer.updateVolume();
+        });
+        masterVolumeSlider.setLabelFormatter(sliderConverter);
+
+        musicVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleSliderChange(musicVolumeSlider, newValue);
+            SoundPlayer.updateVolume();
+        });
+        musicVolumeSlider.setLabelFormatter(sliderConverter);
+
+        effectsVolumeSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            handleSliderChange(effectsVolumeSlider, newValue);
+            SoundPlayer.updateVolume();
+        });
+        effectsVolumeSlider.setLabelFormatter(sliderConverter);
 
         // Add a global key listener to handle key change
         keyChangePopup.setOnKeyPressed(this::handleKeyPress);
     }
+
 
     public void setParentController(ParentControllerInterface parentController) {
         this.parentController = parentController;
@@ -173,21 +193,17 @@ public class SettingsController implements Initializable {
         parentController.changeChild();
     }
 
-    private void handleFieldChange(TextField field) {
-        // Logic to change the field value, e.g., show a dialog to input new value
-        System.out.println("Field changed: " + field.getId());
-    }
-
     private void handleSliderChange(Slider slider, Number newValue) {
+        DecimalFormat df = new DecimalFormat("#.##");
         if (slider.equals(masterVolumeSlider)) {
             GamePreferences.setPreference(AudioPreference.MASTER_VOLUME.getKey(), newValue.floatValue());
-            masterVolume.setText(String.valueOf(newValue.floatValue()));
+            masterVolume.setText(df.format(newValue.floatValue()));
         } else if (slider.equals(musicVolumeSlider)) {
             GamePreferences.setPreference(AudioPreference.MUSIC_VOLUME.getKey(), newValue.floatValue());
-            musicVolume.setText(String.valueOf(newValue.floatValue()));
+            musicVolume.setText(df.format(newValue.floatValue()));
         } else if (slider.equals(effectsVolumeSlider)) {
             GamePreferences.setPreference(AudioPreference.EFFECTS_VOLUME.getKey(), newValue.floatValue());
-            effectsVolume.setText(String.valueOf(newValue.floatValue()));
+            effectsVolume.setText(df.format(newValue.floatValue()));
         }
     }
 
@@ -208,6 +224,26 @@ public class SettingsController implements Initializable {
             keyChangePopup.setVisible(false);
             currentKeyPreference = null;
         }
+    }
+
+    private StringConverter<Double> createSliderConverter() {
+        return new StringConverter<Double>() {
+            private final DecimalFormat df = new DecimalFormat("#.##");
+
+            @Override
+            public String toString(Double object) {
+                return df.format(object);
+            }
+
+            @Override
+            public Double fromString(String string) {
+                try {
+                    return df.parse(string).doubleValue();
+                } catch (Exception e) {
+                    return 0.0;
+                }
+            }
+        };
     }
 
     public void updateKeyPreference(String keyPreference, KeyCode newKey) {
