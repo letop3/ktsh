@@ -12,10 +12,23 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
+    private static final long FULLSCREEN_TOGGLE_DEBOUNCE_DELAY = 500; // 500 milliseconds debounce delay
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private static boolean keyRecentlyChanged = false; // Add this field
+    private boolean fullscreenToggleAllowed = true;
+
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void notifyKeyChange() {
+        keyRecentlyChanged = true;
+        scheduler.schedule(() -> keyRecentlyChanged = false, FULLSCREEN_TOGGLE_DEBOUNCE_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -39,12 +52,6 @@ public class Main extends Application {
         // Remove the title bar and borders
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        // Set fullscreen toggle on user-defined key (default is F11)
-        KeyCode fullScreenToggleKey = GamePreferences.getKeyCodePreference(
-                GraphicsPreference.FULL_SCREEN_TOGGLE.getKey(),
-                (KeyCode) GraphicsPreference.FULL_SCREEN_TOGGLE.getDefaultValue()
-        );
-
         // Set initial fullscreen state based on preference
         boolean startFullScreen = GamePreferences.getBooleanPreference(
                 GraphicsPreference.START_FULL_SCREEN.getKey(),
@@ -57,13 +64,28 @@ public class Main extends Application {
 
         // Set event handler for key presses
         scene.setOnKeyPressed(event -> {
-            if (event.getCode() == fullScreenToggleKey) {
-                primaryStage.setFullScreen(!primaryStage.isFullScreen());
+            if (event.getCode() == GamePreferences.getKeyCodePreference(
+                    GraphicsPreference.FULL_SCREEN_TOGGLE.getKey(),
+                    (KeyCode) GraphicsPreference.FULL_SCREEN_TOGGLE.getDefaultValue()
+            )) {
+                if (fullscreenToggleAllowed && !keyRecentlyChanged) {
+                    primaryStage.setFullScreen(!primaryStage.isFullScreen());
+                    fullscreenToggleAllowed = false;
+                    scheduler.schedule(() -> fullscreenToggleAllowed = true, FULLSCREEN_TOGGLE_DEBOUNCE_DELAY, TimeUnit.MILLISECONDS);
+                }
+                // Reset keyRecentlyChanged after debounce delay
+                keyRecentlyChanged = false;
             }
         });
 
         primaryStage.setTitle("Kill To Save Her");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        scheduler.shutdownNow();
+        super.stop();
     }
 }
