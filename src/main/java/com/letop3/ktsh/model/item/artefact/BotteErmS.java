@@ -19,13 +19,13 @@ public class BotteErmS extends Artefact {
         if (player.getDirection() != null && !isOnCD()) {
             notifyActionListener();
 
-            double newX = player.getPosition().getX() + player.getDirection().getX() * (Chunk.CHUNK_SIZE/11);
-            double newY = player.getPosition().getY() - player.getDirection().getY() * (Chunk.CHUNK_SIZE/11);
+            double newX = player.getPosition().getX() + player.getDirection().getX();
+            double newY = player.getPosition().getY() - player.getDirection().getY();
 
             int tpCount = 0;
-            while (player.getGround().isTileWalkable(newX + player.getDirection().getX() * (Chunk.CHUNK_SIZE/11), newY - player.getDirection().getY() * (Chunk.CHUNK_SIZE/11), player.getDirection()) && tpCount < 2){
-                newX += player.getDirection().getX() * (Chunk.CHUNK_SIZE/11);
-                newY -= player.getDirection().getY() * (Chunk.CHUNK_SIZE/11);
+            while (player.getGround().isTileWalkable(newX + player.getDirection().getX(), newY - player.getDirection().getY(), player.getDirection()) && tpCount <= 64){
+                newX += player.getDirection().getX();
+                newY -= player.getDirection().getY();
                 tpCount++;
             }
 
